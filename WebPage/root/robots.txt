@@ -1,0 +1,40 @@
+User-agent: *
+
+Disallow : /
+
+Disallow: /__*/
+Disallow: /_*/
+Disallow: /_Backup*/
+Disallow: /_Config*/
+Disallow: /_Tool*/
+
+Disallow: /Backup*/
+Disallow: /Document*/
+
+Disallow: /image*/
+Disallow: /log*/
+Disallow: /native_modules*/
+Disallow: /node_modules*/
+
+Disallow: /*.bat$
+Disallow: /*.bak$
+Disallow: /*.command$
+Disallow: /*.crt$
+Disallow: /*.dbjs$
+Disallow: /*.doc$
+Disallow: /*.exe$
+Disallow: /*.html$
+Disallow: /*.hwp$
+Disallow: /*.js$
+Disallow: /*.json$
+Disallow: /*.lnk$
+Disallow: /*.log$
+Disallow: /*.mp3$
+Disallow: /*.pdf$
+Disallow: /*.sh$
+Disallow: /*.tdbjs$
+Disallow: /*.thtml$
+Disallow: /*.tjs$
+Disallow: /*.tjson$
+Disallow: /*.txt$
+Disallow: /*.zip$

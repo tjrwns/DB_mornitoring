@@ -1,0 +1,1 @@
+{ "description" : "Brand ID (FK) - Brand Collection 을 참조( 브랜드명 등을 참조한다. )", "exampleValue" : 0<include>000_common_txt/uint_len0.txt</include>, "minValue" : 0, "maxValue" : 999999999 }

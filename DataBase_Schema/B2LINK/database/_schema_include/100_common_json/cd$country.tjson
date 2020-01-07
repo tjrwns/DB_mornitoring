@@ -1,0 +1,4 @@
+{
+	"description" : "국적", "exampleValue" : "US"
+	<include>000_common_txt/string_len2.txt</include>
+}

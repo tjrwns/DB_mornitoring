@@ -1,0 +1,196 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/lazada__상품상세정보가져오기검색조건대용량.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+var skip = <!=skip=!>;
+var limit = <!=limit=!>;
+var search = <!=search=!>
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SEARCH_MODEL_ = {
+	"goodsId" : {
+		"field" : "LIST.nid"
+		, "type" : "string"
+	}
+	, "brandId" : {
+		"field" : "LIST.brandId"
+		, "type" : "string"
+	}
+	, "brandName" : {
+		"field" : "LIST.brandName"
+		, "type" : "string"
+	}
+	, "categoryId" : {
+		"field" : "LIST.categories"
+		, "type" : "array"
+	}
+	//, "categoryName" :{
+	//	"field" : "LIST.categoryName"
+	//	, "type" : "string"
+	//}
+	, "shopId" : {
+		"field" : "LIST.sellerId"
+		, "type" : "string"
+	}
+	, "shopName" : {
+		"field" : "LIST.sellerName"
+		, "type" : "string"
+	}
+	, "goodsName" : {
+		"field" : "LIST.name"
+		, "type" : "string"
+	}
+	, "price" : {
+		"field" : "LIST.price"
+		, "type" : "string"
+	}
+	, "keyword" : {
+		"field" : "keyword"
+		, "type" : "string"
+	}
+	, "url" : {
+		"field" : "LIST.productUrl"
+		, "type" : "string"
+	}
+	//, "sellCount"  : {
+	//	"field" : "LIST.sellCount"
+	//	, "type" : "string"
+	//}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//검색조건을 생성한다.;
+var make_search_query = function( search ){
+
+	var q;
+
+	if( Object.keys( search ).length == 0 ) return search;
+
+	var _ta = [];
+	var _to;
+	var s,so
+	for( s in _SEARCH_MODEL_ ){
+
+		so = _SEARCH_MODEL_[ s ];
+		_to = {}
+		if( search[ s ] )
+		{
+			if( so.type == "number" ) _to[ so.field ] = Number( search[ s ] );
+
+			if( so.type == "string" ) _to[ so.field ] = { $regex : search[ s ], $options : "gi" }
+
+			if( so.type == "array" )
+			{
+				_to[ so.field ] = {};
+
+				if( s == "categoryId" ) _to[ so.field ][ "$all" ] = [ Number( search[ s ] ) ] ;
+				else _to[ so.field ][ "$all" ] = [ search[ s ] ] ;
+			}
+
+			_ta.push( _to )
+		}
+	}
+
+	q = { $and : _ta }
+	return q;
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	totalCount : 0
+	, data : []
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q00 = make_search_query( search );
+
+//----------------------------------------------------------------------------------------------------;
+
+var _to;
+
+r.totalCount = col0.find( _q00 ).count();
+
+col0.find( _q00 ).skip( skip ).limit( limit ).forEach( function( doc ){
+	if( !doc.LIST ) return;
+
+	//VIP의 _id는 숫가자 커서 NumberLong 임;
+	_to = 	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : null
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+	_to.goodsId = NumberLong( doc._id );
+
+	var t0 = doc.LIST;
+
+	//_to.goodsImg = t0.squareImage || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+	//_to.goodsImg = t0.image+ "_1200x1200q80.jpg" || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+	_to.goodsImg = t0.image || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+
+	_to.goodsName = t0.name;
+
+	_to.brandName = t0.brandName;
+	_to.brandId = t0.brandId;
+
+	_to.categoryId = "";
+	_to.categoryName = "";
+	if( t0.categories.length > 0 )
+	{
+		var i = 0,iLen = t0.categories.length,io;
+		for(;i<iLen;++i){
+			io = t0.categories[ i ];
+			if( i != 0 )
+			{
+				_to.categoryId = _to.categoryId + " / ";
+				_to.categoryName = _to.categoryName + " / ";;
+			}
+			_to.categoryId = _to.categoryId + io;
+			_to.categoryName = _to.categoryName + io;
+		}
+	}
+	else
+	{
+		_to.categoryId = "";
+		_to.categoryName = "";
+	}
+
+	_to.shopId = t0.sellerId;
+	_to.shopName = t0.sellerName;
+
+	_to.price = t0.price;
+
+	_to.keyword = doc.keyword;
+	_to.url = t0.productUrl;
+
+	r.data.push( _to );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

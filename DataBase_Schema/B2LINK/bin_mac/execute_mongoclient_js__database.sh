@@ -1,0 +1,1 @@
+../../../../Development-Binary-Mac/Binary/MongoDB/mongo 127.0.0.1:59320/$1 -u $2 -p $3 $4

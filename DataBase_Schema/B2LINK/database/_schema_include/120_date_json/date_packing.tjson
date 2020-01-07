@@ -1,0 +1,5 @@
+{
+			"description" : "패킹작업 예정일자"
+			, "type" : "object"
+			, "properties" : <include>100_common_json/properties__Date_Object.json</include>
+		}

@@ -1,0 +1,58 @@
+var d = {
+	"_id" : "member_date"
+
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	, "dereference" : [
+		"member.member_basic"
+		, "member.member_session"
+		, "member.member_date"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_basic"
+		, "member_session"
+		, "member_date"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Member ID;
+		, "mid" : <include>member/mid.json</include>
+
+		//Date - Last SignIn;
+		, "d_l_si" : { "description" : "Date - Last SignIn", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }
+
+		//Date - SignUp;
+		, "d_su" : { "description" : "Date - SignUp", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }
+
+		//Date - Secession;
+		, "d_sec" : { "description" : "Date - Secession", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }
+	}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+db.getSiblingDB( "_schema" ).member.insert( d );

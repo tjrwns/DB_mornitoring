@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {String} sid
+ * @return {uint} -1, 0. 1
+ */

@@ -1,0 +1,86 @@
+<div class="id-wrap" style="height: 100%;width: 100%;">
+
+	<!-- ---------------------------------------------------------------------------------------------------- -->
+
+	<div class="id-menu-list-left" style="float: left;width:250px;height: 100%;clear: both;">
+		<style>
+			.id-menu-list-left{
+				border-right : 1px solid #eee;
+			}
+			.id-menu-list-left .id-menu-item{
+				border-bottom: 1px solid #eee;
+				width: 100%;
+				height: 30px;
+			}
+			.id-menu-list-left .id-menu-item .id-header-title{
+				float: left;
+				width: 220px;
+				padding : 5px;
+				height: 30px;
+			}
+			.id-menu-list-left .id-menu-item .id-header-title .title{
+				font-size: 11px;
+				font-weight: 200;
+			}
+			.id-menu-list-left .id-menu-item .id-header-icon{
+				float: left;
+				width: 29px;
+				padding : 5px;
+				height: 30px;
+				text-align: center;
+			}
+			.tc_white{
+				color : white;
+			}
+			.site_name{
+				font-size: 17px;
+				font-weight: bold;
+			}
+		</style>
+
+		<div class="id-menu-item" style="background-color: #d14a61;">
+			<div class="id-header-title"><span class="site_name tc_white">OBMS</span></div>
+			<div id="bars" class="id-header-icon"><i class="inverted bars icon"></i></div>
+		</div>
+		<div class="id-menu-list">
+			<div class="id-menu-item" data-act="{{nm_file}}">
+				<div class="id-header-title" data-act="{{nm_file}}"><span class="title">{{menu_title}}</span></div>
+				<div class="id-header-icon" data-act="{{nm_file}}" style="display:block;"><i class="{{icon}} line icon"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ---------------------------------------------------------------------------------------------------- -->
+	<div class="ui right floated mini green button id-btn-render_reine_data" style="position : absolute;top:5px;right:5px;">정제대상 현황 확인하기</div>
+	<div class="id-content" style="float: left;height: 100%;">
+
+		<style>
+			.id-content .item{
+				padding: 10px;
+				border-bottom: 1px solid #eee;
+			}
+		</style>
+
+		<div class="id-header-top item" style="background-color: #eee;">
+			<div>{{공지사항입력공간 -- 생각해봅시다}}</div>
+		</div>
+
+		<div class="id-header-content item" style="height: 40px;">
+			<span class="id-sub-header-title ui medium header"></span>
+		</div>
+
+		<div id="id-container" class="item" style="overflow-y:auto;width: 100%;position: inherit;"></div>
+
+		<div class="id-footer item" style="height: 40px;">
+			<span>Copyright B2link 2019.</span>
+		</div>
+
+	</div>
+
+	<!-- ---------------------------------------------------------------------------------------------------- -->
+
+	<!-- LOADER -->
+
+	<!-- ---------------------------------------------------------------------------------------------------- -->
+
+</div>

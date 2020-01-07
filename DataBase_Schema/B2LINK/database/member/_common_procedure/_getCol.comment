@@ -1,0 +1,6 @@
+/**
+ * @function
+ * @param {String} dbNm
+ * @param {String} colNma
+ * @return {Collection}
+ */

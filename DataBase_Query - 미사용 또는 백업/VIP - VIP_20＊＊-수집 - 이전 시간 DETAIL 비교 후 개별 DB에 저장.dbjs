@@ -1,0 +1,106 @@
+///----------------------------------------------------------------------------------------------------;
+
+//createIndex;
+
+//----------------------------------------------------------------------------------------------------;
+
+//var db0 = db.getSiblingDB( "VIP_2018-수집" );
+//var db1 = db.getSiblingDB( "VIP_2018-수집--비교" );
+
+var db0 = db.getSiblingDB( "VIP_2019-수집" );
+var db1 = db.getSiblingDB( "VIP_2019-수집--비교" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = {};
+
+
+//var P1 = { "result.data.product.productId" : -1 };
+var P1 = { _id : -1 };
+
+var P2 = { _id : -1, doc_prev : null, doc_next : null };
+var P3 = { _id : -1, doc_prev : null, doc_next : null, error : null };
+
+var cols0 = db0.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var LIST_DETAIL_COLS = [];
+
+var io;
+var i=0, iLen=cols0.length;
+for( ; i<iLen; ++i ){
+	io = cols0[ i ];
+
+	//예외 데이터 처리;
+	if( -1 != io.indexOf( " - All" ) ){ continue; }
+
+	if( -1 != io.indexOf( "-DETAIL" ) ){ LIST_DETAIL_COLS.push( io ); }
+}
+
+printjson( LIST_DETAIL_COLS );
+
+var io;
+var iod;
+var i=1, iLen=LIST_DETAIL_COLS.length;
+for( ; i<iLen; ++i ){
+	io  = LIST_DETAIL_COLS[ i ];
+	iod = LIST_DETAIL_COLS[ i - 1 ];
+
+	var col_current = db0.getCollection( io );
+	var col_diff_ta = db0.getCollection( iod );
+
+	//print( "col_current : " + col_current );
+	//print( "col_diff_ta : " + col_diff_ta );
+
+	var col_s_0 = db1.getCollection( io + "--신규" );
+	var col_s_1 = db1.getCollection( io + "--변경" );
+	var col_s_2 = db1.getCollection( io + "--변경-에러" );
+
+	col_current.find( P0 ).forEach( function( doc ){
+
+		//--------------------------------------------------;
+		//P1[ "result.data.product.productId" ] = doc.result.data.product.productId;
+		//var doc_prev = col_diff_ta.findOne( P1 );
+		//----------;
+		P1._id = doc._id;
+		var doc_prev = col_diff_ta.findOne( P1 );
+		//--------------------------------------------------;
+
+		//전 시간과 정보가 다른 상품 저장;
+		if( doc_prev ){
+
+			var si0 = doc_prev.pageCache[ 0 ].result.data.serviceInfo;
+			var si1 = doc     .pageCache[ 0 ].result.data.serviceInfo;
+
+			//다른 상품 여부 판단 비교 값;
+			try
+			{
+				if(    si0[ "return" ].content != si1[ "return" ].content
+					|| si0.exchange.content != si1.exchange.content
+					|| si0.price.content != si1.price.content
+				){
+					P2._id = doc._id;
+					P2.doc_prev = doc_prev;
+					P2.doc_next = doc;
+
+					col_s_1.insertOne( P2 );
+				}
+			}
+			catch( er )
+			{
+				P3._id = doc._id;
+				P3.doc_prev = doc_prev;
+				P3.doc_next = doc;
+				P3.error = er;
+
+				col_s_2.insertOne( P3 );
+			}
+		}
+		else{//전 시간에 없는 상품 저장;
+			col_s_0.insertOne( doc );
+		}
+	});
+
+	print( iLen + " / " + i + " - " + col_current );
+}

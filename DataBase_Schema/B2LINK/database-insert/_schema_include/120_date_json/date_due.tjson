@@ -1,0 +1,1 @@
+{ "description" : "납기요청일 ( 물품이 납기되는 제한기간 )", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }

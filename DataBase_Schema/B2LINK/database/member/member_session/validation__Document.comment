@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {Object} d {}
+ * @return {Object}
+ */

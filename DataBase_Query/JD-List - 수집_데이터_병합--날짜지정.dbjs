@@ -1,0 +1,163 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _TARGET_DATE_ = "20190100";//지정한날짜포함 이후만 타겟이된다;
+var _SITE_NAME_ = "JD";
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( _TARGET_DATE_ ){
+
+	var nm_db = _SITE_NAME_ + "_" + _TARGET_DATE_.substr(0,4);
+	var db0 = db.getSiblingDB( nm_db );
+	var db1 = db.getSiblingDB( nm_db + "-수집" );
+
+	var colList = [];
+	db1.getCollectionNames().forEach(function( col ){
+		if( col.split("_")[0] * 1 >= _TARGET_DATE_ * 1 )//지정한날짜포함 이후만 타겟이된다;
+		{
+			if( colList.indexOf( col.split("-")[ 0 ] ) == -1 ) colList.push( col.split("-")[0] );
+		}
+	});
+
+	//데이터생성시 기존데이터가 있다면 삭제하고 재생성;
+	var i = 0,iLen = colList.length,io;
+	for(;i<iLen;++i){
+		io = colList[ i ];
+		db0.getCollection( io ).drop();
+	}
+
+	var _q0 = {};
+	var i = 0;
+	colList.reverse().forEach(function( col ){
+		print( colList.length + " / " + i + " / " + col + " / " + Date() );
+		var colNm = col;//"<!=nm_col=!>";
+		print( colNm )
+		var targetColNm = colNm.substr( 0, 8 );
+		var col0 = db0.getCollection( targetColNm );
+
+		var col1 = db1.getCollection( colNm + "-LIST" );
+		var col2 = db1.getCollection( colNm + "-DETAIL" );
+
+		//----------------------------------------------------------------------------------------------------;
+
+		var result = {
+			totalCount : 0
+			, errorResult : {
+				LIST_insert : []
+				, DETAIL_insert : []
+			}
+		};
+
+		var r0 = {};
+		var r1 = {};
+
+		col0.find( _q0 ).forEach(function(doc){
+			r0[ doc._id ] = {};
+		})
+
+		//List Insert;
+		if( col1 )
+		{
+			col1.find( _q0 ).forEach( function( doc ){
+				try
+				{
+					var a = doc.data.searchm.Paragraph;
+					var io;
+					var i=0, iLen=a.length;
+					for( ; i<iLen; ++i )
+					{
+						io = a[ i ];
+
+						if( !r0[ io.wareid ] )
+						{
+							r1[ io.wareid ] = {
+								_id : NumberLong( io.wareid )
+								, LIST : io
+								, DETAIL : null
+							}
+						}
+					}
+				}
+				catch( err )
+				{
+					result.errorResult.LIST_insert.push( err.message );
+				}
+			});
+		}
+
+		//DETAIL Insert;
+		if( col2 )
+		{
+			col2.find( _q0 ).forEach( function( doc ){
+				try
+				{
+					if( !r0[ doc._id ] ) r1[ doc._id ].DETAIL = doc;
+				}
+				catch( err )
+				{
+					result.errorResult.DETAIL_insert.push( err.message );
+				}
+			});
+		}
+
+		//----------------------------------------------------------------------------------------------------;
+
+		var a = 0;
+		for(var s in r1 )
+		{
+			try
+			{
+				//r1[ s ]._id = NumberLong( r1[ s ]._id );
+				r1[ s ].LIST._id = NumberLong( r1[ s ].LIST._id );
+				r1[ s ].DETAIL._id = NumberLong( r1[ s ].DETAIL._id );
+				col0.insertOne( r1[ s ] );
+			}
+			catch(er)
+			{
+				//er;
+			}
+
+		}
+
+		var stats = col0.stats();
+
+		result.totalCount = a;
+		result.size = stats.size;
+		result.count = stats.count;
+
+		/*/
+		return {
+			r : 0
+			, d : result
+			, m : "OK"
+		};
+		/*/
+		// printjson({
+		//	 r : 0
+		//	 , d : result
+		//	 , m : "OK"
+		// });
+		//*/
+
+		++i;
+	})
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "20190418" );
+
+return;

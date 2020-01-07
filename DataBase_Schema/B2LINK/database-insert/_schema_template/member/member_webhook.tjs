@@ -1,0 +1,61 @@
+var d = {
+	"_id" : "member_webhook"
+
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	, "dereference" : [
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Member ID;
+		, "mid" : <include>member/mid.json</include>
+
+		//webhook 정보
+		,"webhook" : { "description" : "webhook 정보 - 사용자의 알림수단의 정보를 배열로 저장한다."
+			, "type" : "array"
+			, "valueDetail" : {
+				//messenger Code;
+				"cd$messenger" : { "description" : "messenger Code", "exampleValue" : "MSG014"<include>000_common_txt/string_default.txt</include> }
+
+				//알림수단 타이틀 - (ex) 잔디알림
+				, "title" : { "description" : "알림수단 타이틀 - (ex) 잔디알림", "exampleValue" : "잔디알림"<include>000_common_txt/string_default.txt</include> }
+
+				//사용될 webhook url
+				, "webhook_url" : { "description" : "사용될 webhook url", "exampleValue" : "wh.jandi.com/connect-api/webhook/11320800/a9e7cace9fe309afe9fc5759ea212e29"<include>000_common_txt/string_default.txt</include> }
+
+				//알림사용여부 체크
+				, "use_check" : { "description" : "Boolean Member Connection", "exampleValue" : NumberInt( 0 )<include>000_common_txt/boolean.txt</include> }
+			}
+		}
+	}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+db.getSiblingDB( "_schema" ).member.insert( d );

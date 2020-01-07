@@ -1,0 +1,261 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__상품상세정보가져오기검색조건대용량.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+var skip = <!=skip=!>;
+var limit = <!=limit=!>;
+var search = <!=search=!>;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( "_CATEGORY-TAOBAO" );
+var db2 = db.getSiblingDB( "category" );
+
+var col0 = db0.getCollection( nm_col );
+var col1 = db1.getCollection( "id_brand-20191108" );
+var col2 = db2.getCollection( "category_product_type" );
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//col0.createIndex({"apiStack.0.value.item.sellCount" : -1});
+var _SEARCH_MODEL_ = {
+	"goodsId" : {
+		"field" : "item.itemId"
+		, "type" : "string"
+	}
+	, "brandId" : {
+		"field" : "item.brandValueId"
+		, "type" : "string"
+	}
+//	, "brandName" : {
+//		"field" : "LIST.brandName"
+//		, "type" : "string"
+//	}
+	, "categoryId" : {
+		"field" : "item.categoryId"
+		, "type" : "string"
+	}
+	//, "categoryName" :{
+	//	"field" : "LIST.categoryName"
+	//	, "type" : "string"
+	//}
+	, "shopId" : {
+		"field" : "seller.shopId"
+		, "type" : "string"
+	}
+	, "shopName" : {
+		"field" : "seller.shopName"
+		, "type" : "string"
+	}
+	, "goodsName" : {
+		"field" : "item.title"
+		, "type" : "string"
+	}
+	, "price" : {
+		"field" : "apiStack.0.value.price.price.priceText"
+		, "type" : "string"
+	}
+	, "keyword" : {
+		"field" : "keyword"
+		, "type" : "string"
+	}
+//	, "url" : {
+//		"field" : "LIST.productUrl"
+//		, "type" : "string"
+//	}
+	, "sellCount"  : {
+		"field" : "apiStack.0.value.item.sellCount"
+		, "type" : "string"
+	}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//검색조건을 생성한다.;
+var make_search_query = function( search ){
+
+	var q;
+
+	if( Object.keys( search ).length == 0 ) return search;
+
+	var _ta = [];
+	var _to;
+	var s,so
+	for( s in _SEARCH_MODEL_ ){
+
+		so = _SEARCH_MODEL_[ s ];
+		_to = {}
+		if( search[ s ] )
+		{
+			if( so.type == "string" ) _to[ so.field ] = { $regex : search[ s ], $options : "gi" }
+
+			if( so.type == "array" )
+			{
+				_to[ so.field ] = {};
+
+				if( s == "categoryId" ) _to[ so.field ][ "$all" ] = [ Number( search[ s ] ) ] ;
+				else _to[ so.field ][ "$all" ] = [ search[ s ] ] ;
+			}
+
+			_ta.push( _to )
+		}
+	}
+
+	q = { $and : _ta }
+	return q;
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _q01 = { _id : { $gt : -1 } };
+var _q01 = {};
+var _q02 = { _id : { $in : [] }};
+var _q00 = make_search_query( search );
+var _q03 = { _id : null };
+
+//var temp = [];
+//col0.find( _q00,{ _id : 1 } ).skip( skip ).limit( limit ).forEach(function( d ){
+//	temp.push( d._id );
+//})
+//
+//_q00[ "$and" ].push( { _id : { $in :temp }} );
+
+var categories = {};
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	totalCount : 0
+	, data : []
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var _to;
+
+r.totalCount = col0.find( _q00 ).count();
+
+col0.find( _q00 ).skip( skip ).limit( limit ).forEach( function( doc ){
+	if( !doc.item ) return;
+
+	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : null
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+	_to.goodsId = NumberLong( doc._id );
+
+	var t0 = doc.item;
+
+	try
+	{
+		_to.goodsImg = t0.images[ 0 ];
+	}
+	catch(er){
+		_to.goodsImg = "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+	}
+
+	_to.goodsName = t0.title;
+
+	_q01._id = NumberInt( t0.brandValueId );
+	var brandName = col1.findOne( _q01 )
+	if( brandName )
+	{
+		_to.brandName = brandName.b;
+	}
+	else _to.brandName = t0.brandValueId;
+
+	_to.brandId = t0.brandValueId
+
+	_to.categoryId = t0.categoryId;
+
+	var cateNm;
+	if( !categories[ doc.item.categoryId ] )
+	{
+		categories[ doc.item.categoryId ] = "";
+
+		_q03._id = Number( doc.item.categoryId );
+		var doc00 = col2.findOne( _q03 );
+
+		if( doc00 ) catName = doc00.nm;
+		else catName = doc.item.categoryId;
+		categories[ doc.item.categoryId ] = catName;
+	}
+	else
+	{
+		catName = categories[ doc.item.categoryId ];
+	}
+
+	_to.categoryName = catName;
+
+	var t1 = doc.seller;
+
+	_to.shopId = t1.shopId;
+	_to.shopName = t1.shopName;
+
+	try
+	{
+		_to.price = doc.apiStack[ 0 ].value.price.price.priceText;
+	}
+	catch( er )
+	{
+		//er;
+		_to.price = 0
+	}
+
+	try
+	{
+		if( doc.apiStack[ 0 ].value.item.sellCount )
+		{
+			var _tmpSellCount = doc.apiStack[ 0 ].value.item.sellCount
+			if( _tmpSellCount.indexOf( "+" ) == -1 ) _to.sellCount = doc.apiStack[ 0 ].value.item.sellCount * 1;
+			else if( _tmpSellCount.indexOf( "万" ) != -1 )
+			{
+				_to.sellCount = doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000;
+			}
+			else
+			{
+				_to.sellCount = doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1;
+			}
+		}
+	}
+	catch( e )
+	{
+		//에러;
+		_to.sellCount = 0;
+	}
+
+	//_to.sellCount = doc.apiStack[0].value.item.sellCount;
+
+	if( doc.keyword ) _to.keyword = doc.keyword;
+	//_to.url = t0.productUrl;
+
+	r.data.push( _to );
+});
+
+r.data.sort(function (a, b) {
+	return a.sellCount * 1 > b.sellCount * 1 ? -1 : a.sellCount * 1 < b.sellCount * 1 ? 1 : 0;
+});
+
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

@@ -1,0 +1,18 @@
+var db0 = db.getSiblingDB("Taobao_2018-Lite--PIMS")
+var db1 = db.getSiblingDB("Taobao_2019-Lite--PIMS")
+var cols00 = db0.getCollectionNames();
+var cols01 = db1.getCollectionNames();
+cols00.forEach(function(col){
+
+	var cnt = db0.getCollection( col ).count();
+	print( col + " / " + cnt )
+
+})
+
+cols01.forEach(function(col){
+
+	var cnt = db1.getCollection( col ).count();
+	print( col + " / " + cnt )
+
+})
+printjson( 1 )

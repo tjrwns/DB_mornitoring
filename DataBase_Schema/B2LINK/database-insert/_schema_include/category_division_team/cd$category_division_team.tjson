@@ -1,0 +1,6 @@
+{ "description" : "Division-Team Category Code", "exampleValue" : "FI"<include>000_common_txt/string_default.txt</include>
+
+	, "values" : [ "BP", "CMK", "CO", "CVO", "DEV", "FI", "GA", "GS", "HR", "KMK", "LOG", "OFL", "ONL", "PP", "PR", "SA", "SO", "ST" ]
+
+	, "valuesMap" : { "BP" : NumberInt( 1 ), "CMK" : NumberInt( 1 ), "CO" : NumberInt( 1 ), "CVO" : NumberInt( 1 ), "DEV" : NumberInt( 1 ), "FI" : NumberInt( 1 ), "GA" : NumberInt( 1 ), "GS" : NumberInt( 1 ), "HR" : NumberInt( 1 ), "KMK" : NumberInt( 1 ), "LOG" : NumberInt( 1 ), "OFL" : NumberInt( 1 ), "ONL" : NumberInt( 1 ), "PP" : NumberInt( 1 ), "PR" : NumberInt( 1 ), "SA" : NumberInt( 1 ), "SO" : NumberInt( 1 ), "ST" : NumberInt( 1 ) }
+}

@@ -1,0 +1,300 @@
+//----------------------------------------------------------------------------------------------------;
+
+var start = new Date();
+
+//----------------------------------------------------------------------------------------------------;
+
+//	VARIABLE
+
+//----------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DB
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$brand = db.getSiblingDB( "brand");
+var _db$daily_master = db.getSiblingDB( "daily_master_h5");
+var _db$graph_data = db.getSiblingDB( "graph_data");
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _col$brand_basic = _db$brand.brand_basic;//사용하지않음;
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );//일간 마스터 데이터;
+var _col$daily_data_by_sku = _db$graph_data.daily_data_by_sku;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { cd$product_master : 1, date: 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	VARIABLE
+
+//----------------------------------------------------------------------------------------------------;
+
+var io_arr = [];
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETERS
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _date = "2019-03-03"//"<!=date=!>"; // YYYY-MM-DD
+//var now = ISODate();//사용하지않음;
+
+var _q0 = {
+	_id$brand_basic : { $ne : -1 },
+	cd$product_master : {$exists : true, $ne : "" },
+	date : { $gte : null, $lte : null }
+};
+
+var _q1 = {
+	"date_of_value.a" : { $gte : null, $lte :null }
+};
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( day ){
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  day + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	//전체재생성이으로 삭제가 필요없음;
+	//_q1[ "date_of_value.a" ].$gte = ISODate( day + "T00:00:00.000Z" );
+	//_q1[ "date_of_value.a" ].$lte = ISODate( day + "T23:59:59.999Z" );
+
+	//_col$daily_data_by_sku.remove( _q1 );
+
+	_q0.date.$gte = ISODate( day + "T00:00:00.000Z" );
+	_q0.date.$lte = ISODate( day + "T23:59:59.999Z" );
+
+	var r = {};
+
+	_col$daily_master.find( _q0 ).forEach( function( doc ){
+		var key = doc._id$brand_basic + "_" +doc.cd$product_master ;
+		if( !r[ key ] ){
+
+			r[ key ] = {};
+			r[ key ]._ids$member = {};
+
+			r[ key ]._id$brand_basic = doc._id$brand_basic;
+			r[ key ].cd$product_master = doc.cd$product_master;
+			r[ key ].date_create = {};
+			r[ key ].date_create.a = ISODate( day + "T00:00:00.000Z");
+			r[ key ].date_of_value = {};
+			r[ key ].date_of_value.a = doc.date;
+			r[ key ].taobao_sales_amount = 0;
+			r[ key ].taobao_avg_sell_price = 0;
+			r[ key ].taobao_sale_price = 0;
+			r[ key ].taobao_sell_quantity = 0;
+			r[ key ].tmall_sales_amount = 0;
+			r[ key ].tmall_avg_sell_price = 0;
+			r[ key ].tmall_sales_price = 0;
+			r[ key ].tmall_sell_quantity = 0;
+			r[ key ].tmall_flag_local_sales_amount = 0;
+			r[ key ].tmall_flag_local_sell_price = 0;
+			r[ key ].tmall_flag_local_sell_quantity = 0;
+			r[ key ].tmall_flag_local_sales_price = 0;
+			r[ key ].tmall_flag_foreign_sales_amount = 0;
+			r[ key ].tmall_flag_foreign_sell_price  = 0;
+			r[ key ].tmall_flag_foreign_sales_price = 0;
+			r[ key ].tmall_flag_foreign_sell_quantity = 0;
+		}
+
+		var sell_quantity = doc.Daily_Sales;
+		if( !sell_quantity || sell_quantity < 0 ) sell_quantity = 0;
+
+		var sales_amount = doc.Daily_Sales * doc.price_max;
+		if( !sales_amount || sales_amount < 0 ) sales_amount = 0;
+
+		if( doc.shop_type.trim() == "淘宝" )
+		{
+			r[ key ].taobao_sell_quantity += sell_quantity;
+			r[ key ].taobao_sales_amount += sales_amount;
+			//r[ key ].taobao_sale_price = doc.price;
+			return;
+		}
+
+		if(doc.shop_type.trim() == "天猫")
+		{
+			r[ key ].tmall_sell_quantity += sell_quantity;
+			r[ key ].tmall_sales_amount += sales_amount;
+			//r[ key ].tmall_sales_price = doc.price;
+			return;
+		}
+
+		if(doc.shop_type.trim() == "旗舰店" )
+		{
+			r[ key ].tmall_flag_local_sell_quantity += sell_quantity;
+			r[ key ].tmall_flag_local_sales_amount += sales_amount;
+			r[ key ].tmall_flag_local_sales_price = doc.price;
+			return;
+		}
+
+		if(doc.shop_type.trim() == "海外旗舰店" )
+		{
+			r[ key ].tmall_flag_foreign_sell_quantity += sell_quantity;
+			r[ key ].tmall_flag_foreign_sales_amount += sales_amount;
+			r[ key ].tmall_flag_foreign_sales_price = doc.price;
+			return;
+		}
+
+		printjson( { r:1,m:"존재하지않는 shop_type 입니다."} )
+		//return { r:1,m:"존재하지않는 shop_type 입니다."};
+
+	});
+
+	for( var s in r ){
+		var io = r[ s ];
+
+		io._id$brand_basic = NumberInt( io._id$brand_basic );
+		io.taobao_sell_quantity = NumberInt( io.taobao_sell_quantity );
+		io.tmall_sell_quantity = NumberInt( io.tmall_sell_quantity );
+		io.tmall_flag_local_sell_quantity = NumberInt( io.tmall_flag_local_sell_quantity );
+		io.tmall_flag_foreign_sell_quantity = NumberInt( io.tmall_flag_foreign_sell_quantity );
+
+		io.taobao_avg_sell_price = io.taobao_sales_amount / io.taobao_sell_quantity;
+		if( !io.taobao_avg_sell_price ) io.taobao_avg_sell_price = 0;
+
+		io.tmall_avg_sell_price = io.tmall_sales_amount / io.tmall_sell_quantity;
+		if( !io.tmall_avg_sell_price ) io.tmall_avg_sell_price = 0;
+
+		io.tmall_flag_local_sell_price = io.tmall_flag_local_sales_amount / io.tmall_flag_local_sell_quantity;
+		if( !io.tmall_flag_local_sell_price ) io.tmall_flag_local_sell_price = 0
+
+		io.tmall_flag_foreign_sell_price = io.tmall_flag_foreign_sales_amount / io.tmall_flag_foreign_sell_quantity;
+		if( !io.tmall_flag_foreign_sell_price ) io.tmall_flag_foreign_sell_price = 0
+
+		//toFixed(2) Property;
+		io.taobao_sales_amount = Number( io.taobao_sales_amount.toFixed(2) );
+		io.taobao_avg_sell_price = Number( io.taobao_avg_sell_price.toFixed(2)  );
+		io.tmall_sales_amount = Number( io.tmall_sales_amount.toFixed(2) );
+		io.tmall_avg_sell_price = Number( io.tmall_avg_sell_price.toFixed(2) );
+		io.tmall_flag_local_sales_amount = Number( io.tmall_flag_local_sales_amount.toFixed(2) );
+		io.tmall_flag_local_sell_price = Number( io.tmall_flag_local_sell_price.toFixed(2) );
+		io.tmall_flag_foreign_sales_amount = Number( io.tmall_flag_foreign_sales_amount.toFixed(2) );
+		io.tmall_flag_foreign_sell_price = Number( io.tmall_flag_foreign_sell_price.toFixed(2) );
+
+		//;
+		io.taobao_sell_quantity = NumberInt( io.taobao_sell_quantity );
+		io.tmall_sell_quantity = NumberInt( io.tmall_sell_quantity );
+		io.tmall_flag_local_sell_quantity = NumberInt( io.tmall_flag_local_sell_quantity );
+		io.tmall_flag_local_sales_price = Number( io.tmall_flag_local_sales_price );
+		io.tmall_flag_foreign_sell_quantity = NumberInt( io.tmall_flag_foreign_sell_quantity );
+		io.tmall_flag_foreign_sales_price = Number( io.tmall_flag_foreign_sales_price );
+		io.total_sales_amount = io.taobao_sales_amount + io.tmall_sales_amount + io.tmall_flag_local_sales_amount + io.tmall_flag_foreign_sales_amount;
+
+		if( io_arr.length == 900 )
+		{
+			try
+			{
+				_col$daily_data_by_sku.insertMany( io_arr );
+				io_arr.length = 0;
+			}
+			catch( er )
+			{
+				//
+			}
+		}
+		else
+		{
+			io_arr.push( io );
+		}
+
+	}
+
+	try
+	{
+		_col$daily_data_by_sku.insertMany( io_arr );
+		io_arr.length = 0;
+	}
+	catch( er )
+	{
+		//
+	}
+
+}
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate )
+		{
+			var convert_toString = io.substr(0,4) + "-" + io.substr(4,2) + "-" + io.substr(6,2);
+			result.push( convert_toString );
+		}
+	}
+
+	return result;
+};
+
+
+/*
+ * 로직을 식행하는 함수
+ * @param {Number} startDate
+ * @param {Number} endDate
+ */
+var FN_LOGIC =  function( startDate, endDate ){
+	var targetDays = getTargetDays( startDate, endDate );
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = targetDays[ i ];
+		FN( io )
+	}
+
+	return;
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+//FN_LOGIC( 20180401, 20181231 );
+FN_LOGIC( 20190101, 20190929 );
+
+//FN_LOGIC( 20181001, 20181231 );
+//FN_LOGIC( 20190704, 20190706 );
+
+print( "EXECUTION TIME : " + ( new Date() - start ) + "ms" );
+
+//return;
+printjson( 1 );

@@ -1,0 +1,195 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "DataBase_Query/Taobao-Daily - 그래프데이터생성_월간_01--graph_data.monhtly_brand_salesamount_by_channel - 재생성 -- 기간지정.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$brand = db.getSiblingDB("brand");
+var _db$daily_master = db.getSiblingDB("daily_master_h5");
+var _db$graph_data = db.getSiblingDB("graph_data");
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$brand_basic = _db$brand.brand_basic;
+var _col$daily_master = _db$daily_master.daily_master;
+var _col$monthly_brand_top5_shop =  _db$graph_data.monthly_brand_top5_shop;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { date : 1, _id$brand_basic : 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var brandList = [];
+_col$brand_basic.find({}, {_id : 1}).forEach(function( doc ){ brandList.push( doc._id ); });
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var getDateRangeByMonth = function( y, m ) {
+
+	var r = {};
+	var date = new Date();
+	date.setFullYear( y , m , 0); //해당 월의 마지막 날짜를 가져온다.
+
+	var my = date.getFullYear();
+	var mm = date.getMonth()+1;
+		mm = mm > 9 ? mm.toString() : '0' + mm.toString();
+	var md = date.getDate();
+		md = md > 9 ? md.toString() : '0' + md.toString();
+	r.s = my+ "-" + mm + '-' + '01';
+	r.e = my+ "-" + mm + '-' + md;
+	return r;
+};
+
+var FN = function( year, month ){
+
+	// Remote Old Data
+//	_col$monthly_brand_top5_shop.remove({
+//		year : NumberInt( year ),
+//		month : NumberInt( month )
+//	});
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  month + " - " + year + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+
+	var i = 0,iLen = brandList.length,io;
+	for(;i<iLen;++i){
+
+		io = brandList[ i ];
+		var _id$brand_basic = io;
+		var _year = NumberInt( year );
+		var _month = NumberInt( month );
+
+		var model = {
+			_id$brand_basic : -1,
+			year : -1,
+			month : -1,
+			date_start : "",
+			date_end : "",
+			shop_id : "",
+			shop_name : "",
+			sales_amount : NaN,
+			sales_quantity : NaN,
+			rank : 0
+		};
+
+		var date_range = getDateRangeByMonth( year, month );
+
+		var _q = {
+			_id$brand_basic : _id$brand_basic
+			, cd$product_master : { $ne : "" }
+			, date : { $gte : ISODate ( date_range.s ), $lte :  ISODate( date_range.e  )}
+		};
+
+		model._id$brand_basic = NumberInt( _id$brand_basic );
+		model.year = _year;
+		model.month = _month;
+		model.date_start = date_range.s;
+		model.date_end = date_range.e;
+
+		var rank = 1;
+
+		_col$daily_master.aggregate([
+			{
+				$match : _q
+			}
+			, {
+				$group : {
+					_id : { shop_id : '$shop_id' }
+					, sales_amount : { $sum : { $multiply : [ "$Daily_Sales", "$price" ]} }
+					, sales_quantity : { $sum : "$Daily_Sales" }
+					, shop_name : { $last : "$shop_name" }
+				}
+			}
+			, {
+				$project : {
+					shop_id : "$_id.shop_id",
+					shop_name : "$shop_name",
+					sales_amount : "$sales_amount",
+					sales_quantity : "$sales_quantity",
+				}
+			}
+			, {
+				$sort : { sales_amount : -1 }
+			}
+
+		]).forEach( function ( doc ){
+
+			model.sales_quantity = NumberInt( doc.sales_quantity );
+			model.sales_amount = doc.sales_amount;
+			model.shop_id = doc.shop_id;
+			model.shop_name = doc.shop_name;
+			model.rank = NumberInt( rank++ );
+
+			_col$monthly_brand_top5_shop.insertOne( model );
+
+		});
+	};
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+var dateRangesObject = [
+//	  { y : 2018, m : 1 }
+//	, { y : 2018, m : 2 }
+//	, { y : 2018, m : 3 }
+	  { y : 2018, m : 4 }
+	, { y : 2018, m : 5 }
+	, { y : 2018, m : 6 }
+	, { y : 2018, m : 7 }
+	, { y : 2018, m : 8 }
+	, { y : 2018, m : 9 }
+	, { y : 2018, m : 10 }
+	, { y : 2018, m : 11 }
+	, { y : 2018, m : 12 }
+	, { y : 2019, m : 1 }
+	, { y : 2019, m : 2 }
+	, { y : 2019, m : 3 }
+	, { y : 2019, m : 4 }
+	, { y : 2019, m : 5 }
+	, { y : 2019, m : 6 }
+	, { y : 2019, m : 7 }
+	, { y : 2019, m : 8 }
+//	, { y : 2019, m : 9 }
+//	, { y : 2019, m : 10 }
+//	, { y : 2019, m : 11 }
+//	, { y : 2019, m : 12 }
+];
+
+
+var i = 0, iLen = dateRangesObject.length,io;
+for(;i<iLen;++i){
+	io = dateRangesObject[ i ];
+	FN( io.y, io.m );
+}
+
+//FN( 2019, 7 );
+//FN( 2019, 8 );
+
+return;

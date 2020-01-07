@@ -1,0 +1,4 @@
+{
+	"description" : "통신판매신고번호", "exampleValue" : "제2014-서울마포-0835"
+		<include>000_common_txt/string_default.txt</include>
+}

@@ -1,0 +1,4 @@
+/**
+ * @function
+ * @return {Object} { "year" : 0, "month" : 0, "date" : 0 }
+ */

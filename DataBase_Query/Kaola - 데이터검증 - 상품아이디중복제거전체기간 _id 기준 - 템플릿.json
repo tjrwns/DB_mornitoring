@@ -1,0 +1,746 @@
+{
+    "code" : 200,
+    "msg" : "OK",
+    "body" : {
+        "result" : {
+            "filterList" : [
+                {
+                    "hidden" : false,
+                    "itemId" : 11,
+                    "itemName" : "考拉服务",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "1101",
+                            "name" : "促销"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "1102",
+                            "name" : "考拉自营"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "1103",
+                            "name" : "仅看有货"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "1105",
+                            "name" : "会员价"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "1106",
+                            "name" : "考拉工厂店"
+                        }
+                    ],
+                    "lower" : -1,
+                    "showLine" : 0,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "itemId" : 12,
+                    "itemName" : "价格",
+                    "itemType" : 1,
+                    "list" : [
+                        {
+                            "alphas" : [
+                                "0.0",
+                                "89.0"
+                            ]
+                        },
+                        {
+                            "alphas" : [
+                                "90.0",
+                                "199.0"
+                            ]
+                        },
+                        {
+                            "alphas" : [
+                                "200.0",
+                                "299.0"
+                            ]
+                        },
+                        {
+                            "alphas" : [
+                                "300.0",
+                                "1199.0"
+                            ]
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "itemId" : 13,
+                    "itemName" : "品牌",
+                    "itemType" : 2,
+                    "list" : [
+                        {
+                            "alphas" : [
+                                "C"
+                            ],
+                            "checked" : false,
+                            "id" : "1030",
+                            "imgUrl" : "",
+                            "name" : "3CE"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 8,
+                    "showLine" : 3,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "itemId" : 14,
+                    "itemName" : "底妆",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "731",
+                            "name" : "蜜粉/散粉"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "727",
+                            "name" : "BB霜/CC霜"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "732",
+                            "name" : "腮红/胭脂"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "728",
+                            "name" : "粉底液/膏"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "726",
+                            "name" : "妆前/隔离"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "733",
+                            "name" : "修颜/高光/阴影粉"
+                        }
+                    ],
+                    "lower" : -1,
+                    "showLine" : 2,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "itemId" : 14,
+                    "itemName" : "唇妆",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "737",
+                            "name" : "唇彩/唇蜜"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "736",
+                            "name" : "唇膏/口红"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "itemId" : 14,
+                    "itemName" : "其他分类",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "923",
+                            "name" : "眼影"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "764",
+                            "name" : "彩妆套装"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "742",
+                            "name" : "指甲油"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "734",
+                            "name" : "眼妆"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 2,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100410",
+                    "itemId" : 15,
+                    "itemName" : "功能",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005192",
+                            "name" : "修容"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004972",
+                            "name" : "滋润"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004844",
+                            "name" : "润唇"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004889",
+                            "name" : "不易脱色"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004936",
+                            "name" : "补水保湿"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005193",
+                            "name" : "淡化唇纹"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005191",
+                            "name" : "装扮"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004928",
+                            "name" : "提亮肤色"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004887",
+                            "name" : "遮瑕"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004985",
+                            "name" : "变色"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005232",
+                            "name" : "提升气色"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004903",
+                            "name" : "修饰轮廓"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005265",
+                            "name" : "眼部造型"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004965",
+                            "name" : "不晕染"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005264",
+                            "name" : "放大双眼"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004924",
+                            "name" : "不易脱妆"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004976",
+                            "name" : "易延展"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004944",
+                            "name" : "隔离"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004837",
+                            "name" : "美白"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004846",
+                            "name" : "防晒"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004854",
+                            "name" : "控油"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004991",
+                            "name" : "收敛毛孔"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1004898",
+                            "name" : "定妆"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_439256",
+                            "name" : "红润气色"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005298",
+                            "name" : "修饰"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100410_1005299",
+                            "name" : "美甲"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 9,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100203",
+                    "itemId" : 15,
+                    "itemName" : "产品类型",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005292",
+                            "name" : "唇彩"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_925577",
+                            "name" : "唇釉"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005293",
+                            "name" : "唇蜜"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005290",
+                            "name" : "口红"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005291",
+                            "name" : "有色唇膏"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005189",
+                            "name" : "润唇膏"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005269",
+                            "name" : "眼影盘"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005236",
+                            "name" : "气垫CC"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005237",
+                            "name" : "BB霜"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005247",
+                            "name" : "散粉"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005452",
+                            "name" : "彩妆套装"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005252",
+                            "name" : "腮红"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_3749841",
+                            "name" : "单色腮红"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_3749416",
+                            "name" : "多色腮红"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005241",
+                            "name" : "粉底液"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005231",
+                            "name" : "妆前乳"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005303",
+                            "name" : "指甲油"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005255",
+                            "name" : "高光膏"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005253",
+                            "name" : "高光粉"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100203_1005254",
+                            "name" : "阴影粉"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 7,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100354",
+                    "itemId" : 15,
+                    "itemName" : "质地",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100354_1004997",
+                            "name" : "液体"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100354_1004995",
+                            "name" : "膏状"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100354_1004998",
+                            "name" : "啫喱"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100354_1005061",
+                            "name" : "粉状"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100354_1005064",
+                            "name" : "块状"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100354_1005066",
+                            "name" : "霜状"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100354_1005001",
+                            "name" : "乳状"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 3,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "501948",
+                    "itemId" : 15,
+                    "itemName" : "妆效",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "501948_3748841",
+                            "name" : "自然"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "501948_3748842",
+                            "name" : "闪光/珠光"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "501948_3748843",
+                            "name" : "哑光"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "501948_3748855",
+                            "name" : "光泽"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 2,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100280",
+                    "itemId" : 15,
+                    "itemName" : "适用年龄",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100280_764",
+                            "name" : "18岁以下"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100280_24",
+                            "name" : "18-35岁"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100280_25",
+                            "name" : "35-50岁"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100280_26",
+                            "name" : "50岁以上"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 2,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100365",
+                    "itemId" : 15,
+                    "itemName" : "适用部位",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100365_1005142",
+                            "name" : "唇部"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100365_1005153",
+                            "name" : "面部"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100369",
+                    "itemId" : 15,
+                    "itemName" : "颜色数量",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100369_2759608",
+                            "name" : "1-5色"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100369_2759598",
+                            "name" : "6-10色"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100224",
+                    "itemId" : 15,
+                    "itemName" : "适用群体",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100224_755",
+                            "name" : "女"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100224_757",
+                            "name" : "通用"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "id" : "100355",
+                    "itemId" : 15,
+                    "itemName" : "颜色",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "100355_3752873",
+                            "name" : "粉色系"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100355_3752860",
+                            "name" : "橘色系"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "100355_3752858",
+                            "name" : "多色"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                },
+                {
+                    "hidden" : false,
+                    "itemId" : 16,
+                    "itemName" : "国家/地区",
+                    "itemType" : 0,
+                    "list" : [
+                        {
+                            "checked" : false,
+                            "id" : "133",
+                            "name" : "韩国"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "502",
+                            "name" : "美国"
+                        },
+                        {
+                            "checked" : false,
+                            "id" : "142",
+                            "name" : "中国"
+                        }
+                    ],
+                    "lower" : -1,
+                    "maxShowLine" : 1,
+                    "showLine" : 1,
+                    "upper" : -1
+                }
+            ],
+            "goodsList" : <!=goodsList=!>,
+            "hasMore" : 1,
+            "noStoreCount" : 0,
+            "numSwitch" : true,
+            "pageNo" : 1,
+            "pageSize" : 20,
+            "searchType" : "synonym",
+            "shortcutFilters" : [
+                {
+                    "itemId" : 11,
+                    "nodeId" : "1102",
+                    "showType" : 0
+                },
+                {
+                    "itemId" : 14,
+                    "showType" : 2
+                },
+                {
+                    "itemId" : 15,
+                    "showType" : 3
+                }
+            ],
+            "showNum" : false,
+            "sortTypeList" : [
+                {
+                    "defDesc" : 1,
+                    "hasDesc" : 0,
+                    "name" : "综合",
+                    "sortType" : 0
+                },
+                {
+                    "defDesc" : 1,
+                    "hasDesc" : 0,
+                    "name" : "销量",
+                    "sortType" : 2
+                },
+                {
+                    "defDesc" : 0,
+                    "hasDesc" : 1,
+                    "name" : "价格",
+                    "sortType" : 4
+                },
+                {
+                    "defDesc" : 0,
+                    "hasDesc" : 0,
+                    "name" : "新品",
+                    "sortType" : 6
+                }
+            ],
+            "stockSwitch" : false,
+            "storeCount" : 0,
+            "total" : 72
+        },
+        "totalNum" : 72
+    },
+    "keyword" : "3CE"
+}

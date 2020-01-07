@@ -1,0 +1,8 @@
+/**
+ * @function
+ * @param {Object} d
+ * @return {uint} 0, 1
+ *
+ * @example
+ * member_session_log$addDoc({ "mid" : "thdtjsdn@gmail.com" });
+ */

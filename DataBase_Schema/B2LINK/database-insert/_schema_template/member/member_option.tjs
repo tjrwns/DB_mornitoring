@@ -1,0 +1,188 @@
+var d = {
+
+	"_id" : "member_option"
+
+	//이 Collection의 명세;
+	, "description" : "회원에 대한 부가 정보"
+
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	, "dereference" : [
+		"member.member_public"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_public"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"brand.brand_basic"
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+		"brand_basic"
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+		"brand"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"administrator.terms_of_service"
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Member ID;
+		, "mid" : <include>member/mid.json</include>
+
+//----------------------------------------------------------------------------------------------------;
+
+//	관리되는 DB에 한해서는 _id$콜렉션이름, cd$콜렉션이름 의 Property(Column)만 추가 가능하다;
+
+//----------------------------------------------------------------------------------------------------;
+
+		//Brand ID (FK) - brand.brand_basic Collection 을 참조( 브랜드명 등을 참조한다. );
+		//사용되는 시스템 목록----------;
+		//	'BrandPortal'
+		//사용되는 시스템 목록----------;
+		, "_id$brand_basic" : <include>100_common_json/_id$brand_basic.json</include>
+
+//----------------------------------------------------------------------------------------------------;
+
+//시스템별 개별 옵션 정보는 Object 타입으로 만든다;
+
+//----------------------------------------------------------------------------------------------------;
+
+		//----------------------------------------------------------------------------------------------------;
+
+		//----------[ S ] - B2ker의 Member Option 정보;
+		//, "b2ker" : { "description" : "BrandPortal의 Member Option 정보", "type" : "object" }
+		//----------[ E ] - B2ker의 Member Option 정보;
+
+		//----------------------------------------------------------------------------------------------------;
+
+		//----------[ S ] - BrandPortal의 Member Option 정보;
+		, "SYS0030" : { "description" : "BrandPortal의 Member Option 정보", "type" : "object"
+			, "properties" : {
+
+				//Member의 소속 회사 정보;
+				"company" : { "description" : "회사 정보", "type" : "object"
+					, "properties" : {
+						//회사 주소;
+						"address" : <include>address/address.json</include>
+
+						//사업자 등록 번호;
+						, "company_registration_number" : <include>partner/company_registration_number.json</include>
+
+						//회사 Email;
+						, "email" : <include>100_common_json/email.json</include>
+
+						//회사 대표 전화번호;
+						, "phone_tel" : <include>100_common_json/contact/phone__tel.json</include>
+
+						//회사 이름;
+						, "nm" : { "description" : "회사 이름", "exampleValue" : "비투링크"<include>000_common_txt/string_default.txt</include> }
+
+						//대표이사 이름;
+						, "nm_president" : <include>member/nm.json</include>
+					}
+				}
+
+				//직원 정보;
+				, "employee" : { "description" : "직원 정보", "type" : "object"
+					, "properties" : {
+						"email" : <include>100_common_json/email.json</include>
+						, "nm" : <include>member/nm.json</include>
+						, "phone_tel" : <include>100_common_json/contact/phone__tel.json</include>
+						, "messenger" : { "description" : "메신저 정보", "type" : "object"
+							, "properties" : {
+								"cd$messenger" : { "description" : "메신저 타입", "exampleValue" : "MSG010"<include>000_common_txt/string_default.txt</include>
+								,"id" : <include>100_common_json/email.json</include> }
+							}
+						}
+					}
+				}
+
+				//관심 상품;
+				,"favorite_products_info" : { "description" : "관심 상품", "type" : "object"
+					, "properties" : {
+
+						//타사 관심 상품;
+						"another_products" : { "description" : "타사 관심 상품", "type" : "array"
+							, "valueDetail" : {
+								"_id$brand_basic" : <include>100_common_json/_id$brand_basic.json</include>
+								, "_id$product_basic" : <include>100_common_json/_id$product_basic.json</include>
+							}
+						}
+
+						//자사 관심 상품;
+						, "own_products" : { "description" : "자사 관심 상품", "type" : "array"
+							, "valueDetail" : {
+								"_id$product_basic" : <include>100_common_json/_id$product_basic.json</include>
+							}
+						}
+					}
+				}
+
+				//사용자 첫 로그인 상태;
+				, "first_login_status" : { "description" : "사용자 첫 로그인 상태. -1 : 미로그인 상태. 0 : 회사정보 입력 단계. 1 : 약관 및 관심 상품 등록 단계. 2 : 첫로그인 완료.", "type" : "NumberInt", "exampleValue" : -1 }
+
+				//Member의 결제정보;
+				, "info_payment" : { "description" : "결제 정보", "type" : "object"
+
+					, "properties" : {
+
+						//세금 계산서 발급 정보;
+						"issue_tax_bill" : { "description" : "세금 계산서 발급 정보", "exampleValue" : "발급"<include>000_common_txt/string_default.txt</include> }
+
+						//계좌 주 이름"
+						, "nm_account_owner" : { "description" : "계좌 주 이름", "exampleValue" : "이소형"<include>000_common_txt/string_default.txt</include> }
+
+						//은행 이름;
+						, "nm_bank" : { "description" : "은행명", "exampleValue" : "국민은행"<include>000_common_txt/string_default.txt</include> }
+
+						//계좌 번호;
+						, "num_account" : { "description" : "계좌 번호", "exampleValue" : "123-456-789"<include>000_common_txt/string_default.txt</include> }
+					}
+				}
+
+				//브랜드 명;
+				, "nm$brand_basic" : { "description" : "브랜드 명", "exampleValue" : "파파레서피"<include>000_common_txt/string_default.txt</include> }
+
+				//약관 버전별 동의 이력;
+				, "terms_history" : { "description" : "약관 버전별 동의 이력", "type" : "array"
+					, "valueDetail" : {
+						"_id$terms_of_service" : { "description" : "약관버전", "type" : "NumberInt", "exampleValue" : 5 }
+
+						, "date_create" : { "description" : "약관 동의일", "type" : "ISODate", "exampleValue" : "ISODate('2017-08-24T10:37:59.122Z')" }
+					}
+				}
+
+				//최신 동의한 약관 버전;
+				, "toc_agreed" : { "description" : "최신 동의한 약관 버전", "type" : "NumberInt", "exampleValue" : 1 }
+			}
+		}
+		//----------[ E ] - BrandPortal의 Member Option 정보;
+	}
+		//----------------------------------------------------------------------------------------------------;
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+db.getSiblingDB( "_schema" ).member.insert( d );

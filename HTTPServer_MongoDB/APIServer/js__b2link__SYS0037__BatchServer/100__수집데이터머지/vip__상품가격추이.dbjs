@@ -1,0 +1,138 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__가격추이.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_SITE_ = "VIP";
+var product_id = "<!=product_id=!>";
+
+var db0 = db.getSiblingDB( _TARGET_SITE_ + "_2018" );
+var db1 = db.getSiblingDB( _TARGET_SITE_ + "_2019" );
+
+var cols0 = db0.getCollectionNames();
+var cols1 = db1.getCollectionNames();
+
+var allCols = cols0.concat( cols1 )
+var r = {
+    date : []
+    , price : {
+		price : []
+	}
+	, info : []
+};
+
+var _q00 = { _id : null }
+
+var _to;
+allCols.forEach(function(col){
+
+	var year = col.substr(0,4);
+	var tDb = db.getSiblingDB( _TARGET_SITE_ + "_" + year );
+	var tCol = tDb.getCollection( col );
+
+	_q00._id = NumberLong( product_id );
+	var doc = tCol.findOne( _q00 );
+
+	if( doc ){
+		r.date.push( col );
+		r.price.price.push( doc.LIST.sale_price )
+
+		_to = {
+			 date : col
+
+
+			, goodsName : ""//doc.LIST.name
+			, goodsImg : ""//doc.LIST.small_image
+			, price : ""//doc.LIST.sale_price
+			, shopId : ""//doc.LIST.brand_store_sn
+			, shopName : ""//doc.LIST.brand_store_name
+			, categoryId : ""//doc.LIST.categoryId
+			, brandId : ""//doc.LIST.brand_id
+			, brandName : ""//doc.LIST.brand_name
+			, brandLogo : ""
+			, goodsId : ""
+			, v_spu_id : ""//doc.LIST.v_spu_id
+			, sku_id : ""//doc.LIST.sku_id
+
+			, market_price : ""
+			, vip_discount : ""
+			, stock_detail : ""
+			, reputation_getSpuIdNlpKeyword : ""
+
+		};
+
+		try
+		{
+			if( doc.LIST )
+			{
+
+				_to.price = doc.LIST.sale_price;
+				_to.market_price = doc.LIST.market_price;
+				_to.vip_discount = doc.LIST.vip_discount;
+
+				_to.goodsName = doc.LIST.name;
+				_to.goodsImg = doc.LIST.small_image;
+				_to.categoryId = doc.LIST.categoryId;
+				_to.brandId = doc.LIST.brand_id;
+				_to.brandName = doc.LIST.brand_name;
+				_to.shopId = doc.LIST.brand_store_sn;
+				_to.shopName = doc.LIST.brand_store_name;
+
+
+				_to.v_spu_id = doc.LIST.v_spu_id;
+				_to.sku_id = doc.LIST.sku_id;
+				_to.goodsId = doc.LIST.product_id;
+
+				_to.market_price = doc.LIST.market_price;
+				if( doc.LIST.brand_logo != "" ) _to.brandLogo = '<img src="' +  doc.LIST.brand_logo + '" width="100">'
+
+				_to.attrValNameList = doc.LIST.attrValNameList.join('<br>');
+
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			if( doc.DETAIL )
+			{
+
+				_to.stock_detail = "";
+				var i = 0,iLen = doc.DETAIL.stock_detail.items.length,io;
+				for(;i<iLen;++i){
+					io = doc.DETAIL.stock_detail.items[ i ];
+					_to.stock_detail = _to.stock_detail + "<li><b>" + io.name_std + " / " + io.name + "</b> : " + io.sn + " : " + io.saled + "</li>";
+				}
+
+				_to.reputation_getSpuIdNlpKeyword = "";
+				var i = 0,iLen = doc.DETAIL.reputation_getSpuIdNlpKeyword.data.length,io;
+				for(;i<iLen;++i){
+					io = doc.DETAIL.reputation_getSpuIdNlpKeyword.data[ i ];
+					_to.reputation_getSpuIdNlpKeyword = _to.reputation_getSpuIdNlpKeyword + "<li><b>" + io.keyWordNlp + "</b> : " + io.keyWordCount + "</li>";
+				}
+
+
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+
+		r.info.push( _to );
+	}
+})
+
+r.info.reverse();
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

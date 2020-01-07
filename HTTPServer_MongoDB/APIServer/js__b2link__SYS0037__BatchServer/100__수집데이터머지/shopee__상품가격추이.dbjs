@@ -1,0 +1,109 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/shopee__상품가격추이.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_SITE_ = "Shopee";
+var product_id = <!=product_id=!>;
+
+var db0 = db.getSiblingDB( _TARGET_SITE_ + "_2018" );
+var db1 = db.getSiblingDB( _TARGET_SITE_ + "_2019" );
+
+var cols0 = db0.getCollectionNames();
+var cols1 = db1.getCollectionNames();
+
+var allCols = cols0.concat( cols1 )
+var r = {
+    date : []
+    , price : {
+		price : []
+		, view_count : []
+	}
+	, info : []
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q00 = { _id : null }
+
+var _to;
+allCols.forEach(function(col){
+
+	var year = col.substr(0,4);
+	var tDb = db.getSiblingDB( _TARGET_SITE_ + "_" + year );
+	var tCol = tDb.getCollection( col );
+
+	_q00._id = NumberLong( product_id );
+	var doc = tCol.findOne( _q00 );
+
+	if( doc ){
+		r.date.push( col );
+
+		_to = {
+			date : col
+			, goodsName : ""
+			, goodsImg : ""
+			, goodsId : ""
+			//, brand_id : ""
+			, brand_name : ""
+			, categoryId : ""
+			//, categoryName : ""
+			, shopId : ""
+			//, shopName : ""
+		};
+
+		try
+		{
+			if( doc.LIST )
+			{
+				_to.goodsId = NumberLong( doc._id )
+				_to.goodsImg = "https://cf.shopee.sg/file/" + doc.LIST.image || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+				_to.goodsName = doc.LIST.name;
+				_to.brand_name = doc.LIST.brand;
+				//_to.brand_id = "";
+				_to.categoryId = doc.LIST.catid;
+				//_to.categoryName = "";
+				_to.shopId = doc.LIST.shopid;
+				//_to.shopName = "";
+
+
+				var s,so,_tmpKeyword = [];
+				for( s in doc.keyword ){
+					_tmpKeyword.push( s );
+				}
+				_to.keyword = _tmpKeyword.join(",");
+
+				_to.url = "https://shopee.sg/--i."+ doc.LIST.shopid + "." + doc.LIST.itemid;
+				_to.sellCount = doc.LIST.sold + " / " + doc.LIST.historical_sold
+
+				_to.price = doc.LIST.price;
+				r.price.price.push( Number( doc.LIST.price ) );
+
+				if( doc.LIST.view_count ) _to.view_count = doc.LIST.view_count;
+				else _to.view_count = 0;
+
+				_to.sold = doc.LIST.sold;
+				_to.historical_sold = doc.LIST.historical_sold;
+				_to.stock = doc.LIST.stock;
+				if( doc.LIST.discount ) _to.discount = doc.LIST.discount;
+				if( doc.LIST.shop_location ) _to.shop_location = doc.LIST.shop_location;
+
+				r.price.view_count.push( Number( doc.LIST.view_count ) );
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		r.info.push( _to);
+	}
+})
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

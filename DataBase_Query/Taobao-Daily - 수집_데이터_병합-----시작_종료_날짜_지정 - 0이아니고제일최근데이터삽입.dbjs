@@ -1,0 +1,291 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SITE_NAME_ = "Taobao";
+
+//----------------------------------------------------------------------------------------------------;
+
+// QUERY;
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+var getSellCount = function(doc){
+
+	if( doc.apiStack[0].value.item.sellCount ) return doc.apiStack[0].value.item.sellCount;
+	if( doc.apiStack[0].value.item.vagueSellCount ) return doc.apiStack[0].value.item.vagueSellCount;
+	return null;
+
+}
+var FN = function( TARGET_DATE ){
+
+
+	var nm_db = "Taobao_" + TARGET_DATE.substr( 0, 4 );
+
+	var db0 = db.getSiblingDB( nm_db );
+	var db1 = db.getSiblingDB( nm_db + "-수집" );
+	var db2 = db.getSiblingDB( nm_db + "-ERROR" );
+
+	var COL_NAMES = [];
+
+	db1.getCollectionNames().forEach( function( nm_col ){
+		if( nm_col.split( "_" )[ 0 ] * 1 == TARGET_DATE * 1 )
+			if( COL_NAMES.indexOf( nm_col.split( "-" )[ 0 ] ) == -1 ) COL_NAMES.push( nm_col.split( "-" )[ 0 ] );
+	});
+
+
+	var i = 0,iLen = COL_NAMES.length,io;
+	for(;i<iLen;++i){
+		io = COL_NAMES[ i ];
+
+		//기존생성된 머지컬렉션 삭제;
+		db0.getCollection( io.substr(0,8) ).drop();
+
+		//ERROR 삭제;
+		db2.getCollection( io.substr(0,8) ).drop();
+	}
+
+
+	COL_NAMES = COL_NAMES.reverse();
+
+	var targetColNm = TARGET_DATE.substr( 0, 8 );
+	var col0 = db0.getCollection( targetColNm );
+	var col0_error = db2.getCollection( targetColNm );
+
+	var r0 = {};
+	var r1 = {};
+
+	var io;
+	var i=0, iLen=COL_NAMES.length;
+	for( ; i<iLen; ++i )
+	{
+		io = COL_NAMES[ i ];
+
+		print( "-------------------------------------------------------" );
+		print( iLen + " / " + i + " - " + io + " / " + Date() );
+		print( "-------------------------------------------------------" );
+
+		var col1 = db1.getCollection( io );
+
+		//--------------------------------------------------;
+
+		col1.find( P0 ).forEach( function( doc ){
+
+			if( !r1[ doc._id ] ){
+				try
+				{
+					//sellCount는 {String};
+					var SC= getSellCount( doc )
+					if( SC )
+					{
+						//printjson( doc.apiStack[0].value.item )
+						r1[ doc._id ] = doc;
+						r1[ doc._id ].time = io;
+						//return;
+					}
+
+				}
+				catch( er)
+				{
+					//er;
+					//print( io + "/없앙")
+					//return;
+
+					doc.apiStack[0].value = doc.apiStack[0].value.global.data;
+
+					//sellCount는 {String};
+					var SC= getSellCount( doc )
+					if( SC )
+					{
+						//printjson( doc.apiStack[0].value.item )
+						r1[ doc._id ] = doc;
+						r1[ doc._id ].time = io;
+						//return;
+					}
+				}
+
+			}
+			/*/
+			if( doc.apiStack[0] && doc.apiStack[0].value && doc.apiStack[0].value.item && doc.apiStack[0].value.item.sellCount != 0 )
+			{
+				r1[ doc._id ] = doc;
+			}
+			//*/
+
+			try
+			{
+				var SC = getSellCount( doc );
+
+				var prevDoc = r1[ doc._id ];
+				if( prevDoc )
+				{
+					var SC_PREV = getSellCount( prevDoc );
+
+					var n_SC = Number( SC );
+					var n_SC_PREV = Number( SC_PREV );
+
+					//당일 최대 값;
+					if( n_SC > n_SC_PREV ){ r1[ doc._id ] = doc; r1[ doc._id ].time = io; return; }
+					//당일 최소 값;
+					//if( n_SC < n_SC_PREV ){ r1[ doc._id ] = doc; r1[ doc._id ].time = io; return; }
+
+					//n_SC 또는 n_SC_PREV가 NaN, 문자열 일시
+					else
+					{
+						var SC_idx_Man = SC.indexOf( "万" );
+						var SC_idx_Plus = SC.indexOf( "+" );
+						//var SC_idx_Minus = SC.indexOf( "-" );
+						var SC_PREV_idx_Man = SC_PREV.indexOf( "万" );
+						var SC_PREV_idx_Plus = SC_PREV.indexOf( "+" );
+						//var SC_PREV_idx_Minus = SC_PREV.indexOf( "-" );
+
+						//"万" 문자열 존재시;
+						if( -1 != SC_idx_Man ) n_SC = Number( SC.slice( 0, SC_idx_Man ) ) * 10000;
+						//"万" 문자열이 없을시 무조건 +가 존재한다;
+						else n_SC = Number( SC.slice( 0, SC_idx_Plus ) );
+
+						//"万" 문자열 존재시;
+						if( -1 != SC_PREV_idx_Man ) n_SC_PREV = Number( SC_PREV.slice( 0, SC_PREV_idx_Man ) ) * 10000;
+						//"万" 문자열이 없을시 무조건 +가 존재한다;
+						else n_SC_PREV = Number( SC_PREV.slice( 0, SC_PREV_idx_Plus ) );
+
+						//당일 최대 값;
+						if( n_SC > n_SC_PREV ){ r1[ doc._id ] = doc; r1[ doc._id ].time = io; }
+						//당일 최소 값;
+						//if( n_SC < n_SC_PREV ){ r1[ doc._id ] = doc; r1[ doc._id ].time = io; }
+
+						return;
+					}
+				}
+			}
+			catch( er ){
+			}
+		});
+	}
+
+	var jo;
+	for(var s in r1 )
+	{
+		jo = r1[ s ];
+
+		var b = false;
+		try{
+			/*/
+			if( !jo.apiStack[0] ) b = true;
+			if( !jo.apiStack[0].value ) b = true;
+			if( !jo.apiStack[0].value.item ) b = true;
+			//*/
+			if( !jo.apiStack[0].value.item.sellCount ) b = true;
+			if( "0" == getSellCount( jo ) ) b = true;
+			if( b ){
+				//jo.time = TARGET_DATE;
+				col0_error.insertOne( jo );
+			}
+		}
+		catch( er )
+		{
+			//jo.time = TARGET_DATE;
+			col0_error.insertOne( jo );
+
+			//er;
+			print( "수집데이터병합중 에러데이터 발생 - col0_error.insertOne( jo ); -- " + er.message );
+		}
+
+		//delete jo.time;
+		col0.insertOne( jo );
+
+		//print(a);
+		//++a;
+	}
+
+};
+
+var LOOP = function(START_DATE,END_DATE){
+
+	var db0 = db.getSiblingDB( _SITE_NAME_ + "_" + START_DATE.substr(0,4) + "-수집" );
+	var col0 = db0.getCollectionNames();
+	printjson( col0 )
+	if( START_DATE != END_DATE )
+	{
+		var allCols = [];
+		var db1 = db.getSiblingDB( _SITE_NAME_ + "_" + END_DATE.substr(0,4) + "-수집" );
+		var col1 = db1.getCollectionNames();
+
+		var i = 0,iLen = col0.length,io;
+		for(;i<iLen;++i){
+			io = col0[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+		}
+
+		var i = 0,iLen = col1.length,io;
+		for(;i<iLen;++i){
+			io = col1[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP" ) allCols.push( io );
+		}
+	}
+	else
+	{
+		var allCols = [];
+		var i = 0,iLen = col0.length,io;
+		for(;i<iLen;++i){
+			io = col0[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+		}
+
+	}
+
+	allCols.reverse();
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		FN( io )
+	}
+
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+//LOOP( "20190101", "20190131");
+//LOOP( "20190201", "20190228");
+//LOOP( "20190301", "20190331");
+//LOOP( "20190401", "20190430");
+//LOOP( "20190501", "20190531");
+//LOOP( "20190601", "20190630");
+//LOOP( "20190701", "20190731");
+//LOOP( "20190801", "20190831");
+LOOP( "20190924", "20190929");
+//LOOP( "20191001", "20190131");
+//LOOP( "20191101", "20190131");
+//LOOP( "20191201", "20190131");
+//LOOP( "20190706", "20190708");
+//LOOP( "20190408", "20190716");
+//FN("20190926")
+//printjson( 1 );
+return;
+

@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {String} nmCol Collection's Name
+ * @return {Array}
+ */

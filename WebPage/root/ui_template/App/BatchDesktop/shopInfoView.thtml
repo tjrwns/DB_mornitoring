@@ -1,0 +1,11 @@
+<div class="id-fancygrid" style="margin:0 auto;height:100%;min-width:300px; width:100%;">
+
+	<div class="id-fancygrid-left" style="min-width:300px;float:left;margin-right:10px;">
+			<div id="div-fancygrid-0"></div>
+	</div>
+	<div class="id-fancygrid-right" style="min-width:300px;float:left;">
+			<div class="id-echarts0" style="height: 400px;"></div>
+			<div id="div-fancygrid-1" tabindex="0"></div>
+	</div>
+	<div class="id-echarts1" style="height: 100%;"></div>
+</div>

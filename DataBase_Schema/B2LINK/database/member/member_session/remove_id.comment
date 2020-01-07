@@ -1,0 +1,6 @@
+/**
+ * remove document by _id
+ * @function
+ * @param {String} _id
+ * @return {uint}
+ */

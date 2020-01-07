@@ -1,0 +1,255 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/kaola__비교상품상세정보가져오기검색조건썸네일대용량.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+var skip = <!=skip=!>;
+var limit = <!=limit=!>;
+var search = <!=search=!>;
+
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+var _SEARCH_MODEL_ = {
+	"goodsId" : {
+		"field" : "item.itemId"
+		, "type" : "string"
+	}
+	, "brandId" : {
+		"field" : "item.brandValueId"
+		, "type" : "string"
+	}
+//	, "brandName" : {
+//		"field" : "LIST.brandName"
+//		, "type" : "string"
+//	}
+	, "categoryId" : {
+		"field" : "item.categoryId"
+		, "type" : "string"
+	}
+	//, "categoryName" :{
+	//	"field" : "LIST.categoryName"
+	//	, "type" : "string"
+	//}
+	, "shopId" : {
+		"field" : "seller.shopId"
+		, "type" : "string"
+	}
+	, "shopName" : {
+		"field" : "seller.shopName"
+		, "type" : "string"
+	}
+	, "goodsName" : {
+		"field" : "item.title"
+		, "type" : "string"
+	}
+	, "price" : {
+		"field" : "apiStack.0.value.price.price.priceText"
+		, "type" : "string"
+	}
+	, "keyword" : {
+		"field" : "keyword"
+		, "type" : "string"
+	}
+//	, "url" : {
+//		"field" : "LIST.productUrl"
+//		, "type" : "string"
+//	}
+	, "sellCount"  : {
+		"field" : "apiStack.0.value.item.sellCount"
+		, "type" : "string"
+	}
+};
+
+var diffRootProperty = [ "prev_doc", "doc"];
+
+//----------------------------------------------------------------------------------------------------;
+
+//검색조건을 생성한다.;
+var make_search_query = function( search ){
+
+	var q = { $or : [] }
+
+	if( Object.keys( search ).length == 0 ) return search;
+	diffRootProperty.forEach(function(item){
+		var _toAndCondition = { $and : null }
+		var _to;
+		var _ta = [];
+		var s,so
+		for( s in _SEARCH_MODEL_ ){
+			so = _SEARCH_MODEL_[ s ];
+			_to = {}
+			if( search[ s ] )
+			{
+				if( so.type == "string" ) _to[ item + "." + so.field ] = { $regex : search[ s ], $options : "gi" }
+				if( so.type == "array" )
+				{
+					_to[ item + "." + so.field ] = {};
+					if( s == "categoryId" ) _to[ item + "." + so.field ][ "$all" ] = [ Number( search[ s ] ) ] ;
+					else _to[ item + "." + so.field ][ "$all" ] = [ search[ s ] ] ;
+				}
+				_ta.push( _to )
+				_toAndCondition.$and = _ta;
+			}
+		}
+		q.$or.push( _toAndCondition );
+	})
+
+	return q;
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _q01 = { _id : { $gt : -1 } };
+var _q01 = {};
+var _q02 = { _id : { $in : [] }};
+var _q00 = make_search_query( search );
+var _q03 = { _id : null };
+
+//var temp = [];
+//col0.find( _q00,{ _id : 1 } ).skip( skip ).limit( limit ).forEach(function( d ){
+//	temp.push( d._id );
+//})
+//
+//_q00[ "$and" ].push( { _id : { $in :temp }} );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	totalCount : 0
+	, data : []
+};
+//----------------------------------------------------------------------------------------------------;
+
+var _to;
+
+r.totalCount = col0.find( _q00 ).count();
+
+col0.find( _q00 ).skip( skip ).limit( limit ).forEach( function( doc ){
+
+	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : ""
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+
+	if( doc.prev_doc )
+	{
+		//VIP의 _id는 숫가자 커서 NumberLong 임;
+		_to.goodsId = NumberInt( doc.prev_doc._id );
+
+		if( doc.prev_doc.DETAIL_HTML && doc.prev_doc.DETAIL_HTML.__Goods__ && doc.prev_doc.DETAIL_HTML.__Goods__.basicInfo )
+		{
+			_to.brandId = doc.prev_doc.DETAIL_HTML.__Goods__.basicInfo.brandId;
+			_to.brandName = doc.prev_doc.DETAIL_HTML.__Goods__.basicInfo.brandName;
+
+			_to.categoryId = doc.prev_doc.DETAIL_HTML.__Goods__.basicInfo.categoryId;;
+			_to.categoryName = doc.prev_doc.DETAIL_HTML.__Goods__.basicInfo.categoryName;
+
+		};
+
+		if( doc.prev_doc.DETAIL_HTML && doc.prev_doc.DETAIL_HTML.__KaolaGoodsDetail__ && doc.prev_doc.DETAIL_HTML.__Goods__.goodsShopInfo )
+		{
+			_to.shopId = doc.prev_doc.DETAIL_HTML.__Goods__.goodsShopInfo.shopId;
+			_to.shopName = doc.prev_doc.DETAIL_HTML.__Goods__.goodsShopInfo.shopName;
+
+		}
+
+		if( doc.prev_doc.DETAIL && doc.prev_doc.DETAIL.data && doc.prev_doc.DETAIL.data.skuPrice && doc.prev_doc.DETAIL.data.skuPrice.currentPrice )
+		{
+			_to.price = doc.prev_doc.DETAIL.data.skuPrice.currentPrice;
+		}
+
+		if( doc.prev_doc.LIST )
+		{
+			//수정 - 송선우 - 20190228_2053;
+			_to.goodsImg = doc.prev_doc.LIST.imageUrl || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+			_to.goodsName = doc.prev_doc.LIST.title;
+		}
+
+		if( doc.prev_doc.keyword ) _to.keyword = doc.keyword;
+		//_to.url = "";
+	}
+
+	r.data.push( _to );
+
+	//-------------------------------------------------------;
+
+	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : ""
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+	if( doc.doc )
+	{
+		//VIP의 _id는 숫가자 커서 NumberLong 임;
+		_to.goodsId = NumberInt( doc.doc._id );
+
+		if( doc.doc.DETAIL_HTML && doc.doc.DETAIL_HTML.__Goods__ && doc.doc.DETAIL_HTML.__Goods__.basicInfo )
+		{
+			_to.brandId = doc.doc.DETAIL_HTML.__Goods__.basicInfo.brandId;
+			_to.brandName = doc.doc.DETAIL_HTML.__Goods__.basicInfo.brandName;
+
+			_to.categoryId = doc.doc.DETAIL_HTML.__Goods__.basicInfo.categoryId;;
+			_to.categoryName = doc.doc.DETAIL_HTML.__Goods__.basicInfo.categoryName;
+
+		};
+
+		if( doc.doc.DETAIL_HTML && doc.doc.DETAIL_HTML.__KaolaGoodsDetail__ && doc.doc.DETAIL_HTML.__Goods__.goodsShopInfo )
+		{
+			_to.shopId = doc.doc.DETAIL_HTML.__Goods__.goodsShopInfo.shopId;
+			_to.shopName = doc.doc.DETAIL_HTML.__Goods__.goodsShopInfo.shopName;
+
+		}
+
+		if( doc.doc.DETAIL && doc.doc.DETAIL.data && doc.doc.DETAIL.data.skuPrice && doc.doc.DETAIL.data.skuPrice.currentPrice )
+		{
+			_to.price = doc.doc.DETAIL.data.skuPrice.currentPrice;
+		}
+
+		if( doc.doc.LIST )
+		{
+			//수정 - 송선우 - 20190228_2053;
+			_to.goodsImg = doc.doc.LIST.imageUrl || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+			_to.goodsName = doc.doc.LIST.title;
+		}
+
+		if( doc.doc.keyword ) _to.keyword = doc.keyword;
+		//_to.url = "";
+	}
+
+	r.data.push( _to );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

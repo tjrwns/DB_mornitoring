@@ -1,0 +1,10 @@
+{
+				//All Name(Default);
+				"a" : { "description" : "All Name(KR)", "exampleValue" : "송선우"<include>000_common_txt/string_default.txt</include> }
+
+				//First Name(Default);
+				, "f" : { "description" : "First Name(KR)", "exampleValue" : "선우"<include>000_common_txt/string_default.txt</include> }
+
+				//Last Name(Default);
+				, "l" : { "description" : "Last Name(KR)", "exampleValue" : "송"<include>000_common_txt/string_default.txt</include> }
+			}

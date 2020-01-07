@@ -1,0 +1,37 @@
+[
+	{
+		"method": "SearchRpc.getSearchList",
+		"result": {
+			"code": 0,
+			"msg": "success",
+			"data": {
+				"total": <!=productsLength=!>,
+				"match_channel": 0,
+				"getLabel": false,
+				"brands": {
+					"1710620162": {
+						"brand_id": "1710620162",
+						"brand_name": "唯品会好货精选",
+						"sell_time_from": "1538939247",
+						"sell_time_to": "1570636800",
+						"pms_activetips": "",
+						"isHaitao": "0",
+						"preHeat": 0,
+						"is_login_add_cart": 0
+					}
+				},
+				"products": <!=products=!>,
+				"mainCategoryId": "7477",
+				"brandStoreSn": "10020258",
+				"showStyle": 0,
+				"switchs": {
+					"list_timelimit_recommend": 1
+				}
+			},
+			"_format_": 1
+		},
+		"time": 1570416358,
+		"hash": "c906bba0",
+		"id": 1570416358490
+	}
+]

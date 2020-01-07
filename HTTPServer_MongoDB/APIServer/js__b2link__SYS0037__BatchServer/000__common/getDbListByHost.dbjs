@@ -1,0 +1,36 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getDbListByHost.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var check_colNm = {
+	admin : 1
+	, config : 1
+	, local : 1
+
+	, _TEMP : 1
+	, _instance : 1
+};
+
+var r = [];
+
+//----------------------------------------------------------------------------------------------------;
+
+var a = db.adminCommand({ listDatabases : 1 });
+	a.databases.forEach( function( item ){
+		if( !check_colNm[ item.name ] )
+		{
+			r.push({
+				nm_db : item.name
+				, count_cols : db.getSiblingDB( item.name ).getCollectionNames().length
+			});
+		}
+	});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

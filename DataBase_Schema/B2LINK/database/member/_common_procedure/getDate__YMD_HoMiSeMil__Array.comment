@@ -1,0 +1,4 @@
+/**
+ * @function
+ * @return {Array} [ year, month, day, hours, minutes, seconds, milliseconds ]
+ */

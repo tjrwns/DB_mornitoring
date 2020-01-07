@@ -1,0 +1,57 @@
+//----------------------------------------------------------------------------------------------------;
+
+//	Build Script, Executor 들이 모여있다.;
+
+//----------------------------------------------------------------------------------------------------;
+
+. 도움 또는 기능상 필요한 실행용 script들이 들어있다.
+
+//--------------------------------------------------;
+//	database 설정 및 기초 데이터 삽입;
+//--------------------------------------------------;
+
+@ database-insert--Insert_Data.***
+ - 기본 데이터셋을 DB에 삽입한다.
+ - _schema DB에 Collection 별 Schema 를 삽입한다.
+ - 현재 구동되고있는 MongoDB Instance에 기초 데이터를 삽입하는 기능
+
+
+@ database--Setup.***
+ - Procedure들을 Database에 등록 한다.
+ - Node로 구동 시키는 커맨드가 포함되어있다.
+ - 각 DB별 계정을 생성한다.
+ - 현재 구동되고있는 MongoDB Instance에 procedure를 등록하는 기능
+
+
+@ all--Delete_Log_Result_Files.***
+  - database--Setup.***, database-insert--Insert_Data.*** 등이 작동될때 생성되는 Mongo Client Console에서 구동될 스크립트 파일과 성공 및 실패 로그 파일 전체를 제거한다.
+
+  - 이하 와 같은 커맨드를 순차적으로 호출 한다.
+   . database--Delete_dbjs.***
+   . database--Delete_dbs_errorResult.***
+   . database--Delete_dbs_result.***
+
+   . database-insert--Delete_dbjs.***
+   . database-insert--Delete_dbs_errorResult.***
+   . database-insert--Delete_dbs_result.***
+
+//--------------------------------------------------;
+//	database _schema, _schema_include, _schema_template;
+//--------------------------------------------------;
+
+@ database--_schema_include--CreateJSON.***
+ - database/_schema_include 의 *.tjson을 *.json으로 변환(*.tjson은 유지)
+
+
+@ database--_schema--CreateJSON__FromTemplate.***
+ - database/_schema_template 의 *.tjson을 database/_schema_include의 *.json을 참조하여 *.json으로 변환 후 *.json 파일들을 database/_schema로 복사
+
+
+@ database--_schema--CreateJSON__All__FromTemplate.***
+ - database--_schema_include--CreateJSON.*** 를 구동 후
+ - database--_schema--CreateJSON__FromTemplate.*** 를 구동한다.
+
+
+@ database--_schema--Delete_JSON--_schema.***
+ - database/_schema/*.json을 제거 한다.
+ - database/_schema/*.tjson은 유지 된다.

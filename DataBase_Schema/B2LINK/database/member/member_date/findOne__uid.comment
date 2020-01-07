@@ -1,0 +1,8 @@
+/**
+ * @function
+ * @param {String} uid user ID
+ * @return {Document}
+ *
+ * @example
+ * member_date$findOne__uid( "thdtjsdn@gmail.com" )' );
+ */

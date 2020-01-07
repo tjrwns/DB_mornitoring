@@ -1,0 +1,9 @@
+{
+	"description" : "trade_disposal", "exampleValue" : 0
+
+	<include>000_common_txt/uint_len0.txt</include>
+
+	, "values" : [ "L/C", "CWO", "T/T", "M/T", "DD", "COD", "CAD", "D/P", "D/A" ]
+
+	, "valuesMap" : { "LC" : 1, "CWO" : 1, "T/T" : 1, "M/T" : 1, "DD" : 1, "COD" : 1, "CAD" : 1, "D/P" : 1, "D/A" : 1 }
+}

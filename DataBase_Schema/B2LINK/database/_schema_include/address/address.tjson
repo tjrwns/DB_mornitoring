@@ -1,0 +1,26 @@
+{
+	"description" : "Address", "exampleValue" : "", "type" : "object"
+
+	, "properties" : {
+
+		//전체주소;
+		"f" : { "description" : "전체주소", "exampleValue" : "전체주소"<include>000_common_txt/string_default.txt</include> }
+
+		, "cd$country" : <include>100_common_json/country.json</include>
+
+		//수정하기;
+		, "cd_postal" : { "description" : "우편번호", "exampleValue" : "우편번호" <include>000_common_txt/string_default.txt</include> }
+
+		, "addr1" : { "description" : "주소1", "exampleValue" : "주소1"<include>000_common_txt/string_default.txt</include> }
+
+		, "addr2" : { "description" : "주소2", "exampleValue" : "주소2"<include>000_common_txt/string_default.txt</include> }
+
+		, "addr3" : { "description" : "주소3", "exampleValue" : "주소3"<include>000_common_txt/string_default.txt</include> }
+
+		, "addr4" : { "description" : "주소4", "exampleValue" : "주소4"<include>000_common_txt/string_default.txt</include> }
+
+		, "addr5" : { "description" : "주소5", "exampleValue" : "주소5"<include>000_common_txt/string_default.txt</include> }
+
+		, "addr6" : { "description" : "주소6", "exampleValue" : "주소6"<include>000_common_txt/string_default.txt</include> }
+	}
+}

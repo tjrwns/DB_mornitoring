@@ -1,0 +1,6 @@
+/**
+ * 'sid'를 가지고 Session Object를 검색 후 Session Check.
+ * @function
+ * @param {Object} d Request Object { "mid" : "", "sid" : "", "d_ex" : "" }
+ * @return {uint} 0 or 1
+ */

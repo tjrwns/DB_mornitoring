@@ -1,0 +1,199 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/__상품상세정보가져오기썸네일.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+col0.createIndex( {"apiStack.0.value.item.sellCount" : 1} );
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+
+//----------------------------------------------------------------------------------------------------;
+var _to;
+
+col0.find({}).forEach( function( doc ){
+
+	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : ""
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+
+	if( doc.prev_doc )
+	{
+		_to.goodsId = NumberLong( doc._id );
+
+		if( doc.prev_doc.item )
+		{
+			var t0 = doc.prev_doc.item;
+
+			try
+			{
+				_to.goodsImg = t0.images[ 0 ];
+			}
+			catch(er){
+				_to.goodsImg = "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+			}
+
+			_to.goodsName = t0.title;
+
+			_to.brandName = t0.brandValueId;
+			_to.brandId = t0.brandValueId
+
+			_to.categoryId = t0.categoryId;
+			_to.categoryName = t0.categoryId;
+
+		}
+
+		if( doc.prev_doc.item )
+		{
+			var t1 = doc.prev_doc.seller;
+
+			_to.shopId = t1.shopId;
+			_to.shopName = t1.shopName;
+		}
+
+		try
+		{
+			if ( doc.prev_doc.apiStack[ 0 ].value.item.sellCount )
+			{
+				_to.price = doc.prev_doc.apiStack[ 0 ].value.price.price.priceText;
+				var _tmpSellCount = doc.prev_doc.apiStack[ 0 ].value.item.sellCount
+				if( _tmpSellCount.indexOf( "+" ) == -1 ) _to.sellCount = doc.prev_doc.apiStack[ 0 ].value.item.sellCount * 1;
+				else if( _tmpSellCount.indexOf( "万" ) != -1 )
+				{
+					_to.sellCount = doc.prev_doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000;
+				}
+				else
+				{
+					_to.sellCount = doc.prev_doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1;
+				}
+			}
+		}
+		catch( e )
+		{
+			//에러;
+			_to.price = 0
+			_to.sellCount = 0;
+		}
+
+		if( doc.prev_doc.keyword ) _to.keyword = doc.keyword;
+		//_to.url = t0.productUrl;
+
+	}
+
+	r.push( _to );
+
+	//-------------------------------------------------------;
+
+	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : ""
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+	if( doc.doc )
+	{
+		_to.goodsId = NumberLong( doc._id );
+
+		if( doc.doc.item )
+		{
+			var t0 = doc.doc.item;
+
+			try
+			{
+				_to.goodsImg = t0.images[ 0 ];
+			}
+			catch(er){
+				_to.goodsImg = "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+			}
+
+			_to.goodsName = t0.title;
+
+			_to.brandName = t0.brandValueId;
+			_to.brandId = t0.brandValueId
+
+			_to.categoryId = t0.categoryId;
+			_to.categoryName = t0.categoryId;
+
+		}
+
+		if( doc.doc.item )
+		{
+			var t1 = doc.doc.seller;
+
+			_to.shopId = t1.shopId;
+			_to.shopName = t1.shopName;
+		}
+
+		try
+		{
+			if ( doc.doc.apiStack[ 0 ].value.item.sellCount )
+			{
+				_to.price = doc.doc.apiStack[ 0 ].value.price.price.priceText;
+				var _tmpSellCount = doc.doc.apiStack[ 0 ].value.item.sellCount
+				if( _tmpSellCount.indexOf( "+" ) == -1 ) _to.sellCount = doc.doc.apiStack[ 0 ].value.item.sellCount * 1;
+				else if( _tmpSellCount.indexOf( "万" ) != -1 )
+				{
+					_to.sellCount = doc.doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000;
+				}
+				else
+				{
+					_to.sellCount = doc.doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1;
+				}
+			}
+		}
+		catch( e )
+		{
+			//에러;
+			_to.price = 0
+			_to.sellCount = 0;
+		}
+
+		if( doc.keyword ) _to.keyword = doc.keyword;
+		//_to.url = t0.productUrl;
+
+	}
+
+	r.push( _to );
+
+
+});
+
+//r.sort(function (a, b) {
+//	return a.sellCount > b.sellCount ? -1 : a.sellCount < b.sellCount ? 1 : 0;
+//});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

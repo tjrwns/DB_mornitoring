@@ -1,0 +1,248 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "DataBase_Query/Taobao-Daily - 그래프데이터생성_월간_01--graph_data.monhtly_brand_salesamount_by_channel - 재생성.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$brand = db.getSiblingDB("brand");
+var _db$daily_master = db.getSiblingDB("daily_master_h5");
+var _db$graph_data = db.getSiblingDB("graph_data");
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$brand_basic = _db$brand.brand_basic;
+var _col$daily_master = _db$daily_master.daily_master;
+var _col$monthly_brand_salesamount_by_channel =  _db$graph_data.monthly_brand_salesamount_by_channel;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { date : 1, _id$brand_basic : 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var brandList = [];
+_col$brand_basic.find({}, {_id : 1}).forEach(function( doc ){
+	brandList.push( doc._id );
+});
+
+
+var _SHOP_TYPE = {
+	"海外旗舰店" : {
+		amount : "tmall_foreign_sales_amount"
+		, quantity : "tmall_foreign_sales_quantity"
+	}
+	, "旗舰店" : {
+		amount : "tmall_local_sales_amount"
+		, quantity : "tmall_local_sales_quantity"
+	}
+	, "天猫" : {
+		amount : "tmall_sales_amount"
+		, quantity : "tmall_sales_quantity"
+	}
+	, "淘宝" : {
+		amount : "taobao_sales_amount"
+		, quantity : "taobao_sales_quantity"
+	}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var getDateRangeByMonth = function( y, m  ){
+
+	var r = {};
+	var date = new Date();
+	date.setFullYear( y , m , 0); //해당 월의 마지막 날짜를 가져온다.
+
+	var my = date.getFullYear();
+	var mm = date.getMonth()+1;
+		mm = mm > 9 ? mm.toString() : '0' + mm.toString();
+	var md = date.getDate();
+		md = md > 9 ? md.toString() : '0' + md.toString();
+	r.s = my+ "-" + mm + '-' + '01';
+	r.e = my+ "-" + mm + '-' + md;
+	return r;
+};
+
+var FN = function( year, month ){
+
+
+//	_col$monthly_brand_salesamount_by_channel.remove({
+//		year : NumberInt( year ),
+//		month : NumberInt( month )
+//	});
+
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  month + " - " + year + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	var i = 0,iLen = brandList.length,io;
+	for(;i<iLen;++i){
+
+		io = brandList[ i ];
+		var _id$brand_basic = io;
+		var _year = NumberInt( year );
+		var _month = NumberInt( month );
+
+
+		var model = {
+			year : -1,
+			month : -1,
+			date_start : "",
+			date_end : "",
+			_id$brand_basic : -1,
+			taobao_sales_amount : 0 ,
+			taobao_sales_quantity : 0 ,
+			taobao_sales_percent : 0,
+			tmall_sales_amount : 0,
+			tmall_sales_quantity : 0,
+			tmall_sales_percent : 0,
+			tmall_local_sales_amount : 0,
+			tmall_local_sales_quantity : 0,
+			tmall_local_sales_percent : 0,
+			tmall_foreign_sales_amount : 0,
+			tmall_foreign_sales_quantity : 0,
+			tmall_foreign_sales_percent : 0,
+			total_sales_amount : 0,
+			total_sales_quantity : 0
+		};
+
+		var date_range = getDateRangeByMonth( year, month );
+
+		var _q = {
+			_id$brand_basic : _id$brand_basic
+			, cd$product_master : { $ne : "" }
+			, date : { $gte : ISODate( date_range.s ), $lte :  ISODate( date_range.e  ) }
+		};
+
+		model._id$brand_basic = _id$brand_basic;
+		model.year = _year;
+		model.month = _month;
+		model.date_start = date_range.s;
+		model.date_end = date_range.e;
+		model.total_sales_amount = 0;
+		model.total_sales_quantity = 0;
+
+		_col$daily_master.aggregate([
+			{
+				$match : _q
+			},
+			{
+				$group : {
+					_id : '$shop_type'
+					, sales_amount : { $sum : { $multiply : [ "$Daily_Sales", "$price" ]} }
+					, sales_quantity : { $sum : "$Daily_Sales" }
+				}
+			}
+		]).forEach( function( doc ){
+
+			//*/
+			//if문대신 오브젝트를 키값으로 찾는 방식으로수정 - 최석준 2019.03.25;
+			model[ _SHOP_TYPE[ doc._id ].amount ] = doc.sales_amount;
+			model[ _SHOP_TYPE[ doc._id ].quantity ] = doc.sales_quantity;
+			/*/
+			if( doc._id == "海外旗舰店" )
+			{
+				model.tmall_foreign_sales_amount = doc.sales_amount;
+				model.tmall_foreign_sales_quantity = doc.sales_quantity;
+			}
+			else if( doc._id == "旗舰店" )
+			{
+				model.tmall_local_sales_amount = doc.sales_amount;
+				model.tmall_local_sales_quantity = doc.sales_quantity;
+
+			}
+			else if( doc._id == "天猫" )
+			{
+				model.tmall_sales_amount = doc.sales_amount;
+				model.tmall_sales_quantity = doc.sales_quantity;
+			}
+			else if( doc._id == "淘宝")
+			{
+				model.taobao_sales_amount = doc.sales_amount;
+				model.taobao_sales_quantity = doc.sales_quantity;
+			}
+			//*/
+
+			model.total_sales_amount += doc.sales_amount;
+			model.total_sales_quantity += NumberInt( doc.sales_quantity );
+
+		});
+
+		model.taobao_sales_percent = model.taobao_sales_amount / model.total_sales_amount * 100;
+		model.tmall_sales_percent = model.tmall_sales_amount / model.total_sales_amount * 100;
+		model.tmall_local_sales_percent = model.tmall_local_sales_amount / model.total_sales_amount * 100;
+		model.tmall_foreign_sales_percent = model.tmall_foreign_sales_amount / model.total_sales_amount * 100;
+
+		_col$monthly_brand_salesamount_by_channel.insert( model );
+
+	};
+
+	return;
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+var dateRangesObject = [
+//	  { y : 2018, m : 1 }
+//	, { y : 2018, m : 2 }
+//	, { y : 2018, m : 3 }
+	  { y : 2018, m : 4 }
+	, { y : 2018, m : 5 }
+	, { y : 2018, m : 6 }
+	, { y : 2018, m : 7 }
+	, { y : 2018, m : 8 }
+	, { y : 2018, m : 9 }
+	, { y : 2018, m : 10 }
+	, { y : 2018, m : 11 }
+	, { y : 2018, m : 12 }
+	, { y : 2019, m : 1 }
+	, { y : 2019, m : 2 }
+	, { y : 2019, m : 3 }
+	, { y : 2019, m : 4 }
+	, { y : 2019, m : 5 }
+	, { y : 2019, m : 6 }
+	, { y : 2019, m : 7 }
+	, { y : 2019, m : 8 }
+//	, { y : 2019, m : 9 }
+//	, { y : 2019, m : 10 }
+//	, { y : 2019, m : 11 }
+//	, { y : 2019, m : 12 }
+];
+
+
+var i = 0, iLen = dateRangesObject.length,io;
+for(;i<iLen;++i){
+	io = dateRangesObject[ i ];
+	FN( io.y, io.m );
+}
+
+//FN( 2019, 7 );
+//FN( 2019, 8 );
+
+return;

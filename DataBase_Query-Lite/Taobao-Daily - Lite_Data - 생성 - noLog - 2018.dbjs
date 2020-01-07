@@ -1,0 +1,1291 @@
+//----------------------------------------------------------------------------------------------------;
+
+var RESULT__APISTACK__GLOBAL = [];
+
+var o_result_error = {};
+
+var _s_dbs = {
+	2018 : db.getSiblingDB( "Taobao_2018" )
+	, 2019 : db.getSiblingDB( "Taobao_2019" )
+};
+
+var _t_dbs = {
+	2018 : db.getSiblingDB( "Taobao_2018-Lite" )
+	, 2019 : db.getSiblingDB( "Taobao_2019-Lite" )
+};
+
+var _er_dbs = {
+	2018 : db.getSiblingDB( "Taobao_2018-Lite--Error" )
+	, 2019 : db.getSiblingDB( "Taobao_2019-Lite--Error" )
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var getSellCount = function( doc ){
+	var T0 = doc.apiStack[ 0 ].value;
+
+	var sellCount = -1;
+
+	try
+	{
+		if( doc.apiStack[ 0 ].value.item.hasOwnProperty( "sellCount" ) ) sellCount = doc.apiStack[ 0 ].value.item.sellCount;
+		else if( doc.apiStack[ 0 ].value.item.hasOwnProperty( "vagueSellCount" ) ) sellCount = doc.apiStack[ 0 ].value.item.vagueSellCount;
+	}
+	catch( er )
+	{
+		//이상데이터 예외 처리;
+		//doc.apiStack[ 0 ].value == doc.apiStack[ 0 ].value;
+		doc.apiStack[ 0 ].value = doc.apiStack[ 0 ].value.global.data;
+
+		if( doc.apiStack[ 0 ].value.item.hasOwnProperty( "sellCount" ) ) sellCount = doc.apiStack[ 0 ].value.item.sellCount;
+		else if( doc.apiStack[ 0 ].value.item.hasOwnProperty( "vagueSellCount" ) ) sellCount = doc.apiStack[ 0 ].value.item.vagueSellCount;
+
+		RESULT__APISTACK__GLOBAL.push( [ nm_col, P1._id ] );
+	}
+
+	return sellCount;
+};
+
+/*
+ * sku2Info에서 최대값과 최소값을 추출하는 함수
+ * @param {Object} obj
+ * @return {Obejct}
+ <code>
+ {
+	min : 100
+	, max : 100
+ }
+ </code>
+ */
+var getPriceMinMax = function( obj ){
+
+	var s,so;
+	var _ta = [];
+
+	for( s in obj ){
+		so = obj[ s ];
+		if( so.price.priceText.indexOf( "-" ) == -1 )
+		{
+			_ta.push( Number( so.price.priceText ) );
+		}
+	}
+
+	_ta.sort(function(a,b){ return a - b });
+
+	var price_min = _ta[ 0 ];
+	var price_max = _ta[ _ta.length - 1 ];
+
+	//price 999,9999예외 처리;
+	if( _ta.length > 1 || price_max != price_min )
+	{
+		if( -1 != price_max.toString().indexOf( "999" ) )
+		{
+			_ta.pop();
+			price_max = _ta[ _ta.length - 1 ];
+		}
+	}
+
+	return { min : price_min, max : price_max };
+}
+
+/*
+ * sku2Info에서 최대값과 최소값을 추출하는 함수
+ * @param {Object} obj
+ * @return {Obejct}
+ <code>
+ {
+	min : 100
+	, max : 100
+ }
+ </code>
+ */
+var getDepositPriceMinMax = function( obj ){
+
+	var s,so;
+	var _ta = [];
+
+	for( s in obj ){
+		so = obj[ s ];
+		if( so.subPrice.priceText.indexOf( "-" ) == -1 )
+		{
+			_ta.push( Number( so.subPrice.priceText ) );
+		}
+	}
+
+	_ta.sort(function(a,b){ return a - b });
+
+	var price_min = _ta[ 0 ];
+	var price_max = _ta[ _ta.length - 1 ];
+
+	//price 999,9999예외 처리;
+	if( _ta.length > 1 || price_max != price_min )
+	{
+		if( -1 != price_max.toString().indexOf( "999" ) )
+		{
+			_ta.pop();
+			price_max = _ta[ _ta.length - 1 ];
+		}
+	}
+
+	return { min : price_min, max : price_max };
+}
+
+
+var getPriceTagStatus = function( doc ){
+
+	//print( doc._id )
+
+	doc._SYS0030 = {};
+
+	//타입
+	//-1 - 뭔지모름;
+	// 0 - 할인 없는 원가 상품;
+	// 1 - 이래저래 그냥 할인 상품;
+	// 2 - 사전 예약 구매 상품;
+	// 3 - 사전 예약 구매 할인 상품;
+
+	//doc.apiStack[ 0 ].value.price가 없음;
+	if( !doc.apiStack[ 0 ].value.hasOwnProperty( "price" ) )
+	{
+		doc._SYS0030.PRICE_TAG_STATUS = -1;
+		//printjson( "Id Product - " + doc._id );
+		//printjson( "-1 - doc.apiStack[ 0 ].value.price가 없음" );
+		//printjson( "---------------------------------------- info" );
+		if( doc.mockData.price.price )
+		{
+			//printjson( "mockData.price.price.priceText : " +  doc.mockData.price.price.priceText );
+		}
+		//printjson( "---------------------------------------- info" );
+		return doc;
+	}
+
+
+	//사전구매상품식별;
+	if( doc.apiStack[ 0 ].value.price.hasOwnProperty( "depositPrice" ) )
+	{
+		doc._SYS0030.PRICE_TAG_STATUS = 2;
+		//printjson( "Id Product - " + doc._id );
+
+		if( -1 != doc.apiStack[ 0 ].value.price.depositPrice.priceDesc.indexOf( "付定金立减" ) )
+		{
+			doc._SYS0030.PRICE_TAG_STATUS = 3;
+		//	printjson( "3 - 사전 예약 구매상품 - 추가할인" );
+		}
+		else
+		{
+		//	printjson( "2 - 사전 예약 구매상품" );
+		}
+
+		//printjson( "---------------------------------------- info" );
+		//printjson( "depositPrice.priceText : " +  doc.apiStack[ 0 ].value.price.depositPrice.priceDesc );
+		if( doc.apiStack[ 0 ].value.price.hasOwnProperty( "subPrice" ) )
+		{
+		//	printjson( "subPrice.priceText : " +  doc.apiStack[ 0 ].value.price.subPrice.priceText );
+		}
+
+		//printjson( "price.priceText : " +  doc.apiStack[ 0 ].value.price.price.priceText );
+		if( doc.apiStack[ 0 ].value.price.hasOwnProperty( "extraPrices" ) )
+		{
+			if( doc.apiStack[ 0 ].value.price.extraPrices.length > 0 )
+			{
+		//		printjson( "extraPrices.priceText : " +  doc.apiStack[ 0 ].value.price.extraPrices[0].priceText );
+			}
+		}
+		//printjson( "---------------------------------------- info" );
+		return doc;
+	}
+
+	//이래저래 그냥 할인 상품;
+	if( doc.apiStack[ 0 ].value.price.hasOwnProperty( "extraPrices" ) )
+	{
+		if( doc.apiStack[ 0 ].value.price.extraPrices.length > 0 )
+		{
+			doc._SYS0030.PRICE_TAG_STATUS = 1;
+			//printjson( "Id Product - " + doc._id );
+			//printjson( "1 - 이래저래 그냥 할인 상품" );
+			//printjson( "---------------------------------------- info" );
+			//printjson( "price.priceText : " +  doc.apiStack[ 0 ].value.price.price.priceText );
+			//printjson( "extraPrices.priceText : " +  doc.apiStack[ 0 ].value.price.extraPrices[0].priceText );
+			//printjson( "---------------------------------------- info" );
+
+			return doc;
+		}
+	}
+
+	//할인 없는 원가 상품;
+	doc._SYS0030.PRICE_TAG_STATUS = 0;
+	//printjson( "Id Product - " + doc._id );
+	//printjson( "0 - 할인없는 원가 상품" );
+	//printjson( "---------------------------------------- info" );
+	//printjson( "price.priceText : " +  doc.apiStack[ 0 ].value.price.price.priceText );
+	//printjson( "extraPrices.priceText : " +  doc.apiStack[ 0 ].value.price.extraPrices[0].priceText );
+	//printjson( "---------------------------------------- info" );
+	//printjson( "doc._SYS0030.PRICE_TAG_STATUS : " + doc._SYS0030.PRICE_TAG_STATUS);
+
+	return doc
+
+};
+
+getPriceTagStatus.CODE_PRICE_TAGS = {
+	//"undefined" : 2,
+	"粉丝专享价" : 1,
+	"淘金币抵5%" : 1,
+	"粉丝专享" : 1,
+	"淘金币抵2%" : 1,
+	"疯狂促销" : 1,
+	"手机专属价" : 1,
+	"热卖促销" : 1,
+	"粉丝福利价" : 1,
+	"火热促销" : 1,
+	"多买多优惠" : 1,
+	"换季促销" : 1,
+	"淘金币抵1%" : 1,
+	"卖家优惠" : 1,
+	"新品上新" : 1,
+	"抢购价" : 1,
+	"超值优惠" : 1,
+	"火爆促销" : 1,
+	"优惠价" : 1,
+	"冲量促销" : 1,
+	"提前放价" : 1,
+	"优惠促销" : 1,
+	"周年店庆" : 1,
+	"粉丝专属价" : 1,
+	"女神价" : 1,
+	"卖家促销" : 1,
+	"活动价" : 1,
+	"冲冠促销" : 1,
+	"掌柜推荐" : 1,
+	"感恩回馈" : 1,
+	"疯狂抢购" : 1,
+	"活动促销" : 1,
+	"活动中" : 1,
+	"手机享优惠" : 1,
+	"回馈客户" : 1,
+	"大促价" : 1,
+	"品牌促销" : 1,
+	"大促" : 1,
+	"抢新价" : 1,
+	"第二件半价" : 1,
+	"淘抢购" : 1,
+	"好货也疯狂" : 1,
+	"心动价" : 1,
+	"品牌钜惠" : 1,
+	"爆款促销" : 1,
+	"淘金币抵10%" : 1,
+	"优惠活动" : 1,
+	"惊喜价" : 1,
+	"满减促销" : 1,
+	"降价啦" : 1,
+	"手机尊享价" : 1,
+	"团购促销" : 1,
+	"专属优惠" : 1,
+	"周周精选" : 1,
+	"年终盛典" : 1,
+	"店铺优惠" : 1,
+	"大减价" : 1,
+	"巨优惠" : 1,
+	"新款优惠" : 1,
+	"狂欢大促" : 1,
+	"让利促销" : 1,
+	"商家推荐" : 1,
+	"秋季新品" : 1,
+	"节日大促" : 1,
+	"促销价" : 1,
+	"反季促销" : 1,
+	"狂欢不止" : 1,
+	"专柜代购价" : 1,
+	"店铺活动" : 1,
+	"买就减" : 1,
+	"店铺促销" : 1,
+	"夏不为利" : 1,
+	"超级买手日" : 1,
+	"促销活动" : 1,
+	"上新价" : 1,
+	"天天团购" : 1,
+	"新品抢鲜价" : 1,
+	"今日特价" : 1,
+	"限时促销" : 1,
+	"圣诞狂欢" : 1,
+	"促销优惠" : 1,
+	"节日促销" : 1,
+	"夏季大促" : 1,
+	"早买早优惠" : 1,
+	"年底大促" : 1,
+	"夏季热卖" : 1,
+	"新品秒杀价" : 1,
+	"春上新" : 1,
+	"夏季促销" : 1,
+	"上新特惠" : 1,
+	"优惠多多" : 1,
+	"清仓特价" : 1,
+	"大促销" : 1,
+	"2人团" : 1,
+	"惠淘价" : 1,
+	"新品尝鲜" : 1,
+	"团购价" : 1,
+	"优惠减价" : 1,
+	"秋冬折扣" : 1,
+	"国庆大放价" : 1,
+	"年末大促" : 1,
+	"狂欢继续" : 1,
+	"秋冬上新" : 1,
+	"爆款特卖" : 1,
+	"直营专享价" : 1,
+	"新品促销" : 1,
+	"国庆促销" : 1,
+	"降价了" : 1,
+	"美丽安心" : 1,
+	"店庆活动价" : 1,
+	"新品抢购" : 1,
+	"聚划算" : 1,
+	"尝鲜价" : 1,
+	"满两件包邮" : 1,
+	"新年大促" : 1,
+	"无线专属价" : 1,
+	"淘金币价" : 1,
+	"新年特价" : 1,
+	"全国包邮" : 1,
+	"购物优惠" : 1,
+	"周年庆" : 1,
+	"手机优惠价" : 1,
+	"春季大促" : 1,
+	"新年促销" : 1,
+	"健康专享价" : 1,
+	"女神新衣" : 1,
+	"新春促销" : 1,
+	"狂欢返场" : 1,
+	"新店促销" : 1,
+	"情人节特惠" : 1,
+	"秋季上新" : 1,
+	"夏上新" : 1,
+	"新店大促" : 1,
+	"预售价" : 2,
+	"新年特惠" : 1,
+	"春夏折扣" : 1,
+	"新品尝鲜价" : 1,
+	"国庆大促" : 1,
+	"秋上新" : 1,
+	"限时特惠价" : 1,
+	"新春大促" : 1,
+	"开业促销" : 1,
+	"夏季新品" : 1
+};
+
+var getPrice = function( doc ){
+	//printjson( "getPrice - doc._SYS0030.PRICE_TAG_STATUS : " + doc._SYS0030.PRICE_TAG_STATUS)
+	//printjson( "getPrice - doc._SYS0030.PRICE_TAG_STATUS : " + doc._SYS0030.PRICE_TAG_STATUS.toString() )
+	return getPrice._PRICE_TYPE_CB[ doc._SYS0030.PRICE_TAG_STATUS.toString() ]( doc );
+};
+getPrice._PRICE_COMMON = function( priceType, apiStackPrice, sku2info ){
+
+	//printjson( "[S] - getPrice._PRICE_COMMON" )
+	//printjson( "apiStackPrice.priceText : " + apiStackPrice.priceText )
+
+	var PRICE_TEXT = apiStackPrice.priceText;
+	var SKU2INFO = sku2info;
+
+	var PRICE_TEXT_idx = PRICE_TEXT.indexOf( "999" );
+	if( PRICE_TEXT_idx < 0 )
+	{
+
+		var dash_PRICE_TEXT_idx = PRICE_TEXT.indexOf("-");
+		if( dash_PRICE_TEXT_idx < 0 )
+		{
+			//printjson( "- 없음" )
+			var r = [
+				Number( PRICE_TEXT )
+				, Number( PRICE_TEXT )
+				, Number( PRICE_TEXT )
+			];
+
+			//printjson( "Price : " + r );
+			//printjson( "[E] - getPrice._PRICE_COMMON" );
+
+			return r;
+		}
+		else
+		{
+			//printjson( "- 있음" )
+
+			var a_PRICE_TEXT = PRICE_TEXT.split("-");
+
+			var r = [
+				Number( a_PRICE_TEXT[1] )
+				, Number( a_PRICE_TEXT[0] )
+				, Number( a_PRICE_TEXT[1] )
+			];
+
+			//printjson( "Price : " + r );
+			//printjson( "[E] - getPrice._PRICE_COMMON" );
+
+			return r;
+		}
+	}
+
+	var s,so;
+	var _ta = [];
+
+	for( s in SKU2INFO ){
+		so = SKU2INFO[ s ];
+		//printjson( so  )
+		//printjson( so[ priceType ]  )
+		if( so[ priceType ].priceText.indexOf( "-" ) == -1 )
+		{
+
+			_ta.push( Number( so[ priceType ].priceText ) );
+		}
+	}
+
+	_ta.sort(function(a,b){ return a - b });
+	//printjson( _ta )
+	var P_MIN = _ta[ 0 ];
+	var P_MAX = _ta[ _ta.length - 1 ];
+
+	//price 999,9999예외 처리;
+	if( _ta.length > 1 || P_MIN != P_MAX )
+	{
+		if( -1 != P_MAX.toString().indexOf( "999" ) )
+		{
+			_ta.pop();
+			P_MAX = _ta[ _ta.length - 1 ];
+		}
+	}
+	var r = [
+		Number( P_MAX )//P;
+		, Number( P_MIN )
+		, Number( P_MAX )
+	];
+	//printjson( "Price : " + r );
+	//printjson( "[E] - getPrice._PRICE_COMMON" );
+	return r;
+};
+
+getPrice._PRICE_DEPOSIT_AND_SALE = function( priceType, apiStackPrice, sku2info, depositPriceDesc ){
+
+	//printjson( "[S] - getPrice._PRICE_DEPOSIT_AND_SALE" )
+	//printjson( "apiStackPrice.priceText : " + apiStackPrice.priceText )
+	//printjson( "depositPriceDesc : " + depositPriceDesc )
+
+	var deposite_sale_amount = Number( depositPriceDesc.replace("付定金立减","") );
+
+	var PRICE_TEXT = apiStackPrice.priceText;
+	var SKU2INFO = sku2info;
+
+	var PRICE_TEXT_idx = PRICE_TEXT.indexOf( "999" );
+	if( PRICE_TEXT_idx < 0 )
+	{
+
+		var dash_PRICE_TEXT_idx = PRICE_TEXT.indexOf("-");
+		if( dash_PRICE_TEXT_idx < 0 )
+		{
+			//printjson( "- 없음" )
+			var r = [
+				Number( PRICE_TEXT ) - deposite_sale_amount
+				, Number( PRICE_TEXT ) - deposite_sale_amount
+				, Number( PRICE_TEXT ) - deposite_sale_amount
+			];
+
+			//printjson( "Price : " + r );
+			//printjson( "[E] - getPrice._PRICE_DEPOSIT_AND_SALE" );
+
+			return r;
+		}
+		else
+		{
+			//printjson( "- 있음" )
+
+			var a_PRICE_TEXT = PRICE_TEXT.split("-");
+
+			var r = [
+				Number( a_PRICE_TEXT[1] )
+				, Number( a_PRICE_TEXT[0] )
+				, Number( a_PRICE_TEXT[1] )
+			];
+
+			//printjson( "Price : " + r );
+			//printjson( "[E] - getPrice._PRICE_DEPOSIT_AND_SALE" );
+
+			return r;
+		}
+	}
+
+	var s,so;
+	var _ta = [];
+
+	for( s in SKU2INFO ){
+		so = SKU2INFO[ s ];
+		//printjson( so  )
+		//printjson( so[ priceType ]  )
+		if( so[ priceType ].priceText.indexOf( "-" ) == -1 )
+		{
+
+			_ta.push( Number( so[ priceType ].priceText ) );
+		}
+	}
+
+	_ta.sort(function(a,b){ return a - b });
+	//printjson( _ta )
+	var P_MIN = _ta[ 0 ];
+	var P_MAX = _ta[ _ta.length - 1 ];
+
+	//price 999,9999예외 처리;
+	if( _ta.length > 1 || P_MIN != P_MAX )
+	{
+		if( -1 != P_MAX.toString().indexOf( "999" ) )
+		{
+			_ta.pop();
+			P_MAX = _ta[ _ta.length - 1 ];
+		}
+	}
+	var r = [
+		Number( P_MAX )//P;
+		, Number( P_MIN )
+		, Number( P_MAX )
+	];
+	//printjson( "Price : " + r );
+	//printjson( "[E] - getPrice._PRICE_DEPOSIT_AND_SALE" );
+	return r;
+};
+
+getPrice._PRICE_NOT_EXISTS = function( priceType, sku2info ){
+
+	//printjson( "[S] - getPrice._PRICE_NOT_EXISTS" )
+	//printjson( "sku2info[ \"0\" ].price.priceText : " + sku2info[ "0" ].price.priceText )
+
+	var PRICE_TEXT = sku2info[ "0" ].price.priceText;
+	var SKU2INFO = sku2info;
+
+	var PRICE_TEXT_idx = PRICE_TEXT.indexOf( "999" );
+	if( PRICE_TEXT_idx < 0 )
+	{
+
+		var dash_PRICE_TEXT_idx = PRICE_TEXT.indexOf("-");
+		if( dash_PRICE_TEXT_idx < 0 )
+		{
+			//printjson( "- 없음" )
+			var r = [
+				Number( PRICE_TEXT )
+				, Number( PRICE_TEXT )
+				, Number( PRICE_TEXT )
+			];
+
+			//printjson( "Price : " + r );
+			//printjson( "[E] - getPrice._PRICE_NOT_EXISTS" );
+
+			return r;
+		}
+		else
+		{
+			//printjson( "- 있음" )
+
+			var a_PRICE_TEXT = PRICE_TEXT.split("-");
+
+			var r = [
+				Number( a_PRICE_TEXT[1] )
+				, Number( a_PRICE_TEXT[0] )
+				, Number( a_PRICE_TEXT[1] )
+			];
+
+			//printjson( "Price : " + r );
+			//printjson( "[E] - getPrice._PRICE_NOT_EXISTS" );
+
+			return r;
+		}
+	}
+
+	var s,so;
+	var _ta = [];
+
+	for( s in SKU2INFO ){
+		so = SKU2INFO[ s ];
+		//printjson( so  )
+		//printjson( so[ priceType ]  )
+		if( so[ priceType ].priceText.indexOf( "-" ) == -1 )
+		{
+
+			_ta.push( Number( so[ priceType ].priceText ) );
+		}
+	}
+
+	_ta.sort(function(a,b){ return a - b });
+	//printjson( _ta )
+	var P_MIN = _ta[ 0 ];
+	var P_MAX = _ta[ _ta.length - 1 ];
+
+	//price 999,9999예외 처리;
+	if( _ta.length > 1 || P_MIN != P_MAX )
+	{
+		if( -1 != P_MAX.toString().indexOf( "999" ) )
+		{
+			_ta.pop();
+			P_MAX = _ta[ _ta.length - 1 ];
+		}
+	}
+	var r = [
+		Number( P_MAX )//P;
+		, Number( P_MIN )
+		, Number( P_MAX )
+	];
+	//printjson( "Price : " + r );
+	//printjson( "[E] - getPrice._PRICE_COMMON" );
+	return r;
+};
+
+getPrice._PRICE_TYPE_CB = {
+	 "-1" : function( doc ){ return getPrice._PRICE_NOT_EXISTS( "price", doc.apiStack[ 0 ].value.skuCore.sku2info ); }
+	, "0" : function( doc ){ return getPrice._PRICE_COMMON( "price", doc.apiStack[ 0 ].value.price.price   , doc.apiStack[ 0 ].value.skuCore.sku2info ); }
+	, "1" : function( doc ){ return getPrice._PRICE_COMMON( "price", doc.apiStack[ 0 ].value.price.price   , doc.apiStack[ 0 ].value.skuCore.sku2info ); }
+	, "2" : function( doc ){
+		if( doc.apiStack[ 0 ].value.price.subPrice )
+		{
+			return getPrice._PRICE_COMMON( "subPrice", doc.apiStack[ 0 ].value.price.subPrice, doc.apiStack[ 0 ].value.skuCore.sku2info );
+		}
+		else
+		{
+			return getPrice._PRICE_COMMON( "price", doc.apiStack[ 0 ].value.price.price, doc.apiStack[ 0 ].value.skuCore.sku2info );
+		}
+	}
+	, "3" : function( doc ){
+		if( doc.apiStack[ 0 ].value.price.subPrice )
+		{
+			//printf("----->1<-----")
+			return getPrice._PRICE_DEPOSIT_AND_SALE( "subPrice", doc.apiStack[ 0 ].value.price.subPrice, doc.apiStack[ 0 ].value.skuCore.sku2info, doc.apiStack[ 0 ].value.price.depositPrice.priceDesc );
+		}
+		else
+		{
+			//printf("----->2<-----")
+			return getPrice._PRICE_DEPOSIT_AND_SALE( "price", doc.apiStack[ 0 ].value.price.price, doc.apiStack[ 0 ].value.skuCore.sku2info, doc.apiStack[ 0 ].value.price.depositPrice.priceDesc );
+		}
+	}
+};
+
+var getPrice__Original = function( doc ){
+	//printjson( "[S] - getPrice__Original " )
+	var PRICE_TEXT = doc.mockData.price.price.priceText;
+	var SKU2INFO = doc.mockData.skuCore.sku2info
+
+
+//	var PRICE_TEXT_idx = PRICE_TEXT.indexOf( "999" );
+//	if( PRICE_TEXT_idx < 0 )
+//	{
+//		var dash_PRICE_TEXT_idx = PRICE_TEXT.indexOf("-");
+//		if( dash_PRICE_TEXT_idx < 0 )
+//		{
+//			return [
+//				PRICE_TEXT
+//				, Number( PRICE_TEXT )
+//				, Number( PRICE_TEXT)
+//			];
+//		}
+//		else
+//		{
+//			var a_PRICE_TEXT = PRICE_TEXT.split("-");
+//			return [
+//				PRICE_TEXT
+//				, Number( a_PRICE_TEXT[0] )
+//				, Number( a_PRICE_TEXT[1] )
+//			];
+//		}
+//	}
+
+	var s,so;
+	var _ta = [];
+
+	for( s in SKU2INFO ){
+		so = SKU2INFO[ s ];
+		if( so.price.priceText.indexOf( "-" ) == -1 )
+		{
+			if( -1 == so.price.priceText.indexOf( "999" ) )
+			{
+				_ta.push( Number( so.price.priceText ) );
+			}
+		}
+	}
+
+	_ta.sort(function(a,b){ return a - b });
+
+	var P_MIN = _ta[ 0 ];
+	var P_MAX = _ta[ _ta.length - 1 ];
+
+	//price 999,9999예외 처리;
+	if( _ta.length > 1 || P_MIN != P_MAX )
+	{
+		if( -1 != P_MAX.toString().indexOf( "999" ) )
+		{
+			_ta.pop();
+			P_MAX = _ta[ _ta.length - 1 ];
+		}
+	}
+
+	var P = PRICE_TEXT;
+	if( P_MIN != P_MAX ) P =  P_MIN.toFixed(2) + "-" + P_MAX.toFixed(2);
+
+	var r = [
+		P//P;
+		, Number( P_MIN )
+		, Number( P_MAX )
+	];
+	//printjson( r )
+	//printjson( "Original Price : " + r )
+	//printjson( "[E] - getPrice__Original " )
+	return r;
+};
+
+
+
+var FN0 = function( nm_col ){
+	print( nm_col );
+	//----------------------------------------------------------------------------------------------------;
+
+	var year = nm_col.substr(0,4);
+	var _s_col = _s_dbs[ year ].getCollection( nm_col );
+	var _t_col = _t_dbs[ year ].getCollection( nm_col );
+
+	//----------------------------------------------------------------------------------------------------;
+
+	var P0 = {
+	/*
+	"_id" : NumberLong//굿스아이디;
+
+	//System Properties;
+	"_SYS0030" : {
+		"id_b" : -1,//id$brand_basic;
+		"cd" : "",//cd$product_master;
+		, "SC_DAY" : Number
+	}
+
+	//Site Properties;
+	"_S_P" : {
+		//Taobao;
+		"id_r" : NumberLong//rootCategoryId;
+		, "id_sku" : NumberLong
+		,
+
+		//Kaola;
+		, "id_sku" : NumberLong
+
+		//VIP;
+		, "id_sku" : NumberLong ||
+		, "id_spu" : NumberLong
+		, "id_spu_v" : NumberLong
+	}
+
+	, "id" : ""//"goods_id" : "14012255208",//상품아이디
+	, "nm" : ""//"name" : "韩国原装爱茉诗AMOS绿茶头皮增发防脱控油洗发水500ML",
+
+	, "id_c" : NumberLong//"categoryId" : "121476023",//categoryId
+	, "id_b" : NumberLong//"brandValueId" : "232906144",//brandValueId'
+	, "id_se" : NumberLong//seller;
+	, "id_sh" : NumberLong//shop;
+
+	"images" : [
+		"//img.alicdn.com/imgextra/i2/23351691/TB2AjVjupXXXXatXXXXXXXXXXXX_!!23351691.jpg"
+	],
+
+	//판매가(최대/최소)
+	//price;
+	"P_MAX" : 14.9,
+	"P_MIN" : 14.9,
+	"P" : 14.9,
+
+	//원래판매가(최대/최소)
+	//original_price;
+	"OP_MAX" : 14.9,
+	"OP_MIN" : 14.9,
+	"OP" : 14.9,
+
+	//해당일 로부터 30일간 판매량(Sell Count) - Taobao 기준 정의;
+	"N_CMT" : NumberInt//656,//코멘트갯수,
+	"N_SC_1" : 0,//1일판메랭
+	"N_SC_30" : 0,//30일판매량//"SC_N" : 0
+
+	"S_SC" : ""//1일판매량 String
+	*/
+	//-------------------------------------------------------;
+
+	/*
+	date는 컬렉션 명이될예정임
+	수량은 0
+	id 식별자는 -1
+
+	문자열 ""
+	null사용 않함
+	*/
+
+	};
+
+	//----------------------------------------------------------------------------------------------------;
+
+	//기존걸렉션삭제;
+	_t_col.drop();
+
+	//InsertMany를 위한 정제문서를 담는 배열;
+	var a_doc = [];
+
+	var i=0, iLen=_s_col.count();
+	_s_col.find({}).forEach( function( doc ){
+
+//		var T0 = doc.apiStack[ 0 ].value;
+//		var T1 = doc.apiStack[ 0 ].value.price;
+//		var T2 = doc.item;
+
+		print( nm_col + " / " + iLen + " / " + i + " - " + doc._id );
+
+		//모델정의;
+		//_S_P 이외의 프로퍼티는 사이트마다 동일해야함;
+		var P1 = {
+			"_id" : -1,
+			"_C_P" : {
+				"id_price_type" : NumberInt( -1 )
+			},
+			"_S_P" : {
+				"id_c_r" : -1,//NumberLong( doc.item.rootCategoryId );
+				"isBanSale4Oversea" : "",//doc.apiStack[ 0 ].value.trade.isBanSale4Oversea;//해외판매가가능한상품인지 구분하는 프로퍼티;
+				"seAllItemCount" : 0,//NumberInt( doc.seller.allItemCount );//shop 총상품갯수;
+				"seNewItemCount" : 0,//NumberInt( doc.seller.newItemCount );//shop 신규상품갯수;
+				"seEvaluates" : {},//doc.seller.evaluates;
+				"seFans" : 0,//doc.seller.fans;//shop 팬수;
+				"SeNick" : 0,//doc.seller.sellerNick;//seller 닉네임;
+				"seStart" : "",//doc.seller.starts;//shop 시작일;
+				"seType" : "",//doc.seller.sellerType;//셀러타입;
+				"seGoodRatePercentag" : 0,//doc.seller.goodRatePercentage;//좋은리부 비율;
+				"sCard" : "",//doc.seller.shopCard;//카드정보(?);
+				"sName" : "",//doc.seller.shopName;//shop 이름;
+				"sType" : "",//doc.seller.shopType;//shop 타입;
+				"sku2info" : {},//doc.mockData.skuCore.sku2info;//옵션별 가격 정보추출을 위해
+				"ABC" : "",//doc.apiStack[ 0 ].value.params.trackParams.aliBizCode//AliBizCode;
+				"BC_type" : "",//doc.params.trackParams.BC_type;//샵비지니스타입;
+				"favcount" : 0,//doc.item.favcount;//싱픔좋아요숫자;
+				"ATT" : {},//속성들;
+
+				//예치금판매관련프로퍼티추가 - 20191024;
+				"price" : {
+					"transmitPrice" : "",//예치금
+					"subPrice" :  "",//사전판매가격
+					"newExtraPrices" :  "",//판매가
+					"extraPrices" :  "",//판매가
+					"depositPrice" :  "",//예치금
+					"priceTag" : []//priceTag
+				}
+			},
+			"nm" : "",
+			"id_c" : -1,
+			"id_b" : -1,
+			"id_se" : -1,
+			"id_sh" : -1,
+			"images" : [],
+			"P_MAX" : -1,
+			"P_MIN" : -1,
+			"P" : -1,
+			"OP_MAX" : -1,
+			"OP_MIN" : -1,
+			"OP" : -1,
+
+			"N_CMT" : 0,
+			"N_SC_1" : 0,
+			"N_SC_30" : 0,//"SC_N" : 0
+
+			"S_SC" : ""
+		};
+
+		//_id;
+		P1._id = NumberLong( doc.item.itemId );
+
+		//------------------------------------------------------- System Property;
+		//속성들;
+		//rootCategoryId;
+		try{ P1._S_P.id_c_r = NumberLong( doc.item.rootCategoryId ); }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//해외판매가가능한상품인지 구분하는 프로퍼티;
+		try{ P1._S_P.isBanSale4Oversea = doc.apiStack[ 0 ].value.trade.isBanSale4Oversea; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//shop 총상품갯수;
+		try{ P1._S_P.seAllItemCount = NumberInt( doc.seller.allItemCount ); }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//shop 신규상품갯수;
+		try{ P1._S_P.seNewItemCount = NumberInt( doc.seller.newItemCount ); }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		try{ P1._S_P.seEvaluates = doc.seller.evaluates; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//shop 팬수;
+		try{ P1._S_P.seFans = doc.seller.fans; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//seller 닉네임;
+		try{ P1._S_P.SeNick = doc.seller.sellerNick; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//shop 시작일;
+		try{ P1._S_P.seStart = doc.seller.starts; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//셀러타입;
+		try{ P1._S_P.seType = doc.seller.sellerType; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//좋은리부 비율;
+		try{ P1._S_P.seGoodRatePercentag = doc.seller.goodRatePercentage; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//카드정보(?);
+		try{ P1._S_P.sCard = doc.seller.shopCard; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//shop 이름;
+		try{ P1._S_P.sName = doc.seller.shopName; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//shop 타입;
+		try{ P1._S_P.sType = doc.seller.shopType; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//옵션별 가격 정보추출을 위해
+		try{ P1._S_P.sku2info = doc.apiStack[ 0 ].value.skuCore.sku2info; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//AliBizCode;
+		try{ P1._S_P.ABC = doc.apiStack[ 0 ].value.params.trackParams.aliBizCode }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//샵비지니스타입;
+		try{ P1._S_P.BC_type = doc.params.trackParams.BC_type; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//싱픔좋아요숫자;
+		try{ P1._S_P.favcount = NumberInt( doc.item.favcount ); }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//속성들;
+		try
+		{
+			if( doc.props.groupProps )
+			{
+				var _to = {};
+				var a000 = doc.props.groupProps[ 0 ][ "基本信息" ];
+				var lo;
+				var l=0, lLen=a000.length;
+				for( ; l<lLen; ++l )
+				{
+					lo = a000[ l ];
+					for( var s in lo ) _to[ s ] = lo[ s ];
+				}
+
+				//_to.itemId = Number( doc.item.itemId );
+				P1._S_P.ATT[ "基本信息" ] = _to;
+			}
+		}
+		catch( er )
+		{
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//예치금금액;
+		try{ P1._S_P.price.transmitPrice = doc.apiStack[ 0 ].value.price.transmitPrice.priceText; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+		//사전판매가격;
+		try{ P1._S_P.price.subPrice = doc.apiStack[ 0 ].value.price.subPrice.priceText; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+		//판매가;
+		try{ P1._S_P.price.newExtraPrices = doc.apiStack[ 0 ].value.price.newExtraPrices[0].priceText; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//판매가;
+		try{ P1._S_P.price.extraPrices = doc.apiStack[ 0 ].value.price.extraPrices[0].priceText; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//예치금설명;
+		try{ P1._S_P.price.depositPrice = doc.apiStack[ 0 ].value.price.depositPrice.priceDesc; }catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//priceTag;
+		try{
+			if( doc.apiStack[ 0 ].value.price.priceTag )
+			{
+				var _t = doc.apiStack[ 0 ].value.price.priceTag;
+				var j = 0,jLen = _t.length,jo
+				for(;j<jLen;++j){
+					jo = _t[ j ];
+
+					delete jo.bgColor;
+					delete jo.bigmarkdownTag;
+
+					P1._S_P.price.priceTag.push( jo );
+				}
+			}
+		}catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+		//------------------------------------------------------- System Property;
+
+		//------------------------------------------------------- Common Info;
+		//name;
+		P1.nm = doc.item.title;
+
+		//categoryId;
+		P1.id_c = NumberLong( doc.item.categoryId );
+		//brandValueId;
+		P1.id_b = NumberLong( doc.item.brandValueId );
+
+		//seller Id'
+		P1.id_se = NumberLong( doc.seller.userId );;
+
+		//shop Id;
+		P1.id_sh = NumberLong( doc.seller.shopId );;
+
+		//이미지배열로 저장한다.
+		P1.images = doc.item.images;
+
+		//----------가격 - [ S ];
+
+		try
+		{
+			//printjson( "[S] - getPriceTagStatus" )
+			getPriceTagStatus( doc );
+			//printjson( "[E] - getPriceTagStatus" )
+			P1._C_P.id_price_type = NumberInt( doc._SYS0030.PRICE_TAG_STATUS );
+			//printjson( "[S] - getPrice" )
+			var a_P = getPrice( doc );
+			//printjson( "[E] - getPrice" )
+		}
+		catch( er )
+		{
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//---------------------------------price_max;
+		P1.P_MAX = a_P[ 2 ];
+		//---------------------------------price_min;
+		P1.P_MIN = a_P[ 1 ];
+		//---------------------------------price;
+		P1.P = a_P[ 0 ];
+
+		//----------가격 - [ E ];
+		//----------원래 가격 - [ S ];
+
+		try
+		{
+			var a_o_P = getPrice__Original( doc )
+
+			//---------------------------------original_price_max;
+			P1.OP_MAX = a_o_P[ 2 ];
+			//---------------------------------original_price_min;
+			P1.OP_MIN = a_o_P[ 1 ];
+			//---------------------------------original_price;
+
+			P1.OP = a_o_P[ 0 ];
+			//----------원래 가격 - [ E ];
+		}
+		catch( er )
+		{
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//---------------------------------sellCount - [ S ];
+
+		//1일판매량 - Number;
+		P1.N_SC_1 =  NumberInt( 0 )
+
+		//해당일 로부터 30일간 판매량(Sell Count) - Taobao 기준 정의;
+		var sellCount = getSellCount( doc );
+
+		var SC_N;
+		try
+		{
+			SC_N = sellCount;
+			if( SC_N )
+			{
+				var idx_plus = SC_N.indexOf( "+" );
+				if( -1 != idx_plus )
+				{
+					var idx_man = SC_N.indexOf( "万" );
+					if( -1 != idx_man ) SC_N = Number( SC_N.slice( 0, idx_man ) ) * 10000;
+					else SC_N = Number( SC_N.slice( 0, idx_plus ) );
+				}
+				else SC_N = Number( SC_N );
+			}
+
+			//sell count - String;
+			P1.S_SC = sellCount;
+
+			//sell count - Number;
+			P1.N_SC_30 = NumberInt( SC_N );
+
+		}
+		catch( er ){
+			if( !o_result_error[ nm_col ] ) o_result_error[ nm_col ] = {};
+			if( !o_result_error[ nm_col ][ er ] ) o_result_error[ nm_col ][ er ] = [];
+			o_result_error[ nm_col ][ er ].push( doc._id );
+			//printjson( er );
+		};
+
+		//---------------------------------sellCount - [ E ];
+
+		//리뷰전체갯수;
+		P1.N_CMT = NumberInt( doc.item.commentCount );
+
+		//------------------------------------------------------- Common Info;
+		++i;
+
+		//500개씩 Insert;
+		a_doc.push( P1 );
+		if( a_doc.length == 900 )
+		{
+			_t_col.insertMany( a_doc );
+			a_doc.length = 0;
+		}
+
+	});
+
+	//나머지데이터 Insert;
+	_t_col.insertMany( a_doc );
+
+	var _to00 = {};
+		_to00._id = NumberInt( nm_col );
+		_to00.errors = o_result_error[ nm_col ];
+
+	_er_dbs[ year ].getCollection( year ).remove({ _id : _to00._id });
+	_er_dbs[ year ].getCollection( year ).insertOne( _to00 );
+
+	delete o_result_error[ nm_col ];
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//2018;
+//FN0("20180101");FN0("20180102");FN0("20180103");FN0("20180104");FN0("20180105");FN0("20180106");FN0("20180107");FN0("20180108");FN0("20180109");FN0("20180110");FN0("20180111");FN0("20180112");FN0("20180113");FN0("20180114");FN0("20180115");FN0("20180116");FN0("20180117");FN0("20180118");FN0("20180119");FN0("20180120");FN0("20180121");FN0("20180122");FN0("20180123");FN0("20180124");FN0("20180125");FN0("20180126");FN0("20180127");FN0("20180128");FN0("20180129");FN0("20180130");FN0("20180131");
+//FN0("20180201");FN0("20180202");FN0("20180203");FN0("20180204");FN0("20180205");FN0("20180206");FN0("20180207");FN0("20180208");FN0("20180209");FN0("20180210");FN0("20180211");FN0("20180212");FN0("20180213");FN0("20180214");FN0("20180215");FN0("20180216");FN0("20180217");FN0("20180218");FN0("20180219");FN0("20180220");FN0("20180221");FN0("20180222");FN0("20180223");FN0("20180224");FN0("20180225");FN0("20180226");FN0("20180227");FN0("20180228");
+//FN0("20180301");FN0("20180302");FN0("20180303");FN0("20180304");FN0("20180305");FN0("20180306");FN0("20180307");FN0("20180308");FN0("20180309");FN0("20180310");FN0("20180311");FN0("20180312");FN0("20180313");FN0("20180314");FN0("20180315");FN0("20180316");FN0("20180317");FN0("20180318");FN0("20180319");FN0("20180320");FN0("20180321");FN0("20180322");FN0("20180323");FN0("20180324");FN0("20180325");FN0("20180326");FN0("20180327");FN0("20180328");FN0("20180329");FN0("20180330");FN0("20180331");
+FN0("20180401");FN0("20180402");FN0("20180403");FN0("20180404");FN0("20180405");FN0("20180406");FN0("20180407");FN0("20180408");FN0("20180409");FN0("20180410");FN0("20180411");FN0("20180412");FN0("20180413");FN0("20180414");FN0("20180415");FN0("20180416");FN0("20180417");FN0("20180418");FN0("20180419");FN0("20180420");FN0("20180421");FN0("20180422");FN0("20180423");FN0("20180424");FN0("20180425");FN0("20180426");FN0("20180427");FN0("20180428");FN0("20180429");FN0("20180430");
+FN0("20180501");FN0("20180502");FN0("20180503");FN0("20180504");FN0("20180505");FN0("20180506");FN0("20180507");FN0("20180508");FN0("20180509");FN0("20180510");FN0("20180511");FN0("20180512");FN0("20180513");FN0("20180514");FN0("20180515");FN0("20180516");FN0("20180517");FN0("20180518");FN0("20180519");FN0("20180520");FN0("20180521");FN0("20180522");FN0("20180523");FN0("20180524");FN0("20180525");FN0("20180526");FN0("20180527");FN0("20180528");FN0("20180529");FN0("20180530");FN0("20180531");
+FN0("20180601");FN0("20180602");FN0("20180603");FN0("20180604");FN0("20180605");FN0("20180606");FN0("20180607");FN0("20180608");FN0("20180609");FN0("20180610");FN0("20180611");FN0("20180612");FN0("20180613");FN0("20180614");FN0("20180615");FN0("20180616");FN0("20180617");FN0("20180618");FN0("20180619");FN0("20180620");FN0("20180621");FN0("20180622");FN0("20180623");FN0("20180624");FN0("20180625");FN0("20180626");FN0("20180627");FN0("20180628");FN0("20180629");FN0("20180630");
+FN0("20180701");FN0("20180702");FN0("20180703");FN0("20180704");FN0("20180705");FN0("20180706");FN0("20180707");FN0("20180708");FN0("20180709");FN0("20180710");FN0("20180711");FN0("20180712");FN0("20180713");FN0("20180714");FN0("20180715");FN0("20180716");FN0("20180717");FN0("20180718");FN0("20180719");FN0("20180720");FN0("20180721");FN0("20180722");FN0("20180723");FN0("20180724");FN0("20180725");FN0("20180726");FN0("20180727");FN0("20180728");FN0("20180729");FN0("20180730");FN0("20180731");
+FN0("20180801");FN0("20180802");FN0("20180803");FN0("20180804");FN0("20180805");FN0("20180806");FN0("20180807");FN0("20180808");FN0("20180809");FN0("20180810");FN0("20180811");FN0("20180812");FN0("20180813");FN0("20180814");FN0("20180815");FN0("20180816");FN0("20180817");FN0("20180818");FN0("20180819");FN0("20180820");FN0("20180821");FN0("20180822");FN0("20180823");FN0("20180824");FN0("20180825");FN0("20180826");FN0("20180827");FN0("20180828");FN0("20180829");FN0("20180830");FN0("20180831");
+FN0("20180901");FN0("20180902");FN0("20180903");FN0("20180904");FN0("20180905");FN0("20180906");FN0("20180907");FN0("20180908");FN0("20180909");FN0("20180910");FN0("20180911");FN0("20180912");FN0("20180913");FN0("20180914");FN0("20180915");FN0("20180916");FN0("20180917");FN0("20180918");FN0("20180919");FN0("20180920");FN0("20180921");FN0("20180922");FN0("20180923");FN0("20180924");FN0("20180925");FN0("20180926");FN0("20180927");FN0("20180928");FN0("20180929");FN0("20180930");
+FN0("20181001");FN0("20181002");FN0("20181003");FN0("20181004");FN0("20181005");FN0("20181006");FN0("20181007");FN0("20181008");FN0("20181009");FN0("20181010");FN0("20181011");FN0("20181012");FN0("20181013");FN0("20181014");FN0("20181015");FN0("20181016");FN0("20181017");FN0("20181018");FN0("20181019");FN0("20181020");FN0("20181021");FN0("20181022");FN0("20181023");FN0("20181024");FN0("20181025");FN0("20181026");FN0("20181027");FN0("20181028");FN0("20181029");FN0("20181030");FN0("20181031");
+FN0("20181101");FN0("20181102");FN0("20181103");FN0("20181104");FN0("20181105");FN0("20181106");FN0("20181107");FN0("20181108");FN0("20181109");FN0("20181110");FN0("20181111");FN0("20181112");FN0("20181113");FN0("20181114");FN0("20181115");FN0("20181116");FN0("20181117");FN0("20181118");FN0("20181119");FN0("20181120");FN0("20181121");FN0("20181122");FN0("20181123");FN0("20181124");FN0("20181125");FN0("20181126");FN0("20181127");FN0("20181128");FN0("20181129");FN0("20181130");
+FN0("20181201");FN0("20181202");FN0("20181203");FN0("20181204");FN0("20181205");FN0("20181206");FN0("20181207");FN0("20181208");FN0("20181209");FN0("20181210");FN0("20181211");FN0("20181212");FN0("20181213");FN0("20181214");FN0("20181215");FN0("20181216");FN0("20181217");FN0("20181218");FN0("20181219");FN0("20181220");FN0("20181221");FN0("20181222");FN0("20181223");FN0("20181224");FN0("20181225");FN0("20181226");FN0("20181227");FN0("20181228");FN0("20181229");FN0("20181230");FN0("20181231");
+
+//2019;
+//FN0("20190101");FN0("20190102");FN0("20190103");FN0("20190104");FN0("20190105");FN0("20190106");FN0("20190107");FN0("20190108");FN0("20190109");FN0("20190110");FN0("20190111");FN0("20190112");FN0("20190113");FN0("20190114");FN0("20190115");FN0("20190116");FN0("20190117");FN0("20190118");FN0("20190119");FN0("20190120");FN0("20190121");FN0("20190122");FN0("20190123");FN0("20190124");FN0("20190125");FN0("20190126");FN0("20190127");FN0("20190128");FN0("20190129");FN0("20190130");FN0("20190131");
+//FN0("20190201");FN0("20190202");FN0("20190203");FN0("20190204");FN0("20190205");FN0("20190206");FN0("20190207");FN0("20190208");FN0("20190209");FN0("20190210");FN0("20190211");FN0("20190212");FN0("20190213");FN0("20190214");FN0("20190215");FN0("20190216");FN0("20190217");FN0("20190218");FN0("20190219");FN0("20190220");FN0("20190221");FN0("20190222");FN0("20190223");FN0("20190224");FN0("20190225");FN0("20190226");FN0("20190227");FN0("20190228");
+//FN0("20190301");FN0("20190302");FN0("20190303");FN0("20190304");FN0("20190305");FN0("20190306");FN0("20190307");FN0("20190308");FN0("20190309");FN0("20190310");FN0("20190311");FN0("20190312");FN0("20190313");FN0("20190314");FN0("20190315");FN0("20190316");FN0("20190317");FN0("20190318");FN0("20190319");FN0("20190320");FN0("20190321");FN0("20190322");FN0("20190323");FN0("20190324");FN0("20190325");FN0("20190326");FN0("20190327");FN0("20190328");FN0("20190329");FN0("20190330");FN0("20190331");
+//FN0("20190401");FN0("20190402");FN0("20190403");FN0("20190404");FN0("20190405");FN0("20190406");FN0("20190407");FN0("20190408");FN0("20190409");FN0("20190410");FN0("20190411");FN0("20190412");FN0("20190413");FN0("20190414");FN0("20190415");FN0("20190416");FN0("20190417");FN0("20190418");FN0("20190419");FN0("20190420");FN0("20190421");FN0("20190422");FN0("20190423");FN0("20190424");FN0("20190425");FN0("20190426");FN0("20190427");FN0("20190428");FN0("20190429");FN0("20190430");
+//FN0("20190501");FN0("20190502");FN0("20190503");FN0("20190504");FN0("20190505");FN0("20190506");FN0("20190507");FN0("20190508");FN0("20190509");FN0("20190510");FN0("20190511");FN0("20190512");FN0("20190513");FN0("20190514");FN0("20190515");FN0("20190516");FN0("20190517");FN0("20190518");FN0("20190519");FN0("20190520");FN0("20190521");FN0("20190522");FN0("20190523");FN0("20190524");FN0("20190525");FN0("20190526");FN0("20190527");FN0("20190528");FN0("20190529");FN0("20190530");FN0("20190531");
+//FN0("20190601");FN0("20190602");FN0("20190603");FN0("20190604");FN0("20190605");FN0("20190606");FN0("20190607");FN0("20190608");FN0("20190609");FN0("20190610");FN0("20190611");FN0("20190612");FN0("20190613");FN0("20190614");FN0("20190615");FN0("20190616");FN0("20190617");FN0("20190618");FN0("20190619");FN0("20190620");FN0("20190621");FN0("20190622");FN0("20190623");FN0("20190624");FN0("20190625");FN0("20190626");FN0("20190627");FN0("20190628");FN0("20190629");FN0("20190630");
+//FN0("20190701");FN0("20190702");FN0("20190703");FN0("20190704");FN0("20190705");FN0("20190706");FN0("20190707");FN0("20190708");FN0("20190709");FN0("20190710");FN0("20190711");FN0("20190712");FN0("20190713");FN0("20190714");FN0("20190715");FN0("20190716");FN0("20190717");FN0("20190718");FN0("20190719");FN0("20190720");FN0("20190721");FN0("20190722");FN0("20190723");FN0("20190724");FN0("20190725");FN0("20190726");FN0("20190727");FN0("20190728");FN0("20190729");FN0("20190730");FN0("20190731");
+//FN0("20190801");FN0("20190802");FN0("20190803");FN0("20190804");FN0("20190805");FN0("20190806");FN0("20190807");FN0("20190808");FN0("20190809");FN0("20190810");FN0("20190811");FN0("20190812");FN0("20190813");FN0("20190814");FN0("20190815");FN0("20190816");FN0("20190817");FN0("20190818");FN0("20190819");FN0("20190820");FN0("20190821");FN0("20190822");FN0("20190823");FN0("20190824");FN0("20190825");FN0("20190826");FN0("20190827");FN0("20190828");FN0("20190829");FN0("20190830");FN0("20190831");
+//FN0("20190901");FN0("20190902");FN0("20190903");FN0("20190904");FN0("20190905");FN0("20190906");FN0("20190907");FN0("20190908");FN0("20190909");FN0("20190910");FN0("20190911");FN0("20190912");FN0("20190913");FN0("20190914");FN0("20190915");FN0("20190916");FN0("20190917");FN0("20190918");FN0("20190919");FN0("20190920");FN0("20190921");FN0("20190922");FN0("20190923");FN0("20190924");FN0("20190925");FN0("20190926");FN0("20190927");FN0("20190928");FN0("20190929");FN0("20190930");
+//FN0("20191001");FN0("20191002");FN0("20191003");FN0("20191004");FN0("20191005");FN0("20191006");FN0("20191007");FN0("20191008");FN0("20191009");FN0("20191010");FN0("20191011");FN0("20191012");FN0("20191013");FN0("20191014");FN0("20191015");FN0("20191016");FN0("20191017");FN0("20191018");FN0("20191019");FN0("20191020");FN0("20191021");FN0("20191022");FN0("20191023");FN0("20191024");FN0("20191025");FN0("20191026");FN0("20191027");FN0("20191028");FN0("20191029");FN0("20191030");FN0("20191031");
+//FN0("20191101");FN0("20191102");FN0("20191103");FN0("20191104");FN0("20191105");FN0("20191106");FN0("20191107");FN0("20191108");FN0("20191109");FN0("20191110");FN0("20191111");FN0("20191112");FN0("20191113");FN0("20191114");FN0("20191115");FN0("20191116");FN0("20191117");FN0("20191118");FN0("20191119");FN0("20191120");FN0("20191121");FN0("20191122");FN0("20191123");FN0("20191124");FN0("20191125");FN0("20191126");FN0("20191127");FN0("20191128");FN0("20191129");FN0("20191130");
+//FN0("20191201");FN0("20191202");FN0("20191203");FN0("20191204");FN0("20191205");FN0("20191206");FN0("20191207");FN0("20191208");FN0("20191209");FN0("20191210");FN0("20191211");FN0("20191212");FN0("20191213");FN0("20191214");FN0("20191215");FN0("20191216");FN0("20191217");FN0("20191218");FN0("20191219");FN0("20191220");FN0("20191221");FN0("20191222");FN0("20191223");FN0("20191224");FN0("20191225");FN0("20191226");FN0("20191227");FN0("20191228");FN0("20191229");FN0("20191230");FN0("20191231");
+
+//FN0("20191023")
+
+printjson( 1 );

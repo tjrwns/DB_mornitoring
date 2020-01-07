@@ -1,0 +1,5 @@
+/**
+ * @return 'CH' name list
+ * @function
+ * @return {Array} [ {nm_ch}, {nm_ch}, ... ]
+ */

@@ -1,0 +1,1 @@
+{ "description" : "데이터 수집일시", "properties" : <include>100_common_json/properties__Date_Object.json</include> }

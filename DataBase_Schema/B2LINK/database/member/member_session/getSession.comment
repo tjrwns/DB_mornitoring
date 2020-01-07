@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {Object} d { "mid" : "" }
+ * @return {uint|Object} 0 or 1, { "mid" : "", "d_ex" : "", "sid" : "" }
+ */

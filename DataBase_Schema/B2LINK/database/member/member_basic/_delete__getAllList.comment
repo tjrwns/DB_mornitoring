@@ -1,0 +1,5 @@
+/**
+ * delete cd_rank, mpw
+ * @function
+ * @param {Document} d
+ */

@@ -1,0 +1,20 @@
+<div>
+	<div class="ui one stackable cards" style="padding:0px 10px 10px 10px;">
+
+			<div class="ui fluid image" style=" padding:30px 10px;">
+				<img src="{{goodsImg}}">
+			</div>
+			<div class="content">
+				<h3 class="header">{{goodsName}}</h3>
+				<div class="meta"><span class="date">{{brandName}}</span></div>
+				<div class="ui divider"></div>
+				<div class="description">
+					<div class="ui celled grid">
+					{{productInfo}}
+					</div>
+				</div>
+			</div>
+			<div class="extra content" style="padding: 10px;line-height: 38px;"></div>
+
+	</div>
+</div>

@@ -1,0 +1,58 @@
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "Taobao_2019-수집" );
+var db1 = db.getSiblingDB( "Taobao_2019-수집-ERROR-N--item" );
+var db2 = db.getSiblingDB( "Taobao_2019-수집-ERROR-N--sellCount" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var cols = db0.getCollectionNames();
+
+var P0 = {};
+
+//apiStack[ 0 ].value.item 없는 목록;
+var r0 = {};
+
+//apiStack[ 0 ].value.item.sellCount 없는 목록;
+var r1 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+var io;
+var i=0, iLen=cols.length;
+for( ; i<iLen; ++i ){
+	io = cols[ i ];
+	var col = db0.getCollection( io );
+
+	var col1 = db1.getCollection( io );
+	var col2 = db2.getCollection( io );
+
+	//에러 문서가 검출되지 않았던 컬렉션만 조회한다;
+	if( !col1.count() && col2.count() )
+	{
+		col.find( P0 ).forEach( function( doc ){
+
+			//item 프로퍼티 존재 유무 체크;
+			if( doc.apiStack[ 0 ].value.item ){
+
+				//sellCount 프로퍼티 존재 유무 체크;
+				if( !doc.apiStack[ 0 ].value.item.hasOwnProperty( "sellCount" ) ){
+					if( !r1[ io ] ) r1[ io ] = [];
+					r1[ io ].push({ _id : Number( doc._id ) });
+				}
+			}
+			else{//item 프로퍼티 없을시 추가;
+				if( !r0[ io ] ) r0[ io ] = [];
+				r0[ io ].push( doc );
+			}
+		});
+	}
+
+	print( iLen + " / " + i + " - " + io );
+}
+
+//item 프로퍼티 없는 목록 데이터 생성 - document 전체 복사;
+for( var s in r0 ){ db1.getCollection( s ).insertMany( r0[ s ] ); }
+
+//sellCount 프로퍼티 없는 목록 데이터 생성 - _id만 복사;
+for( var s in r1 ){ db2.getCollection( s ).insertMany( r1[ s ] ); }

@@ -1,0 +1,40 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getDataTaobaoSellCountStatus.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_YEAR_ = "<!=targetYear=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+var col0 = db0.getCollection( "dashboard-sellCount_check" );
+
+
+var _q0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+var sort00 = { _id : 1 };
+
+var r = {
+	date : []
+    , none_sellCount : []
+    , none_vagueSellCount : []
+    , none_both : []
+};
+
+col0.find( _q0 ).sort( sort00 ).forEach( function( doc ){
+	r.date.push( doc._id );
+	r.none_sellCount.push( doc.none_sellCount );
+	r.none_vagueSellCount.push( doc.none_vagueSellCount );
+	r.none_both.push( doc.none_both );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

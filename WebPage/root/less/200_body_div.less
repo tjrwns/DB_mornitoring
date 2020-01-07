@@ -1,0 +1,100 @@
+/* ---------------------------------------------------------------------------------------------------- */
+
+/* CLASS - DIV - Container */
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+/*/
+.divContainer
+
+.divContainer.application
+
+.divContainer.background
+	- 화면에 보이지 않아도 되는 DOM 객체
+	- 배경에 애니메이션 같은 배경 효과
+
+.divContainer.uiCompFixed
+
+.divContainer.uiCompPanel
+
+.divContainer.top
+	- UI 객체-Panel 보다 상위에 보이고 싶은 객체
+
+.divContainer.topModal
+	- Modal 처리를 위한 부분
+//*/
+
+.divContainer {
+	/*/
+	border-style: solid; border-width: 1px;
+	position: absolute;
+	position: fixed;
+	z-index: 999;
+
+	bottom: 0px;
+	//*/
+	left: 0px;
+	top: 0px;
+
+	right: 0px;
+
+	//overflow: auto;//주석 - 20170417 - 송선우;
+	overflow-x: hidden;
+	overflow-y: hidden;//추가 - 20170417 - 송선우;
+
+	position: absolute;
+
+	//height: 2000px;
+	bottom: 0px;
+
+	//background: none;//[BrandPortal];
+}
+
+.divContainer.uiCompFixed,
+.divContainer.uiCompPanel,
+.divContainer.top {
+}
+
+.divContainer.background {
+	/*/
+	background-color: #ff0000;
+	//*/
+	display: none;
+}
+.divContainer.topModal {
+	@import (inline) "inline/l0_t0_r0_b0.txt";
+
+	@import (inline) "inline/div__modal_common.txt";
+
+	.modal-background-content {
+		@import (inline) "inline/l0_t0_r0_b0.txt";
+
+		@import (inline) "inline/div__modal_common.txt";
+
+		color: #000;
+	}
+
+	.modal-background {
+		@import (inline) "inline/l0_t0_r0_b0.txt";
+
+		@import (inline) "inline/div__modal_common.txt";
+
+		background-color: #000;
+
+		transition: @transition_opacity_200;
+
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.modal-content {
+		@import (inline) "inline/l0_t0_r0.txt";
+
+		@import (inline) "inline/div__modal_common.txt";
+
+		color: #3E3E3E;
+		overflow-x: hidden;
+		overflow-y: auto;
+		//pointer-events: auto;//모달 배경 클릭시 자동 종료 안됨;
+		pointer-events: none;//모달 배경 클릭시 모달 자동 닫힘;
+	}
+}

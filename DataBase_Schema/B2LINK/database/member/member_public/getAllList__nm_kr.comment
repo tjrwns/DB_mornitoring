@@ -1,0 +1,5 @@
+/**
+ * @return 'KR' name list
+ * @function
+ * @return {Array} [ {nm_kr}, {nm_kr}, ... ]
+ */

@@ -1,0 +1,61 @@
+var dbs = {
+	  "2018" : db.getSiblingDB("Taobao_2018")
+	, "2019" : db.getSiblingDB("Taobao_2019")
+}
+var db1 = db.getSiblingDB( "검증01" );
+
+var allCols;
+(function(){
+
+	var cols00 = dbs[ "2018" ].getCollectionNames();
+	var cols01 = dbs[ "2019" ].getCollectionNames();
+
+	allCols = cols00.concat( cols01 );
+
+})()
+
+
+allCols.forEach(function(col){
+	var r = {}
+	r._id = col;
+	r.data = []
+	printjson( col )
+	var year = col.substr(0,4);
+	dbs[ year ].getCollection( col ).find({}).forEach(function(d){
+
+		try
+		{
+			if( d.apiStack[0].value.price.depositPrice )
+			{
+				var d00 = d.apiStack[0].value.price.depositPrice.priceDesc;
+				if( d00.indexOf( "￥" ) != -1 )
+				{
+					var d01 = d00.split( "￥" )[ 0 ];
+					//print( d01 )
+				}
+				else if( d00.indexOf( "付定金立减" ) != -1 )
+				{
+					var d01 = "付定金立减"//d00.split( "" )[ 1 ];
+					//print( d01 )
+				}
+				else
+				{
+					var d01 = d.apiStack[0].value.price.depositPrice.priceDesc
+				}
+				if( r.data.indexOf( d01 ) == -1 ) r.data.push( d01 )
+			}
+		}
+		catch( er )
+		{
+			//er;
+			print( col + " - " + d._id )
+			print( er )
+		}
+
+
+	})
+	db1.getCollection( "deposit_case" ).insertOne( r )
+
+})
+
+printjson( 1 )

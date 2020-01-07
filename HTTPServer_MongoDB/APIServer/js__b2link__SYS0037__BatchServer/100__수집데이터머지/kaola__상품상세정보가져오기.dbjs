@@ -1,0 +1,67 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/kaola__상품상세정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+
+var _to;
+col0.createIndex({ "DETAIL_HTML.__Goods__.basicInfo.brandId" : 1});
+col0.find({}).sort({ "DETAIL_HTML.__Goods__.basicInfo.brandId" : 1}).forEach( function( doc ){
+	if( !doc.DETAIL_HTML ) return;
+
+	//VIP의 _id는 숫가자 커서 NumberLong 임;
+	_to = { goodsId : NumberInt( doc._id ) };
+
+	var t0 = doc.DETAIL_HTML.__Goods__.basicInfo;
+
+	_to.brandId = t0.brandId;
+	_to.brandName = t0.brandName;
+
+	_to.categoryId = t0.categoryId;;
+	_to.categoryName = t0.categoryName;
+
+	//수정 - 송선우 - 20190228_2053;
+	//_to.goodsImg = t0.tmtImage || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+	//_to.goodsName = t0.originTitle;
+
+	var t1 = doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo;
+	if( t1 )
+	{
+		_to.shopId = t1.shopId;
+		_to.shopName = t1.shopName;
+	}
+	else
+	{
+		_to.shopId = "";
+		_to.shopName = "";
+	}
+
+	var t2 = doc.LIST;
+
+	_to.price = t2.actualCurrentPrice;
+
+	//수정 - 송선우 - 20190228_2053;
+	_to.goodsImg = t2.imageUrl || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+	_to.goodsName = t2.title;
+
+	r.push( _to );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

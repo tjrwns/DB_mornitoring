@@ -1,0 +1,255 @@
+var d = {
+
+	"_id" : "member_public"
+
+	//이 Collection의 명세;
+	, "description" : "회원의 기본정보를 저장하는 collection 으로 회원의 부서,권한등의 정보를 저장한다."
+
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	, "dereference" : [
+		"brand.brand_basic"
+		, "company.company_info_basic"
+		, "contract_purchase.contract_purchase_common_info"
+		, "contract_sale.contract_sale_b2b"
+		, "contract_sale.contract_sale_b2c"
+		, "contract_sale.contract_sale_consignment"
+		, "packing_list.packing_list_release"
+		, "partner.partner_buyer"
+		, "partner.partner_logistics"
+		, "product.product_basic"
+		, "partner.partner_person"
+		, "packing_list.packing_list_release"
+		, "stock.warehouse"
+		, "transaction.transaction_entity"
+		, "transaction.transaction_purchase_status"
+		, "transaction.transaction_sale_status"
+		, "transaction_purchase_order_purchase.transaction_purchase_order_purchase_req"
+		, "transaction_purchase_order_purchase.transaction_purchase_order_purchase_res"
+		, "transaction_purchase_order_sale.transaction_purchase_order_sale_req"
+		, "transaction_purchase_order_sale.transaction_purchase_order_sale_res"
+		, "transaction_quote_purchase.transaction_quote_purchase_req"
+		, "transaction_quote_purchase.transaction_quote_purchase_res"
+		, "transaction_quote_sale.transaction_quote_sale_req"
+		, "transaction_quote_sale.transaction_quote_sale_res"
+		, "transaction_quotation_purchase.transaction_quotation_purchase_req"
+		, "transaction_quotation_purchase.transaction_quotation_purchase_res"
+		, "transaction_quotation_sale.transaction_quotation_sale_req"
+		, "transaction_quotation_sale.transaction_quotation_sale_res"
+		, "transaction_stock_release.transaction_stock_release_req"
+		, "transaction_stock_release.transaction_stock_release_res"
+		, "transaction_stock_wearing.transaction_stock_wearing_req"
+		, "transaction_stock_wearing.transaction_stock_wearing_res"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"brand_basic"
+		, "company_info_basic"
+		, "contract_purchase_common_info"
+		, "contract_sale_b2b"
+		, "contract_sale_b2c"
+		, "contract_sale_consignment"
+		, "packing_list_release"
+		, "partner_buyer"
+		, "partner_logistics"
+		, "partner_person"
+		, "packing_list_release"
+		, "product_basic"
+		, "transaction_entity"
+		, "transaction_purchase_status"
+		, "transaction_purchase_order_purchase_req"
+		, "transaction_purchase_order_purchase_res"
+		, "transaction_purchase_order_sale_req"
+		, "transaction_purchase_order_sale_res"
+		, "transaction_quote_purchase_req"
+		, "transaction_quote_purchase_res"
+		, "transaction_quote_sale_req"
+		, "transaction_quote_sale_res"
+		, "transaction_quotation_purchase_req"
+		, "transaction_quotation_purchase_res"
+		, "transaction_quotation_sale_req"
+		, "transaction_quotation_sale_res"
+		, "transaction_sale_status"
+		, "transaction_stock_release_req"
+		, "transaction_stock_release_res"
+		, "transaction_stock_wearing_req"
+		, "transaction_stock_wearing_res"
+		, "warehouse"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"brand"
+		, "company"
+		, "contract_purchase"
+		, "contract_sale"
+		, "packing_list"
+		, "partner"
+		, "product"
+		, "stock"
+		, "transaction"
+		, "transaction_purchase_order_purchase"
+		, "transaction_purchase_order_sale"
+		, "transaction_quote_purchase"
+		, "transaction_quote_sale"
+		, "transaction_quotation_purchase"
+		, "transaction_quotation_sale"
+		, "transaction_stock_release"
+		, "transaction_stock_wearing"
+
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"category.category_division"
+		, "category.category_division_team"
+		, "member.member_session"
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+		"category_division"
+		, "category_division_team"
+		, "member_session"
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+		"category"
+		, "member"
+	]
+
+	//이 Collection에서 검색에 사용되는 Field;
+	, "search_field" : [
+		{
+			"property" : "cd$category_company"
+			, "label" : "회사"
+			, "label_cn" : ""
+			, "label_kr" : "회사"
+			, "label_us" : "Company"
+		}
+		, {
+			"property" : "cd$category_division"
+			, "label" : "디비젼"
+			, "label_cn" : ""
+			, "label_kr" : "디비젼"
+			, "label_us" : "Division"
+		}
+		, {
+			"property" : "cd$category_division_team"
+			, "label" : "팀"
+			, "label_cn" : ""
+			, "label_kr" : "팀"
+			, "label_us" : "Team"
+		}
+		, {
+			"property" : "cd$category_division_part"
+			, "label" : "파트"
+			, "label_cn" : ""
+			, "label_kr" : "파트"
+			, "label_us" : "Part"
+		}
+		, {
+			"property" : "email"
+			, "label" : "이메일"
+			, "label_cn" : ""
+			, "label_kr" : "이메일"
+			, "label_us" : "e-mail"
+		}
+		, {
+			"property" : "nm.a"
+			, "label" : "성명"
+			, "label_cn" : ""
+			, "label_kr" : "성명"
+			, "label_us" : "Name"
+		}
+		, {
+			"property" : "nm_cn.a"
+			, "label" : "성명(중문)"
+			, "label_cn" : ""
+			, "label_kr" : "성명(중문)"
+			, "label_us" : "Name(Chinese)"
+		}
+		, {
+			"property" : "nm_kr.a"
+			, "label" : "성명(국문)"
+			, "label_cn" : ""
+			, "label_kr" : "성명(국문)"
+			, "label_us" : "Name(Korean)"
+		}
+		, {
+			"property" : "nm_us.a"
+			, "label" : "성명(영문)"
+			, "label_cn" : ""
+			, "label_kr" : "성명(영문)"
+			, "label_us" : "Name(English)"
+		}
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Company의 코드;
+		, "cd$category_company" : { "description" : "Company Category Code", "exampleValue" : ""<include>000_common_txt/string_default.txt</include> }
+
+		//Division의 코드;
+		, "cd$category_division" : <include>category_division/cd$category_division.json</include>
+
+		//Division 소속의 팀 코드;
+		, "cd$category_division_team" : <include>category_division_team/cd$category_division_team.json</include>
+
+		//Division 소속 - 팀소속의 파트 코드;
+		, "cd$category_division_part" : <include>category_division_part/cd$category_division_part.json</include>
+
+		//Email;
+		, "email" : <include>100_common_json/email.json</include>
+
+		//Email's ID;
+		//, "email_id" : { "description" : "Email's ID", "exampleValue" : "thdtjsdn"
+		//	, "type" : "string", "length" : 0
+		//}
+
+		//Email's Domain;
+		//, "email_domain" : { "description" : "Email's Domain", "exampleValue" : "gmail.com"
+		//	, "type" : "string", "length" : 0
+		//}
+
+		//Member messenger;
+		, "messenger" : { "description" : "메신저", "type" : "object"
+			, "properties" : {
+
+				//messenger Type CD (FK);
+				"cd$messenger" : { "description" : "메신저 종류 CD (FK)", "exampleValue" : "MSG001"<include>000_common_txt/string_default.txt</include> }
+
+				//messenger USER ID;
+				, "id" : { "description" : "메신저 ID", "exampleValue" : "ray@b2link.co.kr"<include>000_common_txt/string_default.txt</include> }
+			}
+		}
+
+		//Name(Default);
+		, "nm" : <include>member/nm.json</include>
+
+		//Name(CN);
+		, "nm_cn" : <include>member/nm_cn.json</include>
+
+		//Name(KR);
+		, "nm_kr" : <include>member/nm_kr.json</include>
+
+		//Name(US);
+		, "nm_us" : <include>member/nm_us.json</include>
+
+		//Member Mobile Number;
+		, "phone_cell" : <include>100_common_json/contact/phone__cell.json</include>
+
+		//Member Telephone Number;
+		, "phone_tel" : <include>100_common_json/contact/phone__tel.json</include>
+	}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+db.getSiblingDB( "_schema" ).member.insert( d );

@@ -1,0 +1,298 @@
+
+var start = new Date().getTime();
+
+
+
+//----------------------------------------------------------------------------------------------------;
+//  DATABASE
+//----------------------------------------------------------------------------------------------------;
+var _db$daily_master = db.getSiblingDB( "daily_master_h5");
+var _db$graph_data = db.getSiblingDB( "graph_data");
+
+//----------------------------------------------------------------------------------------------------;
+//  COLLECTION
+//----------------------------------------------------------------------------------------------------;
+var _col$daily_master = _db$daily_master.getCollection( "daily_master_ex30day" );
+var _col$daily_sales_by_brand = _db$graph_data.getCollection( "daily_sales_by_brand_ex30day" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { date : 1, Daily_Sales : 1, _id$brand_basic : 1, cd$product_master : 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//  VARIABLES
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//  FUNCTIONS
+
+//----------------------------------------------------------------------------------------------------;
+var get_daily_sales_by_brand = function( _date ) {
+
+	const project_1 = {
+		_id$brand_basic : 1,
+		cd$product_master : 1,
+		shop_type : 1,
+		date : 1,
+		Daily_Sales : 1,
+		price : 1,
+		mul_sales_price : {
+			$multiply : [ "$Daily_Sales", "$price" ]
+		}
+	};
+	const match = {
+		date : {
+			$gte : ISODate( _date + "T00:00:00.000Z" ),
+			$lte : ISODate( _date + "T23:59:59.999Z" )
+		},
+		Daily_Sales : { $gte : 0 },
+		_id$brand_basic : { $gte : 0 },
+		cd$product_master : { $ne : "" }
+	};
+	const group_1 = {
+		_id : {
+			_id$brand_basic : "$_id$brand_basic",
+			shop_type : "$shop_type"
+		},
+		sum_sales : { $sum : "$Daily_Sales" },
+		mul_sales_price : { $sum : "$mul_sales_price"},
+		sum_price : { $sum : "$price" }
+	};
+	const project_2 = {
+		_id$brand_basic : "$_id._id$brand_basic",
+		shop_type : "$_id.shop_type",
+		// mul_sales_price : "$mul_sales_price",
+		// sum_price : "$sum_price",
+		sum_sales : "$sum_sales",
+		avg_sales : { // { (Daily_Sales * Price) + ... + (Daily_Sales * Price) } / { Sales(1) + ... + Sales(N) }
+			$cond : {
+				if : {
+					$gt : [ "$sum_sales", 0 ]
+				},
+				then : {
+					$divide : [ "$mul_sales_price", "$sum_sales" ]
+				},
+				else : 0
+			}
+		},
+		sales_amount : "$mul_sales_price"
+	};
+	const group_2 = {
+		_id : "$_id$brand_basic",
+		sales : {
+			$push : {
+				shop_type : "$_id.shop_type",
+				sum_sales : "$sum_sales",
+				avg_sales : "$avg_sales",
+				sales_amount : "$sales_amount"
+			}
+		}
+	};
+	const result = _col$daily_master.aggregate([
+		{
+			$match : match
+		}, {
+			$project : project_1
+		}, {
+			$group : group_1
+		}, {
+			$project : project_2
+		}, {
+			$group : group_2
+		}, {
+			$sort : { _id : 1 }
+		}
+	]).toArray();
+
+	return result;
+};
+
+var get_model = function( _data, _date ) {
+
+	const shop_types = {
+		taobao : "淘宝",
+		tmall : "天猫",
+		tmall_l : "旗舰店",
+		tmall_f : "海外旗舰店"
+	};
+
+	const _o = {
+		_id$brand_basic : NumberInt( _data._id ),
+		date_of_value : { a : ISODate( _date + "T00:00:00.000Z" ) },
+		date_create : { a : ISODate( _date + "T00:00:00.000Z" )},
+		taobao_avg_sales : 0,
+		taobao_sum_sales : 0,
+		taobao_sales_amount : 0,
+		tmall_avg_sales : 0,
+		tmall_sum_sales : 0,
+		tmall_sales_amount : 0,
+		tmall_local_avg_sales : 0,
+		tmall_local_sum_sales : 0,
+		tmall_local_sales_amount : 0,
+		tmall_foreign_avg_sales : 0,
+		tmall_foreign_sum_sales : 0,
+		tmall_foreign_sales_amount : 0
+	};
+
+	const sales = _data.sales;
+
+	// taobao : 淘宝, tmall : 天猫, tmall_l : 旗舰店, tmall_f : 海外旗舰店
+	sales.forEach( function( doc ) {
+
+		const avg_sales = doc.avg_sales ? Number( doc.avg_sales.toFixed( 4 ) ) : 0;
+		const sum_sales = doc.sum_sales ? NumberInt( doc.sum_sales.toFixed( 0 ) ) : 0;
+		const sales_amount = doc.sales_amount ? NumberInt( doc.sales_amount.toFixed( 0 ) ) : 0;
+
+		if ( doc.shop_type === shop_types.taobao ) {
+			_o.taobao_avg_sales = avg_sales;
+			_o.taobao_sum_sales = sum_sales;
+			_o.taobao_sales_amount = sales_amount;
+		} else if ( doc.shop_type === shop_types.tmall ) {
+			_o.tmall_avg_sales = avg_sales;
+			_o.tmall_sum_sales = sum_sales;
+			_o.tmall_sales_amount = sales_amount;
+		} else if ( doc.shop_type === shop_types.tmall_l ) {
+			_o.tmall_local_avg_sales = avg_sales;
+			_o.tmall_local_sum_sales = sum_sales;
+			_o.tmall_local_sales_amount = sales_amount;
+		} else if ( doc.shop_type === shop_types.tmall_f ) {
+			_o.tmall_foreign_avg_sales = avg_sales;
+			_o.tmall_foreign_sum_sales = sum_sales;
+			_o.tmall_foreign_sales_amount = sales_amount;
+		} else {
+			console.log( "shop type doesn't match" );
+		}
+
+	});
+
+	// total_sales_amount
+	_o.total_sales_amount = _o.taobao_sales_amount + _o.tmall_sales_amount + _o.tmall_local_sales_amount + _o.tmall_foreign_sales_amount;
+
+	return _o;
+}
+
+var get_models_for_g3 = function( _arr, _date ) {
+
+	const _arr_model_g3 = [];
+	for ( i=0; len=_arr.length, i<len; i++ ) {
+		const _data = _arr[ i ];
+		_arr_model_g3.push( get_model( _data, _date ) );
+	}
+
+	return _arr_model_g3;
+};
+
+var removePreData = function( _date ) {
+	const _q = {
+		"date_of_value.a" : {
+			$gte : ISODate( _date + "T00:00:00.000Z" ),
+			$lte : ISODate( _date + "T23:59:59.999Z" )
+		}
+	};
+	_col$daily_sales_by_brand.remove( _q );
+}
+
+var insertData = function( _data ) {
+	_col$daily_sales_by_brand.insertMany( _data );
+}
+
+
+// var _date = "2018-02-03";
+
+
+var FN = function( day ){
+
+	var today_UTC = new Date();
+	var today_local = ISODate( day );
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  day + " --- " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	// RUN ...
+	// 1. Get data array to make object for G3
+	var _arr_sales_by_brand = get_daily_sales_by_brand( day );
+
+	// 2. Make object for G3
+	var _arr_g3 = get_models_for_g3( _arr_sales_by_brand, day );
+
+	// 3. Remove duplicated docs
+	removePreData( day );
+
+	// 4. Insert objects to G3
+	insertData( _arr_g3 );
+	// _arr_sales_by_brand;
+	// _arr_g3;
+
+	return;
+}
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate )
+		{
+			var convert_toString = io.substr(0,4) + "-" + io.substr(4,2) + "-" + io.substr(6,2);
+			result.push( convert_toString );
+		}
+	}
+
+	return result;
+};
+
+
+/*
+ * 로직을 식행하는 함수
+ * @param {Number} startDate
+ * @param {Number} endDate
+ */
+var FN_LOGIC =  function( startDate, endDate ){
+	var targetDays = getTargetDays( startDate, endDate );
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = targetDays[ i ];
+		FN( io )
+	}
+
+	return;
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+//FN_LOGIC( 20180401, 20190515 );
+//FN_LOGIC( 20180401, 20190523 );
+FN_LOGIC( 20181001, 20190331 );
+
+print( "EXECUTION TIME : " + ( new Date() - start ) + "ms" );
+
+return;

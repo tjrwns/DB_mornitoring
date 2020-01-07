@@ -1,0 +1,64 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/kaola__머지데이터의브랜드정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r1 = [];
+
+col0.find({}).forEach( function( doc ){
+	if( doc.DETAIL_HTML == null ) return;
+
+	var t0 = doc.DETAIL_HTML.__Goods__.basicInfo;
+
+	var t1 = r0[ t0.brandName ];
+	if( !t1 )
+	{
+
+		t1 = r0[ t0.brandName ] = {};
+		t1.count = 1;
+		t1.brand_id = t0.brandId;
+
+		t1.count_shop = 1;
+	}
+	else
+	{
+		t1.count = t1.count + 1;
+		if( doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo )
+			t1.count_shop = t1.count_shop + 1;
+	}
+});
+
+var _to, s;
+for( s in r0 )
+{
+
+	_to = {};
+	_to.name = s;
+	_to.brand_id = r0[ s ].brand_id;
+	_to.value = r0[ s ].count;
+	_to.count_shop = r0[ s ].count_shop;
+	r1.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = r1.sort( function( a, b ){ return b.value - a.value; } );
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

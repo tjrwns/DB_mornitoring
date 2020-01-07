@@ -1,0 +1,60 @@
+.test {
+  cursor: pointer;
+  padding: 5px !important;
+  position: relative;
+  top: -6px;
+  border-radius: 2px;
+  background-color: #d14a61;
+  color: #FFF;
+  width: 100%;
+  text-align: center;
+}
+
+.test:hover {
+  border : 1px #d14a61 solid;
+  background-color: #fff;
+  color: #d14a61;
+}
+.photo img {
+  width: 100%;
+}
+
+.id-column-cls .fancy-grid-cell-inner {
+  margin-top: 30px;
+  margin-left: 14px;
+  font-size: 14px;
+}
+
+.id-column-cls .fancy-grid-cell {
+  border-right: 1px solid rgb(211, 219, 225) !important;
+  background-color: rgb(240, 242, 244);
+}
+
+.fancy-grid-body .fancy-grid-column .fancy-grid-cell.fancy-grid-cell-selected {
+  background-color: #d14a61;
+}
+.fancy-grid-cell.fancy-grid-cell-over {
+  background: #d14a6150;
+  color : #d14a61;
+}
+
+
+.progress .fancy-grid-column-progress-bar {
+  background-color: #dc6b67;
+}
+
+.progress .fancy-grid-bar-label-out-left {
+  color: #dc6b67;
+}
+
+.fancy-grid-cell-inner {
+  margin-top: 7px;
+}
+
+.fancy-grid-column-progress .fancy-grid-cell-inner {
+  margin-top: 4px;
+}
+
+.fancy-grid-column-progress-bar {
+  line-height: 19px
+}

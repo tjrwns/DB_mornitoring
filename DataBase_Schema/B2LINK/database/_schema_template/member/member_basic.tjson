@@ -1,0 +1,163 @@
+{
+	//이 Collection의 명세;
+	"description" : "회원의 기본정보를 저장하는 collection 으로 회원의 부서, 권한등의 정보를 저장한다."
+
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	, "dereference" : [
+		"member.member_session"
+		, "member.member_session_log"
+		, "member.member_date"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_session"
+		, "member_session_log"
+		, "member_date"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"category.category_division"
+		, "category.category_division_team"
+		, "member.member_session"
+		, "member.member_session_log"
+		, "member.member_date"
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+		"category_division"
+		, "category_division_team"
+		, "member_session"
+		, "member_session_log"
+		, "member_date"
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+		"category"
+		, "member"
+	]
+
+	//이 Collection에서 검색에 사용되는 Field;
+	, "search_field" : [
+		{
+			"property" : "email"
+			, "label" : "이메일"
+			, "label_cn" : ""
+			, "label_kr" : "이메일"
+			, "label_us" : "e-mail"
+		}
+		, {
+			"property" : "nm.a"
+			, "label" : "성명"
+			, "label_cn" : ""
+			, "label_kr" : "성명"
+			, "label_us" : "Name"
+		}
+		, {
+			"property" : "nm_cn.a"
+			, "label" : "성명(중문)"
+			, "label_cn" : ""
+			, "label_kr" : "성명(중문)"
+			, "label_us" : "Name(Chinese)"
+		}
+		, {
+			"property" : "nm_kr.a"
+			, "label" : "성명(국문)"
+			, "label_cn" : ""
+			, "label_kr" : "성명(국문)"
+			, "label_us" : "Name(Korean)"
+		}
+		, {
+			"property" : "nm_us.a"
+			, "label" : "성명(영문)"
+			, "label_cn" : ""
+			, "label_kr" : "성명(영문)"
+			, "label_us" : "Name(English)"
+		}
+	]
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Member ID;
+		, "mid" : <include>member/mid.json</include>
+
+		//Member Password;
+		, "mpw" : <include>member/mpw.json</include>
+
+		//Boolean Member Connection;
+		, "bConn" : { "description" : "Boolean Member Connection", "exampleValue" : 0<include>000_common_txt/boolean.txt</include> }
+
+		//Authority Code;
+		, "cd$authority_code" : <include>member/cd$authority_code.json</include>
+			//Rank Priority [ Admin, Founders, Leaders, Manager, Staff, Unauthorized, Exitor ];
+			//, "cd$category_member_rank" : <>member/cd$category_member_rank.json</>;
+
+		//Division의 코드 - 제거예정;
+		, "cd$category_division" : <include>category_division/cd$category_division.json</include>
+
+		//Division 소속의 팀 코드 - 제거예정;
+		, "cd$category_division_team" : <include>category_division_team/cd$category_division_team.json</include>
+
+		//Division 소속 - 팀소속의 파트 코드 - 제거예정;
+		, "cd$category_division_part" : <include>category_division_part/cd$category_division_part.json</include>
+
+		//Email;
+		, "email" : <include>100_common_json/email.json</include>
+
+		//Email's ID;
+		//, "email_id" : { "description" : "Email's ID", "exampleValue" : "thdtjsdn"<include>000_common_txt/string_default.txt</include> }
+
+		//Email's Domain;
+		//, "email_domain" : { "description" : "Email's Domain", "exampleValue" : "gmail.com"<include>000_common_txt/string_default.txt</include> }
+
+		//Member messenger;
+		, "messenger" : { "description" : "메신저 정보", "type" : "object"
+			, "properties" : {
+
+				//messenger Type CD (FK);
+				"cd$messenger" : { "description" : "메신저 종류 CD (FK)", "exampleValue" : "MSG001"<include>000_common_txt/string_default.txt</include> }
+
+				//messenger USER ID;
+				, "id" : { "description" : "메신저 ID", "exampleValue" : "ray@b2link.co.kr"<include>000_common_txt/string_default.txt</include> }
+			}
+		}
+
+		//Name(Default);
+		, "nm" : <include>member/nm.json</include>
+
+		//Name(CN);
+		, "nm_cn" : <include>member/nm_cn.json</include>
+
+		//Name(KR);
+		, "nm_kr" : <include>member/nm_kr.json</include>
+
+		//Name(US);
+		, "nm_us" : <include>member/nm_us.json</include>
+
+		//Signin(Login) 실패 횟수;
+		, "nSignInFail" : { "description" : "Signin(Login) 실패 횟수\n5회 실패시 SignIn 불가능", "exampleValue" : 1
+			, "type" : "uint", "length" : 1, "default" : 0, "minValue" : 0, "maxValue" : 5
+			, "values" : [ 0, 1, 2, 3, 4, 5 ]
+			, "valuesMap" : { "0" : 1, "1" : 1, "2" : 1, "3" : 1, "4" : 1, "5" : 1 }
+		}
+
+		//Member Mobile Number;
+		, "phone_cell" : <include>100_common_json/contact/phone__cell.json</include>
+
+		//Member Telephone Number;
+		, "phone_tel" : <include>100_common_json/contact/phone__tel.json</include>
+	}
+}

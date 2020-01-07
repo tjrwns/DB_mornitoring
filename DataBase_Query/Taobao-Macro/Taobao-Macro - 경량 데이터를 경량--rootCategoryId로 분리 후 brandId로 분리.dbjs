@@ -1,0 +1,23 @@
+var db0 = db.getSiblingDB( "경량--rootCategoryId" );
+var col_1801 = db0.getCollection( "1801" );
+var col_50010788 = db0.getCollection( "50010788" );
+var col_50023282 = db0.getCollection( "50023282" );
+var col_50025705 = db0.getCollection( "50025705" );
+
+var db1 = db.getSiblingDB( "경량--rootCategoryId--BrandId" );
+
+var COLS = {};
+
+var i = 0;
+var iLen = col_1801.count();
+col_1801.find({}).forEach(function(doc){
+	var id_b = Number( doc.id_b ).toString();
+
+	if( !COLS[ id_b ] ) COLS[ id_b ] = db1.getCollection( id_b );
+
+	COLS[ id_b ].insertOne( doc );
+
+	print( iLen + " / " + i );
+	++i;
+});
+

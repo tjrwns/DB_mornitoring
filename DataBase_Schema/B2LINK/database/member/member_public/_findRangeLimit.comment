@@ -1,0 +1,9 @@
+/**
+ * _id_gt ~ _id_lt 사이의 _id 값을 가진 {Document}를 가져온다.
+ * _id_gt와 _id_lt의 값은 포함하지 않는다.
+ * @function
+ * @param {uint} _id_gt start index
+ * @param {uint} _id_lt end index
+ * @param {uint} nLimit
+ * @return {Array} [ { member_public }, { member_public }, ... ]
+ */

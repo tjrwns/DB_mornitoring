@@ -1,0 +1,5 @@
+/**
+ * @return 'US' name list
+ * @function
+ * @return {Array} [ {nm_us}, {nm_us}, ... ]
+ */

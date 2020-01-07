@@ -1,0 +1,5 @@
+/**
+ * @return email list
+ * @function
+ * @return {Array} [ email, email, ... ]
+ */

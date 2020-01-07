@@ -1,0 +1,90 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/Lazada__00_정제대상데일리수집컬렉션가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var targetYear = "<!=targetYear=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "Lazada";
+var TARGET_SITE = "LAZADA";
+var nm_db = _NM_SITE_ + "_" + targetYear;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( nm_db + "-수집" );
+var db2 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+var col0 = db2.getCollection( "dashboard-daily" );
+var col1 = db2.getCollection( "dashboard-detail" );
+
+var colList0 = [];
+
+//*///수정 - 20190315_2149 - 송선우 - 정제대상 목록 추출 로직 변경;
+col1.find({}).forEach(function( doc ){ if( colList0.indexOf( doc.date ) == -1 ) colList0.push( doc.date ); });
+/*/
+col0.find({}).forEach(function( doc ){ if( colList0.indexOf( doc.date ) == -1 ) colList0.push( doc.date ); });
+//*/
+
+var colList1 = db1.getCollectionNames();
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = { date : null };
+
+//----------------------------------------------------------------------------------------------------;
+
+var r_list_check = [];
+var r = [];
+
+colList1.forEach( function( nm_col ){
+	if( nm_col == "_TEMP" ) return;
+	if( nm_col.indexOf( "All" ) != -1 ) return;
+
+	var targetColNm0 = nm_col.split( "-" )[ 0 ];//print( "targetColNm0 : " + targetColNm0 );
+
+	//*///수정 - 20190315_2149 - 송선우 - 정제대상 목록 추출 로직 변경;
+	if( -1 == colList0.indexOf( targetColNm0 ) )
+	/*/
+	P0.date = Number( targetColNm0.split( "_" )[ 0 ] );
+	var bDoc_Daily = col0.findOne( P0 );
+	if( -1 == colList0.indexOf( targetColNm0 ) && !bDoc_Daily )
+	//*/
+	{
+		if( -1 == r_list_check.indexOf( targetColNm0 ) )
+		{
+			var col0stats = db1.getCollection( targetColNm0 + "-LIST" ).stats();
+
+			/*/
+			r.push( targetColNm0 );
+			/*///수정 - 20190302_1646 - 송선우;
+			r_list_check.push( targetColNm0 );
+			r.push({
+				nm_col : targetColNm0
+				, stats : {
+					count : {
+						  LIST : col0stats.count
+					}
+					, size : {
+						  LIST : col0stats.size
+					}
+				}
+			});
+			//*/
+		}
+	}
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : {
+		totalCount : r.length
+		, data : r
+		, target_site : TARGET_SITE
+		, DB : nm_db + "-수집"
+	}
+};

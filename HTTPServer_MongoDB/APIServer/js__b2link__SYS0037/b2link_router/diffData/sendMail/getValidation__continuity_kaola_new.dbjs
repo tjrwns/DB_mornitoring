@@ -1,0 +1,334 @@
+//To Get Execution Time;
+var start = new Date().getTime();
+
+//----------------------------------------------------------------------------------------------------;
+
+//	REQUIRE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$nm = null;//연속성 검증 디비;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$new = null;//연속성 검증 추가된상품 컬랙션;
+var _col$price = null;//연속성 검증 가격다른상품 컬랙션;
+var _col$remove = null;//연속성 검증 삭제된상품 컬랙션;
+var _col$title = null;//연속성 검증 제목다른사품 컬랙션;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENT;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _doc$title = [];
+var _doc$price = [];
+var _doc$bool={};
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+var start_date = "<!=start_date=!>";
+//var start_date = "2019-11-06";
+var channel = "kaola";
+var _find = {};
+
+var result = [];
+var totalCount = 0;
+var ratio_violate = 0;
+var r = {};
+
+var cnt_both_fail = 0;
+var cnt_price_pass = 0;
+var cnt_title_pass = 0;
+//*/
+
+/*/
+var date = new Date();
+var year = date.getFullYear();
+	year = year.toString();
+var month = date.getMonth() + 1;
+	month = lpad( month, "0", 2 );
+var day = date.getDate();
+	day = lpad( day, "0", 2 );
+/*/
+var date = start_date.split( "-" );
+var year = date[ 0 ];
+var month = date[ 1 ];
+var day = date[ 2 ];
+//*/
+//디비 설정;
+_db$nm = db.getSiblingDB( channel + "_" + year + "_continuity" );//연속성 검증 디비;
+
+_col$new = _db$nm.getCollection( year + month + day + "--new" );
+_col$remove = _db$nm.getCollection( year + month + day + "--remove" );
+_col$title = _db$nm.getCollection( year + month + day + "--title" );
+_col$price = _db$nm.getCollection( year + month + day + "--price" );
+_col$STATISTICS = _db$nm.getCollection( "STATISTICS" );
+
+var _doc$STATISTICS = {
+    "prev_doc_count" : 0,
+    "doc_count" : 0,
+    "removeItem_count" : 0,
+    "newItem_count" : 0,
+    "title_count" : 0,
+    "price_count" : 0
+};
+var _p_diff = { _id : NumberInt( year + month + day ) };
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	RESULT;
+
+//----------------------------------------------------------------------------------------------------;
+
+if( _col$STATISTICS )
+{
+	_doc$STATISTICS = _col$STATISTICS.findOne( _p_diff );
+}
+
+if( _col$title )
+{
+	_col$title.find({}).forEach(function( doc ){
+
+		var title_model = {
+			  flag : "title_failed"
+			, id: ""			//"156576805149376512";
+			, name: ""			//"红蔷薇柔光无暇气垫霜-11粉米色";
+			, name_prev: ""		//"透亮柔光水嫩无暇红白气垫霜 bb霜 遮瑕 粉底";
+			, price: -1			//149;
+			, request_url: ""	//http://detail.vip.com/detail-2750386-2156717289.html";
+		};
+		var price_model = {
+			  flag : "price_failed"
+			, id: ""			//"156576805149376512";
+			, name: ""			//"红蔷薇柔光无暇气垫霜-11粉米色";
+			, price: -1			//149;
+			, price_prev: -1	//59;
+			, ratio : 0			//( price / price_prev * 100 - 100 );
+			, request_url: ""	//http://detail.vip.com/detail-2750386-2156717289.html";
+		};
+
+		if( channel == "vip" )
+		{
+			title_model.id = doc.doc.LIST.v_spu_id;
+			title_model.name = doc.doc.LIST.name;
+			title_model.name_prev = doc.prev_doc.LIST.name;
+			title_model.price = doc.doc.LIST.sale_price;
+			title_model.request_url = "https://detail.vip.com/detail-"+ doc.doc.LIST.brand_id +"-"+ doc.doc.LIST.product_id +".html";
+		}
+		else if( channel == "kaola" )
+		{
+			title_model.id = Number( doc.doc._id );
+			title_model.name = doc.doc.LIST.title;
+			title_model.name_prev = doc.prev_doc.LIST.title;
+			try
+			{
+				title_model.price = doc.doc.DETAIL.data ? doc.doc.DETAIL.data.skuPrice.currentPrice : 0;
+			}
+			catch( er )
+			{
+				//er;
+				title_model.price = 0;
+			}
+
+			title_model.request_url = "https://goods.kaola.com/product/" + Number( doc.doc._id ) + ".html";
+		}
+
+		_doc$title.push( title_model );
+		_doc$bool[ title_model.id ] = false;
+	});
+}
+
+if( _col$price )
+{
+	_col$price.find({}).forEach(function( doc ){
+
+		var title_model = {
+			  flag : "title_failed"
+			, id: ""			//"156576805149376512";
+			, name: ""			//"红蔷薇柔光无暇气垫霜-11粉米色";
+			, name_prev: ""		//"透亮柔光水嫩无暇红白气垫霜 bb霜 遮瑕 粉底";
+			, price: -1			//149;
+			, request_url: ""	//http://detail.vip.com/detail-2750386-2156717289.html";
+		};
+		var price_model = {
+			  flag : "price_failed"
+			, id: ""			//"156576805149376512";
+			, name: ""			//"红蔷薇柔光无暇气垫霜-11粉米色";
+			, price: -1			//149;
+			, price_prev: -1	//59;
+			, ratio : 0			//( price / price_prev * 100 - 100 );
+			, request_url: ""	//http://detail.vip.com/detail-2750386-2156717289.html";
+		};
+
+		if( channel == "vip" )
+		{
+			price_model.id = doc.doc.LIST.v_spu_id;
+			price_model.name = doc.doc.LIST.name;
+			price_model.price = doc.doc.LIST.sale_price;
+			price_model.price_prev = doc.prev_doc.LIST.sale_price;
+			price_model.ratio = doc.doc.LIST.sale_price / doc.prev_doc.LIST.sale_price * 100 - 100;
+			price_model.request_url = "https://detail.vip.com/detail-"+ doc.doc.LIST.brand_id +"-"+ doc.doc.LIST.product_id +".html";
+		}
+		else if( channel == "kaola" )
+		{
+			price_model.id = Number( doc.doc._id );
+			price_model.name = doc.doc.LIST.title;
+			try
+			{
+				price_model.price = doc.doc.DETAIL.data ? doc.doc.DETAIL.data.skuPrice.currentPrice : 0;
+			}
+			catch( er )
+			{
+				//er;
+				price_model.price = 0;
+			}
+
+			try
+			{
+				price_model.price_prev = doc.prev_doc.DETAIL.data ? doc.prev_doc.DETAIL.data.skuPrice.currentPrice : 0;
+			}
+			catch( er )
+			{
+				//er;
+				price_model.price_prev = 0;
+			}
+
+
+			try
+			{
+				price_model.ratio = doc.doc.DETAIL.data && doc.prev_doc.DETAIL.data ? ( doc.doc.DETAIL.data.skuPrice.currentPrice / doc.prev_doc.DETAIL.data.skuPrice.currentPrice * 100 - 100 ) : 0;
+			}
+			catch( er )
+			{
+				//er;
+				price_model.ratio = 0;
+			}
+
+
+			price_model.request_url = "https://goods.kaola.com/product/" + Number( doc.doc._id ) + ".html";
+		}
+
+		_doc$price.push( price_model );
+		if( price_model.ratio > 20 ) ++ratio_violate;
+
+		if( _doc$bool.hasOwnProperty( price_model.id ) ) _doc$bool[ price_model.id ] = true;
+		// else _doc$bool[ price_model.id ] = false;
+	});
+}
+
+/*/
+var i=0,iLen=_doc$title.length;
+var io;
+var isTitleBoth=false;
+var isPriceBoth=false;
+for( ; i<iLen; ++i )
+{
+	io = _doc$title[ i ];
+	isTitleBoth=false;
+
+	var j=0,jLen=_doc$price.length;
+	var jo;
+	for( ; j<jLen; ++j )
+	{
+		jo = _doc$price[ j ];
+		isPriceBoth=false;
+
+		if( Number( io.id ) == Number( jo.id ) )
+		{
+			var both_model = {
+				  flag : "title_failed,price_failed"
+				, id : ""			//2380961.0;
+				, request_url : ""	//https://www.kaola.com/product/2380961.html";
+				, name : ""			//"【包邮】3CE MOOD RECIPE情调配方 第二季 哑光质地九色眼影盘 8.1克/盒";
+				, name_prev : ""	//"【包邮包税】3CE MOOD RECIPE情调配方 第二季 哑光质地九色眼影盘 8.1克/盒";
+				, price : -1		//249.0;
+				, price_prev : -1	//219.0;
+				, ratio : 0			//( price / price_prev * 100 - 100 );
+			};
+
+			both_model.id = io.id;
+			both_model.request_url = io.request_url;
+			both_model.name = io.name;
+			both_model.name_prev = io.name_prev;
+			both_model.price = jo.price;
+			both_model.price_prev = jo.price_prev;
+			both_model.ratio = jo.ratio;
+
+			result.push( both_model );
+			++cnt_both_fail;
+			isTitleBoth=true;
+			isPriceBoth=true;
+		}
+
+		if( i == 0 && !_doc$bool[ jo.id ] ) result.push( jo );
+	}
+
+	if( !isTitleBoth ) result.push( io );
+}
+/*/
+for( var s in _doc$bool )
+{
+	if( _doc$bool[ s ] ) ++cnt_both_fail;
+}
+//*/
+
+cnt_title_pass = _doc$STATISTICS.doc_count - _doc$STATISTICS.title_count;
+cnt_price_pass = _doc$STATISTICS.doc_count - _doc$STATISTICS.price_count;
+
+//----------------------------------------------------------------------------------------------------;
+result_model = {
+	date_target : start_date
+	, result : {
+		count : {
+			both_fail : cnt_both_fail
+			, new : _doc$STATISTICS.newItem_count
+			, price_fail : _doc$STATISTICS.price_count
+			, price_pass : cnt_price_pass
+			, ratio_standard : 20
+			, ratio_violate : ratio_violate
+			, skip : _doc$STATISTICS.removeItem_count
+			, title_fail : _doc$STATISTICS.title_count
+			, title_pass : cnt_title_pass
+		}
+		, data : result
+		, total_source : _doc$STATISTICS.prev_doc_count
+		, total_target : _doc$STATISTICS.doc_count
+		, desc : ""
+	}
+	, type : "continuity"
+	, _id$chnnel_basic : 26
+};
+
+r = [ result_model ];
+r.executionTime = new Date().getTime() - start;
+
+//----------------------------------------------------------------------------------------------------;
+//
+//	Return
+//
+//----------------------------------------------------------------------------------------------------;
+print( JSON.stringify( r ) );

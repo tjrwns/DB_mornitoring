@@ -1,0 +1,143 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/lazada__상품가격추이.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_SITE_ = "Lazada";
+var product_id = <!=product_id=!>;
+
+var db0 = db.getSiblingDB( _TARGET_SITE_ + "_2018" );
+var db1 = db.getSiblingDB( _TARGET_SITE_ + "_2019" );
+
+var cols0 = db0.getCollectionNames();
+var cols1 = db1.getCollectionNames();
+
+var allCols = cols0.concat( cols1 )
+var r = {
+    date : []
+    , price : {
+		price : []
+		, review : []
+	}
+	, info : []
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q00 = { _id : null }
+
+var _to;
+allCols.forEach(function(col){
+
+	var year = col.substr(0,4);
+	var tDb = db.getSiblingDB( _TARGET_SITE_ + "_" + year );
+	var tCol = tDb.getCollection( col );
+
+	_q00._id = NumberLong( product_id );
+	var doc = tCol.findOne( _q00 );
+
+	if( doc ){
+		r.date.push( col );
+
+		_to = {
+			date : col
+			, goodsImg : ""
+			, goodsId : ""
+			, goodsName : ""
+			, description : ""
+			, price : ""
+			, originalPrice : ""
+			, discount : ""
+			, brandId : ""
+			, brandName : ""
+			, shopId : ""
+			, shopName : ""
+			, categoryId : ""
+			, categoryName : ""
+			, ratingScore : ""
+			, review : ""
+			, location : ""
+			, inStock : ""
+			, keyword : ""
+			, url : ""
+		};
+
+		try
+		{
+			if( doc.LIST )
+			{
+				_to.goodsId = NumberLong( doc._id )
+				_to.goodsImg = doc.LIST.image || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+				_to.goodsName = doc.LIST.name;
+				_to.brandName = doc.LIST.brandName;
+				_to.brandId = doc.LIST.brandId;
+
+				_to.categoryId = "";
+				_to.categoryName = "";
+
+				if( doc.LIST.categories.length > 0 )
+				{
+					var i = 0,iLen = doc.LIST.categories.length,io;
+					for(;i<iLen;++i){
+						io = doc.LIST.categories[ i ];
+						if( i != 0 )
+						{
+							_to.categoryId = _to.categoryId + " / ";
+							_to.categoryName = _to.categoryName + " / ";;
+						}
+						_to.categoryId = _to.categoryId + io;
+						_to.categoryName = _to.categoryName + io;
+					}
+				}
+				else
+				{
+					_to.categoryId = "";
+					_to.categoryName = "";
+				}
+
+				_to.shopId = doc.LIST.sellerId;
+				_to.shopName = doc.LIST.sellerName;
+
+				_to.keyword = doc.keyword;
+				_to.url = doc.LIST.productUrl;
+
+				_to.price = Number( doc.LIST.price );
+				_to.originalPrice = Number( doc.LIST.originalPrice );
+				r.price.price.push( Number( doc.LIST.price ) );
+
+
+				_to.ratingScore = doc.LIST.ratingScore
+				_to.review = doc.LIST.review
+				r.price.review.push( Number( doc.LIST.review ) );
+				if( doc.LIST.discount ) _to.discount = doc.LIST.discount;
+
+				_to.location = doc.LIST.location;
+				_to.inStock = doc.LIST.inStock
+				//추가정보;
+
+
+
+				var i = 0,iLen = doc.LIST.description.length,io,description = "";
+				for(;i<iLen;++i){
+					io = doc.LIST.description[ i ];
+					description = description + "<li>" + io + "</li>";
+				}
+				_to.description = description;
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		r.info.push( _to);
+	}
+})
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

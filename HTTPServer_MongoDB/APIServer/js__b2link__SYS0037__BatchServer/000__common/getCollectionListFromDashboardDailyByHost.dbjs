@@ -1,0 +1,38 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getCollectionListFromDashboardDailyByHost.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var TARGET_YEAR = "<!=target_year=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+var col0 = db0.getCollection( "dashboard-daily" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+var _to;
+
+col0.find({}).sort({_id : -1}).forEach(function(doc){
+
+	if( doc.date.substring(0,4) != TARGET_YEAR ) return;
+
+	_to = {};
+	_to.nm_col = doc._id;
+	_to.count_doc = NumberInt( doc.count );
+	_to.size = doc.size.mb + " MB";
+	_to.count_shop = NumberInt( doc.shop_count );
+	_to.count_brand = NumberInt( doc.brand_count );
+
+	r.push( _to );
+})
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

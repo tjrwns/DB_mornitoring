@@ -1,0 +1,1 @@
+{ "description" : "Name(KR)", "type" : "object", "properties" : <include>100_common_json/name_person/nm__kr.json</include> }

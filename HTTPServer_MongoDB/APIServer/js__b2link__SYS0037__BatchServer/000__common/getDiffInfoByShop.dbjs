@@ -1,0 +1,50 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getDiffInfoByShop.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "<!=nm_site=!>";
+var _TARGET_YEAR_ = "<!=target_year=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+
+var nmDb = _NM_SITE_ + "_" +  _TARGET_YEAR_ + "--비교";
+
+var db0 = db.getSiblingDB( nmDb );
+var col0 = db0.getCollection( "STATISTICS" );
+
+
+var _q0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+var sort00 = { _id : 1 };
+
+var r = {
+	date : []
+    , prev_doc_count : []
+    , doc_count : []
+    , removeItem_count : []
+    , newItem_count : []
+    , title_count : []
+    , price_count : []
+};
+
+col0.find( _q0 ).sort( sort00 ).forEach( function( doc ){
+	r.date.push( doc._id );
+	r.prev_doc_count.push( doc.prev_doc_count );
+	r.doc_count.push( doc.doc_count );
+	r.removeItem_count.push( doc.removeItem_count );
+	r.newItem_count.push( doc.newItem_count );
+	r.title_count.push( doc.title_count );
+	r.price_count.push( doc.price_count );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

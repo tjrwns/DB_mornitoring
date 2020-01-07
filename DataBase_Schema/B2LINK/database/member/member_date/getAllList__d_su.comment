@@ -1,0 +1,5 @@
+/**
+ * @return d_su(date_signup)
+ * @function
+ * @return {Array} [ d_su, d_su, ... ]
+ */

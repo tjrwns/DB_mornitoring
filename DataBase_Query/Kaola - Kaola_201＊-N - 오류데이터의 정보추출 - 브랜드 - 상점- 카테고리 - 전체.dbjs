@@ -1,0 +1,189 @@
+//-------------------------------------------------------;
+
+// DEFINE;
+
+//-------------------------------------------------------;
+
+var _SITE_NAME_ = "Kaola";
+
+
+//*/
+var db00 = db.getSiblingDB( "Kaola_2018-N" );
+var db10 = db.getSiblingDB( "Kaola_2019-N" );
+
+/*/
+
+//test code;
+var db00 = db.getSiblingDB( "Kaola_2018_test" );
+var db01 = db.getSiblingDB( "Kaola_2018_test-N" );
+var db10 = db.getSiblingDB( "Kaola_2019_test" );
+var db11 = db.getSiblingDB( "Kaola_2019_test-N" );
+
+//*/
+
+//-------------------------------------------------------;
+
+// DATABASE;
+
+//-------------------------------------------------------;
+
+var db$N_List  = db.getSiblingDB("N-List");
+
+//-------------------------------------------------------;
+
+// COLLECTION;
+
+//-------------------------------------------------------;
+
+var col$Nbrand = db$N_List.getCollection("N_brand");
+var col$Nshop = db$N_List.getCollection("N_shop");
+var col$Ncategory = db$N_List.getCollection("N_category");
+
+//-------------------------------------------------------;
+
+// PARAMETER;
+
+//-------------------------------------------------------;
+
+var brandIds = {};
+var shopIds = {};
+var categoryIds = {};
+
+//-------------------------------------------------------;
+
+var P0 = {};
+
+//-------------------------------------------------------;
+
+//	DEFINE - FUNCTION;
+
+//-------------------------------------------------------;
+
+var FN = function( DB ){
+
+	var cols = DB.getCollectionNames();
+	print( cols )
+
+	print( "-------------------------------------------------------" );
+	print( DB + " / " + cols.length );
+	print( "-------------------------------------------------------" );
+
+	var i = 0,iLen = cols.length,io;
+	for(;i<iLen;++i){
+		print( i )
+		io = cols[ i ];
+		DB.getCollection( io ).find( P0 , { DETAIL_HTML : 1}).forEach(function(doc){
+
+			try
+			{
+				if( !brandIds[ doc.DETAIL_HTML.__Goods__.basicInfo.brandId ] )
+				{
+					brandIds[ doc.DETAIL_HTML.__Goods__.basicInfo.brandId ] = {}
+					brandIds[ doc.DETAIL_HTML.__Goods__.basicInfo.brandId ].nm = doc.DETAIL_HTML.__Goods__.basicInfo.brandName;
+				}
+			}
+			catch( er )
+			{
+				//er;
+			}
+
+			try
+			{
+				if( !shopIds[ doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId ] )
+				{
+					shopIds[ doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId ] = {}
+					shopIds[ doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId ].nm = doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopName;
+				}
+			}
+			catch( er )
+			{
+				//er;
+
+			}
+
+			try
+			{
+				if( !categoryIds[ doc.DETAIL_HTML.__Goods__.basicInfo.categoryId ] )
+				{
+					categoryIds[ doc.DETAIL_HTML.__Goods__.basicInfo.categoryId ] = {}
+					categoryIds[ doc.DETAIL_HTML.__Goods__.basicInfo.categoryId ].nm = doc.DETAIL_HTML.__Goods__.basicInfo.categoryName;
+				}
+			}
+			catch( er )
+			{
+				//er;
+			}
+
+		});
+	}
+};
+
+//-------------------------------------------------------;
+
+// LOGIC;
+
+//-------------------------------------------------------;
+
+//col$Nbrand.drop();
+//col$Nshop.drop();
+//col$Ncategory.drop();
+
+//2018;
+FN( db00 );
+//2019;
+FN( db10 );
+
+//brandIds insert;
+var s,so,_to
+for( s in brandIds ){
+	_to = {};
+	_to._id = NumberInt( s );
+	_to.nm = brandIds[ s ].nm;
+	try
+	{
+		col$Nbrand.insertOne( _to );
+	}
+	catch( er )
+	{
+		//er
+		print( er );
+	}
+}
+
+
+//shopIds insert;
+var s,so,_to
+for( s in shopIds ){
+	_to = {};
+	_to._id = NumberInt( s );
+	_to.nm = shopIds[ s ].nm;
+	try
+	{
+		col$Nshop.insertOne( _to );
+	}
+	catch( er )
+	{
+		print( er );
+	}
+}
+
+//categoryIds insert;
+var s,so,_to
+for( s in categoryIds ){
+	_to = {};
+	_to._id = NumberInt( s );
+	_to.nm = categoryIds[ s ].nm;
+
+	try
+	{
+		col$Ncategory.insertOne( _to );
+	}
+	catch( er )
+	{
+		//er;
+		print( er )
+
+	}
+
+}
+return

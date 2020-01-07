@@ -1,0 +1,12 @@
+/**
+ * @function
+ * @param {Object} d
+ * <code>
+ * {
+ * }
+ * </code>
+ * @return {uint} 0 or 1
+ *
+ * @example
+ * member_basic$addDoc( {"nm_us" :{"f" : "SunWoo", "l" : "Song", "a" : "SunWoo Song"}, "email" : "thdtjsdn@gmail.com", "nm_kr" :{"f" : "선우", "l" : "송", "a" : "송선우"}, "mid" : "thdtjsdn@gmail.com", "nm_cn" :{"f" : "", "l" : "", "a" : ""}, "nm" :{"f" : "선우", "l" : "송", "a" : "송선우"}, "mpw" : "123qweasd"} );
+ */

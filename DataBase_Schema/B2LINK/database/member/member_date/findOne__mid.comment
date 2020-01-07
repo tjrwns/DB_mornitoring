@@ -1,0 +1,8 @@
+/**
+ * @function
+ * @param {String} mid member ID
+ * @return {Document}
+ *
+ * @example
+ * member_date$findOne__mid( "thdtjsdn@gmail.com" )' );
+ */

@@ -1,0 +1,1 @@
+, "type" : "uint", "length" : NumberInt( 0 ), "minValue" : NumberInt( 0 ), "maxValue" : NumberInt( 999999999 )

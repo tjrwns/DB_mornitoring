@@ -1,0 +1,61 @@
+var _db$graph_data = db.getSiblingDB( "graph_data" );
+var _db$product = db.getSiblingDB( "product" );
+
+var _col$daily_data_by_sku = _db$graph_data.getCollection( "daily_data_by_sku" );
+var _col$product_service_taobao = _db$product.getCollection( "product_service_taobao");
+
+var _seq = 0;
+var _r = [];
+var _date = "<!=TARGET_DATE=!>";
+var today_UTC = new Date();
+var now = new Date( today_UTC.getTime() - ( today_UTC.getTimezoneOffset() * 60000) );
+
+var skus = [];
+
+_col$daily_data_by_sku.aggregate([
+{
+    $match : {
+        "date_of_value.a" : {
+            $gte : ISODate( _date + "T00:00:00.000Z" ),
+            $lte : ISODate( _date + "T23:59:59.999Z" )
+        }
+    }
+},{
+    $project : {
+        cd$product_master : 1,
+        sum_sell_quantity : {
+            $sum : [
+                "$taobao_sell_quantity",
+                "$tmall_sell_quantity",
+                "$tmall_flag_local_sell_quantity",
+                "$tmall_flag_foreign_sell_quantity"
+            ]
+        }
+    }
+}, {
+    $group : {
+        _id : "$cd$product_master",
+        sum_sell_quantity : { $last : "$sum_sell_quantity" }
+    }
+}, {
+    $sort : {
+        sum_sell_quantity : -1
+    }
+}
+]).toArray().forEach(function(doc) {
+    _col$product_service_taobao.update(
+        { cd$product_master : doc._id },
+        {
+            $set : {
+                seq : NumberInt( ++_seq ),
+                date_update : now
+            }
+        }
+    );
+
+    skus.push( doc._id );
+});
+
+_col$product_service_taobao.updateMany({ cd$product_master : { $nin : skus } }, { $set : { seq : NumberInt( 9999 ) } });
+
+return;

@@ -1,0 +1,18 @@
+<div class="div-Product-diff-Info ui modal">
+	<div class="header" data-url="{{url}}">[ {{brandName}} ] {{goodsName}}</div>
+		<div class="image content">
+			<div class="ui medium image"><img src="{{goodsImg}}"></div>
+			<div class="description">
+				{{productInfo}}
+			</div>
+		</div>
+		<div class="actions">
+			<!--
+			<div class="ui right labeled icon button" onclick="javascript:window.open('{{url}}');">View Product Site<i class="checkmark icon"></i>
+			-->
+			<div class="id-linkButton ui right labeled icon button">View Product Site<i class="checkmark icon"></i>
+		</div>
+	</div>
+</div>
+
+

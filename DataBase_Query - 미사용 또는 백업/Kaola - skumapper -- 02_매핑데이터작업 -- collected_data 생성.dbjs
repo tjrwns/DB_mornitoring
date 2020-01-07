@@ -1,0 +1,194 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var brandDB = db.getSiblingDB( "brand" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var col$brand_basic = brandDB.getCollection( "brand_basic" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	CREATE_INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	QUERY;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+var _q1 = { _id$channel_basic : 26, product_no : null };
+var _q2 = { _id : -1 };
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _to;
+var mappingData;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var FN = function( date ){
+
+	var year = date.toString().substr(0,4)
+	var goodsListDB = db.getSiblingDB( "goods_list_" + year );
+	var refineDB = db.getSiblingDB( "Kaola_" + year );
+	var targetDB = db.getSiblingDB( "Kaola_" + year + "-collected_data");
+
+	var refineCol = refineDB.getCollection( date.toString() );
+	var targetCol = targetDB.getCollection( date.toString() );
+	//var goodsListCol = goodsListDB.getCollection(  date.toString() );
+	var goodsListCol = goodsListDB.getCollection( date.toString() );
+
+	goodsListCol.createIndex( { _id$channel_basic : 1, product_no : 1 } );
+
+	//기존데이터삭제;
+	targetCol.drop();
+	var idx = 0;
+	refineCol.find( _q0 ).forEach(function(doc){
+
+		print( idx + " / " + Date() );
+
+		if( !doc.DETAIL ) return;
+		if( !doc.DETAIL_HTML ) return;
+
+		_to = {
+			  "_id" : -1
+			, "_id$brand_basic" : NumberInt( -1 )
+			, "cd$product_master" : null
+			, "nm$brand_basic" : null
+			, "options" : []//DETAIL_HTML.skuPropertyList.skuPropertyValueList[].propertyValue
+			, "origin_price" : -1//DETAIL.data.skuPrice.marketPrice;
+			, "product_id" : null//DETAIL_HTML.__Goods__.basicInfo.goodsId
+			, "product_images" : [] //DETAIL_HTML.__Goods__.basicInfo.webImageList
+			, "product_name" : null//DETAIL_HTML.__Goods__.basicInfo.originTitle
+//			, "request_url" : null//"https://www.kaola.com/product/" + DETAIL_HTML.__Goods__.basicInfo.goodsId + ".html"
+			, "sell_price" : NumberInt( -1 ) //DETAIL.data.skuPrice.currentPrice;
+
+			//현요남 추가요청 프로퍼티;
+			, "brandId" : NumberInt( -1 )//DETAIL_HTML.__Goods__.basicInfo.brandId
+			, "brandName" : null//DETAIL_HTML.__Goods__.basicInfo.brandName
+
+			//-------------------- 추가프로퍼티;
+			, "bTaxAmount" : NumberInt( -1 )//세금포함인지여부;
+			, "tax_amount" : NumberInt( -1 )//세금금액;
+			, "purchase_price" : NumberInt( -1 )//세금포함판매금액;
+			, "bSoldOut" : NumberInt( -1 )//품절여부
+
+			//--------------------추가프로퍼티;
+		};
+
+		_to._id = NumberInt( idx );
+
+		_q1.product_no = doc._id.valueOf();
+		mappingData = goodsListCol.findOne( _q1 );
+		if( mappingData )
+		{
+
+			_to._id$brand_basic = NumberInt( mappingData._id$brand_basic );
+			_to.cd$product_master = mappingData.cd$product_master;
+
+			_q2._id = mappingData._id$brand_basic;
+
+			var doc$brand_basic = col$brand_basic.findOne( _q2 );
+			if( doc$brand_basic ) _to.nm$brand_basic = doc$brand_basic.alias || doc$brand_basic.nm_kr;
+		}
+
+		_to.product_id = NumberInt( doc.DETAIL_HTML.__Goods__.basicInfo.goodsId );
+
+		var i = 0,iLen = doc.DETAIL_HTML.__Goods__.basicInfo.webImageList.length,io;
+		for(;i<iLen;++i){
+			io = doc.DETAIL_HTML.__Goods__.basicInfo.webImageList[ i ];
+			_to.product_images.push( io.imageUrl )
+		}
+
+		_to.product_name = doc.DETAIL_HTML.__Goods__.basicInfo.originTitle
+//		_to.request_url = "https://www.kaola.com/product/" + doc.DETAIL_HTML.__Goods__.basicInfo.goodsId + ".html";
+
+		var i = 0,iLen = doc.DETAIL_HTML.__Goods__.skuPropertyList.length,io;
+		var _to0;
+		for(;i<iLen;++i){
+			io = doc.DETAIL_HTML.__Goods__.skuPropertyList[ i ];
+			_to0 = {
+				nm : io.propertyName
+				, values : []
+			}
+			var j = 0,jLen = io.skuPropertyValueList.length,jo;
+			for(;j<jLen;++j){
+				jo = io.skuPropertyValueList[ j ];
+				_to0.values.push( jo.propertyValue )
+			}
+
+			_to.options.push( _to0 );
+		}
+
+		var sell_price = -1;
+		if( doc.DETAIL.data.skuPrice.currentPrice ) sell_price = _to.sell_price = doc.DETAIL.data.skuPrice.currentPrice;
+		if( doc.DETAIL.data.skuPrice.marketPrice ) _to.origin_price = doc.DETAIL.data.skuPrice.marketPrice;
+
+		_to.sell_price =  sell_price;
+
+		if( doc[ "DETAIL-PC" ] && doc[ "DETAIL-PC" ].data.skuTaxInfoPc ){
+			if( doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount != null && doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxFeeTitle != null )
+			{
+				_to.bTaxAmount = NumberInt( 1 );
+				_to.purchase_price = sell_price + doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount;
+			}
+			else
+			{
+				_to.bTaxAmount = NumberInt( 0 );
+				_to.purchase_price = sell_price;
+			}
+
+			_to.tax_amount = doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount;
+		}
+		else
+		{
+			_to.bTaxAmount = NumberInt( 0 );
+			_to.purchase_price = sell_price;
+		}
+
+		_to.bSoldOut = NumberInt( 0 );
+		if( doc.DETAIL_HTML && doc.DETAIL_HTML.__Goods__.basicInfo.onlineStatus == 0 ) _to.bSoldOut = NumberInt( 1 )
+		if( !doc.DETAIL.data.goodsStoreStatus ) _to.bSoldOut = NumberInt( 1 );
+
+
+		if( doc.DETAIL_HTML && doc.DETAIL_HTML.__Goods__.basicInfo )
+		{
+			_to.brandId = NumberInt( doc.DETAIL_HTML.__Goods__.basicInfo.brandId );
+			_to.brandName = doc.DETAIL_HTML.__Goods__.basicInfo.brandName;
+		}
+
+		targetCol.insertOne( _to );
+
+		++idx;
+	})
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+FN( 20190507 );
+
+return;

@@ -1,0 +1,70 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__00_정제대상데일리수집컬렉션가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var targetYear = "<!=targetYear=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "Taobao";
+var TARGET_SITE = "TAOBAO-DAILY";
+var nm_db = _NM_SITE_ + "_" + targetYear;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( nm_db + "-수집" );
+var db2 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+var col1 = db2.getCollection('dashboard-detail');
+
+var colList0 = [];
+col1.find({}).forEach(function(doc){
+	colList0.push( doc.date )
+});
+
+var colList1 = db1.getCollectionNames();
+//----------------------------------------------------------------------------------------------------;
+
+var r_list_check = [];
+var r = [];
+
+colList1.forEach( function( col ){
+	if( col == "_TEMP" ) return;
+	if( col.indexOf( "All" ) != -1 ) return;
+
+	if( -1 == colList0.indexOf( col ) )
+	{
+		if( -1 == r_list_check.indexOf( col ) )
+		{
+			var col0stats = db1.getCollection( col ).stats();
+
+			/*/
+			r.push( col );
+			/*///수정 - 20190302_1646 - 송선우;
+			r_list_check.push( col );
+			r.push({
+				nm_col : col
+				, stats : {
+					count : col0stats.count
+					, size : col0stats.size
+				}
+			});
+			//*/
+		}
+	}
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : {
+		totalCount : r.length
+		, data : r
+		, target_site : TARGET_SITE
+		, DB : nm_db + "-수집"
+	}
+};

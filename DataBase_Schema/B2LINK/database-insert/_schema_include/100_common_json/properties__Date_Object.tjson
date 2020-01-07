@@ -1,0 +1,19 @@
+{
+				//Date - Year;
+				"y" : <include>100_common_json/date/date_Object_Year.json</include>
+
+				//Date - Month;
+				, "m" : <include>100_common_json/date/date_Object_Month.json</include>
+
+				//Date - Day;
+				, "d" : <include>100_common_json/date/date_Object_Day.json</include>
+
+				//Date - Hour;
+				, "ho" : <include>100_common_json/date/date_Object_Hour.json</include>
+
+				//Date - Minute;
+				, "mi" : <include>100_common_json/date/date_Object_Minute.json</include>
+
+				//Date - Seconds;
+				, "se" : <include>100_common_json/date/date_Object_Seconds.json</include>
+			}

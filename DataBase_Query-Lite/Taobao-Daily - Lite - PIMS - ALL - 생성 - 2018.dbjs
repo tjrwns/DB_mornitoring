@@ -1,0 +1,58 @@
+var dbs = {
+	"2018" : db.getSiblingDB("Taobao_2018-Lite--PIMS")
+	, "2019" : db.getSiblingDB("Taobao_2019-Lite--PIMS")
+}
+
+var _q00 = { '_SYS0030.id_b' :{$ne :-1} };
+
+var FN0 = function( year ){
+
+	var cols = dbs[ year ].getCollectionNames();
+	var _tCol = dbs[ year ].getCollection('_ALL');
+
+	_tCol.drop();
+
+	cols.forEach(function( col ){
+		print( col + " / " + cols.length );
+		var r = []
+		dbs[ year ].getCollection( col ).find( _q00 ).forEach(function(d){
+
+			delete d._id;
+			d.date = NumberInt( col );
+
+			var _bInt = 0;
+			try
+			{
+				if( !d.apiStack[ 0 ].value.trade.isBanSale4Oversea ) d._SYS0030.id_c = NumberInt( 70 );
+				else d._SYS0030.id_c = NumberInt( 21 );
+			}
+			catch( er )
+			{
+				//er;
+				//d._SYS0030.id_c = NumberInt( 70 )
+				_bInt = 1;
+			}
+			if( _bInt ) return;
+
+			d._SYS0030.id_c = NumberInt()
+			r.push( d );
+			if( r.length == 500 ){
+				_tCol.insertMany( r );
+				r.length = 0;
+			}
+		})
+
+		_tCol.insertMany( r );
+		r.length = 0;
+	})
+
+}
+//FN0("2018")
+FN0("2019")
+
+//티몰 70
+//티몰 21
+//printjson( 1 )
+
+return;
+

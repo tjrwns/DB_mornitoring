@@ -1,0 +1,157 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SITE_NAME_ = "Taobao";
+
+//----------------------------------------------------------------------------------------------------;
+
+// QUERY;
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var dateToFormat = {
+	"YYYYMMDD" : function( _date ){
+		var date = new Date( _date );
+		var yyyy = date.getFullYear().toString();
+		var mm = ( date.getMonth() + 1 ).toString().length > 1 ? ( date.getMonth() + 1 ).toString() : "0" + ( date.getMonth() + 1 ).toString()
+		var dd = date.getDate().toString().length > 1 ? date.getDate().toString() : "0" + date.getDate().toString()
+
+		return yyyy + mm + dd
+	}
+	, "YYYY-MM-DD" : function( _date){
+		var date = new Date( _date );
+		var yyyy = date.getFullYear().toString();
+		var mm = ( date.getMonth() + 1 ).toString().length > 1 ? ( date.getMonth() + 1 ).toString() : "0" + ( date.getMonth() + 1 ).toString()
+		var dd = date.getDate().toString().length > 1 ? date.getDate().toString() : "0" + date.getDate().toString()
+
+		return yyyy + "-" + mm + "-" + dd;
+	}
+}
+
+var getDateRange = function( start, end ){
+	var startDate = new Date( Number( start.substr(0,4)), Number( start.substr(4,2)) - 1, Number( start.substr(6,2)) );
+	var endDate = new Date( Number( end.substr(0,4)), Number( end.substr(4,2)) - 1, Number( end.substr(6,2)) );
+	var tmp = startDate;
+
+	var r = [];
+	while( tmp < endDate ){
+		r.push( dateToFormat["YYYYMMDD"]( tmp ) )
+		tmp.setDate(tmp.getDate() + 1);
+	}
+	r.push( dateToFormat["YYYYMMDD"]( endDate ) )
+
+	return r;
+};
+
+//----------------------------------------------------------------------------------------------------goods_list 임포트;
+var startDate = "20181201";
+var endDate = "20181231";
+
+var dates = getDateRange( startDate, endDate );
+
+printjson( dates )
+
+/*
+[
+	"20181201",
+	"20181202",
+	"20181203",
+	"20181204",
+	"20181205",
+	"20181206",
+	"20181207",
+	"20181208",
+	"20181209",
+	"20181210",
+	"20181211",
+	"20181212",
+	"20181213",
+	"20181214",
+	"20181215",
+	"20181216",
+	"20181217",
+	"20181218",
+	"20181219",
+	"20181220",
+	"20181221",
+	"20181222",
+	"20181223",
+	"20181224",
+	"20181225",
+	"20181226",
+	"20181227",
+	"20181228",
+	"20181229",
+	"20181230",
+	"20181231"
+]
+*/
+dates.forEach(function( date ){
+	var db0 = db.getSiblingDB( _SITE_NAME_ + "_" + date.substr( 0,4 ) );
+	var col0 = db0.getCollection( date )
+	var col0_error = db.getSiblingDB( _SITE_NAME_ + "_" + date.substr( 0,4 ) + "-ERROR" ).getCollection( date );
+	//print( col )
+	col0_error.remove( { time : date + "_0000" } );
+	var i = 0;
+	col0.find({}).forEach(function(d){
+
+		try{
+			/*/
+			if( !jo.apiStack[0] ) b = true;
+			if( !jo.apiStack[0].value ) b = true;
+			if( !jo.apiStack[0].value.item ) b = true;
+			//*/
+			var b = false;
+			if( !d.apiStack[0].value.item.sellCount ) b = true;
+			if( "0" == d.apiStack[0].value.item.sellCount ) b = true;
+			if( b ){
+				//jo.time = TARGET_DATE;
+				var doc = col0_error.findOne({ _id : d._id });
+				if( !doc )
+				{
+					print( date + "/" + d._id);
+					d.time = date + "_0000";
+					col0_error.insertOne( d );
+				}
+			}
+		}
+		catch( er )
+		{
+			//er;
+			print( er.message );
+			var doc = col0_error.findOne({ _id : d._id });
+			if( !doc )
+			{
+				print( date + "/" + d._id);
+				d.time = date + "_0000";
+				col0_error.insertOne( d );
+			}
+		}
+		print( i );
+		++i;
+	})
+
+})
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+//LOOP( "20180227", "20181231");
+//LOOP( "20181201", "20181231");
+
+//return;
+printjson(1)

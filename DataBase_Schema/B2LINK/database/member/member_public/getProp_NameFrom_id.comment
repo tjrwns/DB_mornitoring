@@ -1,0 +1,6 @@
+/**
+ * _id(member_public code)로 member_public의 nm.a를 얻어온다.
+ * @function
+ * @param {uint} _id member_public code
+ * @return {String}
+ */

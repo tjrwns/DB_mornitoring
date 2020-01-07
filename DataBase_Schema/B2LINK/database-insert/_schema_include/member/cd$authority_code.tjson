@@ -1,0 +1,6 @@
+{ "description" : "Authority Code", "exampleValue" : NumberInt( 0 )<include>000_common_txt/int_len0.txt</include>
+
+	, "values" : [ NumberInt( -1000 ), NumberInt( 0 ), NumberInt( 1000 ), NumberInt( 2000 ), NumberInt( 3000 ), NumberInt( 4000 ), NumberInt( 10000 ) ]
+
+	, "valuesMap" : { "-1000" : NumberInt( 1 ), "0" : NumberInt( 1 ), "1000" : NumberInt( 1 ), "2000" : NumberInt( 1 ), "3000" : NumberInt( 1 ), "4000" : NumberInt( 1 ), "10000" :  NumberInt( 1 ) }
+}

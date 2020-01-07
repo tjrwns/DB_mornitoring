@@ -1,0 +1,37 @@
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "Taobao_2018-수집" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var cols = db0.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {};
+
+var io;
+var i=0; iLen=cols.length;
+for( ; i<iLen; ++i ){
+	io = cols[ i ];
+
+	var col = db0.getCollection( io );
+		col.find({}).forEach( function( doc ){
+			try{
+				//sellCount에 + 문자열이 포함되어있는 상품 아이디 검색;
+				if( -1 != doc.apiStack[ 0 ].value.item.sellCount.indexOf( "+" ) ){
+					if( !r[ io ] ) r[ io ] = [];
+					r[ io ].push( { _id : Number( doc._id ), sellCount : doc.apiStack[ 0 ].value.item.sellCount } );
+				}
+			}
+			catch( er ){
+
+			}
+		});
+
+	//print( iLen + "/" + i );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+printjson( r );

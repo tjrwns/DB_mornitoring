@@ -1,0 +1,15 @@
+{
+	"description" : "자사 member ID collection", "type" : "object"
+
+	, "properties" : {
+
+		//담당자 Member ID (FK);
+		"manager" : { "description" : "상품 정합해체 담당자 member ID (FK)", "exampleValue" : 0<include>000_common_txt/uint_len0.txt</include>, "minValue" : 0, "maxValue" : 999999999 }
+
+		//등록자 Member ID (FK);
+		, "register" : { "description" : "상품 정합해체 요청자 (FK)", "exampleValue" : 0<include>000_common_txt/uint_len0.txt</include>, "minValue" : 0, "maxValue" : 999999999 }
+
+		//확인자 Member ID (FK);
+		, "confirmed_by" : { "description" : "상품 정합해체 확인자(FK)", "exampleValue" : 0<include>000_common_txt/uint_len0.txt</include>, "minValue" : 0, "maxValue" : 999999999 }
+	}
+}

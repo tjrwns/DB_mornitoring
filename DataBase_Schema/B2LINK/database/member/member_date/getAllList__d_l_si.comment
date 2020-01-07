@@ -1,0 +1,5 @@
+/**
+ * @return d_l_si(date_last_signin)
+ * @function
+ * @return {Array} [ d_l_si, d_l_si, ... ]
+ */

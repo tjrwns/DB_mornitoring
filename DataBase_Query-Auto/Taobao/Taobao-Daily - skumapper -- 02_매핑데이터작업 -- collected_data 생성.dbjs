@@ -1,0 +1,260 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var brandDB = db.getSiblingDB( "brand" );
+var category_taobaoDB = db.getSiblingDB( "_CATEGORY-TAOBAO" );
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var col$brand_basic = brandDB.getCollection( "brand_basic" );
+var col$id_brand = category_taobaoDB.getCollection( "id_brand-20191108" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	CREATE_INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	QUERY;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+var _q1 = { goods_id : null };
+var _q2 = { _id : -1 };
+var _q3 = { _id : null };
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _to;
+var mappingData;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	var year = TARGET_DATE.toString().substr(0,4)
+	var goodsListDB = db.getSiblingDB( "goods_list_" + year );
+	var refineDB = db.getSiblingDB( "Taobao_" + year );
+	var targetDB = db.getSiblingDB( "Taobao_" + year + "-collected_data");
+
+	var refineCol = refineDB.getCollection( TARGET_DATE.toString() );
+	var targetCol = targetDB.getCollection( TARGET_DATE.toString() );
+	//var goodsListCol = goodsListDB.getCollection(  TARGET_DATE.toString() );
+	var goodsListCol = goodsListDB.getCollection( TARGET_DATE.toString() );
+
+	goodsListCol.createIndex( { goods_id : 1 } );
+
+	//기존데이터삭제;
+	targetCol.drop();
+	var idx = 0;
+
+	var insertArr = [];
+	refineCol.find( _q0 ).forEach(function(doc){
+
+		// if( !doc.DETAIL ) return;
+		// if( !doc.DETAIL_HTML ) return;
+
+		_to = {
+			  "_id" : -1
+			, "_id$brand_basic" : NumberInt( -1 )
+			, "cd$product_master" : null
+			, "nm$brand_basic" : null
+			, "isBanSale4Oversea" : false
+			, "options" : []
+			, "origin_price" : {}
+			, "product_id" : null
+			, "product_images" : []
+			, "product_name" : null
+//			, "request_url" : null
+			, "sell_price" : {}
+			, "brandId" : NumberInt( -1 )
+			, "brandName" : null
+
+			//-------------------- 추가프로퍼티;
+			// , "bTaxAmount" : NumberInt( -1 )//세금포함인지여부;
+			// , "tax_amount" : NumberInt( -1 )//세금금액;
+			// , "purchase_price" : NumberInt( -1 )//세금포함판매금액;
+			, "bSoldOut" : NumberInt( -1 )//품절여부
+
+			//--------------------추가프로퍼티;
+		};
+
+		_to._id = NumberInt( idx );
+
+		_q1.goods_id = doc._id.valueOf().toString();
+		mappingData = goodsListCol.findOne( _q1 );
+		if( mappingData )
+		{
+
+			_to._id$brand_basic = NumberInt( mappingData._id$brand_basic );
+			_to.cd$product_master = mappingData.cd$product_master;
+
+			_q2._id = mappingData._id$brand_basic;
+
+			var doc$brand_basic = col$brand_basic.findOne( _q2 );
+			if( doc$brand_basic ) _to.nm$brand_basic = doc$brand_basic.alias || doc$brand_basic.nm_kr;
+		}
+
+		_to.product_id = NumberLong( doc._id );
+
+		try
+		{
+			if( !doc.apiStack[ 0 ].value.trade.isBanSale4Oversea ) _to.isBanSale4Oversea = true;
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			var i = 0,iLen = doc.item.images.length,io;
+			for(;i<iLen;++i){
+				io = doc.item.images[ i ];
+				_to.product_images.push( io )
+			}
+		}
+		catch( er )
+		{
+			//er;
+			_to.product_images = [];
+
+		}
+
+		try
+		{
+			_to.product_name = doc.item.title;
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+
+//		var site = _to.isBanSale4Oversea ? "TMALL" : "TAOBAO";
+//		_to.request_url = urlTemplate[ site ] + doc._id;
+
+		try
+		{
+			var s,so,_to0;
+			for( s in doc.mockData.skuCore.sku2info ){
+				so = doc.mockData.skuCore.sku2info[ s ];
+				_to0 = {};
+				_to0.id = s;
+				_to0.priceText = so.price.priceText;
+				_to.options.push( _to0 );
+			}
+		}
+		catch( er )
+		{
+			//er;
+			_to.options = [];
+		}
+
+		try
+		{
+			if( doc.apiStack[ 0 ].value.price )
+			{
+				var price_txt = doc.apiStack[ 0 ].value.price.price.priceText;
+				if( -1 != price_txt.indexOf( "-" ) )
+				{
+					var a = price_txt.split( "-" );
+					_to.sell_price.min = parseFloat( a[ 0 ] );
+					_to.sell_price.max = parseFloat( a[ 1 ] );
+				}
+				else _to.sell_price.max = _to.sell_price.min = parseFloat( price_txt );
+			}
+			else
+			{
+				_to.sell_price = {
+					min : -1
+					, max : -1
+				};
+			}
+		}
+		catch( er )
+		{
+			//er;
+			_to.sell_price = {
+				min : -1
+				, max : -1
+			};
+		}
+
+		try
+		{
+			if( doc.apiStack[ 0 ].value.price.extraPrices != undefined && doc.apiStack[ 0 ].value.price.extraPrices[ 0 ] != undefined )
+			{
+
+				var original_price_txt = doc.apiStack[ 0 ].value.price.extraPrices[0].priceText;
+				if( -1 != original_price_txt.indexOf( "-" ) )
+				{
+					var a = original_price_txt.split( "-" );
+					_to.origin_price.min = parseFloat( a[ 0 ] );
+					_to.origin_price.max = parseFloat( a[ 1 ] );
+				}
+				else _to.origin_price.max = _to.origin_price.min = parseFloat( original_price_txt );
+			}
+			else
+			{
+				_to.origin_price.max = _to.sell_price.max;
+				_to.origin_price.min = _to.sell_price.min
+			}
+		}
+		catch( er )
+		{
+			//er;
+			_to.origin_price = {
+				min : -1
+				, max : -1
+			};
+		}
+
+
+		_to.brandId = NumberLong( doc.item.brandValueId );
+
+		_q3._id = "20000:" + doc.item.brandValueId;
+		var brandNameById = col$id_brand.findOne( _q3 );
+		if( brandNameById ) _to.brandName = brandNameById.s;
+
+		//targetCol.insertOne( _to );
+		insertArr.push( _to );
+		++idx;
+	})
+
+	var i = 0,iLen = insertArr.length,io;
+	for(;i<iLen;++i){
+		print( i );
+		io = insertArr[ i ];
+		targetCol.insertOne( io );
+	}
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// FN( 20190513 );
+FN( "<!=TARGET_DATE=!>" )
+
+return;

@@ -1,0 +1,245 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var goodsListDB = db.getSiblingDB("goods_list")
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var goodsListCol = goodsListDB.getCollection("20190404");
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	CREATE_INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+goodsListCol.createIndex( { product_no : 1 } );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	QUERY;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+var _q1 = { v_spu_id : null, _d : 1 };
+//var _q2 = { product_no : null, _d : 1 };
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _to;
+var mappingData;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var refineData = function( date ){
+
+	var year = date.toString().substr(0,4)
+	var refineDB = db.getSiblingDB( "VIP_" + year );
+	var targetDB = db.getSiblingDB( "graph_data__vip_" + year + "-daily" );
+	var goodsListDB = db.getSiblingDB( "goods_list_" + year );
+
+	var refineCol = refineDB.getCollection( date.toString() );
+	var targetCol = targetDB.getCollection( date.toString() );
+	var goodsListCol = goodsListDB.getCollection( date.toString() );
+
+	//goodsListCol.createIndex( { product_no : 1 } );
+
+	targetCol.drop();
+	var r = {};
+	refineCol.find( _q0 ).forEach(function(doc){
+//		if( !doc.DETAIL ) return;
+
+		_q1.v_spu_id = doc.LIST.v_spu_id
+		mappingData = goodsListCol.findOne( _q1 );
+
+//		if( !mappingData ){
+//			_q2.product_no = Number( doc.LIST.product_id );
+//			mappingData = goodsListCol.findOne( _q2 );
+//		};
+
+		if( !mappingData ) return;
+
+		if( !r[ mappingData.cd$product_master ] )
+		{
+			r[ mappingData.cd$product_master ] = {
+				_id : mappingData.cd$product_master
+			  , _id$brand_basic : NumberInt( mappingData._id$brand_basic )
+			  , cd$product_master : mappingData.cd$product_master
+			  , date : dateNumberToArray( date )
+			  , representative_sales_price : -1
+			  , a_goodsId : []
+			  , sales_price : []
+			  , bTaxAmount : NumberInt( -1 )
+			  , tax_amount : NumberInt( 0 )
+			  , purchase_price :  NumberInt( -1 )
+			  , soldout_type : NumberInt( -1 )
+			  , promotionList : []
+			  , promotionList_etc : []
+			  , a_purchase_price : []
+			  , a_representative_sales_price : []
+			  , a_sales_price : []
+			  , a_tax_amount : []
+			  , a_soldout_type : []
+			  , idxCheck : []
+			};
+
+		}
+
+		r[ mappingData.cd$product_master ].a_goodsId.push( NumberLong( doc._id ) )
+
+		var sale_price = NumberInt( -1 );
+		if( doc.LIST.sale_price ) sale_price = parseFloat( doc.LIST.sale_price )
+		r[ mappingData.cd$product_master ].a_sales_price.push( sale_price );
+
+		var bSoldOut = 0;
+		if( doc.DETAIL && doc.DETAIL.stock_list && doc.DETAIL.stock_list.sold_out != "" )
+		{
+			bSoldOut = 1;
+		}
+
+		r[ mappingData.cd$product_master ].a_soldout_type.push( bSoldOut );
+
+		if( doc.DETAIL && doc.DETAIL.getDetailPmsTipsCB && doc.DETAIL.getDetailPmsTipsCB.data.priceModelList.length > 0 )
+		{
+			var i = 0,iLen = doc.DETAIL.getDetailPmsTipsCB.data.priceModelList.length,io;
+			for(;i<iLen;++i){
+				io = doc.DETAIL.getDetailPmsTipsCB.data.priceModelList[ i ];
+				if( io.priceList.length > 0 )
+				{
+					var j = 0,jLen = io.priceList.length,jo;
+					for(;j<jLen;++j){
+						jo = io.priceList[ j ];
+						if( !r[ mappingData.cd$product_master ].idxCheck[ jo.iconMsg ] )
+						{
+							var _to1 = {}
+							_to1.title = jo.iconMsg;
+							_to1.content = null;
+							_to1.type = null;
+							r[ mappingData.cd$product_master ].idxCheck[ jo.iconMsg ] = {};
+//							r[ mappingData.cd$product_master ].idxCheck[ jo.iconMsg ][ doc._id ] = {};
+							r[ mappingData.cd$product_master ].promotionList.push( _to1 );
+						}
+					}
+				}
+			}
+		}
+
+		//targetCol.insertOne( _to );
+	})
+
+	var s,so;
+	for( s in r ){
+
+		so = r[ s ];
+		so.purchase_price =so.representative_sales_price = so.sales_price = avgByArr( so.a_sales_price );
+		if( so.bTaxAmount ) so.tax_amount = avgByArr( so.a_tax_amount );
+
+		if( so.a_soldout_type.indexOf( 0 ) == -1 ) so.soldout_type = NumberInt( 1 )
+		if( so.a_soldout_type.indexOf( 1 ) == -1 ) so.soldout_type = NumberInt( 0 )
+		if( so.a_soldout_type.indexOf( 0 ) != -1 && so.a_soldout_type.indexOf( 1 ) != -1 ) so.soldout_type = NumberInt( 0 )
+
+		delete so.a_purchase_price;
+		delete so.a_representative_sales_price;
+		delete so.a_sales_price;
+		delete so.a_tax_amount;
+		delete so.a_soldout_type;
+		delete so.idxCheck;
+
+		targetCol.insertOne( so )
+	}
+
+	targetCol.createIndex( { _id$brand_basic : 1 } );
+	targetCol.createIndex( { cd$product_master : 1 } );
+	targetCol.createIndex( { _id$brand_basic : 1, cd$product_master : 1 } );
+}
+
+
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "VIP_2018" )
+	var db$2019 = db.getSiblingDB( "VIP_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate ) result.push( io )
+	}
+
+	return result;
+};
+
+var avgByArr = function( arr ){
+	if( !arr || arr.length == 0 ) return 0;
+	var i = 0, iLen = arr.length,io;
+	var r = 0;
+
+	for(;i<iLen;++i){
+		io = arr[ i ];
+		r =  r + io;
+	}
+	var avg = r / iLen;
+	return avg;
+}
+
+var dateNumberToArray = function( date ){
+	var _tmp = date.toString();
+	return [
+		NumberInt( _tmp.substr(0,4) )
+		, NumberInt( _tmp.substr(4,2) )
+		, NumberInt( _tmp.substr(6,2) )
+//		, NumberInt( 0 )
+//		, NumberInt( 0 )
+//		, NumberInt( 0 )
+	]
+}
+
+
+var FN = function( startDate, endDate ){
+
+	var targetDays = getTargetDays( startDate, endDate );
+
+//	printjson( targetDays )
+
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = Number( targetDays[ i ] );
+		print( "--------------------------------------------------" )
+		print( io + " - " + iLen + " -- " + Date() )
+		print( "--------------------------------------------------" )
+
+		refineData( io );
+	}
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+FN( 20181024, 20181231 );
+FN( 20190101, 20190808 );
+
+return;

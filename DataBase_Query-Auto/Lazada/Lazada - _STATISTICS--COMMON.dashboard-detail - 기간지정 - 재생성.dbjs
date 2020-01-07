@@ -1,0 +1,99 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SITE_NAME_ = "Lazada";
+
+//----------------------------------------------------------------------------------------------------;
+
+// DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db1 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var col0 = db1.getCollection( "dashboard-detail" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _to;
+var byte = 1024;
+var _COL_TO_DATE = null;
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	var db0 = db.getSiblingDB( _SITE_NAME_ + "_" + TARGET_DATE.substr(0,4) + "-수집" );
+	var cols = db0.getCollectionNames();
+
+	var allCols = [];
+	var i = 0,iLen = cols.length,io;
+	for(;i<iLen;++i){
+		io = cols[ i ];
+
+		if( TARGET_DATE  != io.substr(0,8) ) continue;
+
+		if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+	}
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		_to = {};
+
+		if( io == "_TEMP" ) continue;
+		if( io.indexOf( "-LIST" ) == -1 ) continue;
+
+		var colInfo = db0.getCollection( io ).stats();
+
+		_to._id = io.split( "-" )[ 0 ];
+		_to.year = NumberInt( io.substr( 0, 4 ) );
+		_to.month = NumberInt( io.substr( 4, 2 ) );
+		_to.day = NumberInt( io.substr( 6, 2 ) );
+		_to.hour = NumberInt( io.substr( 9, 2 ) );
+		_to.minute = NumberInt( io.substr( 11, 2 ) );
+		_to.date = io.split( "-" )[ 0 ];
+
+		_to.size = {
+			byte : NumberInt( colInfo.size )
+			, kb : ( colInfo.size / byte ).toFixed( 3 )
+			, mb : ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 3 )
+			, gb : ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 3 )
+		};
+
+		_to.count = NumberInt( colInfo.count );
+
+		col0.remove( { _id : _to._id },true );
+		col0.insert( _to );
+
+		print( io );
+
+	};
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "<!=TARGET_DATE=!>" );
+
+return;

@@ -1,0 +1,17 @@
+<div id="id-div-chart-contents" style="width:100%">
+	<div class="ui right floated mini red button id-btn-chart-scroll-toggle" style="position : absolute;top:45px;right:5px;">자동스크롤 정지</div>
+
+	<!--모달메세지-->
+	<div class="ui basic small modal center aligned"" style="displat:none;text-align:center;">
+		<div class="content" style="text-align: center;">
+			<p class="modal-message"></p>
+		</div>
+		<div class="actions" style="text-align: center;">
+			<div class="ui green ok inverted button"><i class="checkmark icon"></i>확인</div>
+		</div>
+	</div>
+	<!--모달메세지-->
+
+
+</div>
+

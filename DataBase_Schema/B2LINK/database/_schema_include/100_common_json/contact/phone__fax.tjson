@@ -1,0 +1,31 @@
+{
+	"description" : "팩스 번호를 저장", "type" : "object"
+	, "properties" : {
+		//Full;
+		"f" : { "description" : "Full Fax Number", "exampleValue" : "+82-2-1899-0534"<include>000_common_txt/string_default.txt</include> }
+
+		//Country Code;
+		, "c" : { "description" : "Country Code ", "exampleValue" : "82"<include>000_common_txt/string_default.txt</include> }
+
+		//Area Code;
+		, "a" : { "description" : "Area Code", "exampleValue" : "2"<include>000_common_txt/string_default.txt</include> }
+
+		//fax0;
+		, "n0" : { "description" : "Fax 0", "exampleValue" : "0000"<include>000_common_txt/string_default.txt</include> }
+
+		//fax1;
+		, "n1" : { "description" : "Fax 1", "exampleValue" : "1111"<include>000_common_txt/string_default.txt</include> }
+
+		//fax2;
+		, "n2" : { "description" : "Fax 2", "exampleValue" : "2222"<include>000_common_txt/string_default.txt</include> }
+
+		//fax3;
+		, "n3" : { "description" : "Fax 3", "exampleValue" : "3333"<include>000_common_txt/string_default.txt</include> }
+
+		//fax4;
+		, "n4" : { "description" : "Fax 4", "exampleValue" : "4444"<include>000_common_txt/string_default.txt</include> }
+
+		//extenstion;
+		, "e" : { "description" : "extenstion", "exampleValue" : "1"<include>000_common_txt/string_default.txt</include> }
+	}
+}

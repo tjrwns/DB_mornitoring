@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {Object} d { y : 0, m : 0, d : 0, ho : 0, mi : 0, se : 0 }
+ * @return {Object} { y : 0, m : 0, d : 0, ho : 0, mi : 0, se : 0 }
+ */

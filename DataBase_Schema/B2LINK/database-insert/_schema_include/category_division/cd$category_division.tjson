@@ -1,0 +1,6 @@
+{ "description" : "Division Category Code", "exampleValue" : "BSD"<include>000_common_txt/string_default.txt</include>
+
+	, "values" : [ "B2Labs", "BID", "BOD", "BSD", "SSD" ]
+
+	, "valuesMap" : { "B2Labs" : NumberInt( 1 ), "BID" : NumberInt( 1 ), "BOD" : NumberInt( 1 ), "BSD" : NumberInt( 1 ), "SSD" : NumberInt( 1 ) }
+}

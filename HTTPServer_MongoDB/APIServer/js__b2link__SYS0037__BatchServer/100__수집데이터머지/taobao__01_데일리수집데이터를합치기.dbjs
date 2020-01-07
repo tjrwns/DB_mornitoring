@@ -1,0 +1,60 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__01_데일리수집데이터를합치기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var prefix0 = "Taobao";
+var dbNm = prefix0 + "_" + nm_col.substr( 0, 4 );
+var targetColNm = nm_col.substr( 0, 8 );
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( dbNm );
+var db1 = db.getSiblingDB( dbNm + "-수집" );
+
+var col0 = db0.getCollection( targetColNm );
+var col1 = db1.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = {
+	totalCount : 0
+	, errorResult : []
+};
+
+var r0 = {};
+var r1 = {};
+
+col0.find({}).forEach(function(doc){
+	r0[ doc._id ] = {};
+})
+
+col1.find({}).forEach(function(doc){
+	if( !r0[ doc._id ] ) r1[ doc._id ] = doc;
+})
+
+var a = 0;
+for(var s in r1 )
+{
+	col0.insertOne( r1[ s ] );
+	print(a);
+	++a;
+}
+
+var stats = col0.stats();
+
+result.totalCount = a;
+result.size = stats.size;
+result.count = stats.count;
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

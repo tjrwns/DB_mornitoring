@@ -1,0 +1,68 @@
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+var r = {};
+var r1 = [];
+var key;
+var shopName;
+
+col0.find({}).forEach(function(doc){
+    
+    if( doc.DETAIL_HTML == null ) return;
+    
+    if( doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo )
+    {
+        key = doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId;
+        if( doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopName )
+        {
+            shopName = doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopName;
+        }
+        else
+        {
+            shopName = key;
+        }
+        
+    }
+    else
+    {
+        key = shopName =  "N/A";
+    }
+
+    if( !r[ key ] )
+    {
+        r[ key ] = {};
+        r[ key ].nms_brand = {};
+        r[ key ].count = 1;
+        r[ key ].shopId = key;
+        r[ key ].shopName = shopName;
+        r[ key ].count_brand = 1;
+    }
+    else
+    {
+        r[ key ].count  =  r[ key ].count  + 1;
+
+        if( !r[ key ].nms_brand[ doc.DETAIL_HTML.__Goods__.basicInfo.brandName ] )
+        {
+            r[ key ].nms_brand[ doc.DETAIL_HTML.__Goods__.basicInfo.brandName ] = 1;
+            ++r[ key ].count_brand;
+        }
+    }
+})
+
+var _to,s;
+for( s in r){
+    
+    _to = {};
+    _to.shopId = r[ s ].shopId;
+    _to.name = r[ s ].shopName;
+    _to.value = r[ s ].count;
+    _to.count_brand = r[ s ].count_brand;
+    
+    r1.push( _to );
+}
+
+var result = r1.sort(function (a, b) { return b.value - a.value; });
+return { r : 0, d : result, m : "OK" };

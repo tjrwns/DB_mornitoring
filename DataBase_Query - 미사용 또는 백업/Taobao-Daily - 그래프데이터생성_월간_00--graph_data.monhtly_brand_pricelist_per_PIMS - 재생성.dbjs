@@ -1,0 +1,448 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "DataBase_Query/Taobao-Daily - 그래프데이터생성_월간_00--graph_data.monhtly_brand_pricelist_per_PIMS - 재생성.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var getDateRangeByMonth = function( y, m )
+{
+
+	var r = {};
+	var date = new Date();
+	date.setFullYear( y, m, 0 );//해당 월의 마지막 날짜를 가져온다.
+
+	var my = date.getFullYear();
+	var mm = date.getMonth() + 1;
+	mm = mm > 9 ? mm.toString() : '0' + mm.toString();
+	var md = date.getDate();
+	md = md > 9 ? md.toString() : '0' + md.toString();
+	r.s = my + "-" + mm + '-' + '01';
+	r.e = my + "-" + mm + '-' + md;
+	return r;
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$brand = db.getSiblingDB( "brand" );
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );
+var _db$graph_data = db.getSiblingDB( "graph_data" );
+var _db$product_basic = db.getSiblingDB( "product" );
+var _db$transaction_history = db.getSiblingDB( "transaction_history" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$product_history_kaola = _db$transaction_history.getCollection( "product_price_history_kaola" );
+var _col$product_history_red = _db$transaction_history.getCollection( "product_price_history_red" );
+var _col$product_history_vip = _db$transaction_history.getCollection( "product_price_history_vip" );
+
+var _col$brand_basic = _db$brand.getCollection( "brand_basic" );
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );
+//var _col$monthly_brand_top3PIMS_by_shop = _db$graph_data.getCollection( "monthly_brand_top3PIMS_by_shop" );
+
+var _col$monthly_brand_pricelist_per_PIMS = _db$graph_data.getCollection( "monthly_brand_pricelist_per_PIMS" );
+var _col$product_basic = _db$product_basic.getCollection( "product_basic" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { date : 1, _id$brand_basic : 1, cd$product_master : 1 } );
+_col$product_history_kaola.createIndex( { _id$brand_basic : 1, "date_create.a" : 1, cd$product_master : 1 });
+_col$product_history_red.createIndex( { _id$brand_basic : 1, "date_create.a" : 1, cd$product_master : 1 });
+_col$product_history_vip.createIndex( { _id$brand_basic : 1, "date_create.a" : 1, cd$product_master : 1 });
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q = {
+	year : ""
+	, month : ""
+	, _id$brand_basic : 1
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+var brandList = [];
+_col$brand_basic.find({}, {_id : 1}).forEach(function( doc ){
+	brandList.push( doc._id );
+});
+
+var nin_list = [];
+_col$product_basic.find({ nm_kr : /팩종합/ }, { cd$product_master : 1 }).forEach( function( doc ){
+	nin_list.push( doc.cd$product_master );
+});
+
+var c = [2018,2019];
+var months = [];
+c.forEach(function(year){
+	var a = db.getSiblingDB( "Taobao_" + year )
+	a.getCollectionNames().forEach(function(col){
+		if( col * 1 < 20180400 ) return;
+		if( col * 1 > 20190700 ) return;
+		var convert_toString = col.substr(0,4) + "-" + col.substr(4,2);// + "-" + col.substr(6,2);
+		if( months.indexOf( convert_toString ) == -1 ) months.push( convert_toString );
+	});
+});
+
+var i = 0;
+
+months.forEach(function(month){
+
+	//var date = "<!=date=!>"
+
+	var _month = month;
+	var ym = _month.split("-");
+	var y = ym[ 0 ];
+	var m = ym[ 1 ];
+
+	// Remote Old Data
+	//_col$monthly_brand_pricelist_per_PIMS.remove({
+	//	year : NumberInt( y ),
+	//	month : NumberInt( m )
+	//});
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  _month + " - " + i + " - " + months.length + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	brandList.forEach( function( brand )
+	{
+		var _id$brand_basic = brand;
+		var year = NumberInt( y );
+		var month = NumberInt( m );
+
+		var model = {
+			_id$brand_basic : -1
+			, year : -1
+			, month : -1
+			, date_start : ""
+			, date_end : ""
+			, cd$product_master : ""
+			, total_sales_amount : NaN
+			, total_sales_quantity : NaN
+			, tmall_price_list : null
+			, tmall_price_avg : NaN
+			, tmall_price_min : NaN
+			, tmall_price_max : NaN
+			, taobao_price_list : null
+			, taobao_price_avg : NaN
+			, taobao_price_min : NaN
+			, taobao_price_max : NaN
+			, kaola_price_list : null
+			, kaola_price_min : NaN
+			, kaola_price_avg : NaN
+			, red_price_list : null
+			, red_price_min : NaN
+			, red_price_avg : NaN
+			, vip_price_list : null
+			, vip_price_min : NaN
+			, vip_price_avg : NaN
+			, rank : 0
+		};
+
+		var date_range = getDateRangeByMonth( y, m );
+
+		var _q = {
+			_id$brand_basic : _id$brand_basic
+			, date : {
+				$gte : ISODate( date_range.s )
+				, $lte : ISODate( date_range.e )
+			}
+			, cd$product_master : {
+				$ne : ""
+				, $nin : nin_list
+			}
+
+		};
+
+		model._id$brand_basic = _id$brand_basic;
+		model.year = year;
+		model.month = month;
+		model.date_start = date_range.s;
+		model.date_end = date_range.e;
+
+		var rank = 1;
+
+		_col$daily_master.aggregate( [
+			{
+				$match : _q
+			}
+			, {
+				$sort : {
+					"date" : 1
+					, cd$product_master : 1
+				}
+			}
+			, {
+				$group : {
+					_id : {
+						_id$brand_basic : "$_id$brand_basic"
+						, cd$product_master : '$cd$product_master'
+						, date : "$date"
+						, shop_type : {
+							$cond : {
+								if : {
+									$eq : ["$shop_type", "淘宝" ]
+								}
+								, then : "淘宝"
+								, else : "天猫"
+							}
+						}
+					}
+					, pricelist : {
+						$push : { p: "$price" , d : "$Daily_Sales" }
+					}
+					, price_avg : {
+						$avg : "$price"
+					}
+					, price_min : {
+						$min : "$price"
+					}
+					, price_max : {
+						$max : "$price"
+					}
+					, sales_amount : {
+						$sum : {
+							$multiply : ["$Daily_Sales", "$price" ]
+						}
+					}
+					, sales_quantity : {
+						$sum : "$Daily_Sales"
+					}
+				}
+			}
+			, {
+				$sort : {
+					"_id.date" : -1
+					//, "_id.shop_type" : -1
+				}
+			}
+			, {
+				$group : {
+					_id : "$_id.cd$product_master"
+					, taobao_price_list : {
+						$addToSet : {
+							$cond : {
+								if : {
+									$eq : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : {
+									shop_type : "$_id.shop_type"
+									, dates : {
+										$dayOfMonth : "$_id.date"
+									}
+									, prices : "$pricelist"
+									, price_avg : "$price_avg"
+								}
+								, else : null
+							}
+						}
+					}
+					, tmall_price_list : {
+						$addToSet : {
+							$cond : {
+								if : {
+									$ne : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : {
+									shop_type : "天猫"
+									, dates : {
+										$dayOfMonth : "$_id.date"
+									}
+									, prices : "$pricelist"
+									, price_avg : "$price_avg"
+								}
+								, else : null
+							}
+						}
+					}
+					, tmall_price_avg : { $avg : {$cond : {if : {
+									$ne : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : "$price_avg"
+								, else : null }}}
+					, taobao_price_avg : { $avg : {$cond : {if : {
+									$eq : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : "$price_avg"
+								, else : null }}}
+					, tmall_price_min : { $min : {$cond : {if : {
+									$ne : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : "$price_min"
+								, else : null }}}
+					, taobao_price_min : { $min : {$cond : {if : {
+									$eq : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : "$price_min"
+								, else : null }}}
+					, tmall_price_max : { $max : {$cond : {if : {
+									$ne : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : "$price_max"
+								, else : null }}}
+					, taobao_price_max : { $max : {$cond : {if : {
+									$eq : ["$_id.shop_type", "淘宝" ]
+								}
+								, then : "$price_max"
+								, else : null }}}
+					, total_amount : {
+						$sum : "$sales_amount"
+					}
+					, total_quantity : {
+						$sum : "$sales_quantity"
+					}
+				}
+			}
+			, {
+				$project: {
+					tmall_price_list: {
+						$filter: {
+							input: "$tmall_price_list",
+							as: "item",
+							cond: { $ne: [ "$$item", null ] }
+						}
+					},
+						taobao_price_list: {
+						$filter: {
+							input: "$taobao_price_list",
+							as: "item",
+							cond: { $ne: [ "$$item", null ] }
+						}
+					},
+					tmall_price_avg : "$tmall_price_avg"
+					, tmall_price_min : "$tmall_price_min"
+					, tmall_price_max : "$tmall_price_max"
+					, taobao_price_avg : "$taobao_price_avg"
+					, taobao_price_min : "$taobao_price_min"
+					, taobao_price_max : "$taobao_price_max"
+					, total_quantity : "$total_quantity"
+					, total_amount  : "$total_amount"
+				}
+			}
+			, {
+				$sort : {
+					total_amount : -1
+				}
+			}
+		] ).forEach( function( doc ){
+
+			model.cd$product_master = doc._id;
+			model.tmall_price_list = doc.tmall_price_list;
+			model.tmall_price_avg = doc.tmall_price_avg;
+			model.tmall_price_min = doc.tmall_price_min;
+			model.tmall_price_max = doc.tmall_price_max;
+			model.taobao_price_list = doc.taobao_price_list;
+			model.taobao_price_avg = doc.taobao_price_avg
+			model.taobao_price_min = doc.taobao_price_min;
+			model.taobao_price_max = doc.taobao_price_max;
+			model.total_sales_quantity = NumberInt( doc.total_quantity );
+			model.total_sales_amount = doc.total_amount;
+			model.rank = NumberInt( rank++ );
+
+			var _q2 = {
+			_id$brand_basic : _id$brand_basic
+				, "date_create.a" : {
+					$gte : ISODate( date_range.s )
+					, $lte : ISODate( date_range.e )
+				}
+				, cd$product_master :doc._id
+			};
+
+			//kaola
+			_col$product_history_kaola.aggregate( [
+				{
+					$match : _q2
+				}
+				, {
+					$group : {
+						_id : { _id$brand_basic : "$_id$brand_basic", cd$product_master : "$cd$product_master" }
+						, price_list : { $push : {price : "$price_cn" } }
+						, price_min : { $min : "$price_cn" }
+						, price_avg : { $avg : "$price_cn" }
+						, price_violate_count : { $sum :  "$price_violate_count"}
+					}
+				}
+			//,{ $limit : 3  }
+			], { allowDiskUse : true } ).forEach( function( doc )
+			{
+				model.kaola_price_list = doc.price_list;
+				model.kaola_price_min = doc.price_min;
+				model.kaola_price_avg = doc.price_avg;
+				model.kaola_price_violate_count = NumberInt( doc.price_violate_count );
+			});
+
+			//vip
+			_col$product_history_vip.aggregate( [
+				{
+					$match : _q2
+				}
+				, {
+					$group : {
+						_id : { _id$brand_basic : "$_id$brand_basic", cd$product_master : "$cd$product_master" }
+						, price_list : { $push : {price : "$price_cn" } }
+						, price_min : { $min : "$price_cn" }
+						, price_avg : { $avg : "$price_cn" }
+						, price_violate_count : { $sum :  "$price_violate_count"}
+					}
+				}
+
+			//,{ $limit : 3  }
+			], { allowDiskUse : true } ).forEach( function( doc )
+			{
+				model.vip_price_list = doc.price_list;
+				model.vip_price_min = doc.price_min;
+				model.vip_price_avg = doc.price_avg;
+				model.vip_price_violate_count = NumberInt( doc.price_violate_count );
+			});
+
+			//red
+			_col$product_history_red.aggregate( [
+				{
+					$match : _q2
+				}
+				, {
+					$group : {
+						_id : { _id$brand_basic : "$_id$brand_basic", cd$product_master : "$cd$product_master" }
+						, price_list : { $push : {price : "$price_cn" } }
+						, price_min : { $min : "$price_cn" }
+						, price_avg : { $avg : "$price_cn" }
+						, price_violate_count : { $sum :  "$price_violate_count"}
+					}
+				}
+			//,{ $limit : 3  }
+			], { allowDiskUse : true } ).forEach( function( doc )
+			{
+				model.red_price_list = doc.price_list;
+				model.red_price_min = doc.price_min;
+				model.red_price_avg = doc.price_avg;
+				model.red_price_violate_count = NumberInt( doc.price_violate_count );
+			});
+
+			_col$monthly_brand_pricelist_per_PIMS.insert( model );
+		});
+	});
+
+	++i;
+})

@@ -1,0 +1,1 @@
+{ "description" : "년월일 날짜만 등록", "properties" : <include>100_common_json/properties__Date_Object_Ymd.json</include> }

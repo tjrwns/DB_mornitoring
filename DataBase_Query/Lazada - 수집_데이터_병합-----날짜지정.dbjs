@@ -1,0 +1,181 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _TARGET_DATE_ = "20190100";//지정한날짜포함 이후만 타겟이된다;
+var _SITE_NAME_ = "Lazada";
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+
+var FN = function( _TARGET_DATE_ ){
+
+	var nm_db = _SITE_NAME_ + "_" + _TARGET_DATE_.substr(0,4);
+	var db0 = db.getSiblingDB( nm_db );
+	var db1 = db.getSiblingDB( nm_db + "-수집" );
+	var db2 = db.getSiblingDB( nm_db + "-ERROR" );
+
+	var colList = [];
+	db1.getCollectionNames().forEach(function( col ){
+		if( col.split("_")[0] * 1 == _TARGET_DATE_ * 1 )//지정한날짜포함 이후만 타겟이된다;
+		{
+			if( colList.indexOf( col.split("-")[ 0 ] ) == -1 ) colList.push( col.split("-")[0] );
+		}
+	});
+
+	var i = 0,iLen = colList.length,io;
+	for(;i<iLen;++i){
+		io = colList[ i ];
+
+		//기존생성된 머지컬렉션 삭제;
+		db0.getCollection( io.substr(0,8) ).drop();
+
+		//ERROR DB 삭제;
+		db2.getCollection( io.substr(0,8) ).drop();
+	}
+
+
+	var i = 0;
+	colList.reverse().forEach(function( col ){
+		print( colList.length + " / " + i + " / " + col + " / " + Date() );
+		var colNm = col;//"<!=nm_col=!>";
+
+		var targetColNm = colNm.substr( 0, 8 );
+		var col0 = db0.getCollection( targetColNm );
+
+		var col1 = db1.getCollection( colNm + "-LIST" );
+		var col0_error = db2.getCollection( targetColNm );
+
+		//----------------------------------------------------------------------------------------------------;
+
+		var result = {
+			totalCount : 0
+			, errorResult : {
+				LIST_insert : []
+			}
+		};
+
+		var r0 = {};
+		var r1 = {};
+
+		col0.find( _q0 ).forEach(function(doc){
+			r0[ doc._id ] = {};
+		})
+
+		//List Insert;
+		//List Insert;
+		if( col1 )
+		{
+			col1.find( _q0 ).forEach( function( doc ){
+				try
+				{
+					var a = doc.mods.listItems;
+					var io;
+					var i=0, iLen=a.length;
+					for( ; i<iLen; ++i )
+					{
+						io = a[ i ];
+						//*/
+						if( !r0[ NumberLong( io.itemId ) ] )
+						{
+							r1[ NumberLong( io.itemId ) ] = {
+								_id : NumberLong( io.itemId )
+								, LIST : io
+							};
+
+							r1[ NumberLong( io.itemId ) ].keyword = doc.keyword;
+						}
+						/*/
+						col0.insertOne({
+							_id : NumberLong( io.itemId )
+							, LIST : io
+							, DETAIL : null
+							, DETAIL_HTML : null
+							, DETAIL_COMMENT_INFO : null
+						});
+
+						++result.totalCount;
+						//*/
+					}
+				}
+				catch( err )
+				{
+					result.errorResult.LIST_insert.push( err.message );
+				}
+			});
+		}
+
+		//----------------------------------------------------------------------------------------------------;
+
+		var a = 0;
+		var so;
+		for(var s in r1 )
+		{
+			so = r1[ s ];
+			col0.insertOne( so );
+
+			var b = false;
+			if( null == so[ "LIST" ] ) b = true;
+			if( b ){
+				so.time = io
+				try
+				{
+					col0_error.insertOne( so );
+				}
+				catch( er )
+				{
+					//er;
+					print( er.message );
+				}
+			}
+			//print(a);
+			//++a;
+		}
+
+		var stats = col0.stats();
+
+		result.totalCount = a;
+		result.size = stats.size;
+		result.count = stats.count;
+
+		/*/
+		return {
+			r : 0
+			, d : result
+			, m : "OK"
+		};
+		/*/
+		// printjson({
+		//	 r : 0
+		//	 , d : result
+		//	 , m : "OK"
+		// });
+		//*/
+
+		++i;
+	})
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "20190531" )
+FN( "20190601" )
+FN( "20190607" )
+FN( "20190608" )
+FN( "20190609" )
+FN( "20190610" )
+FN( "20190611" )
+
+return;

@@ -1,0 +1,27 @@
+var db0 = db.getSiblingDB( "복구_3CE" );
+var db1 = db.getSiblingDB( "VIP_2019" );
+
+var cols = db0.getCollectionNames();
+
+var doc;
+
+var _q00 = { "LIST.product_id" : "" };
+cols.forEach(function(col){
+
+
+	db0.getCollection( col ).find({}).forEach(function(d){
+		_q00[ "LIST.product_id" ] = d.LIST.product_id;
+		var _bDoc = 0;
+		var cnt = db1.getCollection( col ).find( _q00 ).count();
+		if( cnt > 0 ) _bDoc = 1;
+		printjson( col + " / " + d.LIST.product_id + " / _bDoc : " + _bDoc )
+		if( _bDoc )
+		{
+			db1.getCollection( col ).insertOne( d );
+			//db1.getCollection( col ).remove( _q00 );
+			print( "insert - " +  col + " / " + d.LIST.product_id );
+		}
+	});
+})
+
+printjson( 1 )

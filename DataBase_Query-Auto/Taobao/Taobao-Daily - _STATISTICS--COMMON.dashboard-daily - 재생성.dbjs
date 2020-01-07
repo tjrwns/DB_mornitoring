@@ -1,0 +1,122 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SITE_NAME_ = "Taobao";
+
+//----------------------------------------------------------------------------------------------------;
+
+// DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var col0 = db0.getCollection( "dashboard-daily" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+
+var brand_cnt = 0;
+var shop_cnt = 0;
+var _to;
+var byte = 1024;
+
+//----------------------------------------------------------------------------------------------------;
+
+// QUERY;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+
+	var year = TARGET_DATE.substr( 0, 4 );
+	var db1 = db.getSiblingDB( _SITE_NAME_ + "_" + year );
+	var col1 = db1.getCollection( TARGET_DATE );
+
+	_to = {};
+	var r0 = {};
+	var r1 = {};
+
+	brand_cnt = 0;
+	shop_cnt = 0;
+
+	var colInfo = col1.stats();
+	if( !colInfo.ok ) return;
+
+	print( "-------------------------------------------------------" );
+	print( TARGET_DATE + " / " + Date() );
+	print( "-------------------------------------------------------" );
+
+	col1.find( _q0 ).forEach( function( doc ){
+
+		if( doc.item.brandValueId != null )
+		{
+			if( !r0[ doc.item.brandValueId ] )
+			{
+				r0[ doc.item.brandValueId ] = {};
+				brand_cnt = brand_cnt + 1;
+			}
+		}
+
+		if( doc.seller != null )
+		{
+			if( !r1[ doc.seller.shopId ] )
+			{
+				r1[ doc.seller.shopId ] = {};
+				shop_cnt = shop_cnt + 1;
+			}
+		}
+	});
+
+	_to._id = NumberInt( TARGET_DATE );
+	_to.year = NumberInt( TARGET_DATE.substr( 0, 4 ) );
+	_to.month = NumberInt( TARGET_DATE.substr( 4, 2 ) );
+	_to.day = NumberInt( TARGET_DATE.substr( 6, 2 ) );
+	_to.date = TARGET_DATE;
+
+	_to.size = {
+		byte : NumberInt( colInfo.size )
+		, kb : ( colInfo.size / byte ).toFixed( 3 )
+		, mb : ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 3 )
+		, gb : ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 3 )
+	};
+
+	_to.count = NumberInt( colInfo.count );
+	_to.shop_count = NumberInt( shop_cnt );
+	_to.brand_count = NumberInt( brand_cnt );
+
+	col0.remove( { _id : _to._id },true );
+	col0.insert( _to );
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "<!=TARGET_DATE=!>" );
+
+return;

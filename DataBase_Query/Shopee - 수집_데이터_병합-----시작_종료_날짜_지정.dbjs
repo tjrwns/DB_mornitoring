@@ -1,0 +1,238 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SITE_NAME_ = "Shopee";
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+
+var FN = function( _TARGET_DATE_ ){
+
+	var nm_db = _SITE_NAME_ + "_" + _TARGET_DATE_.substr(0,4);
+	var db0 = db.getSiblingDB( nm_db );
+	var db1 = db.getSiblingDB( nm_db + "-수집" );
+	var db2 = db.getSiblingDB( nm_db + "-ERROR" );
+
+	var colList = [];
+	db1.getCollectionNames().forEach(function( col ){
+		if( col.split("_")[0] * 1 == _TARGET_DATE_ * 1 )//지정한날짜포함 이후만 타겟이된다;
+		{
+			if( colList.indexOf( col.split("-")[ 0 ] ) == -1 ) colList.push( col.split("-")[0] );
+		}
+	});
+
+	var i = 0,iLen = colList.length,io;
+	for(;i<iLen;++i){
+		io = colList[ i ];
+
+		//기존생성된 머지컬렉션 삭제;
+		db0.getCollection( io.substr(0,8) ).drop();
+
+		//ERROR DB 삭제;
+		db2.getCollection( io.substr(0,8) ).drop();
+	}
+
+
+	var z = 0;
+	var colLen = colList.length;
+
+	var r0 = {};
+	var r1 = {};
+
+	var targetColNm = _TARGET_DATE_;
+	var col0 = db0.getCollection( targetColNm );
+	var col0_error = db2.getCollection( targetColNm );
+
+	colList.reverse().forEach(function( col ){
+		print( colList.length + " / " + z + " / " + col + " / " + Date() );
+
+		var colNm = col;//"<!=nm_col=!>";
+
+
+		var col1 = db1.getCollection( colNm + "-LIST" );
+
+		//----------------------------------------------------------------------------------------------------;
+
+		var result = {
+			totalCount : 0
+			, errorResult : {
+				LIST_insert : []
+			}
+		};
+
+
+
+		col1.find( _q0 ).forEach( function( doc ){
+			try
+			{
+				var a = doc.items;
+				var io;
+				var i=0, iLen=a.length;
+				for( ; i<iLen; ++i )
+				{
+					io = a[ i ];
+					//*/
+					if( !r1[ io.itemid ] )
+					{
+						r1[ io.itemid ] = {
+							_id : NumberLong( io.itemid )
+							, LIST : io
+							, keyword : {}
+						}
+						r1[ io.itemid ].time = colNm
+					}
+
+					try{
+
+						if( doc.apiStack[0].value.item.sellCount != "0" ){
+							r1[ doc._id ] = doc;
+							r1[ doc._id ].time = colNm;
+						}
+
+					}
+					catch( er )
+					{
+						//er;
+
+					}
+
+					if( io.price != null)
+					{
+						r1[ io.itemid ]._id = NumberLong( io.itemid );
+						r1[ io.itemid ].LIST = io;
+					}
+
+					r1[ io.itemid ].keyword[ doc.keyword ] = null;
+
+					/*/
+					col0.insertOne({
+						_id : NumberLong( io.itemid )
+						, LIST : io
+						, DETAIL : null
+						, DETAIL_HTML : null
+						, DETAIL_COMMENT_INFO : null
+					});
+
+					++result.totalCount;
+					//*/
+				}
+			}
+			catch( err )
+			{
+				result.errorResult.LIST_insert.push( err.message );
+			}
+
+		});
+
+		++z;
+
+	})
+
+	//----------------------------------------------------------------------------------------------------;
+
+	var a = 0;
+	var so;
+	for(var s in r1 )
+	{
+		so = r1[ s ];
+
+		var b = false;
+		if( null == so[ "LIST" ] ) b = true;
+		if( null == so[ "LIST" ].price ) b = true;
+		if( b )
+		{
+			try
+			{
+				col0_error.insertOne( so );
+			}
+			catch( er )
+			{
+				//er;
+				print( er.message );
+			}
+		}
+
+		delete so.time;
+		col0.insertOne( so );
+
+		//print(a);
+		//++a;
+	}
+
+
+};
+
+var LOOP = function(START_DATE,END_DATE){
+
+	var db0 = db.getSiblingDB( _SITE_NAME_ + "_" + START_DATE.substr(0,4) + "-수집" );
+	var col0 = db0.getCollectionNames();
+	printjson( col0 )
+	if( START_DATE != END_DATE )
+	{
+		var allCols = [];
+		var db1 = db.getSiblingDB( _SITE_NAME_ + "_" + END_DATE.substr(0,4) + "-수집" );
+		var col1 = db1.getCollectionNames();
+
+		var i = 0,iLen = col0.length,io;
+		for(;i<iLen;++i){
+			io = col0[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+		}
+
+		var i = 0,iLen = col1.length,io;
+		for(;i<iLen;++i){
+			io = col1[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP" ) allCols.push( io );
+		}
+	}
+	else
+	{
+		var allCols = [];
+		var i = 0,iLen = col0.length,io;
+		for(;i<iLen;++i){
+			io = col0[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+		}
+
+	}
+
+	allCols.reverse();
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		FN( io )
+	}
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+//FN( "20190421" )
+LOOP( "20190605", "20190614");
+
+return;
+//printjson( 1 );

@@ -1,0 +1,11 @@
+{
+	"description" : "중량단위 (예 mg : 1000 )", "exampleValue" : { "nm" : "mg", "quantity" : 10 }, "type" : "object"
+
+	, "properties" : {
+		//표시 문자;
+		"nm" : { "description" : "표시문자", "exampleValue" : "mg"<include>000_common_txt/string_default.txt</include> }
+
+		//수량 quantity;
+		, "weight" : { "description" : "해당 단위의 중량", "exampleValue" : 10.0<include>000_common_txt/uint_len0.txt</include> }
+	}
+}

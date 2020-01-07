@@ -1,0 +1,98 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__머지데이터의브랜드정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( "_CATEGORY-TAOBAO" );
+
+var col0 = db0.getCollection( nm_col );
+var col1 = db1.getCollection( "id_brand-20191108" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q00 = { _id : null };
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r2 = {};
+var r1 = [];
+var r3 = {};
+var key;
+
+col0.find({}).forEach( function( doc ){
+	if( doc.item == null ) return;
+
+	r3[ doc.item.brandValueId ] = "";
+
+	if( !r3[ doc.item.brandValueId ] )
+	{
+		_q00._id = NumberInt( doc.item.brandValueId );
+		var brandName = col1.findOne( _q00 )
+		if( brandName )
+		{
+			key = brandName.b;
+		}
+		else key = doc.item.brandValueId;
+		r3[ doc.item.brandValueId ] = key;
+	}
+	else
+	{
+		key = r3[ doc.item.brandValueId ];
+	}
+
+
+	var t0 = r0[ key ];
+	if( !t0 )
+	{
+		t0 = r0[ key ] = {};
+		t0.count = 1;
+		t0.brand_id = key;
+		t0.count_shop = 1;
+	}
+	else
+	{
+		t0.count = t0.count + 1;
+
+		if( !r2[ doc.seller.shopId ] )
+		{
+			r2[ doc.seller.shopId ] = {};
+			t0.count_shop = 1;
+
+		}
+		else t0.count_shop = t0.count_shop + 1;
+	}
+});
+
+var io;
+var _to;
+for( var s in r0 )
+{
+	io = r0[ s ];
+
+	_to = {};
+	_to.name = s;
+	_to.brand_id = io.brand_id;
+	_to.value = io.count;
+	_to.count_shop = io.count_shop;
+
+	r1.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = r1.sort( function( a, b ){ return b.value - a.value; });
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

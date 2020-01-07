@@ -1,0 +1,6 @@
+/**
+ * @function
+ * @param {String} nmCol Collection's Name
+ * @param {Object} oSearch search Object
+ * @return {Document}
+ */

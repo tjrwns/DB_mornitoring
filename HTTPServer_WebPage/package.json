@@ -1,0 +1,6 @@
+{
+	"name" : "thdtjsdn"
+	, "version" : "0.1.0"
+	, "main" : "HTTPServer_WebPage-Electron.js"
+	, "v8Flags" : "--expose-gc"
+}

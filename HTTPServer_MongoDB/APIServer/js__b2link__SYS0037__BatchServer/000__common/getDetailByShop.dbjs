@@ -1,0 +1,46 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getDetailByShop.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "<!=nm_site=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+var col0 = db0.getCollection( "dashboard-detail" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	data : []
+	, size : {
+		byte : []
+		, kb : []
+		, mb : []
+		, gb : []
+	}
+	, count : []
+	, shopNm : _NM_SITE_
+};
+
+var sort00 = { _id : 1 };
+
+col0.find({}).sort( sort00 ).forEach( function( d ){
+	r.data.push( d.date );
+
+	r.size.byte.push( NumberInt( d.size.byte ) );
+	r.size.kb.push( d.size.kb );
+	r.size.mb.push( d.size.mb );
+	r.size.gb.push( d.size.gb );
+
+	r.count.push( NumberInt( d.count ) );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

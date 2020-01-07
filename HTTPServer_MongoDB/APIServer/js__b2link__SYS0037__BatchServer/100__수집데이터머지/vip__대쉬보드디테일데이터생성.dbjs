@@ -1,0 +1,64 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__대쉬보드디테일데이터생성.dbjs";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+var date = nm_col.split( "-" )[ 0 ]
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+var col0 = db0.getCollection( nm_col );
+var col1 = db1.getCollection( "dashboard-detail" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var byte = 1024;
+var colInfo = col0.stats();
+
+//----------------------------------------------------------------------------------------------------;
+
+var _to = {
+	_id : date
+	, year : NumberInt( nm_col.substr( 0, 4 ) )
+	, month : NumberInt( nm_col.substr( 4, 2 ) )
+	, day : NumberInt( nm_col.substr( 6, 2 ) )
+	, hour : NumberInt( nm_col.substr( 9, 2 ) )
+	, minute : NumberInt( nm_col.substr( 11, 2 ) )
+	, date : date
+
+	, size : {
+		byte : NumberInt( colInfo.size )
+		, kb : ( colInfo.size / byte ).toFixed( 3 )
+		, mb : ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 3 )
+		, gb : ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 3 )
+	}
+
+	, count : NumberInt( colInfo.count )
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+try
+{
+	var r = col1.isnertOne( _to );
+}
+catch( er )
+{
+	var r = col1.updateOne(
+		  { _id : _to._id }
+		, { $set: _to }
+		, { upsert: true }
+	);
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

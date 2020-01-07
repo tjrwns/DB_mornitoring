@@ -1,0 +1,63 @@
+	"_id" : NumberLong//굿스아이디;
+
+	//System Properties;
+	"_SYS0030" : {
+		"id_b" : -1,//id$brand_basic;
+		"cd" : "",//cd$product_master;
+		, "SC_DAY" : Number
+	}
+
+	//Site Properties;
+	"_S_P" : {
+		//Taobao;
+		"id_r" : NumberLong//rootCategoryId;
+		, "id_sku" : NumberLong
+		,
+
+		//Kaola;
+		, "id_sku" : NumberLong
+
+		//VIP;
+		, "id_sku" : NumberLong ||
+		, "id_spu" : NumberLong
+		, "id_spu_v" : NumberLong
+	}
+
+	, "id" : ""//"goods_id" : "14012255208",//상품아이디
+	, "nm" : ""//"name" : "韩国原装爱茉诗AMOS绿茶头皮增发防脱控油洗发水500ML",
+
+	, "id_c" : NumberLong//"categoryId" : "121476023",//categoryId
+	, "id_b" : NumberLong//"brandValueId" : "232906144",//brandValueId'
+	, "id_se" : NumberLong//seller;
+	, "id_sh" : NumberLong//shop;
+
+	"images" : [
+		"//img.alicdn.com/imgextra/i2/23351691/TB2AjVjupXXXXatXXXXXXXXXXXX_!!23351691.jpg"
+	],
+
+	//판매가(최대/최소)
+	//price;
+	"P_MAX" : 14.9,
+	"P_MIN" : 14.9,
+	"P" : 14.9,
+
+	//원래판매가(최대/최소)
+	//original_price;
+	"OP_MAX" : 14.9,
+	"OP_MIN" : 14.9,
+	"OP" : 14.9,
+
+	//해당일 로부터 30일간 판매량(Sell Count) - Taobao 기준 정의;
+	"SC" : "284",
+	"SC_N" : NumberInt,
+
+	"CNT_CMT" : NumberInt//656,//코멘트갯수
+
+	//-------------------------------------------------------;
+
+	date는 컬렉션 명이될예정임
+수량은 0
+id 식별자는 -1
+
+""
+null사용 않함

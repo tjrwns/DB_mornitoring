@@ -1,0 +1,39 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/taobao_list_getCollectionListAndSizeCountByHost.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var TARGET_YEAR = "<!=target_year=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "Taobao_2019-상세-수집" );
+var col0 = db0.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+var _to;
+
+col0.forEach(function(col){
+	
+	if( col == "_TEMP" ) return;
+
+	var colInfo = db0.getCollection( col ).stats();
+	_to = {};
+	_to.nm_col = col;
+	_to.count_doc = NumberInt( colInfo.count );
+	_to.size = ( colInfo.size / 1024 / 1024 ) + " MB";
+	_to.count_shop = -1;//NumberInt( doc.shop_count );
+	_to.count_brand = -1;//NumberInt( doc.brand_count );
+
+	r.push( _to );
+})
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

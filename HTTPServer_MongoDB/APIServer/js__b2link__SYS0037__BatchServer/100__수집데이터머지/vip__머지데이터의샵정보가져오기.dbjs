@@ -1,0 +1,86 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__머지데이터의샵정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r1 = [];
+
+col0.find({}).forEach( function( doc ){
+	if( doc.LIST == null ) return;
+
+	var key;
+	var shopName;
+
+	var t0 = doc.LIST;
+
+	if( t0.brand_store_sn )
+	{
+		key = t0.brand_store_sn;
+		if( t0.brand_store_name ) shopName = t0.brand_store_name;
+		else shopName = key;
+	}
+	else key = shopName = "N/A";
+
+	var t1 = r0[ key ];
+	if( !t1 )
+	{
+		t1 = r0[ key ] = {};
+
+		//브랜드 수량을 세기 위한 프로퍼티 - 클라이언트로 전달 하지 않음;
+		t1.nms_brand = {};
+
+		t1.count = 1;
+		t1.count_brand = 1;
+		t1.shopId = key;
+		t1.shopName = shopName;
+	}
+	else
+	{
+		t1.count = t1.count + 1;
+
+		//브랜드 갯수 세기;
+		if( !t1.nms_brand[ doc.LIST.brandShowName ] )
+		{
+			t1.nms_brand[ doc.LIST.brandShowName ] = 1;
+			++t1.count_brand;
+		}
+	}
+});
+
+var io;
+var _to;
+for( var s in r0 )
+{
+	io = r0[ s ];
+
+	_to = {};
+	_to.count_brand = io.count_brand;
+	_to.name = io.shopName;
+	_to.shopId = io.shopId;
+	_to.value = io.count;
+
+	r1.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = r1.sort( function( a, b ){ return b.value - a.value; });
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

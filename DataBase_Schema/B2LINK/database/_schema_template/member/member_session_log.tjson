@@ -1,0 +1,53 @@
+{
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	"dereference" : [
+		"member.member_basic"
+		, "member.member_date"
+		, "member.member_session"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_basic"
+		, "member_date"
+		, "member_session"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Member ID;
+		, "mid" : <include>member/mid.json</include>
+
+		//Member Session ID;
+		, "sid" : <include>member/sid.json</include>
+
+		//Create Date;
+		, "date" : { "description" : "Date - Session Log Create", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }
+
+		//Date - Session Expired;
+		, "d_ex" : { "description" : "Date - Session Expired", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }
+	}
+}

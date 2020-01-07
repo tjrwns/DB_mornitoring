@@ -1,0 +1,40 @@
+<div id="__TEMP__HTMLElement">
+
+	<div class="ui equal width center aligned padded grid">
+		<div class="ui horizontal divider">SECTION #0</div>
+		<div class="row">
+			<div class="column">
+
+				<div class="id-div-db_list ui stackable three cards">
+					<div class="card">
+						<div class="content">
+
+							<div class="header">
+								{{STATUS}}
+								<div style="padding:10px 0px;">
+									<h2>{{target_site}}</h2>
+								</div>
+							</div>
+							<div class="description">
+								{{targetDBinfo}}
+								<div class="id-div-merge-list ui three column grid celled">
+									<div class="row">
+										<div class="sixteen wide column"> 정제대상목록 </div>
+									</div>
+								</div>
+								<div class="id-div-merge-list ui three column grid celled" style="max-height:700px;overflow-y: auto;">
+									{{detailInfo}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<div class="map-chart" style="wdith:500px;height: 500px;margin : 20px auto;" id="allmap"></div>
+
+
+</div>

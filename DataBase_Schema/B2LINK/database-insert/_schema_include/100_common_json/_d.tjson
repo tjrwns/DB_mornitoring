@@ -1,0 +1,1 @@
+{ "description" : "해당 entity의 삭제 여부를 표현한다. (1 : 정상, 0 : 삭제)", "exampleValue" : NumberInt( 1 )<include>000_common_txt/boolean.txt</include> }

@@ -1,0 +1,472 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// DB;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _db$daily_master_h5 = db.getSiblingDB( "daily_master_h5" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//var _col$daily_master = _db$daily_master_h5[ "daily_master_template" ];
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//_col$daily_master.createIndex( { date : 1 }, { background : true } );
+//_col$daily_master.createIndex( { goods_id : 1,date : 1 }, { background : true } );
+//_col$daily_master.createIndex( { goods_id : 1}, { background : true } );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - REQUIRE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - DEFINE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var q1 = { date : { $gte : "", $lte : "" }, goods_id : "" };
+var q2 = { date : "", goods_id : "" };
+var q3 = {};
+var q4 = { goods_id : "" };
+var q5 = { date : null };
+
+var p1 = { date : 1, _id : 0, month_sold_quantity : 1, Daily_Sales : 1 };
+var p2 = { _id : 0, Daily_Sales : 1 };
+
+var s1 = { date : -1 };
+
+var makeDateString = function( date )
+{
+	var my = date.getFullYear();
+	var mm = date.getMonth() + 1;
+	mm = mm > 9 ? mm.toString() : '0' + mm.toString();
+	var md = date.getDate();
+	md = md > 9 ? md.toString() : '0' + md.toString();
+
+	return my + "-" + mm + '-' + md;
+};
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DEFINE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DOCUMENT;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+/**
+ * insert model
+ * @property {Object}
+ * <code>
+	{
+		brand : ""
+		, date : ""
+		, Daily_Sales : ""
+		, goods_id : ""
+		, inventory : ""
+		, keyword : ""
+		, month_confirim_quantity : ""
+		, month_sold_quantity : ""
+		, month_sold_amount : ""
+		, name : ""
+		, original_price : ""
+		, original_price_max : ""
+		, original_price_min : ""
+		, price : ""
+		, price_min : ""
+		, price_max : ""
+		, product_attributes : []
+		, seller_id : ""
+		, shop_id : ""
+		, shop_name : ""
+		, shop_type : ""
+		, standard_name : ""
+	}
+ * </code>
+ */
+
+
+//----------------------------------------------------------------------------------------------------------------------------------[ S ] - VALIDATION;
+var insertModel;
+/*/
+var _TARGET_YEARS_ = [ 2019 ];
+/*/
+var _TARGET_YEARS_ = [ 2018, 2019 ];
+//*/
+
+/*/
+var _tq = { _id :{ $in : [ 553227138407 ]} };
+/*/
+var _tq = {};
+//*/
+
+var _DBS = {
+	  "goods_list_2018" : db.getSiblingDB( "goods_list_2018")
+	, "goods_list_2019" : db.getSiblingDB( "goods_list_2019")
+	, "Taobao_2018" : db.getSiblingDB( "Taobao_2018")
+	, "Taobao_2019" : db.getSiblingDB( "Taobao_2019")
+	, "daily_master_info_2018" : db.getSiblingDB( "daily_master_info_2018")
+	, "daily_master_info_2019" : db.getSiblingDB( "daily_master_info_2019")
+};
+
+var _colList$goods_list_2018 = _DBS[ "goods_list_2018" ].getCollectionNames();
+var _colList$goods_list_2019 = _DBS[ "goods_list_2019" ].getCollectionNames();
+
+_colList$goods_list_2018.forEach(function( col ){ _DBS[ "goods_list_2018" ].getCollection( col ).createIndex({ goods_id : 1 }); });
+_colList$goods_list_2019.forEach(function( col ){ _DBS[ "goods_list_2018" ].getCollection( col ).createIndex({ goods_id : 1 }); });
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {String} startDate
+ */
+var FN = function( TARGET_DATE ){
+
+	var year = TARGET_DATE.toString().substr(0,4);
+	var iosDate = ISODate( parseFloat( TARGET_DATE ));
+
+	var _col$goods_list = _DBS[ "goods_list_" + year ].getCollection( TARGET_DATE );
+	var _col = _DBS[  "Taobao_" + year ].getCollection( TARGET_DATE );
+	var daily_master_info_col  = _DBS[ "daily_master_info_" + year  ].getCollection( TARGET_DATE );
+
+	//기존데이터삭제;
+	//q5.date = new Date( TARGET_DATE )
+	//_col$daily_master.remove( q5 );
+
+	print( "------------------------------------------------------------------------------------------" );
+	print( year + " - " + TARGET_DATE + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	//insertMany를 처리하기위한 임시배열;
+	var insertArr = [];
+
+	_col.find( _tq ).forEach(function(doc){
+
+		insertModel = {};
+		insertModel.brand = "";
+
+		//------------------------------------------------------------------------------------------goods_id;
+
+
+		insertModel._id = doc._id;
+		insertModel.goods_id = doc._id.valueOf().toString();
+
+		q4.goods_id = insertModel.goods_id
+		var _doc$name_mapping = _col$goods_list.findOne( q4 );
+
+		if( !_doc$name_mapping )
+		{
+		//------------------------------------------------------------------------------------------_id$brand_basic;
+			insertModel._id$brand_basic = NumberInt( -1 );
+		//------------------------------------------------------------------------------------------cd$product_master;
+			insertModel.cd$product_master = "";
+		//------------------------------------------------------------------------------------------keyword;
+			insertModel.keyword = "";
+		//------------------------------------------------------------------------------------------standard_name;
+			insertModel.standard_name = "";
+		//------------------------------------------------------------------------------------------nm_cn$category;
+		//	insertModel.nm_cn$category = "";
+		//------------------------------------------------------------------------------------------nm_kr$category;
+		//	insertModel.nm_kr$category = "";
+		}
+		else
+		{
+		//------------------------------------------------------------------------------------------_id$brand_basic;
+			//insertModel._id$brand_basic = _doc$name_mapping._id$brand_basic;
+			insertModel._id$brand_basic = NumberInt( _doc$name_mapping._id$brand_basic );
+		//------------------------------------------------------------------------------------------cd$product_master;
+			insertModel.cd$product_master = _doc$name_mapping.cd$product_master;
+		//------------------------------------------------------------------------------------------keyword;
+			insertModel.keyword = _doc$name_mapping.keyword;
+		//------------------------------------------------------------------------------------------standard_name;
+			insertModel.standard_name = _doc$name_mapping.standard_name;
+		//------------------------------------------------------------------------------------------nm_cn$category;
+		//	insertModel.nm_cn$category = "";
+		//------------------------------------------------------------------------------------------nm_kr$category;
+		//	insertModel.nm_kr$category = "";
+		}
+
+		//------------------------------------------------------------------------------------------date;
+		insertModel.date = iosDate;
+		//------------------------------------------------------------------------------------------Daily_Sales;
+		insertModel.Daily_Sales = ""//calculateDailySale( doc, TARGET_DATE );
+		//------------------------------------------------------------------------------------------inventory;
+		insertModel.inventory = doc.mockData.skuCore.sku2info['0'].quantity;;
+
+		//오늘 월간 판매량;
+		//오늘 월간판매량 프로퍼티가 존재하지 않을경우 어제월간판매량을 대입한다.
+		//오늘 월간 판매량;
+		//오늘 월간판매량 프로퍼티가 존재하지 않을경우 어제월간판매량을 대입한다.
+
+//		var sellCount = NumberInt( 0 );
+//		try
+//		{
+//			if ( doc.apiStack[ 0 ].value.item.sellCount )
+//			{
+//				var _tmpSellCount = doc.apiStack[ 0 ].value.item.sellCount
+//				if( _tmpSellCount.indexOf( "+" ) == -1 ) sellCount = NumberInt( doc.apiStack[ 0 ].value.item.sellCount );
+//				else if( _tmpSellCount.indexOf( "万" ) != -1 )
+//				{
+//					sellCount = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000 );
+//				}
+//				else
+//				{
+//					sellCount = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1 );
+//				}
+//			}
+//			else
+//			{
+//				//어제 월간 판매량;
+//				var monthSoldQuantityYesterDay = -1;
+//
+//				var _date_beforeOffset = iosDate;
+//					_date_beforeOffset.setDate( _date_beforeOffset.getDate() - 1 );
+//				var _str_date = makeDateString( _date_beforeOffset );
+//
+//				q2.date = ISODate( _str_date );
+//				q2.goods_id = insertModel.goods_id;
+//
+//				var _doc = _col$daily_master.findOne( q2 );
+//				if( _doc ) monthSoldQuantityYesterDay = sellCount = NumberInt( _doc.month_sold_quantity );
+//				if( monthSoldQuantityYesterDay == -1 ) sellCount = NumberInt( 0 );
+//			}
+//		}
+//		catch( e )
+//		{
+//			//에러;
+//			sellCount = NumberInt( 0 );
+//		}
+
+		//------------------------------------------------------------------------------------------month_sold_quantity;
+		try
+		{
+			insertModel.month_sold_quantity = doc.apiStack[ 0 ].value.item.sellCount;
+		}
+		catch( er )
+		{
+			//er;
+			insertModel.month_sold_quantity = NumberInt( 0 );
+		}
+
+
+		//------------------------------------------------------------------------------------------;
+		try
+		{
+			var price_txt =  doc.apiStack[ 0 ].value.price.price.priceText;
+
+			var price_min = "";
+			var price_max = "";
+
+			var idx_dash_price_txt = price_txt.indexOf( '-' );
+			if( -1 != idx_dash_price_txt )
+			{
+				/*/
+				var a = price_txt.split( "-" );
+				price_txt = a[ 0 ];
+				price_txt = a[ 1 ];
+				/*/
+				//split보다 가벼운 slice 사용;
+				price_min = price_txt.slice(0,idx_dash_price_txt).trim()
+				price_max = price_txt.slice( idx_dash_price_txt + 1,price_txt.length).trim()
+				//*/
+			}
+			else price_min = price_max = price_txt;
+		}
+		catch(er)
+		{
+			//er
+			price_min = price_max = parseFloat( -1 );
+		}
+
+		//------------------------------------------------------------------------------------------price_max;
+		insertModel.price_max = price_max;
+		//------------------------------------------------------------------------------------------price_min;
+		insertModel.price_min = price_min;
+		//------------------------------------------------------------------------------------------price;
+		insertModel.price = price_max;
+		//------------------------------------------------------------------------------------------month_sold_amount;
+		insertModel.month_sold_amount =  "";//sellCount * price_max;
+		//------------------------------------------------------------------------------------------name;
+		insertModel.name = doc.item.title || "";
+		//------------------------------------------------------------------------------------------;
+
+		var original_price_txt;
+
+		try
+		{
+			original_price_txt = doc.apiStack[ 0 ].value.price.extraPrices[0].priceText || doc.apiStack[ 0 ].value.price.price.priceText;
+
+			var original_price_min = "";
+			var original_price_max = "";
+
+			var idx_dash = original_price_txt.indexOf( '-' );
+			if( -1 != idx_dash )
+			{
+				/*/
+				var a = original_price_txt.split( "-" );
+				original_price_min = a[ 0 ];
+				original_price_max = a[ 1 ];
+				/*/
+				//split보다 가벼운 slice 사용;
+				original_price_min = original_price_txt.slice(0,idx_dash).trim()
+				original_price_max = original_price_txt.slice( idx_dash + 1,original_price_txt.length).trim()
+				//*/
+			}
+			else original_price_min = original_price_max = original_price_txt;
+
+		}
+		catch(er)
+		{
+			//er;
+			original_price_min = original_price_max = original_price_txt = parseFloat( -1 );
+		}
+
+		//------------------------------------------------------------------------------------------original_price_min;
+		insertModel.original_price_min = original_price_min;
+		//------------------------------------------------------------------------------------------original_price_max;
+		insertModel.original_price_max = original_price_max;
+		//------------------------------------------------------------------------------------------original_price;
+		insertModel.original_price = original_price_txt;
+		//------------------------------------------------------------------------------------------product_attributes;
+
+		insertModel.product_attributes = [];
+		if( doc.props.groupProps ){
+
+			var j = 0,jLen = doc.props.groupProps[0]['基本信息'].length,jo;
+			var _to = {}
+			for(;j<jLen;++j){
+				jo = doc.props.groupProps[0]['基本信息'][ j ];
+				for( var s in jo ){
+					_to[ s ] = jo[ s ];
+				}
+			}
+			_to.itemId = parseFloat( doc.item.itemId );
+			insertModel.product_attributes.push( _to );
+		}
+
+		//------------------------------------------------------------------------------------------shop_type;
+
+		//판매점포식별;
+		try
+		{
+			if( !doc.apiStack[ 0 ].value.trade.isBanSale4Oversea ) insertModel.shop_type = "天猫";
+			else insertModel.shop_type = "淘宝";
+		}
+		catch( er )
+		{
+			//er;
+			insertModel.shop_type = "";
+		}
+
+		//------------------------------------------------------------------------------------------shop_name;
+		insertModel.shop_name = doc.seller.shopName || "";
+		//------------------------------------------------------------------------------------------shop_id;
+		insertModel.shop_id = doc.seller.shopId.toString();
+		//------------------------------------------------------------------------------------------seller_id;
+		insertModel.seller_id = parseFloat( doc.seller.userId );
+		//------------------------------------------------------------------------------------------rootCategoryId;
+		insertModel.rootCategoryId = doc.item.rootCategoryId;
+		//------------------------------------------------------------------------------------------categoryId;
+		insertModel.categoryId = doc.item.categoryId;
+		//------------------------------------------------------------------------------------------brandValueId;
+		insertModel.brandValueId = doc.item.brandValueId || "";
+		//------------------------------------------------------------------------------------------date_collect;
+		insertModel.date_collect = ISODate( parseFloat( TARGET_DATE ) + 1);
+		//------------------------------------------------------------------------------------------;
+
+		insertArr.push( insertModel );
+
+		if( insertArr.length == 800 )
+		{
+			//_col$daily_master.insertMany( insertArr );
+			daily_master_info_col.insertMany( insertArr );
+			insertArr.length = 0;
+		}
+	})
+
+	//_col$daily_master.insertMany( insertArr );
+	daily_master_info_col.insertMany( insertArr );
+	insertArr.length = 0;
+}
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( -1 != io.indexOf( "__" ) ) continue;
+		if( io * 1 >= startDate &&  io * 1 <= endDate ) result.push( io )
+	}
+
+	return result;
+};
+
+var LOOP = function( start, end ){
+
+	var targetDays = getTargetDays( start, end );
+
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		// io = Number( targetDays[ i ] );
+		io = targetDays[ i ];
+		FN( io )
+	}
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+LOOP( 20180401, 20180410 );
+//LOOP( 20190101, 20190708 );
+//FN( "20190707" )
+//FN( "20190708" )
+
+
+//return;
+printjson( 1 );

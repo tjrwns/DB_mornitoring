@@ -1,0 +1,131 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__머지데이터의카테고리정보가져오기.dbjs";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( "_CATEGORY-TAOBAO" );
+var db2 = db.getSiblingDB( "category" );
+
+var col0 = db0.getCollection( nm_col );
+var col1 = db1.getCollection( "id_brand-20191108" );
+var col2 = db2.getCollection( "category_product_type" );
+
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r1 = [];
+var r2 = {};
+var r3 = {};
+var categories = {};
+
+var _q03 = { _id : null };
+
+col0.find({}).forEach( function( doc ){
+	if( doc.item == null ) return;
+
+	var key;
+	var catName;
+
+	var t0 = doc.item;
+
+	var cateNm;
+	if( !categories[ doc.item.categoryId ] )
+	{
+		categories[ doc.item.categoryId ] = "";
+
+		_q03._id = Number( doc.item.categoryId );
+		var doc00 = col2.findOne( _q03 );
+
+		if( doc00 ) catName = doc00.nm;
+		else catName = doc.item.categoryId;
+
+		categories[ doc.item.categoryId ] = key = catName;
+	}
+	else
+	{
+		key = categories[ doc.item.categoryId ];
+	}
+
+//	if( t0.categoryId )
+//	{
+//		key = t0.categoryId;
+//		//if( t0.shopName ) shopName = t0.shopName;
+//		//else shopName = key;
+//		catName = key;
+//	}
+//	else key = catName = "N/A";
+
+	var t1 = r0[ key ];
+
+	if( !t1 )
+	{
+		t1 = r0[ key ] = {};
+
+		//브랜드 수량을 세기 위한 프로퍼티 - 클라이언트로 전달 하지 않음;
+		t1.nms_brand = {};
+
+		t1.count = 1;
+		t1.categoryId = key;
+		t1.catName = catName;
+	}
+	else t1.count = t1.count + 1;
+
+	//브랜드 갯수 세기;
+	if( !r2[ doc.item.brandValueId ] )
+	{
+		r2[ doc.item.brandValueId ] = {};
+		t1.count_brand = 1;
+	}
+	else ++t1.count_brand;
+
+	//브랜드 갯수 세기;
+	try
+	{
+		if( !r3[ doc.seller.shopId ] )
+		{
+			r3[ doc.seller.shopId ] = {};
+			t1.count_shop = 1;
+		}
+		else ++t1.count_shop;
+
+	}
+	catch( er )
+	{
+		//er;
+	}
+
+});
+
+var io;
+var _to;
+for( var s in r0 )
+{
+	io = r0[ s ];
+	_to = {};
+	_to.categoryId = io.categoryId;
+	_to.name = io.catName;
+	_to.value = io.count;
+	_to.count_brand = io.count_brand;
+	_to.count_shop = io.count_shop;
+
+	r1.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = r1.sort( function( a, b ){ return b.value - a.value; });
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

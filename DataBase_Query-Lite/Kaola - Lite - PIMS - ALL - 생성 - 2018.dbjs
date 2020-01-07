@@ -1,0 +1,33 @@
+var dbs = {
+	"2018" : db.getSiblingDB("Kaola_2018-Lite--PIMS")
+	, "2019" : db.getSiblingDB("Kaola_2019-Lite--PIMS")
+}
+
+var _q00 = { '_SYS0030.id_b' :{$ne :-1} };
+
+var FN0 = function( year ){
+
+	var cols = dbs[ year ].getCollectionNames();
+	var _tCol = dbs[ year ].getCollection('all');
+	cols.forEach(function( col ){
+		print( col + " / " + cols.length );
+		var r = []
+		dbs[ year ].getCollection( col ).find( _q00 ).forEach(function(d){
+			delete d._id;
+			d.date = NumberInt( col );
+			d._SYS0030.id_c = NumberInt(26)
+			r.push( d );
+			if( r.length == 500 ){
+				_tCol.insertMany( r );
+				r.length = 0;
+			}
+		})
+
+		_tCol.insertMany( r );
+		r.length = 0;
+	})
+
+}
+FN0("2019")
+
+printjson( 1 )

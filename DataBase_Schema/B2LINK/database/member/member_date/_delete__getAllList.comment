@@ -1,0 +1,5 @@
+/**
+ * delete d_l_si, d_su, d_sec + member_basic$_delete__getAllList
+ * @function
+ * @param {Document} d
+ */

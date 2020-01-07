@@ -1,0 +1,1 @@
+{ "description" : "본사 정보를 저장하는 컬랙션으로 본사의 업체명, 주소, 전화번호, 팩스번호등을 참조한다", "exampleValue" : NumberInt( 0 )<include>000_common_txt/uint_len0.txt</include> }

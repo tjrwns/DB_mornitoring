@@ -1,0 +1,6 @@
+/**
+ * sid(session id)로 member_session의 _id를 얻어온다.
+ * @function
+ * @param {String} sid session id
+ * @return {uint}
+ */

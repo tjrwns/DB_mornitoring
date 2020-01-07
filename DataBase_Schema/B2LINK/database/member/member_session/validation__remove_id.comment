@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {uint} n
+ * @return {uint} 0, 1
+ */

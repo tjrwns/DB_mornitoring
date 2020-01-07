@@ -1,0 +1,10148 @@
+{
+	"20190101" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13312
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37595
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 183977
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 114398
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 212867
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 70992
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 109748
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11912
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2431
+		}
+	],
+	"20190102" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13229
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37609
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 185080
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 114560
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 212607
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 71848
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 111095
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11983
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2442
+		}
+	],
+	"20190103" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13255
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37677
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 187355
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 115388
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 213276
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 72693
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 112852
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12211
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2448
+		}
+	],
+	"20190104" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13350
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37697
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 186772
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 115995
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 213225
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 72991
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 113561
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12334
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2455
+		}
+	],
+	"20190105" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13367
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37710
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 188502
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 116878
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 213339
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 73493
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 114534
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12528
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2464
+		}
+	],
+	"20190106" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13377
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37733
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 190978
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 117938
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 212724
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 74326
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 115309
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12727
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2481
+		}
+	],
+	"20190107" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13492
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37743
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 195104
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 119565
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 216238
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 75326
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 117127
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12952
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2512
+		}
+	],
+	"20190108" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13721
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37790
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 199884
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 120596
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 219986
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 76754
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 118610
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 13280
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2557
+		}
+	],
+	"20190109" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13942
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37840
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 202264
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 121067
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 222085
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77292
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119868
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 13482
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2582
+		}
+	],
+	"20190110" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14082
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 37859
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 204698
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 121376
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 224553
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77628
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 120540
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 13635
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2641
+		}
+	],
+	"20190111" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12893
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 30018
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 181347
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 109138
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 222365
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 71975
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 108743
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12837
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2696
+		}
+	],
+	"20190112" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 10083
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 805
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 148079
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 90912
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 205312
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64588
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 96294
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9807
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2669
+		}
+	],
+	"20190113" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11145
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1641
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 157773
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 93958
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 214685
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 68351
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 99940
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10087
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6283
+		}
+	],
+	"20190114" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11670
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10028
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 164806
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 96271
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 220669
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 70707
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 102676
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10420
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 8049
+		}
+	],
+	"20190115" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11873
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10050
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 168040
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97013
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 221445
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 72528
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 104586
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10672
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 8918
+		}
+	],
+	"20190116" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12047
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10085
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 171953
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 98122
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 223932
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 74235
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 106709
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10862
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 9993
+		}
+	],
+	"20190117" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12459
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10157
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 178916
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 100000
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 230321
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77442
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 110159
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11174
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 11892
+		}
+	],
+	"20190118" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12405
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10142
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 180291
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 100519
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 232050
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77725
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 110581
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11358
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13181
+		}
+	],
+	"20190119" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12036
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10088
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 180027
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 100835
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 232465
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77567
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 110919
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11497
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13543
+		}
+	],
+	"20190120" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11960
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 10021
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 181262
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 101705
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 234702
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 78481
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 111561
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11730
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13820
+		}
+	],
+	"20190121" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11917
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3843
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 177843
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 101575
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 233344
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 78328
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 106363
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11716
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13809
+		}
+	],
+	"20190122" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12491
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3401
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 183547
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 101758
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 238071
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 79960
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 112169
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12001
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13894
+		}
+	],
+	"20190123" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12959
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3432
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 185135
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 102017
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 240396
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 80783
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 112755
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12133
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13896
+		}
+	],
+	"20190124" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13315
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3286
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 185793
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 101760
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 240988
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 80634
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 112193
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12218
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13919
+		}
+	],
+	"20190125" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13662
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3145
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 186886
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 100897
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 241393
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 80969
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 111520
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12279
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13920
+		}
+	],
+	"20190126" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14101
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3103
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 188254
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 99916
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 241370
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 81487
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 110939
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12289
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13936
+		}
+	],
+	"20190127" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13947
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3098
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 187535
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 98288
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 240123
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 81013
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 109429
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12238
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13929
+		}
+	],
+	"20190128" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13373
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3082
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 184147
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 96126
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 238959
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 80347
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 107987
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 12110
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13841
+		}
+	],
+	"20190129" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13029
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3047
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 180754
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 93886
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 236479
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 79347
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 106134
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11993
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13776
+		}
+	],
+	"20190130" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12966
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3035
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 178102
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 91488
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 233162
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 78943
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 104469
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11784
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13741
+		}
+	],
+	"20190131" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12772
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3033
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 174518
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 89064
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 228861
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77554
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 101690
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11547
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13690
+		}
+	],
+	"20190201" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12523
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3025
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 169947
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 86205
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 223658
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 75820
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 98242
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 11232
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13610
+		}
+	],
+	"20190202" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12292
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2995
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 166162
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 83269
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 217550
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 74171
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 94919
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10864
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13538
+		}
+	],
+	"20190203" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11998
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2939
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 161780
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 79853
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 211194
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 72576
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 91055
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10476
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13475
+		}
+	],
+	"20190204" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11750
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2922
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 156709
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77261
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 206467
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 71281
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 88650
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10126
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13432
+		}
+	],
+	"20190205" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11477
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2905
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 153362
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74450
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 201862
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 69695
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 85897
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9723
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13364
+		}
+	],
+	"20190206" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11210
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2876
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 146824
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 71963
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 196515
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 68139
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 83635
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9380
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13298
+		}
+	],
+	"20190207" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11029
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2862
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 141249
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 69713
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 189955
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66812
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 80883
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8976
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13230
+		}
+	],
+	"20190208" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 10934
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2827
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 137263
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 68026
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 184545
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 65413
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 78271
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8544
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13175
+		}
+	],
+	"20190209" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 10971
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2787
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 134927
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67809
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 180564
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 65294
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 77802
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8227
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13132
+		}
+	],
+	"20190210" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11273
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2821
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 135258
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67984
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 175852
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66680
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 79216
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8069
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13108
+		}
+	],
+	"20190211" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12037
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2850
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 137810
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 69515
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 151418
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 67890
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 81998
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7812
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13166
+		}
+	],
+	"20190212" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11844
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2788
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 134703
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 69001
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 148195
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 67451
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 82096
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7840
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 11092
+		}
+	],
+	"20190213" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11453
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 812
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 131932
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 70132
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 145906
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66521
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 83904
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7739
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 8634
+		}
+	],
+	"20190214" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 11782
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 821
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 131150
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 70915
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 145074
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66397
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 84943
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7638
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7563
+		}
+	],
+	"20190215" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12230
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 827
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 130477
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 71914
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 144857
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66161
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 87148
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7588
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6547
+		}
+	],
+	"20190216" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12355
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 828
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 129268
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72327
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 143415
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 65569
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 88568
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7531
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5262
+		}
+	],
+	"20190217" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 12429
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 846
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128163
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72838
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 141020
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63745
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 92003
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7526
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 3404
+		}
+	],
+	"20190218" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 13301
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 864
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 130376
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74930
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 141998
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64172
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 96984
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7445
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2297
+		}
+	],
+	"20190219" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14294
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 873
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 133139
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77496
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 143125
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64078
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 102683
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7423
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2277
+		}
+	],
+	"20190220" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14882
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 869
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 134477
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 79662
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 142556
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63338
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 108533
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7348
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2704
+		}
+	],
+	"20190221" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15471
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 844
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 135726
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 81753
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 142052
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 62964
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 114253
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7309
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2871
+		}
+	],
+	"20190222" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15800
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 870
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 136301
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 82720
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 141423
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 62378
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119539
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7298
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2871
+		}
+	],
+	"20190223" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15982
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 913
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 138889
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 85383
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 141040
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63019
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 128055
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7289
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2888
+		}
+	],
+	"20190224" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15875
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 914
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 139791
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 87843
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 141535
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63254
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 135197
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7214
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2888
+		}
+	],
+	"20190225" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 16181
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1060
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 141786
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 91172
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 142915
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63216
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 140428
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7275
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2884
+		}
+	],
+	"20190226" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18333
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1243
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 146049
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 94871
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 145916
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64448
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 148472
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7446
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2840
+		}
+	],
+	"20190227" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18957
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1277
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 150057
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97258
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 149454
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 65427
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 154326
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7629
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2804
+		}
+	],
+	"20190228" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19544
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1297
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 154175
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 100209
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 153683
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66244
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 159628
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 7828
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 4672
+		}
+	],
+	"20190301" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 20050
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1300
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 157800
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 102328
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 157584
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 67191
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 164571
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8056
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5516
+		}
+	],
+	"20190302" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 20853
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1317
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 163374
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 105516
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 164102
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 68325
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 169713
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8326
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6616
+		}
+	],
+	"20190303" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21155
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1330
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 166329
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 107260
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 168534
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 68975
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 173828
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8511
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6928
+		}
+	],
+	"20190304" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21389
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1335
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 168944
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 108888
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 172664
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 69492
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 177034
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 8749
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7040
+		}
+	],
+	"20190305" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21865
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1353
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 171855
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 110688
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 184148
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 70209
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 181239
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9072
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7088
+		}
+	],
+	"20190306" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22214
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1353
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 173768
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 111834
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 200632
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 73017
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 188530
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9324
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7068
+		}
+	],
+	"20190307" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 25062
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1542
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 191741
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 121978
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 218470
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 78613
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 199530
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9602
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 12662
+		}
+	],
+	"20190308" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 26967
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1716
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 201989
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 130585
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 199972
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 84034
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 212048
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10066
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16118
+		}
+	],
+	"20190309" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21030
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1786
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 206067
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 133837
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 203372
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 85986
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 217290
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10283
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17945
+		}
+	],
+	"20190310" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21462
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1804
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 208009
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 134708
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 205916
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 86122
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 219854
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10466
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18610
+		}
+	],
+	"20190311" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21752
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1818
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 208191
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 134773
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 207851
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 85772
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 221181
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10547
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18618
+		}
+	],
+	"20190312" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21909
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1822
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 206785
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 134357
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 195765
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 84910
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 220970
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10585
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18621
+		}
+	],
+	"20190313" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21854
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1811
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 205738
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 132057
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 195779
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 83549
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 220296
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10575
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18613
+		}
+	],
+	"20190314" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 27681
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1792
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 201054
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 130339
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 195285
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 81494
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 217361
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10493
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18572
+		}
+	],
+	"20190315" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 27490
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1772
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 196061
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 127586
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 184205
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 79301
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 214377
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10314
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18536
+		}
+	],
+	"20190316" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 27215
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1708
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 191978
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 124866
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 183430
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 77558
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 212863
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 10136
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18508
+		}
+	],
+	"20190317" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 27945
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1668
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 188892
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 122888
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 182718
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 75698
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 211128
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9979
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18530
+		}
+	],
+	"20190318" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 28073
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1619
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 186077
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 120713
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 182021
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 73617
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 208190
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9837
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18555
+		}
+	],
+	"20190319" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 28050
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1627
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 184378
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 119554
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 181461
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 72966
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 206782
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 9665
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18579
+		}
+	],
+	"20190320" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 28008
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1654
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 183282
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 116946
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 177701
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 72105
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 254058
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 22492
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18563
+		}
+	],
+	"20190321" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 26692
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1653
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 177188
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 114141
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 172016
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 71191
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 250335
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 22394
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17947
+		}
+	],
+	"20190322" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 26114
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1631
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 173176
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 112103
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 171542
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 70400
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 243969
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 21757
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17386
+		}
+	],
+	"20190323" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 25285
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1542
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 168994
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 107864
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 170940
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 69784
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 236232
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 21270
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16822
+		}
+	],
+	"20190324" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 24692
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1501
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 165922
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 106145
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 170284
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 69129
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 229685
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 20745
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16783
+		}
+	],
+	"20190325" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 24611
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1472
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 163570
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 105106
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 169830
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 68361
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 226165
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 20389
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16755
+		}
+	],
+	"20190326" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 24999
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1492
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 160139
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 104310
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 169511
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 67835
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 223505
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 20325
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16736
+		}
+	],
+	"20190327" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 24964
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1440
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 157027
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 100525
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 173828
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 67145
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 219342
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 19924
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16721
+		}
+	],
+	"20190328" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 24108
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1275
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 154733
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 99620
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 168033
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 66145
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 208777
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 19365
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16752
+		}
+	],
+	"20190329" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22567
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1199
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 150787
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 98656
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 167497
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 65276
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 205644
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 19083
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16789
+		}
+	],
+	"20190330" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22375
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1235
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 148007
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97215
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 166783
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64646
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 201899
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 18768
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16390
+		}
+	],
+	"20190331" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22317
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1400
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 145870
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 96885
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 166312
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64125
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 199360
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 18499
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 14664
+		}
+	],
+	"20190401" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22504
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2072
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 144937
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97202
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 171094
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63626
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 197625
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 18384
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13969
+		}
+	],
+	"20190402" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 24612
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2746
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 143852
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97340
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 172239
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63630
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 198881
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 18526
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13087
+		}
+	],
+	"20190403" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 25011
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3554
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 143385
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97356
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 171944
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 63968
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 199348
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 18342
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 12998
+		}
+	],
+	"20190404" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 25028
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 3970
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 145359
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97247
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 171582
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64246
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 199250
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 17992
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 12994
+		}
+	],
+	"20190405" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 25101
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 4878
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 148515
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 97730
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 161061
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 64806
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 200098
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 17681
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13040
+		}
+	],
+	"20190406" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 23918
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5717
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 139062
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 94179
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 145067
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 62253
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 185935
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 16813
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 10502
+		}
+	],
+	"20190407" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22018
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 6752
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128799
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 86566
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 139466
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56826
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 168373
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 16135
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6152
+		}
+	],
+	"20190408" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21503
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7291
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123220
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 81732
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 138875
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 53518
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 157989
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15655
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2818
+		}
+	],
+	"20190409" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21743
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7723
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 122747
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 79458
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 142479
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52547
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 155800
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15564
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 1858
+		}
+	],
+	"20190410" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22120
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7773
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124789
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 78720
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 147221
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52584
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 155988
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15487
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 1662
+		}
+	],
+	"20190411" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22379
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7769
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124743
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 78043
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 151814
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52732
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 156322
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15383
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2084
+		}
+	],
+	"20190412" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22830
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7772
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124059
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77388
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 150739
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52747
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 157512
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15402
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2627
+		}
+	],
+	"20190413" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22902
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7775
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123321
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76794
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 150427
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52601
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 157953
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15107
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2870
+		}
+	],
+	"20190414" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22988
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7791
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123854
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76192
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 155440
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52671
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 159110
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 15183
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2926
+		}
+	],
+	"20190415" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17125
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7803
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126088
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76140
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 155349
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52893
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 160316
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55368
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2938
+		}
+	],
+	"20190416" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17044
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7829
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126189
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75856
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 155574
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 53333
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 161006
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55455
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2934
+		}
+	],
+	"20190417" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 16274
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7872
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125960
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75026
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 150626
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54055
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 161217
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55990
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2926
+		}
+	],
+	"20190418" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15942
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7871
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125408
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 73695
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 150349
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54251
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 161303
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55559
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2891
+		}
+	],
+	"20190419" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15894
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7789
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124487
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72434
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 155079
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54429
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 161767
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55452
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 2857
+		}
+	],
+	"20190420" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15872
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7821
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124548
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 71293
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154928
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54788
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 162142
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55361
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 3698
+		}
+	],
+	"20190421" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15812
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7901
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125493
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 71837
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154830
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55367
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 163917
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55237
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 4225
+		}
+	],
+	"20190422" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15837
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7968
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126551
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72314
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154926
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56121
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 166175
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56064
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 4705
+		}
+	],
+	"20190423" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15845
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 8003
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126916
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72308
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 155055
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56224
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 166913
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 58060
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5023
+		}
+	],
+	"20190424" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15871
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 8050
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126643
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 70980
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 155048
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56120
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 165302
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 57236
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5196
+		}
+	],
+	"20190425" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15690
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 8030
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125510
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 69390
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154805
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55714
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 163840
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56371
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5266
+		}
+	],
+	"20190426" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15578
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7998
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124944
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67816
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154843
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56123
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 163312
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55928
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5555
+		}
+	],
+	"20190427" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15388
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7981
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124331
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 66683
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154711
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55642
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 160405
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55526
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5681
+		}
+	],
+	"20190428" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15427
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7965
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124264
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65758
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154610
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55752
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 159322
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55938
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 5878
+		}
+	],
+	"20190429" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15064
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7962
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124211
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63461
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154628
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55771
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 159486
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55622
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6230
+		}
+	],
+	"20190430" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14919
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7819
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123416
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 62825
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154447
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55588
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 158690
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54858
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6376
+		}
+	],
+	"20190501" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14807
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7614
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 122291
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61574
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154215
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55406
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 157820
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54682
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6476
+		}
+	],
+	"20190502" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14412
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 7174
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 121783
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60262
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 153804
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55328
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 157761
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54455
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6567
+		}
+	],
+	"20190503" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14208
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 6546
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 121943
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60544
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 153729
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55276
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 157186
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54102
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6694
+		}
+	],
+	"20190504" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14399
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5969
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 122945
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61306
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 153695
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55400
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 159238
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 53778
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6862
+		}
+	],
+	"20190505" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14584
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5115
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123182
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61947
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 153860
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55990
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 164022
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54299
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7098
+		}
+	],
+	"20190506" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14669
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5120
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123965
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 62085
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 153843
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56378
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 166155
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54549
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7165
+		}
+	],
+	"20190507" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14920
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5129
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125283
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 62107
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154079
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56535
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 166935
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54714
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7321
+		}
+	],
+	"20190508" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14590
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5077
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125052
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61064
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 154346
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56441
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 168315
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55430
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7291
+		}
+	],
+	"20190509" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14023
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5078
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 123234
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60430
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 144217
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56571
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 167323
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56409
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7266
+		}
+	],
+	"20190510" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14209
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5074
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 119295
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59735
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 139090
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56729
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 166015
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56926
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7367
+		}
+	],
+	"20190511" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 14947
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 5058
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 118297
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59589
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 134107
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56506
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 168207
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56947
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7389
+		}
+	],
+	"20190512" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15302
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1224
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 118317
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59572
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 128980
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56362
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 169679
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56343
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6738
+		}
+	],
+	"20190513" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15457
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1230
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117890
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59876
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 128975
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56392
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 170020
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56093
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6344
+		}
+	],
+	"20190514" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15438
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1231
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117634
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59954
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 129371
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56444
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 170165
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56346
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6225
+		}
+	],
+	"20190515" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15592
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1226
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 116484
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59642
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 133875
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56558
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 169500
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56143
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6216
+		}
+	],
+	"20190516" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15449
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1223
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 113939
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59332
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 133801
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56507
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 167756
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56109
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6231
+		}
+	],
+	"20190517" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15166
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1207
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 112054
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59200
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 133531
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56327
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 166818
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55737
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6263
+		}
+	],
+	"20190518" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15755
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1276
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 113331
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59178
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 133376
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55971
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 167123
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55926
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6485
+		}
+	],
+	"20190519" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15798
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1348
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 114887
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60188
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 128331
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56291
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 167912
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56173
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6718
+		}
+	],
+	"20190520" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15621
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1347
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 114427
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60054
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 128876
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56591
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 169098
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56121
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 6391
+		}
+	],
+	"20190521" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15901
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1330
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 113957
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59544
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 129026
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56554
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 169829
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 56337
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16193
+		}
+	],
+	"20190522" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 16023
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1268
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 112330
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 58547
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 55549
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55676
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 168450
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55470
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16168
+		}
+	],
+	"20190523" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 16136
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1221
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111977
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 57871
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 55594
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54913
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 171237
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 55522
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16427
+		}
+	],
+	"20190524" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15841
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1213
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111583
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 58197
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 55735
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54903
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 172015
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 53994
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16924
+		}
+	],
+	"20190525" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15748
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1284
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115887
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 58597
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 55517
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54727
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 171284
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 53825
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16726
+		}
+	],
+	"20190526" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15796
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1384
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117358
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 58939
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 55405
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54647
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 171155
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54061
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16392
+		}
+	],
+	"20190527" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15651
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1396
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117927
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59252
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 55465
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54824
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 170293
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 54090
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 16993
+		}
+	],
+	"20190528" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15613
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1394
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117614
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59985
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 30829
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55060
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 170590
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 53167
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17658
+		}
+	],
+	"20190529" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15474
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1399
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117099
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60979
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 31065
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55022
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 169623
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 52024
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17684
+		}
+	],
+	"20190530" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15418
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1338
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 116208
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61082
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 31165
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54923
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 168159
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 51435
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17754
+		}
+	],
+	"20190531" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 15346
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1348
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 117391
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61116
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 40303
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56111
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 185020
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 53462
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18453
+		}
+	],
+	"20190601" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17665
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1438
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 127992
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64230
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 45849
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58591
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 195289
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 61830
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 25474
+		}
+	],
+	"20190602" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18983
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1495
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 132909
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65467
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 48969
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60276
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 201865
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 69164
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 29065
+		}
+	],
+	"20190603" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19148
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1504
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 133993
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65716
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49307
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60280
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 201874
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 69328
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 30226
+		}
+	],
+	"20190604" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18991
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1487
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 131568
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64887
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49278
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59750
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 197027
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68845
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 30732
+		}
+	],
+	"20190605" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19496
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1387
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128451
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64425
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49849
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58890
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 190888
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 70449
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 32077
+		}
+	],
+	"20190606" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19647
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1371
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126427
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64029
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49590
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58449
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 187243
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 70138
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 32114
+		}
+	],
+	"20190607" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19959
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1366
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124924
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63740
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49278
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58013
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 184828
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 70288
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 30961
+		}
+	],
+	"20190608" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19746
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1364
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125151
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63567
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49153
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57581
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 184283
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 70315
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 31294
+		}
+	],
+	"20190609" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19007
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1414
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124545
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64138
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49158
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57115
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 184189
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 69622
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 31539
+		}
+	],
+	"20190610" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18626
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1472
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124727
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64785
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 49311
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56745
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 181366
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68273
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 31873
+		}
+	],
+	"20190611" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18015
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1467
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125011
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65071
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 54207
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56671
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 175605
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68274
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 31996
+		}
+	],
+	"20190612" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17931
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1479
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125548
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65410
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 54479
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56615
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 175335
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68718
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 32350
+		}
+	],
+	"20190613" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17899
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1479
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125400
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65427
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 54183
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56186
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 174402
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68683
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 32554
+		}
+	],
+	"20190614" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17532
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1465
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124039
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65286
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 53997
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55365
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 171695
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68015
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 32558
+		}
+	],
+	"20190615" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17285
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1433
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124091
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65453
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 53846
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55744
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 194967
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 71001
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33398
+		}
+	],
+	"20190616" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 20025
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1669
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 142017
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 71909
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 61418
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57663
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 205340
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 78904
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 43410
+		}
+	],
+	"20190617" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 20286
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1710
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 146148
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74563
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 64274
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58431
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 213716
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 85733
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 48584
+		}
+	],
+	"20190618" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21381
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1845
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 153285
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76948
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 73254
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60927
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 229331
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 98874
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 54777
+		}
+	],
+	"20190619" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22157
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1860
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 158357
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 78723
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 76396
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60899
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 229396
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 99496
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 56651
+		}
+	],
+	"20190620" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22218
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1834
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 157689
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77872
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 75690
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59669
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 226731
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 94921
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 55564
+		}
+	],
+	"20190621" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22157
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1833
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 158656
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77599
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 75584
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59402
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 227206
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 94878
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 55306
+		}
+	],
+	"20190622" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21880
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1839
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 157223
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77260
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 75206
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58877
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 225446
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 94030
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 54299
+		}
+	],
+	"20190623" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21717
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1841
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 156828
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 77107
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 75064
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58312
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 224216
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 93410
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 53619
+		}
+	],
+	"20190624" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21730
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1818
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 156039
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76984
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 81089
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57660
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 222292
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 92775
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 52907
+		}
+	],
+	"20190625" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21886
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1733
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 150334
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76772
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 81660
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57245
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 220718
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 92311
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 52242
+		}
+	],
+	"20190626" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21953
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1750
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 148096
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76193
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 82023
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56785
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 219138
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 92337
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 51465
+		}
+	],
+	"20190627" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21976
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1754
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 146964
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75811
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 80538
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56090
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 218077
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 92350
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 50364
+		}
+	],
+	"20190628" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22052
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1755
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 147093
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75558
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 80398
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55357
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 217437
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 92807
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 49558
+		}
+	],
+	"20190629" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22245
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1784
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 147830
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75567
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 80415
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55079
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 217190
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 94044
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 49409
+		}
+	],
+	"20190630" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 22639
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1799
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 149449
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75641
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 80647
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55153
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 217988
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 95704
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 49164
+		}
+	],
+	"20190701" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 21467
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1755
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 141520
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 73938
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 78649
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52896
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 197998
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 92546
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 46172
+		}
+	],
+	"20190702" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 19550
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1685
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 134421
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72078
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74774
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 50050
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 186129
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 83711
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 40097
+		}
+	],
+	"20190703" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18451
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1654
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 129938
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 70594
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74093
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 48045
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 179268
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 76625
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 37235
+		}
+	],
+	"20190704" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18506
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1651
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128870
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 69839
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74557
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 47949
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 178475
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 76629
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 36262
+		}
+	],
+	"20190705" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 18317
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1649
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128409
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 69402
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74774
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 47756
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 177925
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 76031
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 35422
+		}
+	],
+	"20190706" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17615
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1628
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 127870
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67967
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 73912
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 47093
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 176794
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 73230
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33722
+		}
+	],
+	"20190707" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17633
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1647
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128236
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 66720
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74190
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46812
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 176602
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 72652
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33536
+		}
+	],
+	"20190708" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17538
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1648
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128735
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 66387
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74360
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46907
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 177591
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 72141
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33313
+		}
+	],
+	"20190709" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17475
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1628
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 128746
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 66304
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 74530
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46996
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 176753
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 71845
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33387
+		}
+	],
+	"20190710" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 17326
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1595
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 127919
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65988
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 120519
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46928
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 176238
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 70920
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33390
+		}
+	],
+	"20190711" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 110882
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1541
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 127110
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65571
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 121251
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46721
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 175025
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 70059
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33353
+		}
+	],
+	"20190712" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 110862
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1512
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126320
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64791
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 121825
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46369
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 173586
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 69167
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33168
+		}
+	],
+	"20190713" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 111627
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1507
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 129479
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 64119
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 121864
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46576
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 172420
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68828
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33026
+		}
+	],
+	"20190714" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 101355
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1507
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 132152
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63847
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 122493
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 47181
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 172024
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 68978
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33258
+		}
+	],
+	"20190715" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 103531
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1498
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 134043
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63792
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 124349
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 47721
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 176107
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 71075
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 33484
+		}
+	],
+	"20190716" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 95911
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1393
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125015
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 60898
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 119598
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 45400
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 148606
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 65828
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 31197
+		}
+	],
+	"20190717" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 85173
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1331
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115333
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 57845
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 114901
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 43401
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 137152
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 58935
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 22374
+		}
+	],
+	"20190718" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 81691
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1277
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 108829
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 55465
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 111267
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 42011
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 125936
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 53749
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17733
+		}
+	],
+	"20190719" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 73155
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1158
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 96694
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49365
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98986
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 38810
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 108644
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43013
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 9808
+		}
+	],
+	"20190720" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 73389
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1087
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 95790
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49077
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98073
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 38890
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 107341
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 41518
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 8883
+		}
+	],
+	"20190721" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 74881
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1114
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 95321
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48675
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97667
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 39349
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 106934
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 41085
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7753
+		}
+	],
+	"20190722" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 76526
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1118
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 97951
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48904
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99577
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 39771
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 117139
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 42097
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7886
+		}
+	],
+	"20190723" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 78134
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1129
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98366
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48864
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99818
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 40245
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119051
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43595
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7852
+		}
+	],
+	"20190724" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 79032
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1148
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98296
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48814
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99835
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 40446
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119474
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43820
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7770
+		}
+	],
+	"20190725" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 80138
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1151
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98599
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48738
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99061
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 40805
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119455
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43749
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7847
+		}
+	],
+	"20190726" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 81193
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1137
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98547
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48725
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98396
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 41073
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119355
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43588
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7858
+		}
+	],
+	"20190727" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 82733
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1130
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98535
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48561
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97531
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 41435
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119365
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43373
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7876
+		}
+	],
+	"20190728" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 83667
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1122
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98224
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48300
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97410
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 41681
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119218
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 42819
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7872
+		}
+	],
+	"20190729" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 84254
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1106
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 98034
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 47959
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96974
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 41827
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 119413
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 42089
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 7855
+		}
+	],
+	"20190730" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 86391
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1169
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 100942
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 47674
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98460
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 42967
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 120510
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 41354
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 9764
+		}
+	],
+	"20190731" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 87362
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1197
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 102242
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 47446
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98887
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 43535
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 121142
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 41968
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 10499
+		}
+	],
+	"20190801" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 89043
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1225
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 104542
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 47369
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99102
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 44673
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 122841
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 42870
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 11530
+		}
+	],
+	"20190802" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 90674
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1219
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 105184
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 47463
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99057
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 45061
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 123739
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 42967
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 11782
+		}
+	],
+	"20190803" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 91609
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1199
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 105011
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 47357
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97465
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 45534
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 124406
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43049
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 12016
+		}
+	],
+	"20190804" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 92748
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1172
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 104882
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48104
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96788
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46282
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 125606
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43329
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 12455
+		}
+	],
+	"20190805" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 94072
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1152
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 104816
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48917
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96259
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46385
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 125208
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43434
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 12767
+		}
+	],
+	"20190806" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 95424
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1125
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 105103
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 50063
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96328
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 46537
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 125005
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43465
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13001
+		}
+	],
+	"20190807" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 96288
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1099
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 104872
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49849
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96054
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 49435
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 126859
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43316
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 13001
+		}
+	],
+	"20190808" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 99426
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1044
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 109851
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49017
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98100
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 52062
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 133599
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 46086
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 15811
+		}
+	],
+	"20190809" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 100451
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 1000
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 110996
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49159
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99368
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 53392
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 136469
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 47705
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 17489
+		}
+	],
+	"20190810" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 101107
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 963
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111367
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48890
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99749
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 53536
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 136554
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 47916
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18096
+		}
+	],
+	"20190811" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 101855
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 941
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111294
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49006
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99054
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 53758
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 136899
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48007
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18027
+		}
+	],
+	"20190812" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 103653
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 905
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 110818
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49350
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 102872
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54125
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 137996
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48285
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18138
+		}
+	],
+	"20190813" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 106100
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 878
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 107540
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48181
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 102791
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54334
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 138955
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48460
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18287
+		}
+	],
+	"20190814" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 108663
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 874
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 106127
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48333
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 102342
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54244
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 138932
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48227
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18577
+		}
+	],
+	"20190815" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 107618
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 874
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 105547
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 48584
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 100780
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54685
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 136276
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 46672
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18498
+		}
+	],
+	"20190816" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 108158
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 791
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 105938
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49177
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 100835
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55129
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 135434
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45773
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18297
+		}
+	],
+	"20190817" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 107792
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 712
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 106081
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49579
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 100324
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55285
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 138239
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45525
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18161
+		}
+	],
+	"20190818" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 112485
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 686
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 106624
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 49739
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99893
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55427
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 140270
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45671
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18219
+		}
+	],
+	"20190819" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 112185
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 587
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 108272
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 51102
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 99997
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55672
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 142500
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45742
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18496
+		}
+	],
+	"20190820" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 114721
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 567
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 108501
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 51574
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 100084
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56993
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 144425
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45596
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18623
+		}
+	],
+	"20190821" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 115886
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 519
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 109851
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 52431
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 100130
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58119
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 147217
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45805
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 18684
+		}
+	],
+	"20190822" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 120604
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 491
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111304
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 53129
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 115271
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58260
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 148468
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45148
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19092
+		}
+	],
+	"20190823" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 121184
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 469
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111639
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 53791
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 115413
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58335
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 147308
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 44186
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19412
+		}
+	],
+	"20190824" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 119655
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 452
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 111875
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 54604
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 115369
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58397
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 150380
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43984
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19609
+		}
+	],
+	"20190825" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 118753
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 369
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 112336
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 56107
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 115562
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59165
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 155176
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43881
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19693
+		}
+	],
+	"20190826" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 122059
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 297
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 114157
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 57598
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 126056
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59629
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 159893
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43797
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19713
+		}
+	],
+	"20190827" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 124237
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 246
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 116318
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 59572
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 125814
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60620
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 163555
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 44126
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19810
+		}
+	],
+	"20190828" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 127017
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 237
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 119294
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 61184
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 127471
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 61227
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 168160
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45434
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21438
+		}
+	],
+	"20190829" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 129135
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 237
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 118863
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 62380
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 126512
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60842
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 167920
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45614
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20937
+		}
+	],
+	"20190830" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 132318
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 159
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 116552
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63418
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 125535
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60727
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 172172
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 44701
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20825
+		}
+	],
+	"20190831" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 131035
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 88
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115446
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 63741
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 124616
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60481
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 172878
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 44454
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20799
+		}
+	],
+	"20190901" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 138162
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 22
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 114522
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 65217
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 123976
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60041
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 174763
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43910
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20776
+		}
+	],
+	"20190902" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4996
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 114966
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 66383
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 123906
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60165
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 175635
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 44133
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21222
+		}
+	],
+	"20190903" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 5048
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115218
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67122
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 129268
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60220
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 175667
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 44362
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21242
+		}
+	],
+	"20190904" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4554
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115615
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67711
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 140138
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60038
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 182311
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45110
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21644
+		}
+	],
+	"20190905" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4526
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115731
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 68026
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 135683
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60187
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 182590
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45551
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21676
+		}
+	],
+	"20190906" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4653
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 115743
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67997
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 135342
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 60140
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 183561
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 46070
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 22441
+		}
+	],
+	"20190907" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4415
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 113422
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 67460
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 133219
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55055
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 173893
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 43912
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21007
+		}
+	],
+	"20190908" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4257
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 112057
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 68034
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 131593
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54468
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 181038
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 42795
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 19058
+		}
+	],
+	"20190909" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4362
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 120503
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 72879
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 118638
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57925
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 189022
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 45283
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20263
+		}
+	],
+	"20190910" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4463
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124263
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74432
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 120503
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59045
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 191415
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 46905
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21291
+		}
+	],
+	"20190911" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4442
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124737
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74572
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 118118
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 59105
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 191951
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 47003
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 21218
+		}
+	],
+	"20190912" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4281
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124153
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74455
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 114181
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58633
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 190805
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 46731
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20992
+		}
+	],
+	"20190913" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4136
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 124759
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74744
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 103969
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 58159
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 190662
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 47060
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20803
+		}
+	],
+	"20190914" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4013
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125680
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 74969
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 103621
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57937
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 190591
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 47669
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20392
+		}
+	],
+	"20190915" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 4018
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 0
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126480
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75394
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 103099
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57038
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 189121
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48004
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20467
+		}
+	],
+	"20190916" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 166845
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 2
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126430
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 75789
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 93199
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56878
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 189000
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48025
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20507
+		}
+	],
+	"20190917" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 157069
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 6
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125869
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76004
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98339
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56902
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 185403
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 47964
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20307
+		}
+	],
+	"20190918" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 159583
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 20
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126494
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76270
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 98560
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 57041
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 183889
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 48573
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20040
+		}
+	],
+	"20190919" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 158427
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 30
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126374
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76336
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97864
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 56337
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 181223
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 49132
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20190
+		}
+	],
+	"20190920" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 159192
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 41
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125925
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76350
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97770
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55549
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 179351
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 49531
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20391
+		}
+	],
+	"20190921" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 159497
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 46
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125530
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76410
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 97402
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54734
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 177984
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 49507
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20594
+		}
+	],
+	"20190922" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 163058
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 55
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125559
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76757
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96476
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54955
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 177032
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 49766
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20594
+		}
+	],
+	"20190923" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 164505
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 60
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 125276
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76682
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 96250
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 55301
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 176344
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 50056
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20426
+		}
+	],
+	"20190924" : [
+		{
+			"_id" : "PM6734",
+			"sellCount" : 166206
+		},
+		{
+			"_id" : "PM2176",
+			"sellCount" : 65
+		},
+		{
+			"_id" : "PM1094",
+			"sellCount" : 126681
+		},
+		{
+			"_id" : "PM6752",
+			"sellCount" : 76108
+		},
+		{
+			"_id" : "PM243",
+			"sellCount" : 95770
+		},
+		{
+			"_id" : "PM6111",
+			"sellCount" : 54710
+		},
+		{
+			"_id" : "PM152",
+			"sellCount" : 172253
+		},
+		{
+			"_id" : "PM6712",
+			"sellCount" : 51056
+		},
+		{
+			"_id" : "PM489",
+			"sellCount" : 20298
+		}
+	]
+}

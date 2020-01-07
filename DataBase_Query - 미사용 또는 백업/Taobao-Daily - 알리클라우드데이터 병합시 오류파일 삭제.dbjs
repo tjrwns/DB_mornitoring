@@ -1,0 +1,28 @@
+var db0 = db.getSiblingDB("Taobao_2018")
+var cols = db0.getCollectionNames();
+
+var q = {};
+var q0 = { _id : null };
+
+var i = 0,iLen = cols.length,io;
+for(;i<iLen;++i){
+
+	io = cols[ i ];
+
+	if( io * 1 < 20181202 ) continue;
+
+	print( i + " -- " + iLen );
+
+	var col0 = db0.getCollection( io );
+
+	col0.find( q, { _id : 1 } ).forEach(function( doc ){
+
+		if( isNaN( Number( doc._id.valueOf() ) ) )
+		{
+			print( io + " / " + doc._id );
+			q0._id = doc._id;
+			col0.remove( q0, true );
+		}
+
+	})
+}

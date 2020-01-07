@@ -1,0 +1,13 @@
+//----------------------------------------------------------------------------------------------------;
+
+//	_schema;
+
+//----------------------------------------------------------------------------------------------------;
+
+- Database Name/Collection Name.json 형태로 Schema JSON이 들어있다.
+
+- database/_schema_template의 *.tjson 파일들이 변환되어 database/_schema의 *.json 형태로 생성된다.
+
+- bin/Schema__createJSON__FromTemplate.bat을 실행하면 database/_schema_template의 *.tjson 파일들을 *.json으로 바꿔서 복사해온다.
+
+- bin/Schema__createJSON__All.bat을 사용하면 bin/Schema__createJSON__FromTemplate.bat이전에 database/_schema_include 를 변환해야하는 로직을 먼저 실행 후 구동한다.

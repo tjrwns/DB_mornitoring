@@ -1,0 +1,1 @@
+{ "description" : "Gender, 0이 여성 1이 남성", "exampleValue" : 0, "type" : "uint", "length" : 1, "values" : [ 0, 1 ], "valuesMap" : { "0" : 1, "1" : 1 } }

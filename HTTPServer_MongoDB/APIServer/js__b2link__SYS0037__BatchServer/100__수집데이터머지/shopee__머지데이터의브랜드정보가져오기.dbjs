@@ -1,0 +1,63 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/shopee__머지데이터의브랜드정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r1 = [];
+
+col0.find({}).forEach( function( doc ){
+
+	if( !doc.LIST.brandName ) return;
+
+	var t0 = r0[ doc.LIST.brandName ];
+
+	if( !t0 )
+	{
+		t0 = r0[ doc.LIST.brandName ] = {};
+		t0.count = 1;
+		t0.brand_id = doc.LIST.brandId;
+		t0.count_shop = 1;
+	}
+	else
+	{
+		t0.count = t0.count + 1;
+		if( doc.LIST.sellerName ) t0.count_shop = t0.count_shop + 1;
+	}
+});
+
+var io;
+var _to;
+for( var s in r0 )
+{
+	io = r0[ s ];
+
+	_to = {};
+	_to.brand_id = io.brandId;
+	_to.count_shop = io.count_shop;
+	_to.name = s;
+	_to.value = io.count;
+
+	r1.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = r1.sort( function( a, b ){ return b.value - a.value; });
+
+//----------------------------------------------------------------------------------------------------;
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

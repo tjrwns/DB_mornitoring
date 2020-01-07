@@ -1,0 +1,12 @@
+{ "description" : "Name(Default)", "type" : "object"
+	, "properties" : {
+		//All Name(Default);
+		"a" : { "description" : "All Name(Default)", "exampleValue" : "송선우"<include>000_common_txt/string_default.txt</include> }
+
+		//First Name(Default);
+		, "f" : { "description" : "First Name(Default)", "exampleValue" : "선우"<include>000_common_txt/string_default.txt</include> }
+
+		//Last Name(Default);
+		, "l" : { "description" : "Last Name(Default)", "exampleValue" : "송"<include>000_common_txt/string_default.txt</include> }
+	}
+}

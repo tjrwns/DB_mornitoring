@@ -1,0 +1,48 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/jd__00_정제대상데일리수집컬렉션가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var targetYear = "<!=targetYear=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var prefix = "JD";
+var targetShop = prefix.toLowerCase();
+var nm_db = prefix + "_" + targetYear;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( nm_db + "-수집" );
+
+var colList0 = db0.getCollectionNames();
+var colList1 = db1.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+colList1.forEach( function( col ){
+	if( col == "_TEMP" ) return;
+
+	var targetColNm0 = col.split( "-" )[ 0 ];
+	var targetColNm1 = targetColNm0.split( "_" )[ 0 ];
+
+	if( colList0.indexOf( targetColNm1 ) == -1 )
+	{
+		if( r.indexOf( targetColNm0 ) == -1 ) r.push( targetColNm0 );
+	}
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : {
+		totalCount : r.length
+		, data : r
+		, targetShop : targetShop
+		, DB : nm_db + "-수집"
+	}
+};

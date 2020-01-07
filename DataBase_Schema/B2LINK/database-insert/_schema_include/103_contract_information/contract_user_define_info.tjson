@@ -1,0 +1,7 @@
+{
+	//key;
+	"k" : { "description" : "유저생성정보 key", "exampleValue" : "유저생성정보 key"<include>000_common_txt/string_default.txt</include> }
+
+	//value;
+	, "v" : { "description" : "유저생성정보 value", "exampleValue" : "유저생성필드 value"<include>000_common_txt/string_default.txt</include> }
+}

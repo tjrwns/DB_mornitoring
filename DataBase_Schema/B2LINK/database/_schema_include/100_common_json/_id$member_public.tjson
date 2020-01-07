@@ -1,0 +1,1 @@
+{ "description" : "member_public ID(FK) - 해당 컬랙션에서 회사 구성원 정보(이름, 연락처, 부서) 를 참조한다.", "exampleValue" : 0<include>000_common_txt/uint_len0.txt</include>, "minValue" : 0, "maxValue" : 999999999 }

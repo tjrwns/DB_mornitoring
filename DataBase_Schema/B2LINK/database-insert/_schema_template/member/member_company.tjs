@@ -1,0 +1,110 @@
+var d = {
+
+	"_id" : "member_company"
+
+	//이 Collection의 명세;
+	, "description" : "회원의 회사 정보를 저장하는 collection 으로 회원의 회사, 부서 등의 정보를 저장한다."
+
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	, "dereference" : [
+		"member.member_session"
+		, "member.member_session_log"
+		, "member.member_date"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_session"
+		, "member_session_log"
+		, "member_date"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"category.category_division"
+		, "category.category_division_team"
+		, "member.member_session"
+		, "member.member_session_log"
+		, "member.member_date"
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+		"category_division"
+		, "category_division_team"
+		, "member_session"
+		, "member_session_log"
+		, "member_date"
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+		"category"
+		, "member"
+	]
+
+	//이 Collection에서 검색에 사용되는 Field;
+	, "search_field" : [
+		{
+			"property" : "cd$category_company"
+			, "label" : "회사"
+			, "label_cn" : ""
+			, "label_kr" : "회사"
+			, "label_us" : "Company"
+		}
+		, {
+			"property" : "cd$category_division"
+			, "label" : "디비젼"
+			, "label_cn" : ""
+			, "label_kr" : "디비젼"
+			, "label_us" : "Division"
+		}
+		, {
+			"property" : "cd$category_division_team"
+			, "label" : "팀"
+			, "label_cn" : ""
+			, "label_kr" : "팀"
+			, "label_us" : "Team"
+		}
+		, {
+			"property" : "cd$category_division_part"
+			, "label" : "파트"
+			, "label_cn" : ""
+			, "label_kr" : "파트"
+			, "label_us" : "Part"
+		}
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//Member ID;
+		, "mid" : <include>member/mid.json</include>
+
+		//Company의 코드;
+		, "cd$category_company" : { "description" : "Company Category Code", "exampleValue" : ""<include>000_common_txt/string_default.txt</include> }
+
+		//Division의 코드;
+		, "cd$category_division" : <include>category_division/cd$category_division.json</include>
+
+		//Division 소속의 팀 코드;
+		, "cd$category_division_team" : <include>category_division_team/cd$category_division_team.json</include>
+
+		//Division 소속 - 팀소속의 파트 코드;
+		, "cd$category_division_part" : <include>category_division_part/cd$category_division_part.json</include>
+	}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+db.getSiblingDB( "_schema" ).member.insert( d );

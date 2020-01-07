@@ -1,0 +1,92 @@
+//----------------------------------------------------------------------------------------------------;
+
+var _DATE_START_ = "20180313";//지정한 날짜 이후 날짜부터 타겟이된다;
+var _DATE_END = "20180319";//지정한 날짜 까지 병합을 수행한다;
+
+//----------------------------------------------------------------------------------------------------;
+
+var prefix0 = "Taobao";
+var nm_db = prefix0 + "_" + _DATE_START_.substr( 0, 4 );
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( nm_db + "-수집" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+/*/
+var COL_NAMES = [];
+
+db1.getCollectionNames().forEach( function( nm_col ){
+	if( nm_col.split( "_" )[ 0 ] * 1 > _DATE_START_ * 1 )
+		if( COL_NAMES.indexOf( nm_col.split( "-" )[ 0 ] ) == -1 ) COL_NAMES.push( nm_col.split( "-" )[ 0 ] );
+});
+/*/
+var COL_NAMES = [
+	  "20180313_01", "20180313_02", "20180314_01"
+	, "20180315_01", "20180315_02", "20180315_03 - 8946"
+	, "20180316_01"
+	, "20180317_01", "20180317_02", "20180317_03 - 7427"
+	, "20180318_01", "20180318_02", "20180318_03 - 11788"
+	, "20180319_01"
+];
+//*/
+
+//printjson( COL_NAMES );
+
+COL_NAMES = COL_NAMES.reverse();
+
+var io;
+var i=0, iLen=COL_NAMES.length;
+for( ; i<iLen; ++i )
+{
+	io = COL_NAMES[ i ];
+
+	print( iLen + " / " + i + " - " + io + " / " + Date() );
+
+	var targetColNm = io.substr( 0, 8 );
+
+	//종료일;
+	//if( targetColNm == _DATE_END ) break;
+
+	//시작일 - COL_NAMES = COL_NAMES.reverse() 일시에;
+	if( targetColNm == _DATE_START_ ) break;
+
+	var col0 = db0.getCollection( targetColNm );
+	var col1 = db1.getCollection( io );
+
+	//--------------------------------------------------;
+
+	var r0 = {};
+	var r1 = {};
+
+	col0.find( P0 ).forEach( function( doc ){ r0[ doc._id ] = {}; })
+	col1.find( P0 ).forEach( function( doc ){ if( !r0[ doc._id ] ) r1[ doc._id ] = doc; });
+
+	var a = 0;
+	for( var s in r1 )
+	{
+		col0.insertOne( r1[ s ] );
+		//print( a );
+		//++a;
+	}
+
+	/*/
+	var stats = col0.stats();
+
+	var result = { totalCount : 0, errorResult : [] };
+		result.totalCount = a;
+		result.size = stats.size;
+		result.count = stats.count;
+	//*/
+
+	//--------------------------------------------------;
+
+	//return { r : 0, d : result, m : "OK" };
+	//printjson({ r : 0, d : result, m : "OK" });
+}

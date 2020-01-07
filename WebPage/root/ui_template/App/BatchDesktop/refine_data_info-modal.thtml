@@ -1,0 +1,10 @@
+<div class="div-Product-diff-Info ui modal" style="padding :30px;">
+
+	<div class="ui center aligned icon header message">
+		<i class="circular icon message-icon"></i>
+		<h4 class="h4-message-title"></h4>
+	</div>
+
+</div>
+
+

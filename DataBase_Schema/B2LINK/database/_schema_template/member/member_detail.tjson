@@ -1,0 +1,135 @@
+{
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	"dereference" : [
+		"member.member_public"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_public"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"member.member_basic"
+		, "member.member_session"
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+		"member_basic"
+		, "member_session"
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+		"member"
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//--------------------------------------------------;
+
+		//Member Address;
+		, "addr" : { "description" : "Member Address", "exampleValue" : ""
+			, "type" : "object"
+			, "proerties" : {
+
+			}
+		}
+
+		//Member Address(US);
+		, "addr_us" : { "description" : "Member Address(US)", "exampleValue" : ""
+			, "type" : "object"
+			, "proerties" : {
+
+			}
+		}
+
+		//--------------------------------------------------;
+
+		//Member BloodType;
+		, "bloodType" : { "description" : "Member BloodType", "exampleValue" : "O"
+			, "type" : "string", "length" : 0, "default" : "O"
+			, "minLength" : 1
+			, "maxLength" : 3
+			, "values" : [ "A", "AB", "B", "O", "Rh+", "Rh-" ]
+			, "valuesMap" : { "A" : 1, "AB" : 1, "B" : 1, "O" : 1, "Rh+" : 1, "Rh-" : 1 }
+		}
+
+		//Member Gender;
+		, "gender" : { "description" : "Member Gender", "exampleValue" : "M"
+			, "type" : "string", "length" : 1
+			, "values" : [ "M", "W" ]
+			, "valuesMap" : { "M" : 1, "W" : 1 }
+		}
+
+		//--------------------------------------------------;
+
+		//Member Telephon;
+		, "phone_tel" : { "description" : "Member Telephone"
+			, "type" : "object"
+			, "proerties" : {
+
+				//Telephone - Compnay;
+				"company" : { "description" : "Member Telephone - Company", "exampleValue" : ""
+					, "type" : "object"
+					, "properties" : {
+						"0" : { "type" : "string", "length" : 0, "minLength" : 2, "maxLength" : 4 }
+						, "1" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+						, "2" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+					}
+				}
+
+				//Telephone - Home;
+				, "home" : { "description" : "Member Telephone - Home"
+					, "type" : "object"
+					, "properties" : {
+						"0" : { "type" : "string", "length" : 0, "minLength" : 2, "maxLength" : 4 }
+						, "1" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+						, "2" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+					}
+				}
+			}
+		}
+
+		//Member cellphone;
+		, "phone_cell" : { "description" : "Member Cellphone"
+			, "type" : "object"
+			, "proerties" : {
+
+				//Cellphone - Compnay;
+				"company" : { "description" : "Member Cellphone - Company"
+					, "type" : "object"
+					, "properties" : {
+						"0" : { "type" : "string", "length" : 0, "minLength" : 2, "maxLength" : 4 }
+						, "1" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+						, "2" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+					}
+				}
+
+				//Cellphone - Home;
+				, "home" : { "description" : "Member Cellphone - Home"
+					, "type" : "object"
+					, "properties" : {
+						"0" : { "type" : "string", "length" : 0, "minLength" : 2, "maxLength" : 4 }
+						, "1" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+						, "2" : { "type" : "string", "length" : 0, "minLength" : 3, "maxLength" : 4 }
+					}
+				}
+			}
+		}
+
+		//--------------------------------------------------;
+	}
+}

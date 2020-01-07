@@ -1,0 +1,50 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getDataSizeCount__Collection.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "<!=nm_site=!>";
+var prefix1 = "<!=targetYear=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( _NM_SITE_ + "_" + prefix1 );
+var cols = db0.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var byte = 1024;
+
+var r = {
+	data : []
+	, size : {
+		byte : []
+		, kb : []
+		, mb : []
+		, gb : []
+	}
+	, count : []
+	, shopNm : _NM_SITE_
+};
+
+cols.forEach( function( d ){
+	if( d == "_TEMP" ) return;
+	if( d.indexOf( "-All" ) != -1 ) return;
+	var colInfo = db0.getCollection( d ).stats();
+
+	r.size.byte.push( colInfo.size );
+	r.size.kb.push( ( colInfo.size / byte ).toFixed( 2 ) );
+	r.size.mb.push( ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 2 ) );
+	r.size.gb.push( ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 2 ) );
+
+	r.data.push( d );
+	r.count.push( colInfo.count );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

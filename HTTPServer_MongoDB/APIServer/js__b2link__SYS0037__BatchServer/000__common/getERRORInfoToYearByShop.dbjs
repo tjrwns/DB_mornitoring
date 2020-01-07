@@ -1,0 +1,49 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getERRORInfoToYearByKaola.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_YEAR_ = <!=targetYear=!>;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+var col0 = db0.getCollection( "dashboard-ERROR" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	data : []
+	, size : {
+		byte : []
+		, kb : []
+		, mb : []
+		, gb : []
+	}
+	, count : []
+};
+
+var sort00 = { _id : 1 };
+
+//2019년3월14일부터 DETAIL_PC를 수집했기때문에 이전데이터는 표출하지 않는다.-- 하드코딩사유;
+col0.find({ year : _TARGET_YEAR_ }).sort( sort00 ).forEach( function( d ){
+
+	if( d.date * 1 < 20190314 ) return;
+
+	r.data.push( d.date );
+
+	r.size.byte.push( NumberInt( d.size.byte ) );
+	r.size.kb.push( d.size.kb );
+	r.size.mb.push( d.size.mb );
+	r.size.gb.push( d.size.gb );
+
+	r.count.push( NumberInt( d.count ) );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

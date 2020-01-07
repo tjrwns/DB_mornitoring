@@ -1,0 +1,51 @@
+var db0 = db.getSiblingDB( "graph_data" );
+
+var cols = db0.getCollectionNames();
+
+
+var dateToFormat = {
+	"YYYYMMDD" : function( date ){
+
+		var yyyy = date.getFullYear();
+		var mm = date.getMonth() + 1;
+		var dd = date.getDate();
+
+		return yyyy + mm + dd
+	}
+	, "YYYY-MM-DD" : function( date ){
+
+		var yyyy = date.getFullYear();
+		var mm = date.getMonth() + 1;
+		var dd = date.getDate();
+
+		return yyyy + "-" + mm + "-" + dd;
+	}
+};
+
+var getTime = function(){
+	return new Date().getTime();
+}
+
+var FN00 = function( str ){
+
+	str = str || "backup";
+	cols.forEach(function(col){
+		if( -1 != col.indexOf( "backup" )) db0.getCollection( col ).renameCollection( col.split( "__" )[0]);
+		else db0.getCollection( col ).renameCollection( col.split( "__" )[0] + "__" + str + "_" + getTime() );
+	})
+};
+
+//var FN01 = function(){
+//	cols.forEach(function(col){
+//		db0.getCollection( col ).renameCollection( col.split( "__" )[0])
+//	})
+//};
+
+/*/
+FN00()
+/*/
+FN00()
+//*/
+
+//return;
+printjson(1);

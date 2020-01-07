@@ -1,0 +1,197 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var brandDB = db.getSiblingDB( "brand" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var col$brand_basic = brandDB.getCollection( "brand_basic" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	CREATE_INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	QUERY;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+var _q1 = { _id$channel_basic : 7, v_spu_id : null };
+var _q2 = { _id : -1 };
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _to;
+var mappingData;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	var year = TARGET_DATE.toString().substr(0,4)
+	var goodsListDB = db.getSiblingDB( "goods_list_" + year );
+	var refineDB = db.getSiblingDB( "VIP_" + year );
+	var targetDB = db.getSiblingDB( "VIP_" + year + "-collected_data");
+
+	var refineCol = refineDB.getCollection( TARGET_DATE.toString() );
+	var targetCol = targetDB.getCollection( TARGET_DATE.toString() );
+	//var goodsListCol = goodsListDB.getCollection(  TARGET_DATE.toString() );
+	var goodsListCol = goodsListDB.getCollection( TARGET_DATE.toString() );
+
+	goodsListCol.createIndex( { _id$channel_basic : 1, v_spu_id : 1 } );
+
+	//기존데이터삭제;
+	targetCol.drop();
+
+	print( TARGET_DATE + " - " + Date() );
+
+	var idx = 0;
+	refineCol.find( _q0 ).forEach(function(doc){
+		if( !doc.LIST ) return;
+		if( !doc.DETAIL ) return;
+
+		_to = 	{
+			  "_id" : -1
+			, "_id$brand_basic" : NumberInt( -1 )
+			, "cd$product_master" : null
+			, "nm$brand_basic" : null
+			, "options" : []//DETAIL.stock_detail.items
+			, "origin_price" : NumberInt( -1 )//LIST.marketPrice
+			, "product_id" : null//LIST.productId
+			, "product_images" : []//LIST.squareImage
+			, "product_name" : null//LIST.product_name
+			, "request_url" : null// "https://m.vip.com" + LIST.product_url : "/product-2627217-472169285.html"
+			, "sell_price" : NumberInt( -1 )//LIST.sale_price
+			, "v_spu_id" : null//LIST.v_spu_id
+
+			//현요남 추가요청 프로퍼티;
+			, "brandId" : NumberInt( -1 )//LIST.brand_store_sn
+			, "brandName" : null//LIST.brand_store_name
+
+			//-------------------- 추가프로퍼티;
+			, "bTaxAmount" : NumberInt( -1 )//세금포함인지여부;
+			, "tax_amount" : NumberInt( -1 )//세금금액;
+			, "purchase_price" : NumberInt( -1 )//세금포함판매금액;
+			, "bSoldOut" : NumberInt( -1 )//품절여부
+			//--------------------추가프로퍼티;
+		}
+
+		_to._id = NumberInt( idx );
+
+		_q1.v_spu_id = doc.LIST.v_spu_id;
+		mappingData = goodsListCol.findOne( _q1 );
+
+		if( mappingData )
+		{
+			_to._id$brand_basic = NumberInt( mappingData._id$brand_basic );
+			_to.cd$product_master = mappingData.cd$product_master;
+
+			_q2._id = mappingData._id$brand_basic;
+			var doc$brand_basic = col$brand_basic.findOne( _q2 );
+			if( doc$brand_basic ) _to.nm$brand_basic = doc$brand_basic.alias || doc$brand_basic.nm_kr;
+		}
+
+		_to.product_id = NumberLong( doc.LIST.productId );
+		_to.product_images.push( doc.LIST.squareImage );
+		_to.product_name = doc.LIST.product_name;
+		_to.request_url = "https://m.vip.com" + doc.LIST.product_url
+		_to.v_spu_id = doc.LIST.v_spu_id;
+		_to.brandId = NumberInt( doc.LIST.brand_store_sn );
+		_to.brandName = doc.LIST.brand_store_name;
+
+		try
+		{
+			if( doc.DETAIL.stock_detail && doc.DETAIL.stock_detail.items.length > 0 )
+			{
+				var i = 0,iLen = doc.DETAIL.stock_detail.items.length,io;
+				var _to0;
+				for(;i<iLen;++i){
+					io = doc.DETAIL.stock_detail.items[ i ];
+					_to0 = { name : io.name, name_std : io.name_std };
+					_to.options.push( _to0 );
+				}
+			}
+		}
+		catch( er )
+		{
+			//er;
+			_to.options = [];
+		}
+
+
+		var sell_price = NumberInt( -1 );
+
+		try
+		{
+			if( doc.LIST.sale_price ) sell_price = _to.sell_price = parseFloat( doc.LIST.sale_price );
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			if( doc.LIST.marketPrice ) _to.origin_price = parseFloat( doc.LIST.marketPrice );
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+
+
+		_to.bTaxAmount = NumberInt( 1 );
+		_to.purchase_price = sell_price;
+		_to.tax_amount = 0;
+
+		_to.bSoldOut = NumberInt( 0 );
+
+		try
+		{
+			if( doc.DETAIL.stock_list && doc.DETAIL.stock_list.sold_out != "" )
+			{
+				_to.bSoldOut = NumberInt( 1 );
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+
+		targetCol.insertOne( _to );
+
+		++idx;
+	})
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+FN( "<!=TARGET_DATE=!>" );
+
+return;

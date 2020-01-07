@@ -1,0 +1,68 @@
+{
+	//이 Collection을 참조하는 Collections - Database Name And Collection Name;
+	"dereference" : [
+		"member.member_public"
+	]
+
+	//이 Collection을 참조하는 Collections - Collection Name;
+	, "dereference_collection" : [
+		"member_public"
+	]
+
+	//이 Collection을 참조하는 Database;
+	, "dereference_database" : [
+		"member"
+	]
+
+	//이 Collection이 참조하는 Collections - Database Name And Collection Name;
+	, "reference" : [
+		"member.member_basic"
+		, "member.member_session"
+	]
+
+	//이 Collection이 참조하는 Collections - Collection Name;
+	, "reference_collection" : [
+		"member_basic"
+		, "member_session"
+	]
+
+	//이 Collection이 참조하는 Database;
+	, "reference_database" : [
+		"member"
+	]
+
+	//--------------------------------------------------;
+
+	//이 Collection의 Properties;
+	, "properties" : {
+		//Unique Key, Primary Key(PK);
+		"_id" : <include>100_common_json/_id.json</include>
+
+		//--------------------------------------------------;
+
+		//Member Career count;
+		, "count" : { "description" : "Member Career count", "exampleValue" : "1"
+			<include>000_common_txt/uint_len0.txt</include>
+		}
+
+		//Member Career count;
+		, "career0" : { "description" : "Member Career 0"
+			, "type" : "object"
+			, "properties" : {
+
+				//Company Name;
+				"nm_company" : { "description" : "Company Name", "exampleValue" : "B2LINK"<include>000_common_txt/string_default.txt</include> }
+
+				//Date - Entering;
+				, "d_enter" : { "description" : "Date - Entering", "exampleValue" : [ 2016, 8, 27 ], "type" : "array" }
+
+				//Date - Leave;
+				, "d_leave" : { "description" : "Date - Leave", "exampleValue" : [ 2016, 12, 31 ], "type" : "array" }
+			}
+		}
+
+		//, ...
+
+		//--------------------------------------------------;
+	}
+}

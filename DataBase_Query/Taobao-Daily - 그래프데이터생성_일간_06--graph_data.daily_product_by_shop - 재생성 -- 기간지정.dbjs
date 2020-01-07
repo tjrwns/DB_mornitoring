@@ -1,0 +1,248 @@
+var start = new Date().getTime();
+// daily_shop_info_by_brand 가 생성된 이후 에 작동한다.
+// daily_master 생성 이후 동작
+
+//----------------------------------------------------------------------------------------------------;
+
+//	REQUIRE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );//일간 마스터 데이타;
+var _db$graph_data = db.getSiblingDB( "graph_data" );//
+var _db$brand = db.getSiblingDB( "brand" );//
+var _db$product = db.getSiblingDB( "product" );//
+
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );//일간 마스터 데이터;
+var _col$daily_product_by_shop = _db$graph_data.getCollection( "daily_product_by_shop" );
+var _col$daily_shop_info_by_brand = _db$graph_data.getCollection( "daily_shop_info_by_brand" );
+//var _col$daily_shop_info_by_brand = _db$graph_data.getCollection( "daily_shop_info_by_brand__1030" );
+
+var _col$product_service_taobao =  _db$product.getCollection( "product_service_taobao" );
+var _col$product_service_tmall=  _db$product.getCollection( "product_service_tmall" );
+var _col$product = {};
+_col$product['淘宝'] =  _col$product_service_taobao;
+_col$product['海外旗舰店'] = _col$product['旗舰店'] = _col$product['天猫'] = _col$product_service_tmall;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENTS;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { date : 1, _id$brand_basic : 1, shop_id : 1, cd$product_master : 1 } );
+_col$product_service_taobao.createIndex( { cd$product_master : 1} );
+_col$product_service_tmall.createIndex( { cd$product_master : 1} );
+_col$daily_product_by_shop.createIndex( { date : 1} );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENTS;
+
+//----------------------------------------------------------------------------------------------------;
+var _doc$daily_product_by_shop;
+var _col$product;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETERS
+
+//----------------------------------------------------------------------------------------------------;
+var _q0 = {};
+var _q1 = { cd$product_master : null };
+
+var q = {
+	date : null
+	, _id$brand_basic : null
+	, shop_id : null
+	, cd$product_master : null
+};
+
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( day ){
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  day + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	var datecreate = ISODate( day );
+
+	// Remove Old Data
+	_col$daily_product_by_shop.remove({ date : ISODate( day ) });
+
+	var model_arr = [];
+	_col$daily_shop_info_by_brand.find( _q0 ).forEach( function( doc ){
+
+		q.date = datecreate;
+		q._id$brand_basic = doc._id$brand_basic;
+		q.shop_id = doc.shop_id;
+		q.cd$product_master = doc.cd$product_master;
+
+		_doc$daily_master = _col$daily_master.findOne( q );
+		if( _doc$daily_master )
+		{
+			var model = {
+				date : ISODate( day )
+				//, date_create : ISODate( day )
+				, _id$brand_basic : doc._id$brand_basic
+				, shop_id : doc.shop_id
+				, date_create : { a : datecreate }
+				, cd$product_master : doc.cd$product_master
+				, Daily_Sales : _doc$daily_master.Daily_Sales
+				, price : _doc$daily_master.price
+				//이미데일리 마스터를 생성할때 데일리세일즈가 음수면 다른날짜의 데일리세일즈로 치환하기 때문에 마이너스가 없음.
+				//, daily_sales_amount : Math.abs( _doc$daily_master.Daily_Sales ) * _doc$daily_master.price
+				, daily_sales_amount : _doc$daily_master.Daily_Sales * _doc$daily_master.price
+				, violation : false
+				, violate_price_count : 0
+				, shop_type : doc.shop_type
+			}
+
+//현재프라이스 가이드는 운여하고있지 않음.
+//			_q1.cd$product_master  = doc.cd$product_master;
+//			var _doc$product = _col$product[doc.shop_type].findOne( _q1 );
+
+			/*/
+			if ( _doc$product )
+			{
+
+				if ( _doc$product.price_guide )
+				{
+					if( _doc$product.price_guide < doc.price )
+					{
+						model.violate_price_count++;
+						model.violation = true
+					}
+				}
+			}
+
+			/*/
+//			try
+//			{
+//				if( _doc$product.price_guide < doc.price )
+//				{
+//					model.violate_price_count++;
+//					model.violation = true
+//				}
+//			}
+//			catch( er )
+//			{
+//				//er;
+//			}
+			//*/
+
+			model_arr.push( model );
+		}
+	})
+
+	var insertArr = [];
+	var i = 0,iLen = model_arr.length,io;
+	for(;i<iLen;++i){
+		//print( i + " / " + iLen )
+		io = model_arr[ i ];
+
+		insertArr.push( io );
+
+		if( insertArr.length == 900 )
+		{
+			_col$daily_product_by_shop.insertMany( insertArr );
+			insertArr.length = 0
+
+		}
+	}
+
+	_col$daily_product_by_shop.insertMany( insertArr );
+
+}
+
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate )
+		{
+			result.push( io );
+		}
+	}
+
+	return result;
+};
+
+
+/*
+ * 로직을 식행하는 함수
+ * @param {Number} startDate
+ * @param {Number} endDate
+ */
+var FN_LOGIC =  function( startDate, endDate ){
+	var targetDays = getTargetDays( startDate, endDate );
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = targetDays[ i ];
+		FN( io )
+	}
+
+	return;
+}
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+//FN_LOGIC( 20180401, 20181231 );
+//FN_LOGIC( 20190101, 20190908 );
+FN( 20191031 )
+//FN_LOGIC( 20181001, 20181231 );
+//FN_LOGIC( 20190704, 20190706 );
+
+print( "EXECUTION TIME : " + ( new Date() - start ) + "ms" );
+
+return;

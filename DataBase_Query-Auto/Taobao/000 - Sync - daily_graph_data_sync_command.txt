@@ -1,0 +1,74 @@
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190721
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190722
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190723
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190724
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190725
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190726
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190727
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190728
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190729
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190730
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190731
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190801
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190802
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190803
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190804
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190805
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190806
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190807
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190808
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190809
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190810
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190811
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190812
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190813
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190814
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190815
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190816
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190817
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190818
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190819
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190820
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190821
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190822
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190823
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190824
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190825
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190826
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190827
+
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190905
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190906
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20190907
+
+
+call D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20191001
+call D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20191002
+call D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20191003
+call D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20191004
+call D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20191005
+call D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_daily_sync.js" 20191006
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201922
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201923
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201924
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201925
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201926
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201927
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201928
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201929
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201930
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201931
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201932
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201933
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201934
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_weekly_sync.js" 201935
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_monthly_sync.js" 201907
+D:\GitHub_B2LiNK\Development-Binary-Windows\Binary\NodeJS\exes100.exe "000 - Sync - graph_monthly_sync.js" 201908
+
+//----------------------------------------------------------------------------------------------------------------------------------;

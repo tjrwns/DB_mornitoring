@@ -1,0 +1,136 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+//----------------------------------------------------------------------------------------------------;
+
+// QUERY;
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+
+	var nm_db = "Taobao_" + TARGET_DATE.substr( 0, 4 );
+
+	var db0 = db.getSiblingDB( nm_db );
+	var db1 = db.getSiblingDB( nm_db + "-수집" );
+	var db2 = db.getSiblingDB( nm_db + "-ERROR" );
+
+	var COL_NAMES = [];
+
+	db1.getCollectionNames().forEach( function( nm_col ){
+		if( nm_col.split( "_" )[ 0 ] * 1 == TARGET_DATE * 1 )
+			if( COL_NAMES.indexOf( nm_col.split( "-" )[ 0 ] ) == -1 ) COL_NAMES.push( nm_col.split( "-" )[ 0 ] );
+	});
+
+
+	var i = 0,iLen = COL_NAMES.length,io;
+	for(;i<iLen;++i){
+		io = COL_NAMES[ i ];
+
+		//기존생성된 머지컬렉션 삭제;
+		db0.getCollection( io.substr(0,8) ).drop();
+
+		//ERROR 삭제;
+		db2.getCollection( io.substr(0,8) ).drop();
+	}
+
+
+	COL_NAMES = COL_NAMES.reverse();
+
+	var targetColNm = TARGET_DATE.substr( 0, 8 );
+	var col0 = db0.getCollection( targetColNm );
+	var col0_error = db2.getCollection( targetColNm );
+
+	var r0 = {};
+	var r1 = {};
+
+	var io;
+	var i=0, iLen=COL_NAMES.length;
+	for( ; i<iLen; ++i )
+	{
+		io = COL_NAMES[ i ];
+
+		print( "-------------------------------------------------------" );
+		print( iLen + " / " + i + " - " + io + " / " + Date() );
+		print( "-------------------------------------------------------" );
+
+		var col1 = db1.getCollection( io );
+
+		//--------------------------------------------------;
+
+		col1.find( P0 ).forEach( function( doc ){
+			if( !r1[ doc._id ] ) r1[ doc._id ] = doc;
+
+			/*/
+			if( doc.apiStack[0] && doc.apiStack[0].value && doc.apiStack[0].value.item && doc.apiStack[0].value.item.sellCount != 0 )
+			{
+				r1[ doc._id ] = doc;
+			}
+			//*/
+
+			try{
+				if( doc.apiStack[0].value.item.sellCount != "0" ){
+					r1[ doc._id ] = doc;
+				}
+			}
+			catch( er ){
+			}
+		});
+	}
+
+	var jo;
+	for(var s in r1 )
+	{
+		jo = r1[ s ];
+		col0.insertOne( jo );
+
+		var b = false;
+		try{
+			/*/
+			if( !jo.apiStack[0] ) b = true;
+			if( !jo.apiStack[0].value ) b = true;
+			if( !jo.apiStack[0].value.item ) b = true;
+			//*/
+			if( !jo.apiStack[0].value.item.sellCount ) b = true;
+			if( "0" == jo.apiStack[0].value.item.sellCount ) b = true;
+			if( b ){
+				jo.time = TARGET_DATE;
+				col0_error.insertOne( jo );
+			}
+		}
+		catch( er )
+		{
+			jo.time = TARGET_DATE;
+			col0_error.insertOne( jo );
+
+			//er;
+			print( er.message );
+		}
+
+		//print(a);
+		//++a;
+	}
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+//FN( "20190512" );
+FN( "20190604" );
+
+return;

@@ -1,0 +1,20 @@
+var db0 = db.getSiblingDB( "타오바오_상품상세_전체브랜드--경량" );
+var col0 = db0.getCollection( "201906" );
+
+var db1 = db.getSiblingDB( "경량--rootCategoryId" );
+
+var COLS = {};
+
+var i = 0;
+var iLen = col0.count();
+col0.find({}).forEach(function(doc){
+	var id_c_r = Number( doc.id_c_r ).toString();
+
+	if( !COLS[ id_c_r ] ) COLS[ id_c_r ] = db1.getCollection( id_c_r );
+
+	COLS[ id_c_r ].insertOne( doc );
+
+	print( iLen + " / " + i );
+	++i;
+});
+

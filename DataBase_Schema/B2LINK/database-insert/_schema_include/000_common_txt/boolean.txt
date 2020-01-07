@@ -1,0 +1,3 @@
+, "exampleValue" : NumberInt( 0 )<include>000_common_txt/uint_len1.txt</include>, "default" : NumberInt( 0 ), "minValue" : NumberInt( 0 ), "maxValue" : NumberInt( 1 )
+			, "values" : <include>100_common_json/array/array__0, 1.json</include>
+			, "valuesMap" : <include>100_common_json/array/array__0, 1__valuesMap.json</include>

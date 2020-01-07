@@ -1,0 +1,64 @@
+#static_ui_common-static_search_selector_common_list {
+
+	@import (inline) "inline/_inline_div_static_ui_selector.txt";
+
+	@import (inline) "inline/_inline_static_ui_common_effect.txt";
+
+	@import "import/_import_static_ui_selector_list";
+
+
+
+	//min-height: 680px;
+	min-width: 400px;
+
+
+
+	.div-content {
+		display: table;
+		width: 100%;
+	}
+
+	.section-search_list {
+		box-sizing: border-box;
+		width: 100%;
+
+		.section-btns-search_list {
+			box-sizing: border-box;
+			display: inline-flex;
+			justify-content: space-between;
+			padding: 0px 10px 0px 10px;
+			width: 100%;
+
+			.span-count {
+				color: #f00;
+			}
+
+			input {
+				height: 32px;
+				width: 50px;
+			}
+		}
+
+		ul {
+			margin-bottom: 1em;
+		}
+	}
+
+	.section-search_requirement {
+		align-items: center;
+		display: inline-flex;
+		justify-content: center;
+
+		box-sizing: border-box;
+		padding: 10px;
+		width: 100%;
+
+		input, select { padding: 0px; height: 32px; }
+		input {
+			padding-left: 10px;
+			width: 450px;
+		}
+
+		* { margin: 0px 2px 0px 2px }
+	}
+}

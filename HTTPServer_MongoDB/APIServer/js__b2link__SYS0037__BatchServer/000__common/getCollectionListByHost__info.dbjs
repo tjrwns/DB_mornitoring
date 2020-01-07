@@ -1,0 +1,38 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getCollectionListByHost__info.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_DB_ = "<!=nm_db=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( _NM_DB_ );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+var colstats = "";
+
+var colList = db0.getCollectionNames().reverse();
+	colList.forEach( function( col ){
+
+		if( col == "_TEMP" ) return;
+		if( col == "STATISTICS" ) return;
+
+			colstats = db0.getCollection( col ).stats()
+			r.push({
+				nm_col : col
+				, count : colstats.count
+				, size : colstats.size
+			});
+
+	});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

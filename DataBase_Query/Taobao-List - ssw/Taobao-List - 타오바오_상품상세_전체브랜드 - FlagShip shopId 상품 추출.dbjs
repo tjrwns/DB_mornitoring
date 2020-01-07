@@ -1,0 +1,49 @@
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_CATEGORY-TAOBAO" );
+var db1 = db.getSiblingDB( "타오바오_상품상세_전체브랜드" );
+//var db2 = db.getSiblingDB( "타오바오_상품상세_B2LiNK브랜드" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var col00 = db0.getCollection( "id_flagship-20190322" );
+
+var col10 = db1.getCollection( "code_1801" );
+var col11 = db1.getCollection( "code_50010788" );
+var col12 = db1.getCollection( "code_50023282" );
+var col13 = db1.getCollection( "code_50025705" );
+
+var col20 = db1.getCollection( "flagship-code_1801" );
+var col21 = db1.getCollection( "flagship-code_50010788" );
+var col22 = db1.getCollection( "flagship-code_50023282" );
+var col23 = db1.getCollection( "flagship-code_50025705" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = { "seller.shopId" : -1 };
+
+//----------------------------------------------------------------------------------------------------;
+
+//Flagship 데이터 배열;
+var a_flagship = col00.find({}).toArray();
+
+//----------------------------------------------------------------------------------------------------;
+
+var io;
+
+//i의 숫자를 바꿔서 이어하기를 진행한다;
+var i=0, iLen=a_flagship.length; print( "iLen : " + iLen );
+for( ; i<iLen; ++i ){
+	io = a_flagship[ i ];
+
+	P0[ "seller.shopId" ] = io.shop_id;
+
+	var j=0;
+	var str_i_iLen = iLen + "/" + i + " - ";
+	col10.find( P0 ).forEach(function( doc ){ try{ col20.insertOne( doc ); }catch( er ){} print( str_i_iLen + j ); ++j; });
+	col11.find( P0 ).forEach(function( doc ){ try{ col21.insertOne( doc ); }catch( er ){} print( str_i_iLen + j ); ++j; });
+	col12.find( P0 ).forEach(function( doc ){ try{ col22.insertOne( doc ); }catch( er ){} print( str_i_iLen + j ); ++j; });
+	col13.find( P0 ).forEach(function( doc ){ try{ col23.insertOne( doc ); }catch( er ){} print( str_i_iLen + j ); ++j; });
+
+	print( iLen + "/" + i );
+}

@@ -1,0 +1,21 @@
+<div class="div-Product-diff-Info ui modal" style="width:50%;padding:10px 20px 10px 20px">
+	<div class="ui celled grid">
+		<div class="row">
+			<div class="six wide column imggs_box" style="margin: auto;top: 0;bottom: 0;left: 0;right: 0;">
+			</div>
+			<div class="ten wide column">
+				<h2 class="ui header">{{goodsName}}</h2>
+				<div class="meta"><span class="date">{{brandName}}</span></div>
+				<div class="ui divider"></div>
+				<div class="description">
+				<div class="ui celled aligned padded grid">
+					<div class="row"><div class="sixteen wide column">Product Info</div></div>
+					{{productInfo}}
+					<div class="row"><div class="sixteen wide column"><div class="id-linkButton ui right labeled icon button">View Product Site<i class="checkmark icon"></i></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

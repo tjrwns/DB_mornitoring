@@ -1,0 +1,41 @@
+<style type="text/css">
+	tr:nth-child(even) {
+		bgcolor: #f2f2f2;
+	}
+</style>
+
+<!-- Wrapper width: 100%-->
+<TABLE border="0" width="700px" height="100%" cellpadding="0" cellspacing="0" style="margin:auto; padding:0;">
+	<tr>
+		<td align="center" valign="top">
+<!-- 800px container -->
+			<TABLE id="table_context" cellpadding="0" width="100%" cellspacing="0" style="max-width:800px;min-width:320px;text-align:center;border:solid black 1px;font-family:'sans serif';">
+				<tr height="50" width="800" border="0">
+					<td bgcolor="#162548" style="color: #FFFFFF" border="0" align="center">
+						<p style="font-size:20px margin:0">
+							<!=title=!>
+						</p>
+					</td>
+				</tr>
+				<tr style="font-size:14px;color:#162548;">
+					<td>
+						<div style="padding: 20px 30px;">
+							<!=context=!>
+						</div>
+					</td>
+				</tr>
+				<tr><td bgcolor="#162548" height="50" style="color: #FFFFFF; font-size:12px;" border="0" align="center"></td></tr>
+			</TABLE>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="top" style="font-size:12px;">
+			<!--img src="http://www.b2link.co.kr/images/logo.png" alt="B2link" width="90"-->
+			<p style="display:inline-block; margin:0 1%;"><a href="www.b2link.co.kr" title="B2linkHomepage"><img src="http://www.b2link.co.kr/static/images/w/layout/logo-navy.png" alt="B2link" width="90"></a></p>
+			<p style="display:inline-block; margin:0 1%;"><a href="www.b2link.co.kr" title="B2linkHomepage" style="text-decoration:none;color:#000000;">www.b2link.co.kr</a></p>
+			<p style="display:inline-block; margin:0 1%;">+82 1899-0534</p>
+			<p style="display:inline-block; margin:0 1%;"><a href="mailto:dev@b2link.co.kr" style="color:#000000;text-decoration:none">dev@b2link.co.kr</a></p>
+			<p style="display:inline-block; margin:0 1%;"><a href="http://facebook.com/b2link" title="B2linkFacebook"><img src="https://thepratheesh.files.wordpress.com/2014/01/fb_icon_325x325.png?w=640" width="25" alt="B2link FaceBook"></a></p>
+		</td>
+	</tr>
+</TABLE>

@@ -1,0 +1,1 @@
+{ "description" : "Cancel Date 문서 취소일 ( 해당 문서가 취소되는 일자)", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }

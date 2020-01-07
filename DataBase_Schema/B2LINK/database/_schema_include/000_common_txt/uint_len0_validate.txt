@@ -1,0 +1,1 @@
+, "type" : "uint", "length" : 0, "minValue" : 0, "maxValue" : 999999999

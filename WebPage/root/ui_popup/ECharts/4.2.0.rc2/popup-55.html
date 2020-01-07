@@ -1,0 +1,26 @@
+<div>
+	<style>
+		html{ height : 100%; }
+		body{ height : 100%; margin : 0px;overflow-y : hidden;}
+	</style>
+	<div id="container" style="width:100%;overflow-y: auto;">
+
+		<div id="history" style="width:20%;float:left;background-color:#fff;overflow-y: auto;postion:absolute;height:100%"></div>
+		<div id="chart" style="width:80%;float:left;height: 100%;overflow-y: auto;"></div>
+
+	</div>
+
+	<!-- TEMPLATE -->
+	<div id="template-chart"style="display: none;float:left;width:100%;">
+		<div style="height : {{HEIGHT}}; width :{{WIDTH}};background-color : {{BG_COLOR}};padding:10px" >
+			<div class="DIV_<!=ID=!>" style="height: 100%;width: 100%;background-color:#fff;"></div>
+		</div>
+	</div>
+	<div id="template-history" style="display: none;float:left;width:100%;">
+		<div id="div-history-{{ID}}" style="color:#fff;margin 10px;margin: 0px 0px;cursor: pointer;background-color : {{BG_COLOR}};">
+			<div style="font-size:12px;padding-bottom:10px;"><b>{{BRAND_NM}}</b></div>
+			<div style="font-size:10px;">Sell Count : {{SELL_COUNT}} / {{RATIO_SELL_COUNT}} %</div>
+			<div style="font-size:10px;">Sell Amount : {{SELL_AMOUNT}} / {{RATIO_SELL_AMOUNT}} %</div>
+		</div>
+	</div>
+</div>

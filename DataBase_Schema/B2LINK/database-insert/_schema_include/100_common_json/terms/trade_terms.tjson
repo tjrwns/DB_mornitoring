@@ -1,0 +1,7 @@
+{
+	"description" : "trade_terms", "exampleValue" : NumberInt( 0 )<include>000_common_txt/uint_len0.txt</include>
+
+	, "values" : [ "CFR", "CIF", "CIP", "CPT", "DAT", "DAP", "DDP", "EXW", "FOB", "FCA", "FAS" ]
+
+	, "valuesMap" : { "CFR" : NumberInt( 1 ), "CIF" : NumberInt( 1 ), "CIP" : NumberInt( 1 ), "CPT" : NumberInt( 1 ), "DAT" : NumberInt( 1 ), "DAP" : NumberInt( 1 ), "DDP" : NumberInt( 1 ), "EXW" : NumberInt( 1 ), "FAS" : NumberInt( 1 ), "FCA" : NumberInt( 1 ), "FOB" : NumberInt( 1 ) }
+}

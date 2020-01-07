@@ -1,0 +1,127 @@
+var start = new Date().getTime();
+// 특정일 기준으로 그 이후 데이터만 정리한다.
+// 리스트가 변경되었을 경우만 작동한다
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );//일간 마스터 데이타;
+var _db$graph_data = db.getSiblingDB( "graph_data" );//
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );//일간 마스터 데이터;
+var _col$daily_shop_info_by_brand = _db$graph_data.getCollection( "daily_shop_info_by_brand" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { _id$brand_basic : 1, date : 1, shop_id : 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	print( "--------------------------------------------------" )
+	print( TARGET_DATE + " - " + Date() );
+	print( "--------------------------------------------------" )
+
+	var date = new Date();
+	var sy = date.getFullYear();
+	var sm = date.getMonth()+1;
+		sm = sm > 9 ? sm.toString() : '0' + sm.toString();
+	var sd = date.getDate();
+		sd = sd > 9 ? sd.toString() : '0' + sd.toString();
+	var date_s = sy+ "-" + sm + '-' + sd;
+
+	//기존 데이터 삭제 - 히스토리 관리 필요 없음;
+	_col$daily_shop_info_by_brand.remove({});
+
+	var insertArr = [];
+	_col$daily_master.aggregate( [
+		{
+			$match : {
+				_id$brand_basic : {
+					$ne : -1
+				}
+				, date : {
+					$gte : ISODate( TARGET_DATE )
+				}
+				, shop_id : { $nin : [ "", "0" ] }
+				, cd$product_master : { $ne : "" }
+			}
+		}
+		, {
+			$group : {
+				_id : {
+					_id$brand_basic : "$_id$brand_basic"
+					, shop_id : "$shop_id"
+					, shop_type : "$shop_type"
+					, cd$product_master : "$cd$product_master"
+				}
+				, shop_name : { $last : "$shop_name" }
+			}
+		}
+		, {
+			$sort : {
+				"_id._id$brand_basic" : -1
+			}
+		}
+		, {
+			$project : {
+				_id : 0
+				, _id$brand_basic : "$_id._id$brand_basic"
+				, shop_id : "$_id.shop_id"
+				, shop_name : "$shop_name"
+				, shop_type : "$_id.shop_type"
+				, cd$product_master : "$_id.cd$product_master"
+			}
+		}
+	] ).forEach( function( doc ){
+		var model = {
+			_id$brand_basic : NumberInt( doc._id$brand_basic )
+			, shop_id : doc.shop_id
+			, shop_name : doc.shop_name
+			, shop_type : doc.shop_type
+			, date_create : { a : ISODate( date_s ) }
+			, cd$product_master : doc.cd$product_master
+		};
+
+		//_col$daily_shop_info_by_brand.insert( model );
+		insertArr.push( model );
+		if( insertArr.length == 800 )
+		{
+			_col$daily_shop_info_by_brand.insertMany( insertArr );
+			insertArr.length = 0;
+		}
+	});
+
+	_col$daily_shop_info_by_brand.insertMany( insertArr );
+	insertArr.length = 0;
+
+
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "2018-04-01");//날짜는 고정
+
+return;

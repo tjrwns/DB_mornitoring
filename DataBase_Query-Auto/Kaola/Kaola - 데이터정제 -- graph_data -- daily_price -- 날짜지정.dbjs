@@ -1,0 +1,263 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var goodsListDB = db.getSiblingDB("goods_list")
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	CREATE_INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//goodsListCol.createIndex( { product_no : 1 } );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	QUERY;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+var _q1 = { product_no : null, _d : 1 };
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _to;
+var mappingData;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	var year = TARGET_DATE.toString().substr(0,4)
+	var refineDB = db.getSiblingDB( "Kaola_" + year );
+	var targetDB = db.getSiblingDB( "graph_data__kaola_" + year + "-daily" );
+	var goodsListDB = db.getSiblingDB( "goods_list_" + year );
+
+	var refineCol = refineDB.getCollection( TARGET_DATE.toString() );
+	var targetCol = targetDB.getCollection( TARGET_DATE.toString() );
+	var goodsListCol = goodsListDB.getCollection( TARGET_DATE.toString() );
+
+	goodsListCol.createIndex( { v_spu_id : 1 } );
+
+	targetCol.drop();
+	var r = {};
+	refineCol.find( _q0 ).forEach(function(doc){
+		if( doc.DETAIL == null ) return;
+
+		_q1.product_no = doc._id.valueOf();
+		mappingData = goodsListCol.findOne( _q1 );
+		if( !mappingData ) return;
+
+		if( !r[ mappingData.cd$product_master ] )
+		{
+			r[ mappingData.cd$product_master ] = {
+				_id : mappingData.cd$product_master
+			  , _id$brand_basic : NumberInt( mappingData._id$brand_basic )
+			  , cd$product_master : mappingData.cd$product_master
+			  , date : dateNumberToArray( TARGET_DATE )
+			  , representative_sales_price : -1
+			  , a_goodsId : []
+			  , sales_price : []
+			  , bTaxAmount : -1
+			  , tax_amount : 0
+			  , purchase_price :  -1
+			  , soldout_type : -1
+			  , promotionList : []//promotionList.promotionStartTime이 null 인경우;
+			  , promotionList_etc : []//promotionList.promotionStartTime이 null 아닌경우;
+			  , a_purchase_price : []
+			  , a_representative_sales_price : []
+			  , a_sales_price : []
+			  , a_tax_amount : []
+			  , a_soldout_type : []
+			  , idxCheck : {}
+		  };
+		}
+
+		r[ mappingData.cd$product_master ].a_goodsId.push( NumberInt( doc._id ) )
+
+		var sale_price = -1;
+		if( doc.DETAIL.data && doc.DETAIL.data.skuPrice.currentPrice ) sale_price = doc.DETAIL.data.skuPrice.currentPrice
+
+		r[ mappingData.cd$product_master ].a_representative_sales_price.push( sale_price );
+		r[ mappingData.cd$product_master ].a_sales_price.push( sale_price );
+
+
+		var taxAmount = 0;
+		if( doc[ "DETAIL-PC" ] ) if( doc[ "DETAIL-PC" ].data ) if( doc[ "DETAIL-PC" ].data.skuTaxInfoPc && doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount ) taxAmount = doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount;
+
+		try
+		{
+			if( doc[ "DETAIL-PC" ] && doc[ "DETAIL-PC" ].data.skuTaxInfoPc ){
+
+				if( doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount != null && doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxFeeTitle != null )
+				{
+					r[ mappingData.cd$product_master ].bTaxAmount = NumberInt( 1 );
+				}
+				else if( doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount == null && doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxFeeTitle == "包税" )
+				{
+					r[ mappingData.cd$product_master ].bTaxAmount = NumberInt( 1 );
+				}
+				else
+				{
+					r[ mappingData.cd$product_master ].bTaxAmount = NumberInt( 0 );
+				}
+
+				taxAmount = doc[ "DETAIL-PC" ].data.skuTaxInfoPc.taxAmount;
+				r[ mappingData.cd$product_master ].a_purchase_price.push( sale_price + taxAmount );
+				r[ mappingData.cd$product_master ].a_tax_amount.push( taxAmount );
+			}
+			else
+			{
+				r[ mappingData.cd$product_master ].bTaxAmount = NumberInt( 0 );
+				r[ mappingData.cd$product_master ].a_purchase_price.push( sale_price + taxAmount );
+			}
+		}
+		catch( er )
+		{
+				r[ mappingData.cd$product_master ].bTaxAmount = NumberInt( 0 );
+				r[ mappingData.cd$product_master ].a_purchase_price.push( sale_price + taxAmount );
+		}
+
+		var bSoldOut = 0;
+		try
+		{
+			if( doc.DETAIL_HTML && doc.DETAIL_HTML.__Goods__.basicInfo.onlineStatus == 0 ) bSoldOut = 1;
+			if( doc.DETAIL.data && !doc.DETAIL.data.goodsStoreStatus ) bSoldOut = 1;
+		}
+		catch( er )
+		{
+			//er;
+			var bSoldOut = 0;
+		}
+
+		r[ mappingData.cd$product_master ].a_soldout_type.push( bSoldOut );
+
+		if( doc.DETAIL.data && doc.DETAIL.data.promotionList && doc.DETAIL.data.promotionList.length > 0 )
+		{
+			var i = 0,iLen = doc.DETAIL.data.promotionList.length,io;
+
+			for(;i<iLen;++i){
+				io = doc.DETAIL.data.promotionList[ i ];
+				var _key = io.promotionTitle + io.promotionContent + io.promotionType;
+				var key = _key.replace(/，/gi,"_")
+
+				if( !r[ mappingData.cd$product_master ].idxCheck[ key ] )
+				{
+					r[ mappingData.cd$product_master ].idxCheck[ key ] = {};
+					var _to1 = {}
+					_to1.title = io.promotionTitle;
+					_to1.content = io.promotionContent;
+					_to1.type = io.promotionType;
+
+					if( !io.promotionStartTime ) r[ mappingData.cd$product_master ].promotionList.push( _to1 );
+					else r[ mappingData.cd$product_master ].promotionList_etc.push( _to1 );
+				}
+			}
+		}
+
+		// targetCol.insertOne( _to );
+	})
+
+	var s,so;
+	for( s in r ){
+
+		so = r[ s ];
+		so.purchase_price = avgByArr( so.a_purchase_price );
+		so.representative_sales_price = avgByArr( so.a_representative_sales_price );
+		so.sales_price = avgByArr( so.a_sales_price );
+
+		if( so.bTaxAmount ) so.tax_amount = avgByArr( so.a_tax_amount );
+
+		if( so.a_soldout_type.indexOf( 0 ) == -1 ) so.soldout_type = NumberInt( 1 );
+		if( so.a_soldout_type.indexOf( 1 ) == -1 ) so.soldout_type = NumberInt( 0 );
+		if( so.a_soldout_type.indexOf( 0 ) != -1 ) if( so.a_soldout_type.indexOf( 1 ) != -1 ) so.soldout_type = NumberInt( 0 );
+
+		delete so.a_purchase_price;
+		delete so.a_representative_sales_price;
+		delete so.a_sales_price;
+		delete so.a_tax_amount;
+		delete so.a_soldout_type;
+		delete so.idxCheck;
+
+		targetCol.insertOne( so )
+	}
+
+	targetCol.createIndex( { _id$brand_basic : 1 } );
+	targetCol.createIndex( { cd$product_master : 1 } );
+	targetCol.createIndex( { _id$brand_basic : 1, cd$product_master : 1 } );
+}
+
+var avgByArr = function( arr ){
+	if( !arr || arr.length == 0 ) return 0;
+	var i = 0, iLen = arr.length,io;
+	var r = 0;
+
+	for(;i<iLen;++i){
+		io = arr[ i ];
+		r =  r + io;
+	}
+	var avg = r / iLen;
+	return avg;
+}
+
+
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Kaola_2018" )
+	var db$2019 = db.getSiblingDB( "Kaola_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate ) result.push( io )
+	}
+
+	return result;
+};
+
+var dateNumberToArray = function( date ){
+	var _tmp = date.toString();
+	return [
+		NumberInt( _tmp.substr(0,4) )
+		, NumberInt( _tmp.substr(4,2) )
+		, NumberInt( _tmp.substr(6,2) )
+		// , NumberInt( 0 )
+		// , NumberInt( 0 )
+		// , NumberInt( 0 )
+	]
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+FN( "<!=TARGET_DATE=!>" )
+//FN( "20190511" )
+return;

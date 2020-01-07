@@ -1,0 +1,131 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__01_데일리수집데이터를합치기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var prefix0 = "VIP";
+var dbNm = prefix0 + "_" + nm_col.substr( 0, 4 );
+var targetColNm = nm_col.substr( 0, 8 );
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( dbNm );
+var db1 = db.getSiblingDB( dbNm + "-수집" );
+
+var col0 = db0.getCollection( targetColNm );
+var col1 = db1.getCollection( nm_col + "-LIST" );
+var col2 = db1.getCollection( nm_col + "-DETAIL" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var p1 = { _id : null };
+var p2 = { $set : { DETAIL : null } };
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = {
+	totalCount : 0
+	, errorResult : {
+		LIST_insert : []
+		, DETAIL_insert : []
+	}
+};
+
+var r0 = {};
+var r1 = {};
+
+
+col0.find({}).forEach(function(doc){
+	r0[ doc._id ] = {};
+})
+
+//List Insert;
+if( col1 )
+{
+	col1.find({}).forEach( function( doc ){
+		try
+		{
+			var a = doc.result.data.products;
+			var io;
+			var i=0, iLen=a.length;
+			for( ; i<iLen; ++i )
+			{
+				io = a[ i ];
+				//*/
+				if( !r0[ NumberLong( io.product_id ) ] )
+				{
+					r1[ io.product_id ] = {
+						_id : NumberLong( io.product_id )
+						, list_id : doc._id
+						, LIST : io
+						, DETAIL : null
+						, BRAND_COUPON : null
+					}
+				}
+				/*/
+				col0.insertOne({
+					_id : NumberLong( io.product_id )
+					, list_id : doc._id
+					, LIST : io
+					, DETAIL : null
+					, BRAND_COUPON : null
+				});
+
+				++result.totalCount;
+				
+				//*/
+
+				
+			}
+		}
+		catch( err )
+		{
+			result.errorResult.LIST_insert.push( err.message );
+		}
+	});
+}
+
+//DETAIL_HTML Insert;
+if( col2 )
+{
+	col2.find({}).forEach( function( doc ){
+		try
+		{
+			//*/
+			if( !r0[ NumberLong( doc._id ) ] ) r1[ doc._id ].DETAIL = doc;
+			/*/
+			p1._id = Number( doc._id );
+			p2.$set.DETAIL = doc;
+			col0.updateOne( p1, p2 );
+			//*/
+		}
+		catch( err )
+		{
+			result.errorResult.LIST_insert.push( err.message );
+		}
+	});
+}
+
+var a = 0;
+for(var s in r1 )
+{
+	col0.insertOne( r1[ s ] );
+	print(a);
+	++a;
+}
+
+var stats = col0.stats();
+
+result.totalCount = a;
+result.size = stats.size;
+result.count = stats.count;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

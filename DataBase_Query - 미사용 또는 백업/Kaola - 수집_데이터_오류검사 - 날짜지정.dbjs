@@ -1,0 +1,125 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _TARGET_DATE_ = "20190100";//지정한날짜포함 이후만 타겟이된다;
+var _SITE_NAME_ = "Kaola";
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+var _q0 = { $or : [
+			{ "LIST" : null }
+			, { "DETAIL" : null }
+			, { "DETAIL_HTML" : null }
+			, { "DETAIL_COMMENT_INFO" : null }
+			, { "DETAIL-PC" : null }
+		]
+	};
+
+var FN = function( _TARGET_DATE_ ){
+
+	print( _TARGET_DATE_ );
+
+	var nm_db = _SITE_NAME_ + "_" + _TARGET_DATE_.substr(0,4);
+
+	var db0 = db.getSiblingDB( nm_db );
+	var col0 = db0.getCollection( _TARGET_DATE_ );
+
+	var db1 = db.getSiblingDB( nm_db + "-ERROR" );
+	var col1 = db1.getCollection( _TARGET_DATE_ );
+
+	col1.drop();
+
+	var insertArr = [];
+	col0.find( _q0 ).forEach(function( doc ){
+		insertArr.push( doc )
+	})
+
+	var i = 0,iLen = insertArr.length,io;
+	for(;i<iLen;++i){
+		print( i )
+		io = insertArr[ i ];
+		try
+		{
+			col1.insertOne( io )
+		}
+		catch( er )
+		{
+			//er;
+			print( er.message );
+		}
+
+	}
+};
+
+var LOOP = function(START_DATE,END_DATE){
+
+	var db0 = db.getSiblingDB( _SITE_NAME_ + "_" + START_DATE.substr(0,4) + "-수집" );
+	var col0 = db0.getCollectionNames();
+
+	if( START_DATE != END_DATE )
+	{
+		var allCols = [];
+		var db1 = db.getSiblingDB( _SITE_NAME_ + "_" + END_DATE.substr(0,4) + "-수집" );
+		var col1 = db1.getCollectionNames();
+
+		var i = 0,iLen = col0.length,io;
+		for(;i<iLen;++i){
+			io = col0[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+		}
+
+		var i = 0,iLen = col1.length,io;
+		for(;i<iLen;++i){
+			io = col1[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP" ) allCols.push( io );
+		}
+	}
+	else
+	{
+		var allCols = [];
+		var i = 0,iLen = col0.length,io;
+		for(;i<iLen;++i){
+			io = col0[ i ].substr(0,8) ;
+
+			if( START_DATE * 1 > io.substr(0,8) * 1 ) continue;
+			if( END_DATE * 1 < io.substr(0,8) * 1 ) continue;
+
+			if( allCols.indexOf( io ) == -1 && io != "_TEMP"  ) allCols.push( io );
+		}
+
+	}
+
+	allCols.reverse();
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		FN( io )
+	}
+
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+//FN( "20190421" )
+LOOP( "20190621", "20190621");
+
+return;

@@ -1,0 +1,1 @@
+{ "description" : "Cancel Expire 문서 유효기간 ( 해당 문서의 유효기간( 해당 문서는 당 기간까지 유효함 ))", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }

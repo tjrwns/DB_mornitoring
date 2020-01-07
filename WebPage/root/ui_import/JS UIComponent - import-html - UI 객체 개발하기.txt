@@ -1,0 +1,13 @@
+1. UICompnent 개발(JavaScript Component)
+ - ./js/b2linkUIClass/
+ - 공통 인터페이스와 공통 로직(비지니스데이터 관련 로직 제외)이 포함된 추상클래스는 아니지만 성향이 포함된 클래스 객체
+
+2. <import-html> 개발
+ - ./ui_import/
+ - JS Component를 상속 또는 내부 인스턴스로 보유하든 등의 형태로 API접근이 가능하고 추가되야하는 비지니스 공통 인터페이스 추가
+
+3. <import-html>를 사용한 Business HTML, JS 개발
+ - ./ui_template/
+ - ./ui_import/ 의 객체들의 인터페이스에서 필요로 하는 비지니스를 설정하고 실제 비지니스 로직이 심어져 있는 객체
+
+4. 화면에 띄워서 테스트 하기

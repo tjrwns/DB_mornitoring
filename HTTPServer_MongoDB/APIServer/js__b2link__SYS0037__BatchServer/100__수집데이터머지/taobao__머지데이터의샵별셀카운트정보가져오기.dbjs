@@ -1,0 +1,137 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__머지데이터의샵별셀카운트정보가져오기.dbjs";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r1 = [];
+
+var totalSC = 0;
+var totalSA = 0;
+
+col0.find({}).forEach( function( doc ){
+	if( doc.seller == null ) return;
+
+	var SC = 0;
+
+	try
+	{
+		if ( doc.apiStack[ 0 ].value.item.sellCount )
+		{
+			var _tmpSellCount = doc.apiStack[ 0 ].value.item.sellCount
+			if( _tmpSellCount.indexOf( "+" ) == -1 ) SC = NumberInt( doc.apiStack[ 0 ].value.item.sellCount );
+			else if( _tmpSellCount.indexOf( "万" ) != -1 )
+			{
+				SC = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000 );
+			}
+			else
+			{
+				SC = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1 );
+			}
+		}
+	}
+	catch( e )
+	{
+		//에러;
+		SC = NumberInt( 0 );
+	}
+
+	var price = 0;
+
+	try
+	{
+		var price = doc.apiStack[ 0 ].value.price.price.priceText;
+		if( -1 != price.indexOf( "-" ) )
+		{
+			var a = price.split( "-" );
+			price = parseFloat( a[ 1 ] );
+		}
+		else price = parseFloat( price );
+	}
+	catch( er )
+	{
+		//er;
+		price = 0;
+	}
+
+	var siteType = "Taobao";
+	try
+	{
+		if( !doc.apiStack[ 0 ].value.trade.isBanSale4Oversea ) siteType = "Tmall";
+	}
+	catch( er )
+	{
+		//er;
+		siteType = "unknown";
+	}
+
+	var t0 = doc.seller;
+	var key = t0.shopId;
+
+	if( t0.shopName ) var shopName = t0.shopName;
+	else var shopName = key
+
+	var t1 = r0[ key ];
+
+	if( !t1 )
+	{
+		t1 = r0[ key ] = {};
+		t1.shopName = shopName;
+		t1.siteType = siteType;
+		t1.sellCount = SC;
+		t1.shopId = key;
+		t1.sellAmount = price * SC;
+
+		totalSC += SC;
+		totalSA += price * SC;
+	}
+	else
+	{
+		t1.sellCount += SC;
+		t1.sellAmount += price * SC;
+
+		totalSC += SC;
+		totalSA += price * SC;
+	}
+
+});
+
+var io;
+var _to;
+for( var s in r0 )
+{
+	io = r0[ s ];
+	_to = {};
+	_to.shopId = io.shopId;
+	_to.siteType = io.siteType;
+	_to.name = io.shopName;
+	_to.value = io.sellCount;
+	_to.sellAmount = io.sellAmount.toFixed(2);
+
+	_to.ratioSC = (( _to.value / totalSC ) * 100).toFixed( 2 );
+	_to.ratioSA = (( _to.sellAmount / totalSA ) * 100).toFixed( 2 );
+
+	r1.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = r1.sort( function( a, b ){ return b.value - a.value; });
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

@@ -1,0 +1,10 @@
+border: solid 1px #000;
+border-radius: 0px;
+
+//display: inline-table;
+
+position: absolute;
+
+padding: 0px 0px 10px 0px;
+
+background-color: #fff;

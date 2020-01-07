@@ -1,0 +1,123 @@
+var db0 = db.getSiblingDB( "goods_list_2019" );
+var cols = []
+db0.getCollectionNames().forEach(function(col){
+
+	if( Number(col) > 20190720 ) db0.getCollection( col ).drop();
+
+});
+
+
+//------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "daily_master_h5" );
+var col0 = db0.getCollection( "daily_master" );
+col0.remove({"date" : { $gte : ISODate("2019-10-20T00:00:00.000Z"),}})
+
+//------------------------------------------------------------;
+
+
+var db0 = db.getSiblingDB( "graph_data" );
+var col0 = db0.getCollection( "daily_data_by_shop" );
+var col1 = db0.getCollection( "daily_data_by_sku" );
+var col2 = db0.getCollection( "daily_sku_by_shop" );
+var col3 = db0.getCollection( "daily_sales_by_brand" );
+var col4 = db0.getCollection( "daily_product_by_shop" );
+
+
+col0.remove({"date_of_value.a" : { $gte : ISODate("2019-10-20T00:00:00.000Z"),}})
+col1.remove({"date_of_value.a" : { $gte : ISODate("2019-10-20T00:00:00.000Z"),}})
+col2.remove({"date_of_value.a" : { $gte : ISODate("2019-10-20T00:00:00.000Z"),}})
+col3.remove({"date_of_value.a" : { $gte : ISODate("2019-10-20T00:00:00.000Z"),}})
+col4.remove({"date_create.a" : { $gte : ISODate("2019-10-20T00:00:00.000Z"),}})
+
+//------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "graph_data" );
+var col0 = db0.getCollection( "monthly_brand_pricelist_per_PIMS" );
+var col1 = db0.getCollection( "monthly_brand_salesamount_by_channel" );
+var col2 = db0.getCollection( "monthly_brand_top3PIMS_by_shop" );
+var col3 = db0.getCollection( "monthly_brand_top5_shop" );
+
+col0.remove({year : 2019,month : 7 })
+col1.remove({year : 2019,month : 7 })
+col2.remove({year : 2019,month : 7 })
+col3.remove({year : 2019,month : 7 })
+
+
+//------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "graph_data" );
+var col0 = db0.getCollection( "week_summary_by_brand" );
+var col1 = db0.getCollection( "week_top3_by_platform" );
+var col2 = db0.getCollection( "week_top3_sales_amount_by_brand" );
+var col3 = db0.getCollection( "week_top5_sales_quantity" );
+
+col0.remove({year : "2019", week : { $gte : 22} })
+col1.remove({year : "2019", week : { $gte : 22} })
+col2.remove({year : "2019", week : { $gte : 22} })
+col3.remove({year : "2019", week : { $gte : 22} })
+
+//------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "Taobao_2019--비교" );
+var cols = db0.getCollectionNames();
+
+var _tDate = 20190922
+var _tCols = []
+cols.forEach(function(col){
+	if( _tDate < Number( col.split("--")[0] ) ) _tCols.push( col )
+})
+
+ _tCols.forEach(function(col){
+ 	db0.getCollection( col ).drop()
+ })
+
+db0.getCollection( "STATISTICS" ).remove({ _id : { $gt : _tDate }});
+
+//------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+var _tDate = 20190922
+
+//db0.getCollection('dashboard-daily').remove({ _id : { $gt : _tDate }});
+//db0.getCollection('dashboard-ERROR').remove({ _id : { $gt : _tDate }});
+
+var _tId = []
+db0.getCollection('dashboard-detail').forEach(function(d){
+	if( _tDate < Number( d._id.split("_")[0] ) ) _tId.push( d._id )
+})
+
+_tId.forEach(function(_id){
+	db0.getCollection( dashboard-detail ).remove({ _id : _id })
+})
+
+
+//------------------------------------------------------------;
+//그래프데이터전체 삭제;
+
+var db0 = db.getSiblingDB( "graph_datda" );
+var cols = db0.getCollectionNames();
+
+cols.forEach(function( col ){
+	print( col );
+	//db0.getCollection( col ).remove({});
+})
+
+//------------------------------------------------------------;
+
+//그래프데이터전체 이름변경;
+
+var db0 = db.getSiblingDB( "graph_data" );
+var cols = db0.getCollectionNames();
+cols
+var r = []
+cols.forEach(function( col ){
+	print( col );
+
+     //   var colNm = col + "__20190930"
+            var colNm = col.split( "_New__20190930" )[ 0 ]
+    if( col.indexOf( "_New__20190930" ) != -1 ) db0.getCollection( col ).renameCollection( colNm )
+	//if( col.indexOf( "_New" ) != -1 ) db0.getCollection( col ).renameCollection()
+})
+r

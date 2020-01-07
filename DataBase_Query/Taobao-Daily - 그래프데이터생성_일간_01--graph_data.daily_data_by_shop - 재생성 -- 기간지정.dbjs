@@ -1,0 +1,257 @@
+var start = new Date();
+
+//----------------------------------------------------------------------------------------------------;
+
+//	VARIABLE
+
+//----------------------------------------------------------------------------------------------------;
+
+var key,io,d;
+var _to = {};
+var r = [];
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DB;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$category = db.getSiblingDB( "category" );//카테고리;
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );//일간 마스터 데이타;
+var _db$brand = db.getSiblingDB( "brand" );//일간 마스터 데이타;
+var _db$graph_data = db.getSiblingDB( "graph_data" );//일간 마스터 데이타;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$brand_basic = _db$brand.brand_basic;
+var _col$category_store_type = _db$category.category_store_type;//스토어 타입;
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );//일간 마스터 데이터;
+var _col$daily_data_by_shop = _db$graph_data.daily_data_by_shop;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { cd$product_master : 1, shop_name : 1, keyword : 1, date: 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var CD_SHOP_TYPE = { "海外旗舰店" : "CST002" , "旗舰店" : "CST001", "天猫" : "CST003", "淘宝": "CST004" }
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENTS;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _doc$category_store_type;//스토어 타입;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETERS
+
+//----------------------------------------------------------------------------------------------------;
+
+var _p1 = { nm_cn : "" }; // category_store_type;
+
+var _q0 = {
+	cd$product_master : { $exists : true, $ne : "" },
+	shop_name : { $exists : true, $ne : "" },
+	keyword : { $exists : true, $ne : "" },
+	date : {
+		$gte : null, $lte : null
+	}
+};
+
+var _q1 = { "date_of_value.a" : { $gte : null, $lte :null } };
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( day ){
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  day + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	//삭제할 문서가 없기 때문에 주석처리;
+	//_q1[ "date_of_value.a" ].$gte = ISODate( day + "T00:00:00.000Z" );
+	//_q1[ "date_of_value.a" ].$lte = ISODate( day + "T23:59:59.999Z" );
+	//_col$daily_data_by_shop.remove( _q1 );
+
+	_q0.date.$gte = ISODate( day + "T00:00:00.000Z" );
+	_q0.date.$lte = ISODate( day + "T23:59:59.999Z" );
+
+	_to = {};
+	_col$daily_master.find( _q0 ).forEach( function( doc ) {
+
+		key = doc.shop_type + "_" + doc.shop_name.toUpperCase() + "_" + doc.cd$product_master;//키를 생성한다.;
+
+		var daily_sold_quantity_tmp = 0;
+		if ( doc.Daily_Sales ) daily_sold_quantity_tmp = doc.Daily_Sales;
+
+		if( _to[ key ] )
+		{
+			_to[ key ].total_sell_quantity += daily_sold_quantity_tmp;
+			_to[ key ].total_sales_amount  += daily_sold_quantity_tmp * ( doc.price_max ? doc.price_max : 0 )
+
+		}
+		else
+		{
+			_to[ key ] = {};
+
+			/*/
+			// store_type 에 대해 category code 를 가져 온다.
+			_p1.nm_cn = doc.shop_type;
+			_doc$category_store_type = _col$category_store_type.findOne( _p1 );
+			if ( !_doc$category_store_type  ) var _cd$category_store_type = doc.shop_type;
+			else var _cd$category_store_type = _doc$category_store_type.cd;
+			/*/
+			try
+			{
+				var _cd$category_store_type = CD_SHOP_TYPE[ doc.shop_type ];
+			}
+			catch( er )
+			{
+				//er;
+				var _cd$category_store_type = doc.shop_type;
+			}
+
+
+			//*/
+
+			_to[ key ] = {
+				_ids$member : {
+					register : NumberInt( -1 )
+					, modifier : NumberInt( -1 )
+				}
+				, _id$brand_basic : NumberInt( doc._id$brand_basic )
+				, cd$product_master : doc.cd$product_master
+				, _id$shop_basic : NumberInt( -1 )
+				, nm$shop_basic : doc.shop_name.toUpperCase()
+				, cd$category_store_type : _cd$category_store_type
+				, date_create : { a : ISODate( day + "T00:00:00.000Z") }
+				, date_update : {}
+				, date_of_value : { a : doc.date ? doc.date : ISODate( day ) }
+				, total_sell_quantity : NumberInt( daily_sold_quantity_tmp )
+				, total_sales_amount : NumberInt( daily_sold_quantity_tmp ) * ( doc.price_max ? doc.price_max : 0 )
+
+			};
+
+			//_to[ key ] = _p_model;
+
+		}
+	});
+
+	for ( key in _to ) {
+		d = _to[ key ];
+		d._ids$member.register = NumberInt( d._ids$member.register );
+		d._ids$member.modifier = NumberInt( d._ids$member.modifier );
+		d._id$brand_basic = NumberInt( d._id$brand_basic );
+		d._id$shop_basic = NumberInt( d._id$shop_basic );
+
+		r.push( _to[ key ] );
+
+		if( r.length == 900 )
+		{
+			try
+			{
+				_col$daily_data_by_shop.insertMany( r );
+				r.length = 0;
+			}
+			catch( er )
+			{
+				//
+			}
+		}
+
+	}
+
+	try
+	{
+		_col$daily_data_by_shop.insertMany( r );
+		r.length = 0;
+	}
+	catch( er )
+	{
+		//
+	}
+
+}
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate )
+		{
+			var convert_toString = io.substr(0,4) + "-" + io.substr(4,2) + "-" + io.substr(6,2);
+			result.push( convert_toString );
+		}
+	}
+
+	return result;
+};
+
+
+/*
+ * 로직을 식행하는 함수
+ * @param {Number} startDate
+ * @param {Number} endDate
+ */
+var FN_LOGIC =  function( startDate, endDate ){
+	var targetDays = getTargetDays( startDate, endDate );
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = targetDays[ i ];
+		FN( io )
+	}
+
+	return;
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+
+FN_LOGIC( 20180401, 20181231 );
+FN_LOGIC( 20190101, 20190929 );
+
+//FN_LOGIC( 20181001, 20181231 );
+//FN_LOGIC( 20190704, 20190706 );
+
+
+return

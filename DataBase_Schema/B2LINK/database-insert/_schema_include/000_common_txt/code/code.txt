@@ -1,0 +1,1 @@
+, "type" : "string", "length" : NumberInt( 12 )

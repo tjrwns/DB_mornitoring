@@ -1,0 +1,11 @@
+<div class="id-fancygrid" style="margin:0;height:100%;min-width:300px;">
+
+	<!--window0--!>
+		<div class="ui action input" style="width: 100%;margin-bottom:10px;">
+			<input class="id-input-import-file-path" type="text" placeholder="Search...">
+			<button class="id-btn-import-file-load ui button">Search</button>
+		</div>
+		<div id="div-fancygrid-0"style="width:100%;"></div>
+	<!--window0--!>
+
+</div>

@@ -1,0 +1,20 @@
+{
+	"02" : NumberInt( 1 ),
+	"031" : NumberInt( 1 ),
+	"032" : NumberInt( 1 ),
+	"033" : NumberInt( 1 ),
+	"041" : NumberInt( 1 ),
+	"042" : NumberInt( 1 ),
+	"043" : NumberInt( 1 ),
+	"044" : NumberInt( 1 ),
+	"049" : NumberInt( 1 ),
+	"051" : NumberInt( 1 ),
+	"052" : NumberInt( 1 ),
+	"053" : NumberInt( 1 ),
+	"054" : NumberInt( 1 ),
+	"055" : NumberInt( 1 ),
+	"061" : NumberInt( 1 ),
+	"063" : NumberInt( 1 ),
+	"062" : NumberInt( 1 ),
+	"064" : NumberInt( 1 )
+}

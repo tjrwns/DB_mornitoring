@@ -1,0 +1,200 @@
+//----------------------------------------------------------------------------------------------------;
+
+//	VARIABLE
+
+//----------------------------------------------------------------------------------------------------;
+
+var key,io,d;
+var _to = {};
+var r = [];
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DB;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$category = db.getSiblingDB( "category" );//카테고리;
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );//일간 마스터 데이타;
+var _db$brand = db.getSiblingDB( "brand" );//일간 마스터 데이타;
+var _db$graph_data = db.getSiblingDB( "graph_data" );//일간 마스터 데이타;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+//var _col$brand_basic = _db$brand.brand_basic;
+var _col$category_store_type = _db$category.category_store_type;//스토어 타입;
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );//일간 마스터 데이터;
+var _col$daily_data_by_shop = _db$graph_data.daily_data_by_shop;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { cd$product_master : 1, shop_name : 1, keyword : 1, date: 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENTS;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _doc$category_store_type;//스토어 타입;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETERS
+
+//----------------------------------------------------------------------------------------------------;
+
+var _p1 = { nm_cn : "" }; // category_store_type;
+
+var _q0 = {
+	cd$product_master : { $exists : true, $ne : "" },
+	shop_name : { $exists : true, $ne : "" },
+	keyword : { $exists : true, $ne : "" },
+	date : { $gte : null , $lte : null }
+};
+
+var _q1 = { "date_of_value.a" : { $gte : null, $lte :null } };
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  TARGET_DATE + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	//_q1[ "date_of_value.a" ].$gte = ISODate( TARGET_DATE + "T00:00:00.000Z" );
+	//_q1[ "date_of_value.a" ].$lte = ISODate( TARGET_DATE + "T23:59:59.999Z" );
+	//_col$daily_data_by_shop.remove( _q1 );
+
+	_q0.date.$gte = ISODate( TARGET_DATE + "T00:00:00.000Z" );
+	_q0.date.$lte = ISODate( TARGET_DATE + "T23:59:59.999Z" );
+
+	_col$daily_master.find( _q0 ).forEach( function( doc ) {
+
+		key = doc.shop_type + "_" + doc.shop_name.toUpperCase() + "_" + doc.cd$product_master;//키를 생성한다.;
+
+		var daily_sold_quantity_tmp = 0;
+		if ( doc.Daily_Sales ) daily_sold_quantity_tmp = doc.Daily_Sales;
+
+		if( _to[ key ] )
+		{
+			_to[ key ].total_sell_quantity += daily_sold_quantity_tmp;
+			_to[ key ].total_sales_amount  += daily_sold_quantity_tmp * ( doc.price_max ? doc.price_max : 0 )
+
+		}
+		else
+		{
+			_to[ key ] = {};
+
+			// store_type 에 대해 category code 를 가져 온다.
+			_p1.nm_cn = doc.shop_type;
+			_doc$category_store_type = _col$category_store_type.findOne( _p1 );
+			if ( !_doc$category_store_type  ) _cd$category_store_type = doc.shop_type;
+			else _cd$category_store_type = _doc$category_store_type.cd;
+
+			var _p_model = {
+				_ids$member : {
+					register : NumberInt( -1 )
+					, modifier : NumberInt( -1 )
+				}
+				, _id$brand_basic : NumberInt( doc._id$brand_basic )
+				, cd$product_master : doc.cd$product_master
+				, _id$shop_basic : NumberInt( -1 )
+				, nm$shop_basic : doc.shop_name.toUpperCase()
+				, cd$category_store_type : _cd$category_store_type
+				, date_create : { a : ISODate( TARGET_DATE + "T00:00:00.000Z") }
+				, date_update : {}
+				, date_of_value : { a : doc.date ? doc.date : ISODate( TARGET_DATE ) }
+				, total_sell_quantity : NumberInt( daily_sold_quantity_tmp )
+				, total_sales_amount : NumberInt( daily_sold_quantity_tmp ) * ( doc.price_max ? doc.price_max : 0 )
+			};
+
+			_to[ key ] = _p_model;
+		}
+	});
+
+	for ( key in _to ) {
+
+		d = _to[ key ];
+		d._ids$member.register = NumberInt( d._ids$member.register );
+		d._ids$member.modifier = NumberInt( d._ids$member.modifier );
+		d._id$brand_basic = NumberInt( d._id$brand_basic );
+		d._id$shop_basic = NumberInt( d._id$shop_basic );
+
+		if( r.length == 900 )
+		{
+			try
+			{
+				_col$daily_data_by_shop.insertMany( r );
+				r.length = 0;
+			}
+			catch( er )
+			{
+				//
+			}
+		}
+		else
+		{
+			r.push( _to[ key ] );
+		}
+	}
+
+	try
+	{
+		_col$daily_data_by_shop.insertMany( r );
+	}
+	catch( er )
+	{
+		//
+	}
+
+};
+
+var dateToFormat = {
+	"YYYYMMDD" : function( str  ){
+
+		var yyyy = str.substr(0,4);
+		var mm = str.substr(4,2);
+		var dd = str.substr(6,2);
+
+		return yyyy + pad( mm ) + pad( dd )
+	}
+	, "YYYY-MM-DD" : function( str ){
+
+		var yyyy = str.substr(0,4);
+		var mm = str.substr(4,2);
+		var dd = str.substr(6,2);
+
+		return yyyy + "-" + pad( mm ) + "-" + pad( dd );
+	}
+}
+
+var pad = function( data ){
+	return data.toString().length > 1 ? data.toString() : "0" + data.toString()
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+var TARGET_DATE = "<!=TARGET_DATE=!>"
+FN( dateToFormat[ "YYYY-MM-DD" ]( TARGET_DATE ) );
+
+return;

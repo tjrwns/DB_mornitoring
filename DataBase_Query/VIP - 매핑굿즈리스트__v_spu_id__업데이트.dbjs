@@ -1,0 +1,164 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "VIP--MappingResource" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var col0 = db0.getCollection( "VIP--MappingResource" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	CREATE_INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	QUERY;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _q0 = {};
+var _q1 = { _id : null };
+var _q2 = { _id : null };
+
+var set00 = { $set : { v_spu_id : "" } }
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _to;
+var mappingData;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+var refineData = function( date ){
+
+	var i = 0;
+	var year = date.toString().substr(0,4)
+	var colNm = date.toString();
+
+	var goodsListDB = db.getSiblingDB( "goods_list_" + year );
+	var goodsListCol = goodsListDB.getCollection( colNm );
+	goodsListCol.find( _q0 ).forEach(function(doc){
+		_q1._id = doc.product_no;
+		var resultDoc = col0.findOne( _q1 )
+		if( resultDoc )
+		{
+
+//			if( doc.v_spu_id != resultDoc.v_spu_id.valueOf().toString() )
+//			{
+
+
+				_q2._id = doc._id;
+				var s = resultDoc.v_spu_id.toString();
+				set00.$set.v_spu_id = s.slice( 12, s.length - 2 );
+
+//				goodsListCol.updateOne( _q2, set00 )
+
+				++i
+				print( i + " / " + doc.product_no + " / " + doc.v_spu_id + " / " + set00.$set.v_spu_id )
+			//}
+
+		}
+	})
+
+
+
+}
+
+
+//var s = doc0.v_spu_id.toString();
+//col.updateOne({ _id : doc._id }, { $set : { v_spu_id : s.slice( 12, s.length - 2 ) } });
+
+
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "VIP_2018" )
+	var db$2019 = db.getSiblingDB( "VIP_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate ) result.push( io )
+	}
+
+	return result;
+};
+
+var avgByArr = function( arr ){
+	if( !arr || arr.length == 0 ) return 0;
+	var i = 0, iLen = arr.length,io;
+	var r = 0;
+
+	for(;i<iLen;++i){
+		io = arr[ i ];
+		r =  r + io;
+	}
+	var avg = r / iLen;
+	return avg;
+}
+
+var dateNumberToArray = function( date ){
+	var _tmp = date.toString();
+	return [
+		NumberInt( _tmp.substr(0,4) )
+		, NumberInt( _tmp.substr(4,2) )
+		, NumberInt( _tmp.substr(6,2) )
+//		, NumberInt( 0 )
+//		, NumberInt( 0 )
+//		, NumberInt( 0 )
+	]
+}
+
+
+var FN = function( startDate, endDate ){
+
+	var targetDays = getTargetDays( startDate, endDate );
+
+//	printjson( targetDays )
+
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = Number( targetDays[ i ] );
+		print( "--------------------------------------------------" )
+		print( io + " - " + iLen + " -- " + Date() )
+		print( "--------------------------------------------------" )
+
+		refineData( io );
+	}
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+//FN( 20180430, 20181231 );
+FN( 20190324, 20190808 );
+//FN( 20190807, 20190808 );
+return;

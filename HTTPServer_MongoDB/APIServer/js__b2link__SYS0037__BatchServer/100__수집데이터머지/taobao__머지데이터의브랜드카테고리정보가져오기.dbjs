@@ -1,0 +1,185 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__머지데이터의브랜드카테고리정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+var brand_id = "<!=brand_id=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var db1 = db.getSiblingDB( "_CATEGORY-TAOBAO" );
+var db2 = db.getSiblingDB( "category" );
+
+var col0 = db0.getCollection( nm_col );
+var col1 = db1.getCollection( "id_brand-20191108" );
+var col2 = db2.getCollection( "category_product_type" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var _q00 = { _id : null };
+var _q01 = { "item.brandValueId" : null };
+
+//----------------------------------------------------------------------------------------------------;
+
+var r0 = {};
+var r2 = {};
+var r1 = {
+	info : {
+		date : nm_col
+		, brandNm : ""
+		, brandId : brand_id
+		, totalSC : 0
+		, totalSA : 0
+	}
+	, cateInfo : {}
+	, legend : []
+	, data : []
+};
+
+var brands = {};
+var categories = {};
+
+//var totalSC = 0;
+//var totalSA = 0;
+
+
+//----------------------------------------------------------------------------------------------------;
+
+if( !brands[ brand_id ] )
+{
+	_q00._id = NumberLong( brand_id );
+	var brandDoc = col1.findOne( _q00 )
+	if( !brandDoc ) r1.info.brandNm = brand_id;
+	else r1.info.brandNm = brandDoc.b;
+	brands[ brand_id ] = r1.info.brandNm;
+}
+else r1.info.brandNm = brands[ brand_id ];
+
+_q01[ "item.brandValueId" ] = brand_id;
+col0.find( _q01 ).forEach( function( doc ){
+	if( doc.item == null ) return;
+
+	var SC = 0;
+
+	try
+	{
+		if ( doc.apiStack[ 0 ].value.item.sellCount )
+		{
+			var _tmpSellCount = doc.apiStack[ 0 ].value.item.sellCount
+			if( _tmpSellCount.indexOf( "+" ) == -1 ) SC = NumberInt( doc.apiStack[ 0 ].value.item.sellCount );
+			else if( _tmpSellCount.indexOf( "万" ) != -1 )
+			{
+				SC = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000 );
+			}
+			else
+			{
+				SC = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1 );
+			}
+		}
+	}
+	catch( e )
+	{
+		//에러;
+		SC = NumberInt( 0 );
+	}
+
+	var price = 0;
+
+	try
+	{
+		var price = doc.apiStack[ 0 ].value.price.price.priceText;
+		if( -1 != price.indexOf( "-" ) )
+		{
+			var a = price.split( "-" );
+			price = parseFloat( a[ 1 ] );
+		}
+		else price = parseFloat( price );
+	}
+	catch( er )
+	{
+		//er;
+		price = 0;
+	}
+
+
+	var cateNm;
+	if( !categories[ doc.item.categoryId ] ) categories[ doc.item.categoryId ] = "";
+
+	_q00._id = Number( doc.item.categoryId );
+	var doc00 = col2.findOne( _q00 );
+
+	if( doc00 ) catName = doc00.nm;
+	else catName = doc.item.categoryId;
+
+	categories[ doc.item.categoryId ] = key = catName;
+
+	var t0 = r0[ key ];
+	if( !t0 )
+	{
+		t0 = r0[ key ] = {};
+
+		t0.categories = {}
+		t0.categories[ catName ] = {};
+		t0.categories[ catName ].value = 0;
+		t0.categories[ catName ].cateId = doc.item.categoryId;
+		t0.categories[ catName ].brandId = brand_id;
+		t0.sellCount = SC;
+		t0.sellAmount = price * SC;
+
+		t0.categories[ catName ].value += SC;
+
+		r1.info.totalSC += SC;
+		r1.info.totalSA += price * SC;
+	}
+	else
+	{
+		t0.sellCount += SC;
+		t0.sellAmount += price * SC;
+
+		if( !t0.categories[ catName ] )
+		{
+			t0.categories[ catName ] = {};
+			t0.categories[ catName ].value = 0
+		}
+
+		t0.categories[ catName ].value += SC;
+
+		r1.info.totalSC += SC;
+		r1.info.totalSA += price * SC;
+	}
+});
+
+
+var io;
+var _to00;
+for( var s in r0 )
+{
+	io = r0[ s ];
+	var z,zo;
+	for( z in io.categories ){
+		zo = io.categories[ z ];
+		_to00 = {};
+		_to00.name = z;
+		_to00.brandId = zo.brandId;
+		_to00.cateId = zo.cateId;
+		_to00.value = zo.value;
+		r1.data.push( _to00 );
+		if( !r1.legend[ z ] ) r1.legend.push( z );
+		r1.cateInfo[ z ] = zo.cateId;
+	}
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//var result = r1.sort( function( a, b ){ return b.value - a.value; });
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r1
+	, m : "OK"
+};

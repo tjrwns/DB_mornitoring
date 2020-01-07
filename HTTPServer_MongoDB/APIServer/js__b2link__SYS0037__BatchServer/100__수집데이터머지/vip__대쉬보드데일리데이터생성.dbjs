@@ -1,0 +1,84 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__대쉬보드데일리데이터생성.dbjs";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db.split("-")[0] );
+var db1 = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+var col0 = db0.getCollection( nm_col.split("_")[0] );
+var col1 = db1.getCollection( "dashboard-daily" );
+var colInfo = db0.getCollection( nm_col.split("_")[0]  ).stats();
+
+//----------------------------------------------------------------------------------------------------;
+
+var _to = {};
+var byte = 1024;
+
+var r0 = {};
+var r1 = {};
+var brand_cnt = 0;
+var shop_cnt = 0;
+var date = nm_col.split( "_" )[ 0 ];
+
+col0.find({}).forEach( function( doc ){
+	if( doc.LIST == null ) return;
+
+	var t0 = r0[ doc.LIST.brand_name ];
+	var t1 = r1[ doc.LIST.brand_store_sn ];
+
+	if( !t0 )
+	{
+		t0 = r0[ doc.LIST.brand_name ] = {};
+		brand_cnt = brand_cnt + 1;
+	}
+
+	if( !t1 )
+	{
+		t1 = r1[ doc.LIST.brand_store_sn ] = {};
+		shop_cnt = shop_cnt + 1;
+	}
+});
+
+_to._id = NumberInt( date );
+_to.year = NumberInt( date.substr( 0, 4 ) );
+_to.month = NumberInt( date.substr( 4, 2 ) );
+_to.day = NumberInt( date.substr( 6, 2 ) );
+_to.date = date;
+
+_to.size = {
+	byte : NumberInt( colInfo.size )
+	, kb : ( colInfo.size / byte ).toFixed( 3 )
+	, mb : ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 3 )
+	, gb : ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 3 )
+};
+
+_to.count = NumberInt( colInfo.count );
+_to.shop_count = NumberInt( shop_cnt );
+_to.brand_count = NumberInt( brand_cnt );
+
+try
+{
+	var r = col1.isnertOne( _to );
+}
+catch( er )
+{
+	var r = col1.updateOne(
+		  { _id : _to._id }
+		, { $set: _to }
+		, { upsert: true }
+	);
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

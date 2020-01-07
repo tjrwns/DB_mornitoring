@@ -1,0 +1,11 @@
+{
+	"description" : "수량 단위(unit_of_measurement) - 해당 제품을 구성하는 단위 (예 pkg : 10 )", "exampleValue" : { "nm" : "pkg", "quantity" : 10 }, "type" : "object"
+
+	, "properties" : {
+		//표시 문자;
+		"nm" : { "description" : "표시문자", "exampleValue" : "pkg"<include>000_common_txt/string_default.txt</include> }
+
+		//수량 quantity;
+		, "quantity" : { "description" : "해당 단위에 포함된 수량", "exampleValue" : 10<include>000_common_txt/uint_len0.txt</include> }
+	}
+}

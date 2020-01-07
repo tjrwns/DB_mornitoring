@@ -1,0 +1,81 @@
+//-------------------------------------------------------
+
+// DEFINE;
+
+//-------------------------------------------------------
+
+var _SITE_NAME_ = "Kaola";
+
+//*/
+var db00 = db.getSiblingDB( "Kaola_2018" );
+var db01 = db.getSiblingDB( "Kaola_2018-N" );
+var db10 = db.getSiblingDB( "Kaola_2019" );
+var db11 = db.getSiblingDB( "Kaola_2019-N" );
+
+/*/
+
+//test code;
+var db00 = db.getSiblingDB( "Kaola_2018_test" );
+var db01 = db.getSiblingDB( "Kaola_2018_test-N" );
+var db10 = db.getSiblingDB( "Kaola_2019_test" );
+var db11 = db.getSiblingDB( "Kaola_2019_test-N" );
+
+//*/
+
+
+//-------------------------------------------------------
+
+// PARAMETER;
+
+//-------------------------------------------------------;
+
+//이동할 브래드아이디의 배열;
+var shopIdArr = [
+
+	//삭제 및 이동할 브랜드아이디를 추가할 수 있다.
+	3322231//Rakuten - shopId, type : Number;
+];
+
+//-------------------------------------------------------;
+
+var q0 = { "DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId" : { $in : shopIdArr } };
+
+var P0 = { _id : null };
+
+//-------------------------------------------------------;
+
+//	DEFINE - FUNCTION;
+
+//-------------------------------------------------------;
+
+var FN = function( originalDB, nDB ){
+
+	var cols = originalDB.getCollectionNames();
+	cols.forEach(function( col ){
+		print( "-------------------------------------------------------" );
+		print( originalDB + " - " + col + " / " + cols.length );
+		print( "-------------------------------------------------------" );
+
+		var removeTargetCol = originalDB.getCollection( col );
+		var insertTargetCol = nDB.getCollection( col );
+
+		removeTargetCol.find( q0 ).forEach(function(doc){
+
+			insertTargetCol.insertOne( doc );
+
+			P0._id = doc._id;
+			removeTargetCol.remove( P0 );
+		})
+	});
+};
+
+//-------------------------------------------------------;
+
+// LOGIC;
+
+//-------------------------------------------------------;
+
+//2018;
+FN( db00, db01 );
+//2019;
+FN( db10, db11 );

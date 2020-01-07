@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {Document} d { _"id" : NaN, "mid" : "", "mpw" : "", "nSignInFail" : NaN, ... }
+ * @return {uint} 0 or 1
+ */

@@ -1,0 +1,15 @@
+//Rank Priority;
+//-1000 : Exitor;
+//	 0 : Unauthorized;
+//1000 : Staff;
+//2000 : Manager;
+//3000 : Leaders;
+//4000 : Founders;
+//10000 : Admin;
+{
+	"description" : "Authority Code", "exampleValue" : 0<include>000_common_txt/int_len0.txt</include>
+
+	, "values" : [ -1000, 0, 1000, 2000, 3000, 4000, 10000 ]
+
+	, "valuesMap" : { "-1000" : 1, "0" : 1, "1000" : 1, "2000" : 1, "3000" : 1, "4000" : 1, "10000" : 1 }
+}

@@ -1,0 +1,56 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "graph_data" );
+var col0 = db0.getCollection( "daily_data_by_shop" );
+var col1 = db0.getCollection( "daily_data_by_sku" );
+var col2 = db0.getCollection( "daily_sku_by_shop" );
+var col3 = db0.getCollection( "daily_sales_by_brand" );
+var col4 = db0.getCollection( "daily_product_by_shop" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+/*
+ * String 타입의 데이트를 ISODate로 변환한다.
+ * @function
+ * @param {String} date
+ <code>
+	"20190101"
+ </code>
+ * @return {Object}
+ <code>
+	ISODate( "2019-01-01TT00:00:00.000Z" )
+ </code>
+ */
+var dateStringToISODate = function( date ){
+	var yyyy = date.substr( 0, 4 );
+	var mm = date.substr( 4, 2 );
+	var dd = date.substr( 6, 2 );
+	var r = yyyy + "-" + mm + "-" + dd + "T00:00:00.000Z"
+	return ISODate( r );
+};
+
+var FN = function( TARGET_DATE ){
+
+	var _t_date = dateStringToISODate( TARGET_DATE );
+
+	col0.remove({"date_of_value.a" : _t_date });
+	col1.remove({"date_of_value.a" : _t_date });
+	col2.remove({"date_of_value.a" : _t_date });
+	col3.remove({"date_of_value.a" : _t_date });
+	col4.remove({"date_create.a" : _t_date });
+
+};
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "<!=TARGET_DATE=!>" );

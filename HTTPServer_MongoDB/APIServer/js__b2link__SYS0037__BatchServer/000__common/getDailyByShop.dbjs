@@ -1,0 +1,51 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getDailyByShop.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "<!=nm_site=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "_STATISTICS--COMMON" );
+var col0 = db0.getCollection( "dashboard-daily" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	data : []
+	, size : {
+		byte : []
+		, kb : []
+		, mb : []
+		, gb : []
+	}
+	, count : []
+	, brand_count : []
+	, shop_count : []
+	, shopNm : _NM_SITE_
+};
+
+var sort00 = { _id : 1 };
+
+col0.find({}).sort( sort00 ).forEach( function( doc ){
+
+	r.data.push( doc.date );
+
+	r.size.byte.push( NumberInt( doc.size.byte ) );
+	r.size.kb.push( doc.size.kb );
+	r.size.mb.push( doc.size.mb );
+	r.size.gb.push( doc.size.gb );
+
+	r.count.push( NumberInt( doc.count ) );
+	r.brand_count.push( NumberInt( doc.brand_count ) );
+	r.shop_count.push( NumberInt( doc.shop_count ) );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

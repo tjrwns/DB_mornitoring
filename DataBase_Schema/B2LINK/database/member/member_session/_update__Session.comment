@@ -1,0 +1,6 @@
+/**
+ * update
+ * @function
+ * @param {Object} d Collection's Session Object { "_id" : NaN, "mid" : "", "sid" : "", "d_ex" : "" }
+ * @return {uint} 1
+ */

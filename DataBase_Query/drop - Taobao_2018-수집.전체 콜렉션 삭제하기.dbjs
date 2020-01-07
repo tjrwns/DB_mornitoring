@@ -1,0 +1,17 @@
+var db0 = db.getSiblingDB( "Taobao_2018-수집" );
+
+var cols = db0.getCollectionNames();
+
+var io;
+var i=0, iLen=cols.length;
+for( ; i<iLen; ++i ){
+	io = cols[ i ];
+
+	try{
+		db0.getCollection( io ).drop();
+		print( "[ DROP COMPLETE ] - " + io );
+	}
+	catch( er ){
+		print( "[ ERROR ] - " + er );
+	}
+}

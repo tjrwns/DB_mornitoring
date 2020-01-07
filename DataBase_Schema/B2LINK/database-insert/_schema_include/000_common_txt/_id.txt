@@ -1,0 +1,1 @@
+, "exampleValue" : NumberInt( 0 )<include>000_common_txt/uint_len0.txt</include>, "minValue" : NumberInt( 0 ), "maxValue" : NumberInt( 999999999 )

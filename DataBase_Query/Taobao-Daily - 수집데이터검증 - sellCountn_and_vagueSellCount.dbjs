@@ -1,0 +1,189 @@
+//------------------------------------------------------------------------------------;
+
+//DEFINE;
+
+//------------------------------------------------------------------------------------;
+
+//------------------------------------------------------------------------------------;
+
+//DB;
+
+//------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "Taobao_2019-수집" );
+var db1 = db.getSiblingDB( "Result" );
+
+//------------------------------------------------------------------------------------;
+
+//COLLECTION;
+
+//------------------------------------------------------------------------------------;
+
+var cols = db0.getCollectionNames();
+
+//------------------------------------------------------------------------------------;
+
+//VARIAVLE;
+
+//------------------------------------------------------------------------------------;
+
+//------------------------------------------------------------------------------------;
+
+//FUNCTION;
+
+//------------------------------------------------------------------------------------;
+
+var FN00 = function( date ){
+	print( "---------------------------------------------" );
+	print( "date : " + date );
+
+	var t_cols = [];
+	cols.forEach(function(col){ if( col.indexOf( date ) != -1 ) t_cols.push( col ) });
+
+	var r = []
+	var r_error = [];
+	t_cols.forEach(function(col){
+
+		db0.getCollection( col ).find({}).forEach(function(d){
+			try
+			{
+				d.apiStack[0].value.item.colNm = col
+				d.apiStack[0].value.item._id = d._id
+				r.push( d.apiStack[0].value.item );
+			}
+			catch( er )
+			{
+				//er;
+				r_error.push( d );
+			}
+
+		})
+
+	})
+	printjson( r );
+	print( "---------------------------------------------" );
+
+	//return r;
+};
+
+var FN01 = function( date, goodsId ){
+	print( "---------------------------------------------" );
+	print( "date : " + date );
+	print( "goddsId : " + goodsId );
+
+	var t_cols = [];
+	cols.forEach(function(col){ if( col.indexOf( date ) != -1 ) t_cols.push( col ) });
+
+	var r = []
+	var r_error = [];
+	t_cols.forEach(function(col){
+
+		var d = db0.getCollection( col ).findOne({_id : goodsId })
+			try
+			{
+				d.apiStack[0].value.item.colNm = col
+				d.apiStack[0].value.item._id = d._id
+				r.push( d.apiStack[0].value.item );
+			}
+			catch( er )
+			{
+				//er;
+				r_error.push( d );
+			}
+	})
+	printjson( r );
+	print( "---------------------------------------------" );
+	//return r;
+};
+
+var FN02 = function( date ){
+	print( "---------------------------------------------" );
+	print( "date : " + date );
+
+	var t_cols = [];
+	cols.forEach(function(col){ if( col.indexOf( date ) != -1 ) t_cols.push( col ) });
+
+	var r = {}
+	var r_error = [];
+	t_cols.forEach(function(col){
+		print( col )
+		db0.getCollection( col ).find({}).forEach(function(d){
+			try
+			{
+				if( !d.apiStack[0].value.item.sellCount )
+				{
+					d.apiStack[0].value.item.colNm = col
+					d.apiStack[0].value.item._id = d._id
+					if( !r[ d._id ] )
+					{
+						r[ d._id.valueOf() ] = {};
+						r[ d._id.valueOf() ]._id = d._id
+						r[ d._id.valueOf() ].data = [];
+					}
+					r[ d._id ].data.push( d.apiStack[0].value.item )
+
+				}
+				else
+				{
+					delete r[ d._id.valueOf() ];
+				}
+
+			}
+			catch( er )
+			{
+				//er;
+				r_error.push( d );
+			}
+
+		})
+
+	})
+	//printjson( r );
+
+	var s,so;
+	for( s in r ){
+		so = r[ s ]
+		db1.getCollection( date ).insertOne( so )
+	}
+	print( "---------------------------------------------" );
+
+	//return r;
+};
+
+var FN03 = function( source, target, dateString ){
+
+	var db0 = db.getSiblingDB( "daily_master_h5" );
+
+	var r = []
+	db0.getCollection( source ).find({"date" : ISODate( dateString + "T00:00:00.000Z")},{_id:0,goods_id: 1}).forEach(function(d){
+		r.push( d.goods_id )
+	})
+
+	var r00 = [];
+	db.getCollection( target ).find({"date" : ISODate( dateString + "T00:00:00.000Z" ),goods_id :{$nin : r}},{_id : 0, goods_id :1}).forEach(function(d){
+		r00.push( Number( d.goods_id ) )
+    })
+	printjson( r00 );
+}
+
+//------------------------------------------------------------------------------------;
+
+//LOGIC;
+
+//------------------------------------------------------------------------------------;
+
+//FN00( "20190926" );
+var ids = [
+    558836798220.0,
+    560156981291.0,
+    569376838543.0,
+    588095107775.0
+    ];
+var _tDate = "20190902";
+ids.forEach(function(id){
+	FN01( _tDate, id );
+})
+//FN02( "20190927" );
+//FN02( "daily_master","daily_master__20190930","2019-09-02" )
+printjson( 1 );
+//return

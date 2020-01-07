@@ -1,0 +1,361 @@
+var start = new Date();
+
+var _date = "<!=date=!>";
+var today_UTC = new Date();
+var now = new Date( today_UTC.getTime() - ( today_UTC.getTimezoneOffset() * 60000) );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	REQUIRE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$brand = db.getSiblingDB( "brand" );//brand;
+var _db$category = db.getSiblingDB( "category" );//카테고리;
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );//일간 마스터 데이타;
+var _db$graph_data = db.getSiblingDB( "graph_data" );//graph data;
+var _db$product = db.getSiblingDB( "product" );//상품 데이터;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$brand_basic = _db$brand.getCollection( "brand_basic" );
+var _col$category_store_type = _db$category.getCollection( "category_store_type" ); //스토어 타입;
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" ); //일간 마스터 데이터;
+var _col$daily_sku_by_shop = _db$graph_data.getCollection( "daily_sku_by_shop" );
+
+var _col$product_service_tmall = _db$product.getCollection( "product_service_tmall" );
+var _col$product_service_taobao = _db$product.getCollection( "product_service_taobao" );
+var _col$brand_basic = _db$brand.getCollection( "brand_basic" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$product_service_tmall.createIndex( { cd$product_master : 1 } );
+_col$product_service_taobao.createIndex( { cd$product_master : 1 } );
+_col$daily_master.createIndex( { _id$brand_basic : 1, cd$product_master : 1, shop_id : 1, date: 1 } );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENTS;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _doc$category_store_type;//스토어 타입;
+var _doc$brand_basic;//브랜드;
+var _doc$product_service_tmall;//tmall 상품;
+var _doc$product_service_taobao;//taobao 상품;
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETERS
+
+//----------------------------------------------------------------------------------------------------;
+
+
+
+//schema 정의;
+var model = {
+	_id$brand_basic : NaN
+	, cd$category_store_type : ""
+	, cd$product_master : ""
+	, date_of_value : { a : "", y : "" , m : "", d : "", ho : "" , mi : "", se : ""}
+	, date_create : { a : "", y : "" , m : "", d : "", ho : "" , mi : "", se : ""}
+	, daily_amount : NaN
+	, daily_sales : NaN
+	, price : NaN
+	, price_avg : NaN
+	, price_max : NaN
+	, price_min : NaN
+	, shop_id : ""
+	, shop_name : ""
+	, shop_type : ""
+	, violate_price : false
+};
+
+var date_create = now;
+//----------------------------------------------------------------------------------------------------;
+
+//	VALIDATOR
+
+//----------------------------------------------------------------------------------------------------;
+
+
+
+
+//----------------------------------------------------------------------------------------------------;
+
+var c = [2018,2019]
+var days= [];
+c.forEach(function(year){
+	var a = db.getSiblingDB( "Taobao_" + year )
+	a.getCollectionNames().forEach(function(col){
+		if( col * 1 < 20180400 ) return;
+		if( col * 1 > 20190402 ) return;
+		var convert_toString = col.substr(0,4) + "-" + col.substr(4,2) + "-" + col.substr(6,2);
+		days.push( convert_toString );
+	});
+});
+
+
+
+var i = 0;
+
+days.forEach(function(day){
+
+var _date = day
+
+	print( "------------------------------------------------------------------------------------------" );
+	print(  day + " - " + i + " - " + days.length + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+// 중복 제거
+var _q = {
+	"date_of_value.a" : {
+		$gte : ISODate(_date + "T00:00:00.000Z"),
+		$lte : ISODate(_date + "T23:59:59.999Z")
+	}
+};
+
+_col$daily_sku_by_shop.remove( _q );
+
+// var _date = "2018-02-03";
+//var _date = "<!=date=!>";
+	// for( var i = 0; i < _doc$brand_basic.length; ++i )
+	// {
+
+	// }
+	_col$daily_master.aggregate( [
+	{
+		$match : {
+			_id$brand_basic : { $ne : -1 }
+			, cd$product_master : {
+				$ne : ""
+			}
+			, shop_id : {
+				$nin : ["", 0 ]
+			}
+			, date:
+				/*/
+					{
+					$gte :  ISODate( date_s )
+					//, $lte : ISODate( date_e )
+					}
+				/*/
+				ISODate( _date )
+				//*/
+		}
+		}
+	, {
+		$group : {
+			_id : {
+				shop_id : "$shop_id"
+				, shop_name : "$shop_name"
+				, shop_type : "$shop_type"
+				, _id$brand_basic : "$_id$brand_basic"
+				, cd$product_master : "$cd$product_master"
+			}
+
+			, price_avg : {
+				$avg : "$price_max"
+			}
+			, price_min : {
+				$min : "$price_max"
+			}
+			, price_max : {
+				$max : "$price_max"
+			}
+			, price : {
+				$last : "$price_max"
+			}
+			, daily_sales : {
+				$sum : "$Daily_Sales"
+			}
+			, daily_amount : {
+				$sum : {
+					$multiply : ["$Daily_Sales", "$price_max" ]
+				}
+			}
+			, shop_type : {
+				$last : "$shop_type"
+			}
+			, date : {
+				$last : "$date"
+			}
+			, count : {
+				$sum : 1
+			}
+
+		}
+		}
+
+	, {
+		$project : {
+			_id : 0
+			, shop_id : "$_id.shop_id"
+			, shop_name : "$_id.shop_name"
+			, _id$brand_basic : "$_id._id$brand_basic"
+			, cd$product_master : "$_id.cd$product_master"
+			, price_avg : "$price_avg"
+			, price_max : "$price_max"
+			, price_min : "$price_min"
+			, price : "$price"
+			, daily_sales : "$daily_sales"
+			, daily_amount : "$daily_amount"
+			, shop_type : "$_id.shop_type"
+			, date : "$date"
+
+		}
+		}
+	] ).forEach( function (doc)
+	{
+		model._id$brand_basic = NumberInt( doc._id$brand_basic );
+		_doc$category_store_type = _col$category_store_type.findOne( { nm_cn : doc.shop_type} )
+		if ( _doc$category_store_type )
+		{
+			model.cd$category_store_type = _doc$category_store_type.cd;
+		}
+		else
+		{
+			model.cd$category_store_type = "";
+		}
+
+
+		model.cd$product_master = doc.cd$product_master;
+		model.daily_amount = doc.daily_amount;
+		model.daily_sales = NumberInt( doc.daily_sales );
+		model.shop_id = doc.shop_id;
+		model.shop_name = doc.shop_name;
+		model.shop_type = doc.shop_type;
+		model.price = doc.price;
+		model.price_avg = doc.price_avg;
+		model.price_max = doc.price_max;
+		model.price_min = doc.price_min;
+		var date = new Date (doc.date);
+		model.date_of_value.a = date;
+		model.date_of_value.y = NumberInt( date.getFullYear() );
+		model.date_of_value.m = NumberInt( date.getMonth() + 1  );
+		model.date_of_value.d = NumberInt( date.getDate()  );
+		model.date_of_value.ho = NumberInt( date.getHours()  );
+		model.date_of_value.mi = NumberInt( date.getMinutes()  );
+		model.date_of_value.se = NumberInt( date.getSeconds()  );
+
+		model.date_create.a = date_create;
+		model.date_create.y = NumberInt( date_create.getFullYear() );
+		model.date_create.m = NumberInt( date_create.getMonth() + 1  );
+		model.date_create.d = NumberInt( date_create.getDate()  );
+		model.date_create.ho = NumberInt( date_create.getHours()  );
+		model.date_create.mi = NumberInt( date_create.getMinutes() );
+		model.date_create.se = NumberInt( date_create.getSeconds() );
+
+		var price_guide = NaN;
+		if( model.shop_type == "淘宝")
+		{
+			_doc$product_service_taobao = _col$product_service_taobao.findOne( { cd$product_master : doc.cd$product_master});
+			if( _doc$product_service_taobao )
+			{
+				if( _doc$product_service_taobao.hasOwnProperty( 'price_guide' ) )
+				{
+					if (_doc$product_service_taobao.price_guide > 0 )
+						price_guide = _doc$product_service_taobao.price_guide;
+				}
+			}
+		}
+		else
+		{
+			_doc$product_service_tmall = _col$product_service_tmall.findOne( { cd$product_master : doc.cd$product_master});
+			if( _doc$product_service_tmall )
+			{
+				if( _doc$product_service_tmall.hasOwnProperty( 'price_guide' ) )
+				{
+					if (_doc$product_service_tmall.price_guide > 0 )
+						price_guide = _doc$product_service_tmall.price_guide;
+				}
+			}
+
+		}
+		model.violate_price = price_guide != NaN ? price_guide > doc.price : false;
+		//print( seq++ + "/" + count )
+		_col$daily_sku_by_shop.insert( model );
+
+	});
+++i;
+
+})
+
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate ) result.push( io )
+	}
+
+	return result;
+};
+
+
+/*
+ * 로직을 식행하는 함수
+ * @param {Number} startDate
+ * @param {Number} endDate
+ */
+var FN_LOGIC =  function( startDate, endDate ){
+	var targetDays = getTargetDays( startDate, endDate );
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		io = targetDays[ i ];
+		FN( io )
+	}
+
+	return;
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+//	LOGIC
+
+//----------------------------------------------------------------------------------------------------;
+
+FN_LOGIC( 20180400, 20190405 );
+
+print( "EXECUTION TIME : " + ( new Date() - start ) + "ms" );
+
+return;

@@ -1,0 +1,5 @@
+display: none;
+overflow: hidden;
+position: fixed;
+
+outline: 0;

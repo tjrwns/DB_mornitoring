@@ -1,0 +1,28 @@
+<div class="id-fancygrid" style="margin:0 auto;height:100%;min-width:300px; width:100%;">
+
+	<div class="id-fancygrid-left" style="min-width:300px;float:left;margin-right:10px;">
+			<div id="div-fancygrid-0"></div>
+	</div>
+	<div class="id-fancygrid-right" style="min-width:300px;float:left;" >
+			<div class="id-echarts0" style="height: 600px;"></div>
+			<div id="div-fancygrid-list" tabindex="0"></div>
+	</div>
+
+	<div id="id-div-pie-container" style="height: 100%;"></div>
+	<div id="fancygrid-container" style="width:100%;padding:10px;display:none;"></div>
+
+	<!-- TEMPLATE -->
+	<div id="template-chart"style="display: none;float:left;width:100%;">
+		<div style="height : {{HEIGHT}}; width :{{WIDTH}};background-color : {{BG_COLOR}};padding:10px" >
+			<div id="<!=ID=!>" style="height: 100%;width: 100%;background-color:#fff;"></div>
+		</div>
+	</div>
+	<div id="template-history" style="display: none;float:left;width:100%;">
+		<div id="{{ID}}" style="color:#fff;padding: 10px;margin: 0px 0px;cursor: pointer;background-color : {{BG_COLOR}};">
+			<div style="font-size:12px;padding-bottom:10px;"><b>{{BRAND_NM}}</b></div>
+			<div style="font-size:10px;">Sell Count : {{SELL_COUNT}} / {{RATIO_SELL_COUNT}} %</div>
+			<div style="font-size:10px;">Sell Amount : {{SELL_AMOUNT}} / {{RATIO_SELL_AMOUNT}} %</div>
+		</div>
+	</div>
+
+</div>

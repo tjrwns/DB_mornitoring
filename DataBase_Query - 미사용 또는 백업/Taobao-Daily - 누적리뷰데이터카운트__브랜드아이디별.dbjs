@@ -1,0 +1,87 @@
+var month_endDay = ["0131","0228","0331","0430","0531","0630","0731","0831","0930","1031","1130","1231"]
+
+var targetBrandObject = {
+	204 : { nm :"AHC" , id : 204 }
+	, 81 : { nm :"게리쏭" , id : 81 }
+	, 164 : { nm :"닥터자르트" , id : 164 }
+	, 77 : { nm :"리더스" , id : 77 }
+	, 79 : { nm :"파파레시피" , id : 79 }
+	, 19 : { nm :"메디힐" , id : 19 }
+	, 32 : { nm :"이니스프리" , id : 32 }
+	, 56 : { nm :"잇츠스킨" , id : 56 }
+	, 264 : { nm :"제이엠솔루션" , id : 264 }
+	, 203 : { nm :"제이준" , id : 203 }
+}
+
+var tId = 164
+var targetBrandId = targetBrandObject[ tId ].id;
+
+var db$2018 = db.getSiblingDB( "Taobao_2018" )
+var db$2019 = db.getSiblingDB( "Taobao_2019" )
+var db0 = db.getSiblingDB( "goods_list" )
+
+var cols2018 = db$2018.getCollectionNames();
+var cols2019 = db$2019.getCollectionNames();
+var col0 = db0.getCollection("20190414")
+
+var allCols = cols2018.concat( cols2019 ).sort();
+
+var targetCols = [];
+
+var i = 0,iLen = allCols.length,io;
+for(;i<iLen;++i){
+	io = allCols[ i ];
+	if( month_endDay.indexOf( io.substr(4,8) ) != -1 ) targetCols.push( io )
+}
+
+var targetIds = []
+
+var ro = {}
+col0.find({_id$brand_basic : targetBrandId}).forEach(function(d){
+    if( !ro[ d._id$brand_basic ] ){
+            ro[ d._id$brand_basic ] = {}
+            ro[ d._id$brand_basic ].data = []
+            }
+    ro[ d._id$brand_basic ].data.push( d.goods_id )
+})
+
+
+
+var resultObject = {};
+
+var i = 0,iLen = targetCols.length,io;
+for(;i<iLen;++i){
+    io = targetCols[ i ];
+    resultObject[ io ] = {}
+	resultObject[ io ].reviewCnt = 0;
+//  resultObject[ io ].itemCnt = ro[ targetBrandId ].data.length;
+//	resultObject[ io ].datas = []
+
+    var j = 0,jLen = ro[ targetBrandId ].data.length,jo
+    for(;j<jLen;++j){
+        jo = ro[ targetBrandId ].data[ j ];
+        db.getSiblingDB("Taobao_" + io.substr(0,4) ).getCollection( io ).find({_id : NumberLong( jo ) },{ "_id" : -1, "rate.totalCount" : 1, "apiStack" : 1}).forEach(function(d){
+			printjson( d.apiStack[0].value.trade.isBanSale4Oversea )
+            if( !d.apiStack[0].value.trade.isBanSale4Oversea ) return; //tmall
+			//if( d.apiStack[0].value.trade.isBanSale4Oversea ) return;//taobao
+			if( d.rate )
+			{
+				resultObject[ io ].reviewCnt = resultObject[ io ].reviewCnt + d.rate.totalCount * 1
+//				resultObject[ io ].datas.push( { goods_id : d._id, cnt : d.rate.totalCount * 1 } )
+			}
+        })
+    }
+}
+
+
+var resultArray = [];
+var s,so
+for(s in resultObject ){
+	so = {}
+	so.date = s.substr( 0, 6 )
+	so.reviewCnt = resultObject[ s ].reviewCnt
+	so.brand_id = targetBrandObject[ tId ].nm
+	resultArray.push( so )
+}
+
+resultArray

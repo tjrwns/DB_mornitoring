@@ -1,0 +1,278 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__상품상세정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_SITE_ = "Taobao";
+var product_id = <!=product_id=!>;
+
+var db0 = db.getSiblingDB( _TARGET_SITE_ + "_2018" );
+var db1 = db.getSiblingDB( _TARGET_SITE_ + "_2019" );
+var db2 = db.getSiblingDB( "daily_master_h5" );
+
+var cols0 = db0.getCollectionNames();
+var cols1 = db1.getCollectionNames();
+
+var col0 = db2.getCollection( "daily_master" );
+
+var allCols = cols0.concat( cols1 )
+var r = {
+    date : []
+    , price : {
+		min_price : []
+		, max_price : []
+		, sell_count : []
+		, reviewCount : []
+		//, daily_sale : []
+	}
+	, info : []
+};
+
+var _q00 = { _id : null }
+var _q01 = { goods_id : "" }
+
+//----------------------------------------------------------------------------------------------------;
+var _to;
+
+allCols.forEach(function(col){
+
+	var year = col.substr(0,4);
+	var tDb = db.getSiblingDB( _TARGET_SITE_ + "_" + year );
+	var tCol = tDb.getCollection( col );
+
+	_q00._id = NumberLong( product_id );
+	var doc = tCol.findOne( _q00 );
+
+	if( doc ){
+		r.date.push( col );
+		_to = {
+			date : col
+			, goodsName : ""
+			, isBanSale4Oversea : ""
+			, goodsImg : ""
+			, goodsId : product_id
+
+			, price : ""
+			, reviewCount : ""
+			, shopPromtion : ""
+			, shopId : ""
+			, shopName : ""
+			, sellerInfo : ""
+
+			, categoryId : ""
+			, categoryName : ""
+			, brandId : ""
+			, brandName : ""
+
+			, deliveryFrom : ""
+			, deliveryTo : ""
+			, postage : ""
+			, props : ""
+		};
+
+		try
+		{
+			if( doc.item )
+			{
+				_to.goodsImg = doc.item.images[ 0 ] || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+				_to.goodsName = doc.item.title;
+
+				_to.brandName = doc.item.brandValueId;
+				_to.brandId = doc.item.brandValueId
+
+				_to.categoryId = doc.item.categoryId;
+				_to.categoryName = doc.item.categoryId;
+			}
+		}
+		catch( er )
+		{
+			//er
+		}
+
+		try
+		{
+			if( doc.seller )
+			{
+				_to.shopId = doc.seller.shopId;
+				_to.shopName = doc.seller.shopName;
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			if ( doc.rate )
+			{
+				_to.reviewCount = doc.rate.totalCount;
+				r.price.reviewCount.push( Number( _to.reviewCount ) )
+			}
+		}
+		catch( e )
+		{
+			//에러;
+		}
+
+		try
+		{
+			if ( doc.apiStack[ 0 ].value )
+			{
+
+				_to.deliveryFrom = doc.apiStack[ 0 ].value.delivery.from;
+				_to.deliveryTo = doc.apiStack[ 0 ].value.delivery.to;
+				_to.postage = doc.apiStack[ 0 ].value.delivery.postage;
+				_to.isBanSale4Oversea = doc.apiStack[ 0 ].value.trade.isBanSale4Oversea;
+				_to.shopPromtion = "";
+				var i = 0,iLen = doc.apiStack[ 0 ].value.resource.shopProm.length,io;
+				for(;i<iLen;++i){
+					io = doc.apiStack[ 0 ].value.resource.shopProm[ i ];
+					_to.shopPromtion = _to.shopPromtion + "<li>" + io.content.join(", ") + "</li>";
+				}
+			}
+		}
+		catch( e )
+		{
+			//에러;
+		}
+
+		try
+		{
+			if ( doc.props.groupProps[0][ '基本信息' ].length > 0 )
+			{
+
+				_to.props = "";
+				var i = 0,iLen =  doc.props.groupProps[0][ '基本信息' ].length,io;
+				for(;i<iLen;++i){
+					io =  doc.props.groupProps[0][ '基本信息' ][ i ];
+					var s,so;
+					for( s in io ){
+						so = io[ s ]
+						_to.props = _to.props + "<li><b>" + s + "</b> : " + so + "</li>";
+					}
+				}
+			}
+		}
+		catch( e )
+		{
+			//에러;
+		}
+
+		try
+		{
+			if ( doc.seller )
+			{
+				var s,so
+
+				var sellerInfoProperty = [
+					"userId"
+					, "shopId"
+					, "shopName"
+					, "sellerNick"
+					, "fans"
+					, "certText"
+					, "allItemCount"
+					, "newItemCount"
+					, "shopCard"
+					, "starts"
+					, "goodRatePercentage"
+				];
+
+				_to.sellerInfo = "";
+				sellerInfoProperty.forEach(function(item){
+					if( !doc.seller[ item ] ) return;
+					if( doc.seller[ item ] == "" ) return;
+					_to.sellerInfo = _to.sellerInfo + "<li><b>" + item + "</b> : " + doc.seller[ item ] + "</li>";
+				})
+
+
+			}
+		}
+		catch( e )
+		{
+			//에러;
+		}
+
+		try
+		{
+			if ( doc.apiStack[ 0 ].value.item.sellCount )
+			{
+
+				if( -1 != doc.apiStack[ 0 ].value.item.sellCount.indexOf( "万+" ) )
+				{
+					_to.sellCount = Number( doc.apiStack[ 0 ].value.item.sellCount.split( "万+" )[ 0 ] * 10000 )
+				}
+				else if( -1 != doc.apiStack[ 0 ].value.item.sellCount.indexOf( "+" ) )
+				{
+					_to.sellCount = Number( doc.apiStack[ 0 ].value.item.sellCount.split( "+" )[ 0 ] * 1 )
+				}
+				else
+				{
+					_to.sellCount = doc.apiStack[ 0 ].value.item.sellCount;
+				}
+
+				r.price.sell_count.push( _to.sellCount )
+				_to.price = doc.apiStack[ 0 ].value.price.price.priceText;
+				if( -1 != doc.apiStack[ 0 ].value.price.price.priceText.indexOf("-") )
+				{
+					var _tPrice = doc.apiStack[ 0 ].value.price.price.priceText.split("-")
+					r.price.min_price.push( Number( _tPrice[0] ) );
+					r.price.max_price.push( Number( _tPrice[1] ) );
+				}
+				else
+				{
+					r.price.min_price.push( Number( doc.apiStack[ 0 ].value.price.price.priceText ) );
+					r.price.max_price.push( Number( doc.apiStack[ 0 ].value.price.price.priceText ) );
+				}
+			}
+		}
+		catch( e )
+		{
+			//에러;
+			_to.price = 0
+		}
+
+		r.info.push( _to );
+	}
+
+})
+
+//var pad = function( data ){
+//	return data.toString().length > 1 ? data.toString() : "0" + data.toString()
+//};
+//
+//var dateFormat = function( date ){
+//	var yyyy = date.getFullYear();
+//	var mm = date.getMonth() + 1;
+//	var dd = date.getDate();
+//	return Number( yyyy.toString() + pad( mm.toString() ) + pad( dd.toString() ) );
+//};
+//
+//_p00 = { Daily_Sales : 1, _id : 0, date : 1 }
+//_q01.goods_id = product_id.toString();
+//var tmpArr00 = [];
+//var tmpArr01 = [];
+//col0.find( _q01, _p00 ).forEach(function(doc){
+//	tmpArr00.push( doc.Daily_Sales );
+//	tmpArr01.push( dateFormat( doc.date ) );
+//	//r.price.daily_sale.push( doc.Daily_Sales );
+//})
+//
+//var i =0,iLen = r.date.length,io;
+//for(;i<iLen;++i){
+//	io = Number( r.date[ i ] );
+//	var idx00 = tmpArr01.indexOf( io );
+//	if( -1 != idx00 ) r.price.daily_sale.push( tmpArr00[ idx00 ] )
+//	else r.price.daily_sale.push( 0 )
+//}
+
+r.info.reverse();
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

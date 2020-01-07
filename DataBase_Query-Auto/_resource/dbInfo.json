@@ -1,0 +1,26 @@
+{
+	"SELF" : { "host" : "127.0.0.1", "port" : 55522, "dbNm" :"admin" }
+	, "JD-DAILY": { "host" : "127.0.0.1", "port" : 55523 }
+	, "JD-LIST" : { "host" : "127.0.0.1", "port" : 55524 }
+	, "KAOLA": { "host" : "127.0.0.1", "port" : 55525 }
+	, "TAOBAO-DAILY" : { "host" : "127.0.0.1", "port" : 55526 }
+	, "TAOBAO-LIST" : { "host" : "127.0.0.1", "port" : 55527 }
+	, "VIP" : { "host" : "127.0.0.1", "port" : 55528 }
+	, "LAZADA" : { "host" : "127.0.0.1", "port" : 55532 }
+	, "SHOPEE" : { "host" : "127.0.0.1", "port" : 55535 }
+	, "ONSIGHT_BATCH" : { "host" : "192.168.0.230", "port" : 57321 }
+	, "SKUMAPPER" : { "host" : "222.239.10.122", "port" : 55421 }
+	, "SKUMAPPER_TEST" : { "host" : "222.239.10.122", "port" : 55421 }
+	, "ONSIGHT" : { "host" : "222.239.10.122", "port" : 55320 }
+	, "ONSIGHT_TEST" : { "host" : "222.239.10.123", "port" : 55320 }
+	, "ONSIGHT_ADMIN" : { "host" : "222.239.10.123", "port" : 55540 }
+	, "BATCH_PC_SELF" : { "host" : "192.168.0.230", "port" : 55522 }
+	, "BATCH_PC_JD-DAILY" : { "host" : "192.168.0.230", "port" : 55523 }
+	, "BATCH_PC_JD-LIST" : { "host" : "192.168.0.230", "port" : 55524 }
+	, "BATCH_PC_KAOLA" : { "host" : "192.168.0.230", "port" : 55525 }
+	, "BATCH_PC_TAOBAO-DAILY" : { "host" : "192.168.0.230", "port" : 55526 }
+	, "BATCH_PC_TAOBAO-LIST" : { "host" : "192.168.0.230", "port" : 55527 }
+	, "BATCH_PC_VIP" : { "host" : "192.168.0.230", "port" : 55528 }
+	, "BATCH_PC_LAZADA" : { "host" : "192.168.0.230", "port" : 55532 }
+	, "BATCH_PC_SHOPEE" : { "host" : "192.168.0.230", "port" : 55535 }
+}

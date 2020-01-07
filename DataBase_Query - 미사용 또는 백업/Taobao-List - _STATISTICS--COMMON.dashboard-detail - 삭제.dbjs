@@ -1,0 +1,50 @@
+var prefix0List = [ "Taobao" ];
+var prefix1List = [ "2018", "2019" ];
+
+prefix0List.forEach( function( prefix0 ){
+	var i = 0;
+
+	//전체 데이터 재 생성하기 전에 대상 컬렉션 drop;
+	var db1 = db.getSiblingDB( "_STATISTICS--COMMON" );
+	var col0 = db1.getCollection( "dashboard-detail" );
+		col0.drop();
+
+	/*/
+	//전체 데이터 재 생성;
+	prefix1List.forEach( function( prefix1 ){
+		var db0 = db.getSiblingDB( prefix0 + "_" + prefix1 + "-상세-수집" );
+		var cols = db0.getCollectionNames();
+
+		var _to;
+		var byte = 1024;
+
+		cols.forEach( function( d ){
+			_to = {};
+
+			if( d == "_TEMP" ) return;
+
+			var colInfo = db0.getCollection( d ).stats();
+
+			_to._id = NumberInt( d.split( "--" )[ 0 ] );
+			_to.year = NumberInt( d.substr( 0, 4 ) );
+			_to.month = NumberInt( d.substr( 4, 2 ) );
+			_to.day = NumberInt( d.substr( 6, 2 ) );
+			//_to.hour = NumberInt( d.substr( 9, 2 ) );
+			//_to.minute = NumberInt( d.substr( 11, 2 ) );
+			_to.date = d.split( "--" )[ 0 ];
+
+			_to.size = {
+				byte : NumberInt( colInfo.size )
+				, kb : ( colInfo.size / byte ).toFixed( 3 )
+				, mb : ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 3 )
+				, gb : ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 3 )
+			};
+
+			_to.count = NumberInt( colInfo.count );
+
+			col0.insert( _to );
+			++i;
+		});
+	});
+	//*/
+});

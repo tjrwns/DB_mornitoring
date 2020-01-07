@@ -1,0 +1,4 @@
+/**
+ * @function
+ * @return {Array} [ { member_date }, { member_date }, ... ]
+ */

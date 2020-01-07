@@ -1,0 +1,24 @@
+var db0 = db.getSiblingDB( "goods_list_2018" )
+var db1 = db.getSiblingDB( "goods_list_2019" )
+
+
+var col2018 = db0.getCollectionNames();
+var col2019 = db1.getCollectionNames();
+
+_q00 = { cd$product_master : "" };
+_q01 = { $set : { _id$brand_basic : NumberInt( -1 ) }};
+col2018.forEach(function(col){
+	print( col )
+	print( db0.getCollection( col ).find( _q00 ).count() )
+	db0.getCollection( col ).updateMany(_q00,_q01)
+
+})
+
+col2019.forEach(function(col){
+	print( col )
+	print( db1.getCollection( col ).find( _q00 ).count() )
+	db1.getCollection( col ).updateMany(_q00,_q01)
+
+})
+
+return;

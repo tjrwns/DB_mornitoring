@@ -1,0 +1,4 @@
+/**
+ * @function
+ * @return {Array} [ { member_basic }, { member_basic }, ... ]
+ */

@@ -1,0 +1,8 @@
+/**
+ * Session과 함께 Sign In을 진행.
+ * Client에서 Request시 'mid'와 'mpw'를 같이 보냄.
+ * Session을 체크 후 저장 또는 파기.
+ * @function
+ * @param {Object} d Request Object { "mid" : "", "mpw" : "", "sid" : "", "d_ex" : "" }
+ * @return {uint} 0 or 1
+ */

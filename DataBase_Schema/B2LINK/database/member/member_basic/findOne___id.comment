@@ -1,0 +1,8 @@
+/**
+ * @function
+ * @param {uint} _id
+ * @return {Document}
+ *
+ * @example
+ * member_basic$findOne___id( 0 );
+ */

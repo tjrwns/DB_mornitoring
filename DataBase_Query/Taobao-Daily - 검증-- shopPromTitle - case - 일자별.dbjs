@@ -1,0 +1,49 @@
+var dbs = {
+	  "2018" : db.getSiblingDB("Taobao_2018")
+	, "2019" : db.getSiblingDB("Taobao_2019")
+}
+var db1 = db.getSiblingDB( "검증01" );
+
+var allCols;
+(function(){
+
+	var cols00 = dbs[ "2018" ].getCollectionNames();
+	var cols01 = dbs[ "2019" ].getCollectionNames();
+
+	allCols = cols00.concat( cols01 );
+
+})()
+
+var _q00 = {"apiStack.0.value.price.shopPromTitle" : { $exists : true }}
+allCols.forEach(function(col){
+	if( Number( col ) < 20190222 ) return
+	var r = {}
+	r._id = col;
+	r.data = []
+	printjson( col )
+	var year = col.substr(0,4);
+	dbs[ year ].getCollection( col ).find(_q00).forEach(function(d){
+
+		try
+		{
+			if( d.apiStack[0].value.price.shopPromTitle )
+			{
+				var t = d.apiStack[0].value.price.shopPromTitle
+				if( r.data.indexOf( t ) == -1 ) r.data.push( t )
+			}
+		}
+		catch( er )
+		{
+			//er;
+			print( col + " - " + d._id )
+			print( er )
+		}
+
+
+	})
+	db1.getCollection( "shopPromTitle_case" ).remove({_id : r._id});
+	db1.getCollection( "shopPromTitle_case" ).insertOne( r )
+
+})
+
+printjson( 1 )

@@ -1,0 +1,35 @@
+var db0 = db.getSiblingDB( "타오바오_상품상세_전체브랜드--경량" );
+var col0 = db0.getCollection( "201906" );
+
+var db1 = db.getSiblingDB( "경량--201906--priceMax" );
+
+var COLS = {};
+
+var i = 0;
+var iLen = col0.count();
+var colName = "";
+col0.find({}).forEach( function( doc ){
+	var P_MAX = Number( doc.P_MAX );
+
+	if( P_MAX < 100 ) colName = "0_100";
+	else if( P_MAX < 200 ) colName = "100_200";
+	else if( P_MAX < 300 ) colName = "200_300";
+	else if( P_MAX < 400 ) colName = "300_400";
+	else if( P_MAX < 500 ) colName = "400_500";
+	else if( P_MAX < 600 ) colName = "500_600";
+	else if( P_MAX < 700 ) colName = "600_700";
+	else if( P_MAX < 800 ) colName = "700_800";
+	else if( P_MAX < 900 ) colName = "800_900";
+	else if( P_MAX < 1000 ) colName = "900_1000";
+	else colName = "1000_plus";
+
+
+
+	if( !COLS[ colName ] ) COLS[ colName ] = db1.getCollection( colName );
+
+	COLS[ colName ].insertOne( doc );
+
+	print( iLen + " / " + i );
+	++i;
+});
+

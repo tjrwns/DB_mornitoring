@@ -1,0 +1,543 @@
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - REQUIRE;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+// var _date = "<!=date=!>";
+var flagshipstore_list =[
+/*
+{ keyword : "3CE", shop_id : "104831451", shop_name : "stylenanda海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://stylenanda.tmall.hk/", seller_id : "1731307542" },
+{ keyword : "3CE", shop_id : "227910826", shop_name : "3CE官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://stylenanda3ce.tmall.com/", seller_id : "4260076097" },
+{ keyword : "age20", shop_id : "186439480", shop_name : "AEKYUNG海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://aekyung.tmall.hk/", seller_id : "2984496242" },
+{ keyword : "age20", shop_id : "331254507", shop_name : "aekyungage20s旗舰", flagshop_keyword : "旗舰店", shop_url : "https://aekyungage20s.tmall.com/", seller_id : "3489457162" },
+{ keyword : "AHC", shop_id : "555004456", shop_name : "AHC官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://ahchzp.tmall.com/", seller_id : "4004614770" },
+{ keyword : "AHC", shop_id : "474453956", shop_name : "AHC海外官方旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://ahc-global.tmall.hk/", seller_id : "2200606797002" },
+{ keyword : "amos", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "Banila CO", shop_id : "230901823", shop_name : "芭妮兰官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://banilacohzp.tmall.com/", seller_id : "3159735360" },
+{ keyword : "Clio", shop_id : "116028014", shop_name : "clubclio海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://clubclio.tmall.hk/", seller_id : "2379306225" },
+{ keyword : "Clio", shop_id : "204399779", shop_name : "珂莱欧旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://cliohzp.tmall.com/", seller_id : "4176213111" },
+{ keyword : "Cloud9", shop_id : "267076203", shop_name : "jdyclaires旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jdyclaires.tmall.com/", seller_id : "3500532262" },
+{ keyword : "Cloud9", shop_id : "537388322", shop_name : "Claireskorea海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://claireskorea.tmall.hk/", seller_id : "2981026169" },
+{ keyword : "CNP", shop_id : "352496984", shop_name : "cnp希恩派旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://xienpai.tmall.com/", seller_id : "3913958532" },
+{ keyword : "DERMAFIRM+", shop_id : "435559117", shop_name : "dermafirm德妃旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://dermafirmhzp.tmall.com/", seller_id : "4118264290" },
+{ keyword : "DERMAFIRM+", shop_id : "593925854", shop_name : "dermafirm海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://dermafirm.tmall.hk/", seller_id : "3699547347" },
+{ keyword : "Dr.Althea", shop_id : "378484041", shop_name : "dralthea海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://dralthea.tmall.hk/", seller_id : "3953355522" },
+{ keyword : "Dr.Jart", shop_id : "116340774", shop_name : "DrJart蒂佳婷官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://drjart.tmall.com/", seller_id : "2301367418" },
+{ keyword : "Dr.Jart", shop_id : "166676445", shop_name : "drjart海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://drjartglobal.tmall.hk/", seller_id : "3322300560" },
+{ keyword : "Espoir", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "etudehouse", shop_id : "116271504", shop_name : "ETUDE HOUSE伊蒂之屋官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://etudehouse.tmall.com/", seller_id : "2365065119" },
+{ keyword : "GUERISSON", shop_id : "267076203", shop_name : "jdyclaires旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jdyclaires.tmall.com/", seller_id : "3500532262" },
+{ keyword : "GUERISSON", shop_id : "537388322", shop_name : "Claireskorea海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://claireskorea.tmall.hk/", seller_id : "2981026169" },
+{ keyword : "Innisfree", shop_id : "583142462", shop_name : "innisfree海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://innisfreeglobal.tmall.hk/", seller_id : "3697925558" },
+{ keyword : "Innisfree", shop_id : "70853336", shop_name : "innisfree官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://innisfree.tmall.com/", seller_id : "845001562" },
+{ keyword : "It's Skin", shop_id : "447104390", shop_name : "itsskin化妆品旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://itsskinhuazhuangpin.tmall.com/", seller_id : "3431088373" },
+{ keyword : "JAYJUN", shop_id : "335039659", shop_name : "Jayjun海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://jayjun.tmall.hk/", seller_id : "2956756848" },
+{ keyword : "JAYJUN", shop_id : "444847627", shop_name : "jayjun旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jayjunhzp.tmall.com/", seller_id : "3160871576" },
+{ keyword : "JM Solution", shop_id : "320776438", shop_name : "JMsolution海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://jmsolution.tmall.hk/", seller_id : "3357241566" },
+{ keyword : "JM Solution", shop_id : "321370127", shop_name : "JMsolution旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jmsolutionhzp.tmall.com/", seller_id : "3940973064" },
+{ keyword : "Laneige", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "Laneige", shop_id : "73228923", shop_name : "兰芝官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://laneige.tmall.com/", seller_id : "1023696028" },
+{ keyword : "LEADERS", shop_id : "115726199", shop_name : "丽得姿化妆品旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://lidezi.tmall.com/", seller_id : "2243848037" },
+{ keyword : "LEADERS", shop_id : "117337181", shop_name : "LEADERS海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://leaderscos.tmall.hk/", seller_id : "2468841947" },
+{ keyword : "Luna", shop_id : "186439480", shop_name : "AEKYUNG海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://aekyung.tmall.hk/", seller_id : "2984496242" },
+{ keyword : "Luna", shop_id : "516268020", shop_name : "露娜旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://lunahzp.tmall.com/", seller_id : "3243525791" },
+{ keyword : "Mamonde", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "Mamonde", shop_id : "67807749", shop_name : "梦妆官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://mamonde.tmall.com/", seller_id : "731633280" },
+{ keyword : "MEDIHEAL", shop_id : "123237063", shop_name : "Mediheal海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://mediheal.tmall.hk/", seller_id : "2541315686" },
+{ keyword : "MEDIHEAL", shop_id : "135375246", shop_name : "mediheal美迪惠尔旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://meidihuier.tmall.com/", seller_id : "2649573952" },
+{ keyword : "miseenscene", shop_id : "486516877", shop_name : "魅尚萱旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://meishangxuan.tmall.com/", seller_id : "4184980536" },
+{ keyword : "Missha", shop_id : "191434489", shop_name : "MISSHA谜尚官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://misshahzp.tmall.com/", seller_id : "3853288510" },
+{ keyword : "Nature Republic", shop_id : "104469496", shop_name : "naturerepublic旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://naturerepublic.tmall.com/", seller_id : "1696174272" },
+{ keyword : "Nature Republic", shop_id : "116712836", shop_name : "naturerepublic官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://naturerepublichk.tmall.hk/", seller_id : "2432554320" },
+{ keyword : "papa recipe", shop_id : "245273146", shop_name : "PAPARECIPE海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://paparecipe.tmall.hk/", seller_id : "3361076672" },
+{ keyword : "papa recipe", shop_id : "291128025", shop_name : "paparecipe旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://paparecipehzp.tmall.com/", seller_id : "4065642251" },
+{ keyword : "RECIPE", shop_id : "129951170", shop_name : "RECIPE海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://recipe.tmall.hk/", seller_id : "2641546987" },
+{ keyword : "RECIPE", shop_id : "374911873", shop_name : "recipe旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://laisibi.tmall.com/", seller_id : "3421591432" },
+{ keyword : "Shangpree", shop_id : "526573779", shop_name : "shangpree香蒲丽旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://xiangpuli.tmall.com/", seller_id : "2200616491228" },
+{ keyword : "Shangpree", shop_id : "388526272", shop_name : "SHANGPREE海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://shangpree.tmall.hk/", seller_id : "3384324308" },
+{ keyword : "SNP", shop_id : "113003751", shop_name : "SNP海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://snpcos.tmall.hk/", seller_id : "2219724804" },
+{ keyword : "SNP", shop_id : "528245900", shop_name : "snp旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://snphzp.tmall.com/", seller_id : "3097858254" },
+{ keyword : "sum37", shop_id : "113414966", shop_name : "LG生活健康海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://lghh.tmall.hk/", seller_id : "2240462077" },
+{ keyword : "sum37", shop_id : "156555754", shop_name : "sum37官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://sum37.tmall.com/", seller_id : "2884685500" },
+{ keyword : "The Face Shop", shop_id : "65216769", shop_name : "LG生活健康旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://lgcare.tmall.com/", seller_id : "676588110" },
+{ keyword : "The Face Shop", shop_id : "61963638", shop_name : "The Face Shop化妆品官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://thefaceshop.tmall.com/", seller_id : "435876330" },
+{ keyword : "The Saem", shop_id : "124993082", shop_name : "thesaem官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://thesaem.tmall.hk/", seller_id : "2564346277" },
+{ keyword : "The Saem", shop_id : "150656019", shop_name : "thesaem得鲜旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://dexian.tmall.com/", seller_id : "2820981703" },
+{ keyword : "Tony Moly", shop_id : "418251961", shop_name : "tonymoly托尼魅力旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://tonymoly.tmall.com/", seller_id : "2968025911" },
+{ keyword : "UNNY", shop_id : "599019439", shop_name : "unnyclub海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://unnyclub.tmall.hk/", seller_id : "3979163118" },
+{ keyword : "VT", shop_id : "506778651", shop_name : "VT海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://vtcosmetics.tmall.hk/", seller_id : "3934273242" },
+{ keyword : "w.lab", shop_id : "281133877", shop_name : "WLab海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://wlab.tmall.hk/", seller_id : "4033652247" },
+{ keyword : "WELLAGE", shop_id : "198890265", shop_name : "唯拉珠化妆品旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://weilazhu.tmall.com/", seller_id : "4050063715" },
+{ keyword : "whoo", shop_id : "109537841", shop_name : "后官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://thehistoryofwhoo.tmall.com/", seller_id : "2029314557" },
+{ keyword : "whoo", shop_id : "113414966", shop_name : "LG生活健康海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://lghh.tmall.hk/", seller_id : "2240462077" },
+{ keyword : "WONJINEFFECT", shop_id : "188883176", shop_name : "WONJINEFFECT海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://wonjineffect.tmall.hk/", seller_id : "4155337799" },
+{ keyword : "吕", shop_id : "109051023", shop_name : "吕官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://ryoe.tmall.com/", seller_id : "2005831794" },
+{ keyword : "雪花秀", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "雪花秀", shop_id : "144807160", shop_name : "Sulwhasoo雪花秀官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://sulwhasoo.tmall.com/", seller_id : "2738112600" }
+*/
+/*
+//2019-09-09 업데이트;
+{ keyword : "3CE", shop_id : "104831451", shop_name : "stylenanda海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://stylenanda.tmall.hk/", seller_id : "1731307542" },
+{ keyword : "3CE", shop_id : "227910826", shop_name : "3CE官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://stylenanda3ce.tmall.com/", seller_id : "4260076097" },
+{ keyword : "age20", shop_id : "186439480", shop_name : "AEKYUNG海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://aekyung.tmall.hk/", seller_id : "2984496242" },
+{ keyword : "age20", shop_id : "331254507", shop_name : "aekyungage20s旗舰", flagshop_keyword : "旗舰店", shop_url : "https://aekyungage20s.tmall.com/", seller_id : "3489457162" },
+{ keyword : "AHC", shop_id : "555004456", shop_name : "AHC官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://ahchzp.tmall.com/", seller_id : "4004614770" },
+{ keyword : "AHC", shop_id : "474453956", shop_name : "AHC海外官方旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://ahc-global.tmall.hk/", seller_id : "2200606797002" },
+{ keyword : "amos", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "Banila CO", shop_id : "230901823", shop_name : "芭妮兰官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://banilacohzp.tmall.com/", seller_id : "3159735360" },
+{ keyword : "Clio", shop_id : "116028014", shop_name : "clubclio海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://clubclio.tmall.hk/", seller_id : "2379306225" },
+{ keyword : "Clio", shop_id : "204399779", shop_name : "clio珂莱欧官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://cliohzp.tmall.com/", seller_id : "4176213111" },
+{ keyword : "Claires Korea", shop_id : "267076203", shop_name : "jdyclaires旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jdyclaires.tmall.com/", seller_id : "3500532262" },
+{ keyword : "Claires Korea", shop_id : "537388322", shop_name : "Claireskorea海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://claireskorea.tmall.hk/", seller_id : "2981026169" },
+{ keyword : "CNP", shop_id : "352496984", shop_name : "cnp希恩派旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://xienpai.tmall.com/", seller_id : "3913958532" },
+{ keyword : "DERMAFIRM+", shop_id : "435559117", shop_name : "dermafirm德妃旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://dermafirmhzp.tmall.com/", seller_id : "4118264290" },
+{ keyword : "DERMAFIRM+", shop_id : "593925854", shop_name : "dermafirm海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://dermafirm.tmall.hk/", seller_id : "3699547347" },
+{ keyword : "Dr.Althea", shop_id : "378484041", shop_name : "dralthea海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://dralthea.tmall.hk/", seller_id : "3953355522" },
+{ keyword : "Dr.Jart", shop_id : "116340774", shop_name : "DrJart蒂佳婷官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://drjart.tmall.com/", seller_id : "2301367418" },
+{ keyword : "Dr.Jart", shop_id : "166676445", shop_name : "drjart海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://drjartglobal.tmall.hk/", seller_id : "3322300560" },
+{ keyword : "Espoir", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "etudehouse", shop_id : "116271504", shop_name : "ETUDE HOUSE伊蒂之屋官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://etudehouse.tmall.com/", seller_id : "2365065119" },
+{ keyword : "Innisfree", shop_id : "583142462", shop_name : "innisfree海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://innisfreeglobal.tmall.hk/", seller_id : "3697925558" },
+{ keyword : "Innisfree", shop_id : "70853336", shop_name : "innisfree官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://innisfree.tmall.com/", seller_id : "845001562" },
+{ keyword : "It's Skin", shop_id : "447104390", shop_name : "itsskin化妆品旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://itsskinhuazhuangpin.tmall.com/", seller_id : "3431088373" },
+{ keyword : "JAYJUN", shop_id : "335039659", shop_name : "Jayjun海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://jayjun.tmall.hk/", seller_id : "2956756848" },
+{ keyword : "JAYJUN", shop_id : "444847627", shop_name : "jayjun旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jayjunhzp.tmall.com/", seller_id : "3160871576" },
+{ keyword : "JM Solution", shop_id : "320776438", shop_name : "JMsolution海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://jmsolution.tmall.hk/", seller_id : "3357241566" },
+{ keyword : "JM Solution", shop_id : "321370127", shop_name : "JMsolution旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://jmsolutionhzp.tmall.com/", seller_id : "3940973064" },
+{ keyword : "Laneige", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "Laneige", shop_id : "73228923", shop_name : "兰芝官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://laneige.tmall.com/", seller_id : "1023696028" },
+{ keyword : "LEADERS", shop_id : "115726199", shop_name : "丽得姿化妆品旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://lidezi.tmall.com/", seller_id : "2243848037" },
+{ keyword : "LEADERS", shop_id : "117337181", shop_name : "LEADERS海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://leaderscos.tmall.hk/", seller_id : "2468841947" },
+{ keyword : "Luna", shop_id : "186439480", shop_name : "AEKYUNG海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://aekyung.tmall.hk/", seller_id : "2984496242" },
+{ keyword : "Mamonde", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "Mamonde", shop_id : "67807749", shop_name : "梦妆官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://mamonde.tmall.com/", seller_id : "731633280" },
+{ keyword : "MEDIHEAL", shop_id : "123237063", shop_name : "Mediheal海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://mediheal.tmall.hk/", seller_id : "2541315686" },
+{ keyword : "MEDIHEAL", shop_id : "135375246", shop_name : "mediheal美迪惠尔旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://meidihuier.tmall.com/", seller_id : "2649573952" },
+{ keyword : "miseenscene", shop_id : "486516877", shop_name : "魅尚萱旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://meishangxuan.tmall.com/", seller_id : "4184980536" },
+{ keyword : "Missha", shop_id : "191434489", shop_name : "MISSHA谜尚官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://misshahzp.tmall.com/", seller_id : "3853288510" },
+{ keyword : "Nature Republic", shop_id : "104469496", shop_name : "naturerepublic旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://naturerepublic.tmall.com/", seller_id : "1696174272" },
+{ keyword : "Nature Republic", shop_id : "116712836", shop_name : "naturerepublic官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://naturerepublichk.tmall.hk/", seller_id : "2432554320" },
+{ keyword : "papa recipe", shop_id : "245273146", shop_name : "PAPARECIPE海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://paparecipe.tmall.hk/", seller_id : "3361076672" },
+{ keyword : "papa recipe", shop_id : "291128025", shop_name : "paparecipe旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://paparecipehzp.tmall.com/", seller_id : "4065642251" },
+{ keyword : "RECIPE", shop_id : "129951170", shop_name : "RECIPE海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://recipe.tmall.hk/", seller_id : "2641546987" },
+{ keyword : "RECIPE", shop_id : "374911873", shop_name : "recipe旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://laisibi.tmall.com/", seller_id : "3421591432" },
+{ keyword : "Shangpree", shop_id : "526573779", shop_name : "shangpree香蒲丽旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://xiangpuli.tmall.com/", seller_id : "2200616491228" },
+{ keyword : "Shangpree", shop_id : "388526272", shop_name : "SHANGPREE海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://shangpree.tmall.hk/", seller_id : "3384324308" },
+{ keyword : "SNP", shop_id : "113003751", shop_name : "SNP海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://snpcos.tmall.hk/", seller_id : "2219724804" },
+{ keyword : "SNP", shop_id : "528245900", shop_name : "snp旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://snphzp.tmall.com/", seller_id : "3097858254" },
+{ keyword : "sum37", shop_id : "113414966", shop_name : "LG生活健康海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://lghh.tmall.hk/", seller_id : "2240462077" },
+{ keyword : "sum37", shop_id : "156555754", shop_name : "sum37官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://sum37.tmall.com/", seller_id : "2884685500" },
+{ keyword : "The Face Shop", shop_id : "65216769", shop_name : "LG生活健康旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://lgcare.tmall.com/", seller_id : "676588110" },
+{ keyword : "The Face Shop", shop_id : "61963638", shop_name : "The Face Shop化妆品官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://thefaceshop.tmall.com/", seller_id : "435876330" },
+{ keyword : "The Saem", shop_id : "124993082", shop_name : "thesaem官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://thesaem.tmall.hk/", seller_id : "2564346277" },
+{ keyword : "The Saem", shop_id : "150656019", shop_name : "thesaem得鲜旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://dexian.tmall.com/", seller_id : "2820981703" },
+{ keyword : "Tony Moly", shop_id : "418251961", shop_name : "tonymoly托尼魅力旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://tonymoly.tmall.com/", seller_id : "2968025911" },
+{ keyword : "UNNY", shop_id : "599019439", shop_name : "unnyclub海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://unnyclub.tmall.hk/", seller_id : "3979163118" },
+{ keyword : "VT", shop_id : "506778651", shop_name : "VT海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://vtcosmetics.tmall.hk/", seller_id : "3934273242" },
+{ keyword : "w.lab", shop_id : "281133877", shop_name : "WLab海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://wlab.tmall.hk/", seller_id : "4033652247" },
+{ keyword : "WELLAGE", shop_id : "198890265", shop_name : "唯拉珠化妆品旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://weilazhu.tmall.com/", seller_id : "4050063715" },
+{ keyword : "whoo", shop_id : "109537841", shop_name : "后官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://thehistoryofwhoo.tmall.com/", seller_id : "2029314557" },
+{ keyword : "whoo", shop_id : "113414966", shop_name : "LG生活健康海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://lghh.tmall.hk/", seller_id : "2240462077" },
+{ keyword : "WONJINEFFECT", shop_id : "188883176", shop_name : "WONJINEFFECT海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://wonjineffect.tmall.hk/", seller_id : "4155337799" },
+{ keyword : "吕", shop_id : "109051023", shop_name : "吕官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://ryoe.tmall.com/", seller_id : "2005831794" },
+{ keyword : "雪花秀", shop_id : "140045259", shop_name : "爱茉莉官方海外旗舰店", flagshop_keyword : "海外旗舰店", shop_url : "https://amorepacific.tmall.hk/", seller_id : "2691044240" },
+{ keyword : "雪花秀", shop_id : "144807160", shop_name : "Sulwhasoo雪花秀官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://sulwhasoo.tmall.com/", seller_id : "2738112600" },
+{ keyword : "UNNY", shop_id : "184084838", shop_name : "UNNYCLUB官方旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://unnyclubhzp.tmall.com/", seller_id : "2785170885" },
+{ keyword : "Dr.G", shop_id : "374161538", shop_name : "drg蒂迩肌旗舰店", flagshop_keyword : "旗舰店", shop_url : "https://drghzp.tmall.com/", seller_id : "4134542572" }
+*/
+/*
+//2019-09-24 겡신
+ {"keyword": "3CE"            ,"shop_id": 104831451,"shop_name": "stylenanda海外旗舰店"         ,"flagshop_keyword": "海外旗舰店","shop_url": "https://stylenanda.tmall.hk/"          ,"seller_id": 1731307542}
+,{"keyword": "3CE"            ,"shop_id": 227910826,"shop_name": "3CE官方旗舰店"                ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://stylenanda3ce.tmall.com/"      ,"seller_id": 4260076097}
+,{"keyword": "AHC"            ,"shop_id": 474453956,"shop_name": "AHC海外官方旗舰店"            ,"flagshop_keyword": "海外旗舰店","shop_url": "https://ahc-global.tmall.hk/"          ,"seller_id": 2200606797002}
+,{"keyword": "AHC"            ,"shop_id": 555004456,"shop_name": "AHC官方旗舰店"                ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://ahchzp.tmall.com/"             ,"seller_id": 4004614770}
+,{"keyword": "Banila CO"      ,"shop_id": 230901823,"shop_name": "芭妮兰官方旗舰店"               ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://banilacohzp.tmall.com/"        ,"seller_id": 3159735360}
+,{"keyword": "CNP"            ,"shop_id": 352496984,"shop_name": "cnp希恩派旗舰店"              ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://xienpai.tmall.com/"            ,"seller_id": 3913958532}
+,{"keyword": "Claires Korea"  ,"shop_id": 267076203,"shop_name": "jdyclaires旗舰店"             ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://jdyclaires.tmall.com/"         ,"seller_id": 3500532262}
+,{"keyword": "Claires Korea"  ,"shop_id": 537388322,"shop_name": "Claireskorea海外旗舰店"       ,"flagshop_keyword": "海外旗舰店","shop_url": "https://claireskorea.tmall.hk/"        ,"seller_id": 2981026169}
+,{"keyword": "Clio"           ,"shop_id": 116028014,"shop_name": "clubclio海外旗舰店"           ,"flagshop_keyword": "海外旗舰店","shop_url": "https://clubclio.tmall.hk/"            ,"seller_id": 2379306225}
+,{"keyword": "Clio"           ,"shop_id": 204399779,"shop_name": "clio珂莱欧官方旗舰店"           ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://cliohzp.tmall.com/"            ,"seller_id": 4176213111}
+,{"keyword": "DERMAFIRM+"     ,"shop_id": 435559117,"shop_name": "dermafirm德妃旗舰店"          ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://dermafirmhzp.tmall.com/"       ,"seller_id": 4118264290}
+,{"keyword": "DERMAFIRM+"     ,"shop_id": 593925854,"shop_name": "dermafirm海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://dermafirm.tmall.hk/"           ,"seller_id": 3699547347}
+,{"keyword": "Dr.Althea"      ,"shop_id": 378484041,"shop_name": "dralthea海外旗舰店"           ,"flagshop_keyword": "海外旗舰店","shop_url": "https://dralthea.tmall.hk/"            ,"seller_id": 3953355522}
+,{"keyword": "Dr.G"           ,"shop_id": 374161538,"shop_name": "drg蒂迩肌旗舰店"               ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://drghzp.tmall.com/"             ,"seller_id": 4134542572}
+,{"keyword": "Dr.Jart"        ,"shop_id": 116340774,"shop_name": "DrJart蒂佳婷官方旗舰店"       ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://drjart.tmall.com/"             ,"seller_id": 2301367418}
+,{"keyword": "Dr.Jart"        ,"shop_id": 166676445,"shop_name": "drjart海外旗舰店"             ,"flagshop_keyword": "海外旗舰店","shop_url": "https://drjartglobal.tmall.hk/"        ,"seller_id": 3322300560}
+,{"keyword": "Espoir"         ,"shop_id": 140045259,"shop_name": "爱茉莉官方海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://amorepacific.tmall.hk/"        ,"seller_id": 2691044240}
+,{"keyword": "Innisfree"      ,"shop_id": 70853336 ,"shop_name": "innisfree官方旗舰店"          ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://innisfree.tmall.com/"          ,"seller_id": 845001562}
+,{"keyword": "Innisfree"      ,"shop_id": 583142462,"shop_name": "innisfree海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://innisfreeglobal.tmall.hk/"     ,"seller_id": 3697925558}
+,{"keyword": "It's Skin"      ,"shop_id": 447104390,"shop_name": "itsskin化妆品旗舰店"           ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://itsskinhuazhuangpin.tmall.com/","seller_id": 3431088373}
+,{"keyword": "JAYJUN"         ,"shop_id": 335039659,"shop_name": "Jayjun海外旗舰店"             ,"flagshop_keyword": "海外旗舰店","shop_url": "https://jayjun.tmall.hk/"              ,"seller_id": 2956756848}
+,{"keyword": "JAYJUN"         ,"shop_id": 444847627,"shop_name": "jayjun旗舰店"                 ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://jayjunhzp.tmall.com/"          ,"seller_id": 3160871576}
+,{"keyword": "JM Solution"    ,"shop_id": 320776438,"shop_name": "JMsolution海外旗舰店"         ,"flagshop_keyword": "海外旗舰店","shop_url": "https://jmsolution.tmall.hk/"          ,"seller_id": 3357241566}
+,{"keyword": "JM Solution"    ,"shop_id": 321370127,"shop_name": "JMsolution旗舰店"             ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://jmsolutionhzp.tmall.com/"      ,"seller_id": 3940973064}
+,{"keyword": "LEADERS"        ,"shop_id": 115726199,"shop_name": "丽得姿化妆品旗舰店"             ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://lidezi.tmall.com/"             ,"seller_id": 2243848037}
+,{"keyword": "LEADERS"        ,"shop_id": 117337181,"shop_name": "LEADERS海外旗舰店"            ,"flagshop_keyword": "海外旗舰店","shop_url": "https://leaderscos.tmall.hk/"          ,"seller_id": 2468841947}
+,{"keyword": "Laneige"        ,"shop_id": 73228923 ,"shop_name": "兰芝官方旗舰店"                ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://laneige.tmall.com/"            ,"seller_id": 1023696028}
+,{"keyword": "Laneige"        ,"shop_id": 140045259,"shop_name": "爱茉莉官方海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://amorepacific.tmall.hk/"        ,"seller_id": 2691044240}
+,{"keyword": "Luna"           ,"shop_id": 186439480,"shop_name": "AEKYUNG海外旗舰店"            ,"flagshop_keyword": "海外旗舰店","shop_url": "https://aekyung.tmall.hk/"             ,"seller_id": 2984496242}
+,{"keyword": "MEDIHEAL"       ,"shop_id": 123237063,"shop_name": "Mediheal海外旗舰店"           ,"flagshop_keyword": "海外旗舰店","shop_url": "https://mediheal.tmall.hk/"            ,"seller_id": 2541315686}
+,{"keyword": "MEDIHEAL"       ,"shop_id": 135375246,"shop_name": "mediheal美迪惠尔旗舰店"       ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://meidihuier.tmall.com/"         ,"seller_id": 2649573952}
+,{"keyword": "Mamonde"        ,"shop_id": 67807749 ,"shop_name": "梦妆官方旗舰店"                 ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://mamonde.tmall.com/"            ,"seller_id": 731633280}
+,{"keyword": "Mamonde"        ,"shop_id": 140045259,"shop_name": "爱茉莉官方海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://amorepacific.tmall.hk/"        ,"seller_id": 2691044240}
+,{"keyword": "Missha"         ,"shop_id": 191434489,"shop_name": "MISSHA谜尚官方旗舰店"           ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://misshahzp.tmall.com/"          ,"seller_id": 3853288510}
+,{"keyword": "Nature Republic","shop_id": 104469496,"shop_name": "naturerepublic旗舰店"         ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://naturerepublic.tmall.com/"     ,"seller_id": 1696174272}
+,{"keyword": "Nature Republic","shop_id": 116712836,"shop_name": "naturerepublic官方海外旗舰店" ,"flagshop_keyword": "海外旗舰店","shop_url": "https://naturerepublichk.tmall.hk/"    ,"seller_id": 2432554320}
+,{"keyword": "Perfect Diary"  ,"shop_id": 223545883,"shop_name": "perfectdiary旗舰店"           ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://perfectdiary.tmall.com"        ,"seller_id": 3375170974}
+,{"keyword": "RECIPE"         ,"shop_id": 129951170,"shop_name": "RECIPE海外旗舰店"             ,"flagshop_keyword": "海外旗舰店","shop_url": "https://recipe.tmall.hk/"              ,"seller_id": 2641546987}
+,{"keyword": "RECIPE"         ,"shop_id": 374911873,"shop_name": "recipe旗舰店"                 ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://laisibi.tmall.com/"            ,"seller_id": 3421591432}
+,{"keyword": "SNP"            ,"shop_id": 113003751,"shop_name": "SNP海外旗舰店"                ,"flagshop_keyword": "海外旗舰店","shop_url": "https://snpcos.tmall.hk/"              ,"seller_id": 2219724804}
+,{"keyword": "SNP"            ,"shop_id": 528245900,"shop_name": "snp旗舰店"                    ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://snphzp.tmall.com/"             ,"seller_id": 3097858254}
+,{"keyword": "Shangpree"      ,"shop_id": 388526272,"shop_name": "SHANGPREE海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://shangpree.tmall.hk/"           ,"seller_id": 3384324308}
+,{"keyword": "Shangpree"      ,"shop_id": 526573779,"shop_name": "shangpree香蒲丽旗舰店"         ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://xiangpuli.tmall.com/"          ,"seller_id": 2200616491228}
+,{"keyword": "The Face Shop"  ,"shop_id": 61963638 ,"shop_name": "The Face Shop化妆品官方旗舰店" ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://thefaceshop.tmall.com/"        ,"seller_id": 435876330}
+,{"keyword": "The Face Shop"  ,"shop_id": 65216769 ,"shop_name": "LG生活健康旗舰店"             ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://lgcare.tmall.com/"             ,"seller_id": 676588110}
+,{"keyword": "The Saem"       ,"shop_id": 124993082,"shop_name": "thesaem官方海外旗舰店"        ,"flagshop_keyword": "海外旗舰店","shop_url": "https://thesaem.tmall.hk/"             ,"seller_id": 2564346277}
+,{"keyword": "The Saem"       ,"shop_id": 150656019,"shop_name": "thesaem得鲜旗舰店"             ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://dexian.tmall.com/"             ,"seller_id": 2820981703}
+,{"keyword": "Tony Moly"      ,"shop_id": 418251961,"shop_name": "tonymoly托尼魅力旗舰店"       ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://tonymoly.tmall.com/"           ,"seller_id": 2968025911}
+,{"keyword": "UNNY"           ,"shop_id": 184084838,"shop_name": "UNNYCLUB官方旗舰店"           ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://unnyclubhzp.tmall.com/"        ,"seller_id": 2200752064827}
+,{"keyword": "UNNY"           ,"shop_id": 599019439,"shop_name": "unnyclub海外旗舰店"           ,"flagshop_keyword": "海外旗舰店","shop_url": "https://unnyclub.tmall.hk/"            ,"seller_id": 3979163118}
+,{"keyword": "VIDIVICI"       ,"shop_id": 282684002,"shop_name": "VIDIVICI海外旗舰店"           ,"flagshop_keyword": "海外旗舰店","shop_url": "https://vidivici.tmall.hk"             ,"seller_id": 2201195116244}
+,{"keyword": "VT"             ,"shop_id": 506778651,"shop_name": "VT海外旗舰店"                 ,"flagshop_keyword": "海外旗舰店","shop_url": "https://vtcosmetics.tmall.hk/"         ,"seller_id": 3934273242}
+,{"keyword": "WONJINEFFECT"   ,"shop_id": 188883176,"shop_name": "wonjin原辰海外旗舰店"         ,"flagshop_keyword": "海外旗舰店","shop_url": "https://wonjineffect.tmall.hk/"        ,"seller_id": 4155337799}
+,{"keyword": "acwell"         ,"shop_id": 231164295,"shop_name": "acwell旗舰店"                 ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://acwell.tmall.com"              ,"seller_id": 3907924708}
+,{"keyword": "age20"          ,"shop_id": 186439480,"shop_name": "AEKYUNG海外旗舰店"            ,"flagshop_keyword": "海外旗舰店","shop_url": "https://aekyung.tmall.hk/"             ,"seller_id": 2984496242}
+,{"keyword": "age20"          ,"shop_id": 331254507,"shop_name": "aekyungage20s旗舰"            ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://aekyungage20s.tmall.com/"      ,"seller_id": 3489457162}
+,{"keyword": "amos"           ,"shop_id": 140045259,"shop_name": "爱茉莉官方海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://amorepacific.tmall.hk/"        ,"seller_id": 2691044240}
+,{"keyword": "etudehouse"     ,"shop_id": 116271504,"shop_name": "ETUDE HOUSE伊蒂之屋官方旗舰店","flagshop_keyword": "旗舰店"    ,"shop_url": "https://etudehouse.tmall.com/"         ,"seller_id": 2365065119}
+,{"keyword": "miseenscene"    ,"shop_id": 486516877,"shop_name": "魅尚萱旗舰店"                  ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://meishangxuan.tmall.com/"       ,"seller_id": 4184980536}
+,{"keyword": "papa recipe"    ,"shop_id": 245273146,"shop_name": "PAPARECIPE海外旗舰店"         ,"flagshop_keyword": "海外旗舰店","shop_url": "https://paparecipe.tmall.hk/"          ,"seller_id": 3361076672}
+,{"keyword": "papa recipe"    ,"shop_id": 291128025,"shop_name": "paparecipe旗舰店"             ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://paparecipehzp.tmall.com/"      ,"seller_id": 4065642251}
+,{"keyword": "sum37"          ,"shop_id": 113414966,"shop_name": "LG生活健康海外旗舰店"         ,"flagshop_keyword": "海外旗舰店","shop_url": "https://lghh.tmall.hk/"                ,"seller_id": 2240462077}
+,{"keyword": "sum37"          ,"shop_id": 156555754,"shop_name": "sum37官方旗舰店"              ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://sum37.tmall.com/"              ,"seller_id": 2884685500}
+,{"keyword": "w.lab"          ,"shop_id": 281133877,"shop_name": "WLab海外旗舰店"               ,"flagshop_keyword": "海外旗舰店","shop_url": "https://wlab.tmall.hk/"                ,"seller_id": 4033652247}
+,{"keyword": "w.lab"          ,"shop_id": 312253970,"shop_name": "wlab旗舰店"                   ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://wlabhzp.tmall.com"             ,"seller_id": 2201410303531}
+,{"keyword": "whoo"           ,"shop_id": 109537841,"shop_name": "后官方旗舰店"                 ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://thehistoryofwhoo.tmall.com/"   ,"seller_id": 2029314557}
+,{"keyword": "whoo"           ,"shop_id": 113414966,"shop_name": "LG生活健康海外旗舰店"         ,"flagshop_keyword": "海外旗舰店","shop_url": "https://lghh.tmall.hk/"                ,"seller_id": 2240462077}
+,{"keyword": "吕"              ,"shop_id": 109051023,"shop_name": "吕官方旗舰店"                  ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://ryoe.tmall.com/"               ,"seller_id": 2005831794}
+,{"keyword": "雪花秀"         ,"shop_id": 140045259,"shop_name": "爱茉莉官方海外旗舰店"          ,"flagshop_keyword": "海外旗舰店","shop_url": "https://amorepacific.tmall.hk/"        ,"seller_id": 2691044240}
+,{"keyword": "雪花秀"         ,"shop_id": 144807160,"shop_name": "Sulwhasoo雪花秀官方旗舰店"    ,"flagshop_keyword": "旗舰店"    ,"shop_url": "https://sulwhasoo.tmall.com/"          ,"seller_id": 2738112600}
+*/
+/*
+//20191022;
+ { "keyword" : "3CE"            , "shop_id" : 104831451, "shop_name" : "stylenanda海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 1731307542   , "shop_url" : "https://stylenanda.tmall.hk/" }
+,{ "keyword" : "3CE"            , "shop_id" : 227910826, "shop_name" : "3CE官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4260076097   , "shop_url" : "https://stylenanda3ce.tmall.com/" }
+,{ "keyword" : "acwell"         , "shop_id" : 231164295, "shop_name" : "acwell旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3907924708   , "shop_url" : "https://acwell.tmall.com" }
+,{ "keyword" : "age20"          , "shop_id" : 186439480, "shop_name" : "AEKYUNG海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2984496242   , "shop_url" : "https://aekyung.tmall.hk/" }
+,{ "keyword" : "age20"          , "shop_id" : 331254507, "shop_name" : "aekyungage20s旗舰"            , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3489457162   , "shop_url" : "https://aekyungage20s.tmall.com/" }
+,{ "keyword" : "AHC"            , "shop_id" : 474453956, "shop_name" : "AHC海外官方旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2200606797002, "shop_url" : "https://ahc-global.tmall.hk/" }
+,{ "keyword" : "AHC"            , "shop_id" : 555004456, "shop_name" : "AHC官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4004614770   , "shop_url" : "https://ahchzp.tmall.com/" }
+,{ "keyword" : "amos"           , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "Banila CO"      , "shop_id" : 230901823, "shop_name" : "芭妮兰官方旗舰店"               , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3159735360   , "shop_url" : "https://banilacohzp.tmall.com/" }
+,{ "keyword" : "Banila CO"      , "shop_id" : 426664616, "shop_name" : "banilaco芭妮兰海外旗舰店"       , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2201509929816, "shop_url" : "https://banilan.tmall.hk" }
+,{ "keyword" : "Claires Korea"  , "shop_id" : 267076203, "shop_name" : "jdyclaires旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3500532262   , "shop_url" : "https://jdyclaires.tmall.com/" }
+,{ "keyword" : "Claires Korea"  , "shop_id" : 537388322, "shop_name" : "Claireskorea海外旗舰店"       , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2981026169   , "shop_url" : "https://claireskorea.tmall.hk/" }
+,{ "keyword" : "Clio"           , "shop_id" : 116028014, "shop_name" : "clubclio海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2379306225   , "shop_url" : "https://clubclio.tmall.hk/" }
+,{ "keyword" : "Clio"           , "shop_id" : 204399779, "shop_name" : "clio珂莱欧官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4176213111   , "shop_url" : "https://cliohzp.tmall.com/" }
+,{ "keyword" : "CNP"            , "shop_id" : 352496984, "shop_name" : "cnp希恩派旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3913958532   , "shop_url" : "https://xienpai.tmall.com/" }
+,{ "keyword" : "DERMAFIRM+"     , "shop_id" : 435559117, "shop_name" : "dermafirm德妃旗舰店"          , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4118264290   , "shop_url" : "https://dermafirmhzp.tmall.com/" }
+,{ "keyword" : "DERMAFIRM+"     , "shop_id" : 593925854, "shop_name" : "dermafirm海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3699547347   , "shop_url" : "https://dermafirm.tmall.hk/" }
+,{ "keyword" : "Dr.Althea"      , "shop_id" : 378484041, "shop_name" : "dralthea海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3953355522   , "shop_url" : "https://dralthea.tmall.hk/" }
+,{ "keyword" : "Dr.G"           , "shop_id" : 374161538, "shop_name" : "drg蒂迩肌旗舰店"               , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4134542572   , "shop_url" : "https://drghzp.tmall.com/" }
+,{ "keyword" : "Dr.Jart"        , "shop_id" : 116340774, "shop_name" : "DrJart蒂佳婷官方旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2301367418   , "shop_url" : "https://drjart.tmall.com/" }
+,{ "keyword" : "Dr.Jart"        , "shop_id" : 166676445, "shop_name" : "drjart海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3322300560   , "shop_url" : "https://drjartglobal.tmall.hk/" }
+,{ "keyword" : "Espoir"         , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "etudehouse"     , "shop_id" : 116271504, "shop_name" : "ETUDE HOUSE伊蒂之屋官方旗舰店", "flagshop_keyword" : "旗舰店"     , "seller_id" : 2365065119   , "shop_url" : "https://etudehouse.tmall.com/" }
+,{ "keyword" : "Innisfree"      , "shop_id" : 70853336, "shop_name" : "innisfree官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 845001562    , "shop_url" : "https://innisfree.tmall.com/" }
+,{ "keyword" : "Innisfree"      , "shop_id" : 583142462, "shop_name" : "innisfree海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3697925558   , "shop_url" : "https://innisfreeglobal.tmall.hk/" }
+,{ "keyword" : "It's Skin"      , "shop_id" : 447104390, "shop_name" : "itsskin化妆品旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3431088373   , "shop_url" : "https://itsskinhuazhuangpin.tmall.com/" }
+,{ "keyword" : "JAYJUN"         , "shop_id" : 335039659, "shop_name" : "Jayjun海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2956756848   , "shop_url" : "https://jayjun.tmall.hk/" }
+,{ "keyword" : "JAYJUN"         , "shop_id" : 444847627, "shop_name" : "jayjun旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3160871576   , "shop_url" : "https://jayjunhzp.tmall.com/" }
+,{ "keyword" : "JM Solution"    , "shop_id" : 320776438, "shop_name" : "JMsolution海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3357241566   , "shop_url" : "https://jmsolution.tmall.hk/" }
+,{ "keyword" : "JM Solution"    , "shop_id" : 321370127, "shop_name" : "JMsolution旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3940973064   , "shop_url" : "https://jmsolutionhzp.tmall.com/" }
+,{ "keyword" : "Laneige"        , "shop_id" : 73228923, "shop_name" : "兰芝官方旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 1023696028   , "shop_url" : "https://laneige.tmall.com/" }
+,{ "keyword" : "Laneige"        , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "LEADERS"        , "shop_id" : 115726199, "shop_name" : "丽得姿化妆品旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2243848037   , "shop_url" : "https://lidezi.tmall.com/" }
+,{ "keyword" : "LEADERS"        , "shop_id" : 117337181, "shop_name" : "LEADERS海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2468841947   , "shop_url" : "https://leaderscos.tmall.hk/" }
+,{ "keyword" : "Luna"           , "shop_id" : 186439480, "shop_name" : "AEKYUNG海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2984496242   , "shop_url" : "https://aekyung.tmall.hk/" }
+,{ "keyword" : "Luna"           , "shop_id" : 219621736, "shop_name" : "aekyung露娜旗舰店"            , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2205827680981, "shop_url" : "https://aekyunghzp.tmall.com" }
+,{ "keyword" : "Mamonde"        , "shop_id" : 67807749, "shop_name" : "梦妆官方旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 731633280    , "shop_url" : "https://mamonde.tmall.com/" }
+,{ "keyword" : "Mamonde"        , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "MEDIHEAL"       , "shop_id" : 123237063, "shop_name" : "Mediheal海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2541315686   , "shop_url" : "https://mediheal.tmall.hk/" }
+,{ "keyword" : "MEDIHEAL"       , "shop_id" : 135375246, "shop_name" : "mediheal美迪惠尔旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2649573952   , "shop_url" : "https://meidihuier.tmall.com/" }
+,{ "keyword" : "miseenscene"    , "shop_id" : 486516877, "shop_name" : "魅尚萱旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4184980536   , "shop_url" : "https://meishangxuan.tmall.com/" }
+,{ "keyword" : "Missha"         , "shop_id" : 191434489, "shop_name" : "MISSHA谜尚官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3853288510   , "shop_url" : "https://misshahzp.tmall.com/" }
+,{ "keyword" : "Nature Republic", "shop_id" : 104469496, "shop_name" : "naturerepublic旗舰店"         , "flagshop_keyword" : "旗舰店"     , "seller_id" : 1696174272   , "shop_url" : "https://naturerepublic.tmall.com/" }
+,{ "keyword" : "Nature Republic", "shop_id" : 116712836, "shop_name" : "naturerepublic官方海外旗舰店" , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2432554320   , "shop_url" : "https://naturerepublichk.tmall.hk/" }
+,{ "keyword" : "papa recipe"    , "shop_id" : 245273146, "shop_name" : "PAPARECIPE海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3361076672   , "shop_url" : "https://paparecipe.tmall.hk/" }
+,{ "keyword" : "papa recipe"    , "shop_id" : 291128025, "shop_name" : "paparecipe旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4065642251   , "shop_url" : "https://paparecipehzp.tmall.com/" }
+,{ "keyword" : "Perfect Diary"  , "shop_id" : 223545883, "shop_name" : "perfectdiary旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3375170974   , "shop_url" : "https://perfectdiary.tmall.com" }
+,{ "keyword" : "RECIPE"         , "shop_id" : 129951170, "shop_name" : "RECIPE海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2641546987   , "shop_url" : "https://recipe.tmall.hk/" }
+,{ "keyword" : "RECIPE"         , "shop_id" : 374911873, "shop_name" : "recipe旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3421591432   , "shop_url" : "https://laisibi.tmall.com/" }
+,{ "keyword" : "Shangpree"      , "shop_id" : 388526272, "shop_name" : "SHANGPREE海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3384324308   , "shop_url" : "https://shangpree.tmall.hk/" }
+,{ "keyword" : "Shangpree"      , "shop_id" : 526573779, "shop_name" : "shangpree香蒲丽旗舰店"         , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2200616491228, "shop_url" : "https://xiangpuli.tmall.com/" }
+,{ "keyword" : "SNP"            , "shop_id" : 113003751, "shop_name" : "SNP海外旗舰店"                , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2219724804   , "shop_url" : "https://snpcos.tmall.hk/" }
+,{ "keyword" : "SNP"            , "shop_id" : 528245900, "shop_name" : "snp旗舰店"                    , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3097858254   , "shop_url" : "https://snphzp.tmall.com/" }
+,{ "keyword" : "sum37"          , "shop_id" : 113414966, "shop_name" : "LG生活健康海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2240462077   , "shop_url" : "https://lghh.tmall.hk/" }
+,{ "keyword" : "sum37"          , "shop_id" : 156555754, "shop_name" : "sum37官方旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2884685500   , "shop_url" : "https://sum37.tmall.com/" }
+,{ "keyword" : "The Face Shop"  , "shop_id" : 61963638, "shop_name" : "The Face Shop化妆品官方旗舰店"  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 435876330    , "shop_url" : "https://thefaceshop.tmall.com/" }
+,{ "keyword" : "The Face Shop"  , "shop_id" : 65216769, "shop_name" : "LG生活健康旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 676588110    , "shop_url" : "https://lgcare.tmall.com/" }
+,{ "keyword" : "The Saem"       , "shop_id" : 124993082, "shop_name" : "thesaem官方海外旗舰店"        , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2564346277   , "shop_url" : "https://thesaem.tmall.hk/" }
+,{ "keyword" : "The Saem"       , "shop_id" : 150656019, "shop_name" : "thesaem得鲜旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2820981703   , "shop_url" : "https://dexian.tmall.com/" }
+,{ "keyword" : "Tony Moly"      , "shop_id" : 418251961, "shop_name" : "tonymoly托尼魅力旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2968025911   , "shop_url" : "https://tonymoly.tmall.com/" }
+,{ "keyword" : "UNNY"           , "shop_id" : 184084838, "shop_name" : "UNNYCLUB官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2200752064827, "shop_url" : "https://unnyclubhzp.tmall.com/" }
+,{ "keyword" : "UNNY"           , "shop_id" : 599019439, "shop_name" : "unnyclub海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3979163118   , "shop_url" : "https://unnyclub.tmall.hk/" }
+,{ "keyword" : "VIDIVICI"       , "shop_id" : 282684002, "shop_name" : "VIDIVICI海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2201195116244, "shop_url" : "https://vidivici.tmall.hk" }
+,{ "keyword" : "VT"             , "shop_id" : 250797046, "shop_name" : "vt旗舰店"                     , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2201226370359, "shop_url" : "https://vthzp.tmall.com" }
+,{ "keyword" : "VT"             , "shop_id" : 506778651, "shop_name" : "VT海外旗舰店"                 , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3934273242   , "shop_url" : "https://vtcosmetics.tmall.hk/" }
+,{ "keyword" : "w.lab"          , "shop_id" : 281133877, "shop_name" : "WLab海外旗舰店"               , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4033652247   , "shop_url" : "https://wlab.tmall.hk/" }
+,{ "keyword" : "w.lab"          , "shop_id" : 312253970, "shop_name" : "wlab旗舰店"                   , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2201410303531, "shop_url" : "https://wlabhzp.tmall.com" }
+,{ "keyword" : "whoo"           , "shop_id" : 109537841, "shop_name" : "后官方旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2029314557   , "shop_url" : "https://thehistoryofwhoo.tmall.com/" }
+,{ "keyword" : "whoo"           , "shop_id" : 113414966, "shop_name" : "LG生活健康海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2240462077   , "shop_url" : "https://lghh.tmall.hk/" }
+,{ "keyword" : "WONJINEFFECT"   , "shop_id" : 188883176, "shop_name" : "wonjin原辰海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4155337799   , "shop_url" : "https://wonjineffect.tmall.hk/" }
+,{ "keyword" : "吕"              , "shop_id" : 109051023, "shop_name" : "吕官方旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2005831794   , "shop_url" : "https://ryoe.tmall.com/" }
+,{ "keyword" : "雪花秀"         , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "雪花秀"         , "shop_id" : 144807160, "shop_name" : "Sulwhasoo雪花秀官方旗舰店"    , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2738112600   , "shop_url" : "https://sulwhasoo.tmall.com/" }
+*/
+/*
+//20191029
+ { "keyword" : "3CE"            , "shop_id" : 104831451, "shop_name" : "stylenanda海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 1731307542   , "shop_url" : "https://stylenanda.tmall.hk/" }
+,{ "keyword" : "3CE"            , "shop_id" : 227910826, "shop_name" : "3CE官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4260076097   , "shop_url" : "https://stylenanda3ce.tmall.com/" }
+,{ "keyword" : "acwell"         , "shop_id" : 231164295, "shop_name" : "acwell旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3907924708   , "shop_url" : "https://acwell.tmall.com" }
+,{ "keyword" : "age20"          , "shop_id" : 186439480, "shop_name" : "AEKYUNG海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2984496242   , "shop_url" : "https://aekyung.tmall.hk/" }
+,{ "keyword" : "age20"          , "shop_id" : 331254507, "shop_name" : "aekyungage20s旗舰"            , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3489457162   , "shop_url" : "https://aekyungage20s.tmall.com/" }
+,{ "keyword" : "AHC"            , "shop_id" : 474453956, "shop_name" : "AHC海外官方旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2200606797002, "shop_url" : "https://ahc-global.tmall.hk/" }
+,{ "keyword" : "AHC"            , "shop_id" : 555004456, "shop_name" : "AHC官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4004614770   , "shop_url" : "https://ahchzp.tmall.com/" }
+,{ "keyword" : "amos"           , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "Banila CO"      , "shop_id" : 230901823, "shop_name" : "芭妮兰官方旗舰店"               , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3159735360   , "shop_url" : "https://banilacohzp.tmall.com/" }
+,{ "keyword" : "Banila CO"      , "shop_id" : 426664616, "shop_name" : "banilaco芭妮兰海外旗舰店"       , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2201509929816, "shop_url" : "https://banilan.tmall.hk" }
+,{ "keyword" : "Claires Korea"  , "shop_id" : 267076203, "shop_name" : "jdyclaires旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3500532262   , "shop_url" : "https://jdyclaires.tmall.com/" }
+,{ "keyword" : "Claires Korea"  , "shop_id" : 537388322, "shop_name" : "Claireskorea海外旗舰店"       , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2981026169   , "shop_url" : "https://claireskorea.tmall.hk/" }
+,{ "keyword" : "Clio"           , "shop_id" : 116028014, "shop_name" : "clubclio海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2379306225   , "shop_url" : "https://clubclio.tmall.hk/" }
+,{ "keyword" : "Clio"           , "shop_id" : 204399779, "shop_name" : "clio珂莱欧官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4176213111   , "shop_url" : "https://cliohzp.tmall.com/" }
+,{ "keyword" : "CNP"            , "shop_id" : 352496984, "shop_name" : "cnp希恩派旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3913958532   , "shop_url" : "https://xienpai.tmall.com/" }
+,{ "keyword" : "DERMAFIRM+"     , "shop_id" : 435559117, "shop_name" : "dermafirm德妃旗舰店"          , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4118264290   , "shop_url" : "https://dermafirmhzp.tmall.com/" }
+,{ "keyword" : "DERMAFIRM+"     , "shop_id" : 593925854, "shop_name" : "dermafirm海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3699547347   , "shop_url" : "https://dermafirm.tmall.hk/" }
+,{ "keyword" : "Dr.Althea"      , "shop_id" : 378484041, "shop_name" : "dralthea海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3953355522   , "shop_url" : "https://dralthea.tmall.hk/" }
+,{ "keyword" : "Dr.G"           , "shop_id" : 374161538, "shop_name" : "drg蒂迩肌旗舰店"               , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4134542572   , "shop_url" : "https://drghzp.tmall.com/" }
+,{ "keyword" : "Dr.Jart"        , "shop_id" : 116340774, "shop_name" : "DrJart蒂佳婷官方旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2301367418   , "shop_url" : "https://drjart.tmall.com/" }
+,{ "keyword" : "Dr.Jart"        , "shop_id" : 166676445, "shop_name" : "drjart海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3322300560   , "shop_url" : "https://drjartglobal.tmall.hk/" }
+,{ "keyword" : "Espoir"         , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "etudehouse"     , "shop_id" : 116271504, "shop_name" : "ETUDE HOUSE伊蒂之屋官方旗舰店", "flagshop_keyword" : "旗舰店"     , "seller_id" : 2365065119   , "shop_url" : "https://etudehouse.tmall.com/" }
+,{ "keyword" : "Innisfree"      , "shop_id" : 70853336 , "shop_name" : "innisfree官方旗舰店"          , "flagshop_keyword" : "旗舰店"     , "seller_id" : 845001562    , "shop_url" : "https://innisfree.tmall.com/" }
+,{ "keyword" : "Innisfree"      , "shop_id" : 583142462, "shop_name" : "innisfree海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3697925558   , "shop_url" : "https://innisfreeglobal.tmall.hk/" }
+,{ "keyword" : "It's Skin"      , "shop_id" : 447104390, "shop_name" : "itsskin化妆品旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3431088373   , "shop_url" : "https://itsskinhuazhuangpin.tmall.com/" }
+,{ "keyword" : "JAYJUN"         , "shop_id" : 335039659, "shop_name" : "Jayjun海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2956756848   , "shop_url" : "https://jayjun.tmall.hk/" }
+,{ "keyword" : "JAYJUN"         , "shop_id" : 444847627, "shop_name" : "jayjun旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3160871576   , "shop_url" : "https://jayjunhzp.tmall.com/" }
+,{ "keyword" : "JM Solution"    , "shop_id" : 320776438, "shop_name" : "JMsolution海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3357241566   , "shop_url" : "https://jmsolution.tmall.hk/" }
+,{ "keyword" : "JM Solution"    , "shop_id" : 321370127, "shop_name" : "JMsolution旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3940973064   , "shop_url" : "https://jmsolutionhzp.tmall.com/" }
+,{ "keyword" : "Laneige"        , "shop_id" : 73228923 , "shop_name" : "兰芝官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 1023696028   , "shop_url" : "https://laneige.tmall.com/" }
+,{ "keyword" : "Laneige"        , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "LEADERS"        , "shop_id" : 115726199, "shop_name" : "丽得姿化妆品旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2243848037   , "shop_url" : "https://lidezi.tmall.com/" }
+,{ "keyword" : "LEADERS"        , "shop_id" : 117337181, "shop_name" : "LEADERS海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2468841947   , "shop_url" : "https://leaderscos.tmall.hk/" }
+,{ "keyword" : "Luna"           , "shop_id" : 186439480, "shop_name" : "AEKYUNG海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2984496242   , "shop_url" : "https://aekyung.tmall.hk/" }
+,{ "keyword" : "Luna"           , "shop_id" : 219621736, "shop_name" : "aekyung露娜旗舰店"            , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2205827680981, "shop_url" : "https://aekyunghzp.tmall.com" }
+,{ "keyword" : "Mamonde"        , "shop_id" : 67807749 , "shop_name" : "梦妆官方旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 731633280    , "shop_url" : "https://mamonde.tmall.com/" }
+,{ "keyword" : "Mamonde"        , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "MEDIHEAL"       , "shop_id" : 123237063, "shop_name" : "Mediheal海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2541315686   , "shop_url" : "https://mediheal.tmall.hk/" }
+,{ "keyword" : "MEDIHEAL"       , "shop_id" : 135375246, "shop_name" : "mediheal美迪惠尔旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2649573952   , "shop_url" : "https://meidihuier.tmall.com/" }
+,{ "keyword" : "MEDI-PEEL"      , "shop_id" : 351360715, "shop_name" : "MediPeel海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4087069577   , "shop_url" : "https://medipeel.tmall.hk" }
+,{ "keyword" : "miseenscene"    , "shop_id" : 486516877, "shop_name" : "魅尚萱旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4184980536   , "shop_url" : "https://meishangxuan.tmall.com/" }
+,{ "keyword" : "Missha"         , "shop_id" : 191434489, "shop_name" : "MISSHA谜尚官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3853288510   , "shop_url" : "https://misshahzp.tmall.com/" }
+,{ "keyword" : "Nature Republic", "shop_id" : 104469496, "shop_name" : "naturerepublic旗舰店"         , "flagshop_keyword" : "旗舰店"     , "seller_id" : 1696174272   , "shop_url" : "https://naturerepublic.tmall.com/" }
+,{ "keyword" : "Nature Republic", "shop_id" : 116712836, "shop_name" : "naturerepublic官方海外旗舰店" , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2432554320   , "shop_url" : "https://naturerepublichk.tmall.hk/" }
+,{ "keyword" : "papa recipe"    , "shop_id" : 245273146, "shop_name" : "PAPARECIPE海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3361076672   , "shop_url" : "https://paparecipe.tmall.hk/" }
+,{ "keyword" : "papa recipe"    , "shop_id" : 291128025, "shop_name" : "paparecipe旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4065642251   , "shop_url" : "https://paparecipehzp.tmall.com/" }
+,{ "keyword" : "Perfect Diary"  , "shop_id" : 223545883, "shop_name" : "perfectdiary旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3375170974   , "shop_url" : "https://perfectdiary.tmall.com" }
+,{ "keyword" : "RECIPE"         , "shop_id" : 129951170, "shop_name" : "RECIPE海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2641546987   , "shop_url" : "https://recipe.tmall.hk/" }
+,{ "keyword" : "RECIPE"         , "shop_id" : 374911873, "shop_name" : "recipe旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3421591432   , "shop_url" : "https://laisibi.tmall.com/" }
+,{ "keyword" : "Shangpree"      , "shop_id" : 388526272, "shop_name" : "SHANGPREE海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3384324308   , "shop_url" : "https://shangpree.tmall.hk/" }
+,{ "keyword" : "Shangpree"      , "shop_id" : 526573779, "shop_name" : "shangpree香蒲丽旗舰店"         , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2200616491228, "shop_url" : "https://xiangpuli.tmall.com/" }
+,{ "keyword" : "SNP"            , "shop_id" : 113003751, "shop_name" : "SNP海外旗舰店"                , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2219724804   , "shop_url" : "https://snpcos.tmall.hk/" }
+,{ "keyword" : "SNP"            , "shop_id" : 528245900, "shop_name" : "snp旗舰店"                    , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3097858254   , "shop_url" : "https://snphzp.tmall.com/" }
+,{ "keyword" : "sum37"          , "shop_id" : 113414966, "shop_name" : "LG生活健康海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2240462077   , "shop_url" : "https://lghh.tmall.hk/" }
+,{ "keyword" : "sum37"          , "shop_id" : 156555754, "shop_name" : "sum37官方旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2884685500   , "shop_url" : "https://sum37.tmall.com/" }
+,{ "keyword" : "The Face Shop"  , "shop_id" : 61963638 , "shop_name" : "The Face Shop化妆品官方旗舰店" , "flagshop_keyword" : "旗舰店"     , "seller_id" : 435876330    , "shop_url" : "https://thefaceshop.tmall.com/" }
+,{ "keyword" : "The Face Shop"  , "shop_id" : 65216769 , "shop_name" : "LG生活健康旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 676588110    , "shop_url" : "https://lgcare.tmall.com/" }
+,{ "keyword" : "The Saem"       , "shop_id" : 124993082, "shop_name" : "thesaem官方海外旗舰店"        , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2564346277   , "shop_url" : "https://thesaem.tmall.hk/" }
+,{ "keyword" : "The Saem"       , "shop_id" : 150656019, "shop_name" : "thesaem得鲜旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2820981703   , "shop_url" : "https://dexian.tmall.com/" }
+,{ "keyword" : "Tony Moly"      , "shop_id" : 418251961, "shop_name" : "tonymoly托尼魅力旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2968025911   , "shop_url" : "https://tonymoly.tmall.com/" }
+,{ "keyword" : "UNNY"           , "shop_id" : 184084838, "shop_name" : "UNNYCLUB官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2200752064827, "shop_url" : "https://unnyclubhzp.tmall.com/" }
+,{ "keyword" : "UNNY"           , "shop_id" : 599019439, "shop_name" : "unnyclub海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3979163118   , "shop_url" : "https://unnyclub.tmall.hk/" }
+,{ "keyword" : "VIDIVICI"       , "shop_id" : 282684002, "shop_name" : "VIDIVICI海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2201195116244, "shop_url" : "https://vidivici.tmall.hk" }
+,{ "keyword" : "VT"             , "shop_id" : 250797046, "shop_name" : "vt旗舰店"                     , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2201226370359, "shop_url" : "https://vthzp.tmall.com" }
+,{ "keyword" : "VT"             , "shop_id" : 506778651, "shop_name" : "VT海外旗舰店"                 , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3934273242   , "shop_url" : "https://vtcosmetics.tmall.hk/" }
+,{ "keyword" : "w.lab"          , "shop_id" : 281133877, "shop_name" : "WLab海外旗舰店"               , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4033652247   , "shop_url" : "https://wlab.tmall.hk/" }
+,{ "keyword" : "w.lab"          , "shop_id" : 312253970, "shop_name" : "wlab旗舰店"                   , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2201410303531, "shop_url" : "https://wlabhzp.tmall.com" }
+,{ "keyword" : "whoo"           , "shop_id" : 109537841, "shop_name" : "后官方旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2029314557   , "shop_url" : "https://thehistoryofwhoo.tmall.com/" }
+,{ "keyword" : "whoo"           , "shop_id" : 113414966, "shop_name" : "LG生活健康海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2240462077   , "shop_url" : "https://lghh.tmall.hk/" }
+,{ "keyword" : "WONJINEFFECT"   , "shop_id" : 188883176, "shop_name" : "wonjin原辰海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4155337799   , "shop_url" : "https://wonjineffect.tmall.hk/" }
+,{ "keyword" : "吕"              , "shop_id" : 109051023, "shop_name" : "吕官方旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2005831794   , "shop_url" : "https://ryoe.tmall.com/" }
+,{ "keyword" : "雪花秀"         , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "雪花秀"         , "shop_id" : 144807160, "shop_name" : "Sulwhasoo雪花秀官方旗舰店"    , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2738112600   , "shop_url" : "https://sulwhasoo.tmall.com/" }
+*/
+ { "keyword" : "3CE"            , "shop_id" : 104831451, "shop_name" : "stylenanda海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 1731307542   , "shop_url" : "https://stylenanda.tmall.hk/" }
+,{ "keyword" : "3CE"            , "shop_id" : 227910826, "shop_name" : "3CE官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4260076097   , "shop_url" : "https://stylenanda3ce.tmall.com/" }
+,{ "keyword" : "acwell"         , "shop_id" : 231164295, "shop_name" : "acwell旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3907924708   , "shop_url" : "https://acwell.tmall.com" }
+,{ "keyword" : "age20"          , "shop_id" : 186439480, "shop_name" : "AEKYUNG海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2984496242   , "shop_url" : "https://aekyung.tmall.hk/" }
+,{ "keyword" : "age20"          , "shop_id" : 331254507, "shop_name" : "aekyungage20s旗舰"            , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3489457162   , "shop_url" : "https://aekyungage20s.tmall.com/" }
+,{ "keyword" : "AHC"            , "shop_id" : 474453956, "shop_name" : "AHC海外官方旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2200606797002, "shop_url" : "https://ahc-global.tmall.hk/" }
+,{ "keyword" : "AHC"            , "shop_id" : 555004456, "shop_name" : "AHC官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4004614770   , "shop_url" : "https://ahchzp.tmall.com/" }
+,{ "keyword" : "amos"           , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "Banila CO"      , "shop_id" : 230901823, "shop_name" : "芭妮兰官方旗舰店"               , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3159735360   , "shop_url" : "https://banilacohzp.tmall.com/" }
+,{ "keyword" : "Banila CO"      , "shop_id" : 426664616, "shop_name" : "banilaco芭妮兰海外旗舰店"       , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2201509929816, "shop_url" : "https://banilan.tmall.hk" }
+,{ "keyword" : "Claires Korea"  , "shop_id" : 267076203, "shop_name" : "jdyclaires旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3500532262   , "shop_url" : "https://jdyclaires.tmall.com/" }
+,{ "keyword" : "Claires Korea"  , "shop_id" : 537388322, "shop_name" : "Claireskorea海外旗舰店"       , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2981026169   , "shop_url" : "https://claireskorea.tmall.hk/" }
+,{ "keyword" : "Clio"           , "shop_id" : 116028014, "shop_name" : "clubclio海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2379306225   , "shop_url" : "https://clubclio.tmall.hk/" }
+,{ "keyword" : "Clio"           , "shop_id" : 204399779, "shop_name" : "clio珂莱欧官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4176213111   , "shop_url" : "https://cliohzp.tmall.com/" }
+,{ "keyword" : "CNP"            , "shop_id" : 352496984, "shop_name" : "cnp希恩派旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3913958532   , "shop_url" : "https://xienpai.tmall.com/" }
+,{ "keyword" : "DERMAFIRM+"     , "shop_id" : 435559117, "shop_name" : "dermafirm德妃旗舰店"          , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4118264290   , "shop_url" : "https://dermafirmhzp.tmall.com/" }
+,{ "keyword" : "DERMAFIRM+"     , "shop_id" : 593925854, "shop_name" : "dermafirm海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3699547347   , "shop_url" : "https://dermafirm.tmall.hk/" }
+,{ "keyword" : "Dr.Althea"      , "shop_id" : 378484041, "shop_name" : "dralthea海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3953355522   , "shop_url" : "https://dralthea.tmall.hk/" }
+,{ "keyword" : "Dr.G"           , "shop_id" : 374161538, "shop_name" : "drg蒂迩肌旗舰店"               , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4134542572   , "shop_url" : "https://drghzp.tmall.com/" }
+,{ "keyword" : "Dr.Jart"        , "shop_id" : 116340774, "shop_name" : "DrJart蒂佳婷官方旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2301367418   , "shop_url" : "https://drjart.tmall.com/" }
+,{ "keyword" : "Dr.Jart"        , "shop_id" : 166676445, "shop_name" : "drjart海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3322300560   , "shop_url" : "https://drjartglobal.tmall.hk/" }
+,{ "keyword" : "Espoir"         , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "etudehouse"     , "shop_id" : 116271504, "shop_name" : "ETUDE HOUSE伊蒂之屋官方旗舰店", "flagshop_keyword" : "旗舰店"     , "seller_id" : 2365065119   , "shop_url" : "https://etudehouse.tmall.com/" }
+,{ "keyword" : "Innisfree"      , "shop_id" : 70853336 , "shop_name" : "innisfree官方旗舰店"          , "flagshop_keyword" : "旗舰店"     , "seller_id" : 845001562    , "shop_url" : "https://innisfree.tmall.com/" }
+,{ "keyword" : "Innisfree"      , "shop_id" : 583142462, "shop_name" : "innisfree海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3697925558   , "shop_url" : "https://innisfreeglobal.tmall.hk/" }
+,{ "keyword" : "It's Skin"      , "shop_id" : 447104390, "shop_name" : "itsskin化妆品旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3431088373   , "shop_url" : "https://itsskinhuazhuangpin.tmall.com/" }
+,{ "keyword" : "JAYJUN"         , "shop_id" : 335039659, "shop_name" : "Jayjun海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2956756848   , "shop_url" : "https://jayjun.tmall.hk/" }
+,{ "keyword" : "JAYJUN"         , "shop_id" : 444847627, "shop_name" : "jayjun旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3160871576   , "shop_url" : "https://jayjunhzp.tmall.com/" }
+,{ "keyword" : "JM Solution"    , "shop_id" : 320776438, "shop_name" : "JMsolution海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3357241566   , "shop_url" : "https://jmsolution.tmall.hk/" }
+,{ "keyword" : "JM Solution"    , "shop_id" : 321370127, "shop_name" : "JMsolution旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3940973064   , "shop_url" : "https://jmsolutionhzp.tmall.com/" }
+,{ "keyword" : "Laneige"        , "shop_id" : 73228923 , "shop_name" : "兰芝官方旗舰店"                , "flagshop_keyword" : "旗舰店"     , "seller_id" : 1023696028   , "shop_url" : "https://laneige.tmall.com/" }
+,{ "keyword" : "Laneige"        , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "LEADERS"        , "shop_id" : 115726199, "shop_name" : "丽得姿化妆品旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2243848037   , "shop_url" : "https://lidezi.tmall.com/" }
+,{ "keyword" : "LEADERS"        , "shop_id" : 117337181, "shop_name" : "LEADERS海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2468841947   , "shop_url" : "https://leaderscos.tmall.hk/" }
+,{ "keyword" : "Luna"           , "shop_id" : 186439480, "shop_name" : "AEKYUNG海外旗舰店"            , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2984496242   , "shop_url" : "https://aekyung.tmall.hk/" }
+,{ "keyword" : "Luna"           , "shop_id" : 219621736, "shop_name" : "aekyung露娜旗舰店"            , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2205827680981, "shop_url" : "https://aekyunghzp.tmall.com" }
+,{ "keyword" : "Mamonde"        , "shop_id" : 67807749 , "shop_name" : "梦妆官方旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 731633280    , "shop_url" : "https://mamonde.tmall.com/" }
+,{ "keyword" : "Mamonde"        , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "MEDIHEAL"       , "shop_id" : 123237063, "shop_name" : "Mediheal海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2541315686   , "shop_url" : "https://mediheal.tmall.hk/" }
+,{ "keyword" : "MEDIHEAL"       , "shop_id" : 135375246, "shop_name" : "mediheal美迪惠尔旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2649573952   , "shop_url" : "https://meidihuier.tmall.com/" }
+,{ "keyword" : "MEDI-PEEL"      , "shop_id" : 351360715, "shop_name" : "MediPeel海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4087069577   , "shop_url" : "https://medipeel.tmall.hk" }
+,{ "keyword" : "miseenscene"    , "shop_id" : 486516877, "shop_name" : "魅尚萱旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4184980536   , "shop_url" : "https://meishangxuan.tmall.com/" }
+,{ "keyword" : "Missha"         , "shop_id" : 191434489, "shop_name" : "MISSHA谜尚官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3853288510   , "shop_url" : "https://misshahzp.tmall.com/" }
+,{ "keyword" : "Nature Republic", "shop_id" : 104469496, "shop_name" : "naturerepublic旗舰店"         , "flagshop_keyword" : "旗舰店"     , "seller_id" : 1696174272   , "shop_url" : "https://naturerepublic.tmall.com/" }
+,{ "keyword" : "Nature Republic", "shop_id" : 116712836, "shop_name" : "naturerepublic官方海外旗舰店" , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2432554320   , "shop_url" : "https://naturerepublichk.tmall.hk/" }
+,{ "keyword" : "papa recipe"    , "shop_id" : 245273146, "shop_name" : "PAPARECIPE海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3361076672   , "shop_url" : "https://paparecipe.tmall.hk/" }
+,{ "keyword" : "papa recipe"    , "shop_id" : 291128025, "shop_name" : "paparecipe旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 4065642251   , "shop_url" : "https://paparecipehzp.tmall.com/" }
+,{ "keyword" : "Perfect Diary"  , "shop_id" : 223545883, "shop_name" : "perfectdiary旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3375170974   , "shop_url" : "https://perfectdiary.tmall.com" }
+,{ "keyword" : "RECIPE"         , "shop_id" : 129951170, "shop_name" : "RECIPE海外旗舰店"             , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2641546987   , "shop_url" : "https://recipe.tmall.hk/" }
+,{ "keyword" : "RECIPE"         , "shop_id" : 374911873, "shop_name" : "recipe旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3421591432   , "shop_url" : "https://laisibi.tmall.com/" }
+,{ "keyword" : "Shangpree"      , "shop_id" : 388526272, "shop_name" : "SHANGPREE海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3384324308   , "shop_url" : "https://shangpree.tmall.hk/" }
+,{ "keyword" : "Shangpree"      , "shop_id" : 526573779, "shop_name" : "shangpree香蒲丽旗舰店"         , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2200616491228, "shop_url" : "https://xiangpuli.tmall.com/" }
+,{ "keyword" : "SNP"            , "shop_id" : 113003751, "shop_name" : "SNP海外旗舰店"                , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2219724804   , "shop_url" : "https://snpcos.tmall.hk/" }
+,{ "keyword" : "SNP"            , "shop_id" : 528245900, "shop_name" : "snp旗舰店"                    , "flagshop_keyword" : "旗舰店"     , "seller_id" : 3097858254   , "shop_url" : "https://snphzp.tmall.com/" }
+,{ "keyword" : "sum37"          , "shop_id" : 113414966, "shop_name" : "LG生活健康海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2240462077   , "shop_url" : "https://lghh.tmall.hk/" }
+,{ "keyword" : "sum37"          , "shop_id" : 156555754, "shop_name" : "sum37官方旗舰店"              , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2884685500   , "shop_url" : "https://sum37.tmall.com/" }
+,{ "keyword" : "The Face Shop"  , "shop_id" : 61963638 , "shop_name" : "The Face Shop化妆品官方旗舰店" , "flagshop_keyword" : "旗舰店"     , "seller_id" : 435876330    , "shop_url" : "https://thefaceshop.tmall.com/" }
+,{ "keyword" : "The Face Shop"  , "shop_id" : 65216769 , "shop_name" : "LG生活健康旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 676588110    , "shop_url" : "https://lgcare.tmall.com/" }
+,{ "keyword" : "The Saem"       , "shop_id" : 124993082, "shop_name" : "thesaem官方海外旗舰店"        , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2564346277   , "shop_url" : "https://thesaem.tmall.hk/" }
+,{ "keyword" : "The Saem"       , "shop_id" : 150656019, "shop_name" : "thesaem得鲜旗舰店"             , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2820981703   , "shop_url" : "https://dexian.tmall.com/" }
+,{ "keyword" : "Tony Moly"      , "shop_id" : 418251961, "shop_name" : "tonymoly托尼魅力旗舰店"       , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2968025911   , "shop_url" : "https://tonymoly.tmall.com/" }
+,{ "keyword" : "UNNY"           , "shop_id" : 184084838, "shop_name" : "UNNYCLUB官方旗舰店"           , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2200752064827, "shop_url" : "https://unnyclubhzp.tmall.com/" }
+,{ "keyword" : "UNNY"           , "shop_id" : 599019439, "shop_name" : "unnyclub海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3979163118   , "shop_url" : "https://unnyclub.tmall.hk/" }
+,{ "keyword" : "VIDIVICI"       , "shop_id" : 282684002, "shop_name" : "VIDIVICI海外旗舰店"           , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2201195116244, "shop_url" : "https://vidivici.tmall.hk" }
+,{ "keyword" : "VT"             , "shop_id" : 250797046, "shop_name" : "vt旗舰店"                     , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2201226370359, "shop_url" : "https://vthzp.tmall.com" }
+,{ "keyword" : "VT"             , "shop_id" : 506778651, "shop_name" : "VT海外旗舰店"                 , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 3934273242   , "shop_url" : "https://vtcosmetics.tmall.hk/" }
+,{ "keyword" : "w.lab"          , "shop_id" : 281133877, "shop_name" : "WLab海外旗舰店"               , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4033652247   , "shop_url" : "https://wlab.tmall.hk/" }
+,{ "keyword" : "w.lab"          , "shop_id" : 312253970, "shop_name" : "wlab旗舰店"                   , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2201410303531, "shop_url" : "https://wlabhzp.tmall.com" }
+,{ "keyword" : "whoo"           , "shop_id" : 109537841, "shop_name" : "后官方旗舰店"                 , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2029314557   , "shop_url" : "https://thehistoryofwhoo.tmall.com/" }
+,{ "keyword" : "whoo"           , "shop_id" : 113414966, "shop_name" : "LG生活健康海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2240462077   , "shop_url" : "https://lghh.tmall.hk/" }
+,{ "keyword" : "WONJINEFFECT"   , "shop_id" : 188883176, "shop_name" : "wonjin原辰海外旗舰店"         , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 4155337799   , "shop_url" : "https://wonjineffect.tmall.hk/" }
+,{ "keyword" : "吕"              , "shop_id" : 109051023, "shop_name" : "吕官方旗舰店"                  , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2005831794   , "shop_url" : "https://ryoe.tmall.com/" }
+,{ "keyword" : "雪花秀"         , "shop_id" : 140045259, "shop_name" : "爱茉莉官方海外旗舰店"          , "flagshop_keyword" : "海外旗舰店" , "seller_id" : 2691044240   , "shop_url" : "https://amorepacific.tmall.hk/" }
+,{ "keyword" : "雪花秀"         , "shop_id" : 144807160, "shop_name" : "Sulwhasoo雪花秀官方旗舰店"    , "flagshop_keyword" : "旗舰店"     , "seller_id" : 2738112600   , "shop_url" : "https://sulwhasoo.tmall.com/" }
+
+];
+//----------------------------------------------------------------------------------------------------;
+
+//	DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _db$daily_master = db.getSiblingDB( "daily_master_h5" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _col$daily_master = _db$daily_master.getCollection( "daily_master" );
+var _col$flagshipstore_list = _db$daily_master.getCollection( "flagshipstore_list" );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { shop_id : 1} );
+
+//----------------------------------------------------------------------------------------------------;
+
+//	DOCUMENT;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _doc$flagshipstore_list;
+
+//----------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+
+//----------;
+//Parameter Object - find or findOne에서 사용;
+
+var p0 = { _id : -1 };
+var p1 = {};
+	//p1.date = ISODate( _date );
+//----------;
+
+//----------------------------------------------------------------------------------------------------[ S ] - VALIDATION;
+
+// 기함점 리스트를 매번 새로 갱신한다.
+_col$flagshipstore_list.remove({});
+_col$flagshipstore_list.insertMany( flagshipstore_list );
+
+//----------------------------------------------------------------------------------------------------[ E ] - VALIDATION;
+print( _col$flagshipstore_list.find( {} ).count() )
+print( "[S] updating flagshipstore ..." );
+
+var i = 0;
+_col$flagshipstore_list.find({}).forEach( function( doc ) {
+	print( i )
+	p1.$or = [
+		{ shop_id : doc.shop_id.toString() },
+		{ shop_id : NumberLong( doc.shop_id ) },
+		{ shop_id : NumberInt( doc.shop_id ) },
+		{ shop_id : Number( doc.shop_id ) },
+		{ shop_id : doc.shop_id }
+	];
+
+	if ( doc.flagshop_keyword ) {
+
+		//*/
+		_col$daily_master.updateMany( p1, { $set : { shop_type : doc.flagshop_keyword}});
+		/*/
+		_col$daily_master.update( p1, { $set : { shop_type : doc.flagshop_keyword}},{ multi: true });
+		//*/
+	}
+	++i;
+});
+
+print( "[E] updating flagshipstore ..." );

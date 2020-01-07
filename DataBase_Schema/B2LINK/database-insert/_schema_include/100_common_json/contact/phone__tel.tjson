@@ -1,0 +1,32 @@
+{
+	"description" : "일반 전화 번호를 저장", "type" : "object"
+
+	, "properties" : {
+		//Full;
+		"f" : { "description" : "Full Tel Number", "exampleValue" : "+82-2-1899-0534"<include>000_common_txt/string_default.txt</include> }
+
+		//Country Code;
+		, "c" : { "description" : "Country Code ", "exampleValue" : "82"<include>000_common_txt/string_default.txt</include> }
+
+		//Area Code;
+		, "a" : { "description" : "Area Code", "exampleValue" : "2"<include>000_common_txt/string_default.txt</include> }
+
+		//tel0;
+		, "n0" : { "description" : "Tel 0", "exampleValue" : "0000"<include>000_common_txt/string_default.txt</include> }
+
+		//tel1;
+		, "n1" : { "description" : "Tel 1", "exampleValue" : "1111"<include>000_common_txt/string_default.txt</include> }
+
+		//tel2;
+		, "n2" : { "description" : "Tel 2", "exampleValue" : "2222"<include>000_common_txt/string_default.txt</include> }
+
+		//tel3;
+		, "n3" : { "description" : "Tel 3", "exampleValue" : "3333"<include>000_common_txt/string_default.txt</include> }
+
+		//tel4;
+		, "n4" : { "description" : "Tel 4", "exampleValue" : "4444"<include>000_common_txt/string_default.txt</include> }
+
+		//extenstion;
+		, "e" : { "description" : "extenstion", "exampleValue" : "1"<include>000_common_txt/string_default.txt</include> }
+	}
+}

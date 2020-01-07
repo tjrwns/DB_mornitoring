@@ -1,0 +1,21 @@
+<div class="header">[ {{brandName}} ] {{goodsName}}</div>
+	<div class="image content">
+		<div class="ui medium image"><img src="{{goodsImg}}"></div>
+		<div class="description">
+			<p>brandName : <b>{{brandName}}</b></p>
+			<p>goodsName : <b>{{goodsName}}</b></p>
+			<p>price : <b>{{price}}</b></p>
+			<p>sellCount : <b>{{sellCount}}</b></p>
+			<p>brandId : <b>{{brandId}}</b></p>
+			<p>categoryId : <b>{{categoryId}}</b></p>
+			<p>categoryName : <b>{{categoryName}}</b></p>
+			<p>goodsId : <b>{{goodsId}}</b></p>
+			<p>shopId : <b>{{shopId}}</b></p>
+			<p>shopName : <b>{{shopName}}</b></p>
+		</div>
+	</div>
+	<div class="actions">
+		<div class="ui black deny button">Nope</div>
+		<div class="ui positive right labeled icon button">Yep!<i class="checkmark icon"></i>
+	</div>
+</div>

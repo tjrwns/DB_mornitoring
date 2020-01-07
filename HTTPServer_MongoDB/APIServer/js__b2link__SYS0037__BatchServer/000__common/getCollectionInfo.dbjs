@@ -1,0 +1,61 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getCollectionInfo.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "<!=nm_db=!>" );
+var col0 = db0.getCollection( "<!=nm_col=!>" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var data = col0.stats();
+
+//----------------------------------------------------------------------------------------------------;
+
+/**
+ * 크기를 읽기용이한 단위로 변환하는 함수;
+ * @function
+ * @param {Number} bytes
+ * @return {String}
+ */
+var formatBytes = function( bytes ){
+	if( bytes < 1024 ) return bytes + " Bytes";
+	else if( bytes < 1048576 ) return ( bytes / 1024 ).toFixed( 3 ) + " KB";
+	else if( bytes < 1073741824 ) return ( bytes / 1048576 ).toFixed( 3 ) + " MB";
+	else return ( bytes / 1073741824 ).toFixed( 3 ) + " GB";
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+data.size = formatBytes( data.size );
+data.avgObjSize = formatBytes( data.avgObjSize );
+data.storageSize = formatBytes( data.storageSize );
+data.totalIndexSize = formatBytes( data.totalIndexSize );
+
+for( var s in data.indexSizes ){ data.indexSizes[ s ] = formatBytes( data.indexSizes[ s ] ); }
+
+//----------------------------------------------------------------------------------------------------;
+
+//--------------------------------------------------data.wiredTiger;
+var t = data.wiredTiger;
+delete t.metadata;
+delete t.creationString;
+delete t.type;
+delete t.uri;
+delete t.LSM;
+delete t[ "block-manager" ];
+delete t.btree;
+delete t.cache;
+delete t.cache_walk;
+delete t.cursor;
+delete t.compression;
+delete t.reconciliation;
+//--------------------------------------------------data.wiredTiger;
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : data
+};

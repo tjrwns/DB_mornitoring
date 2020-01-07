@@ -1,0 +1,119 @@
+//----------------------------------------------------------------------------------------------------;
+
+// DEFINE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var _SITE_NAME_ = "Lazada";
+
+//----------------------------------------------------------------------------------------------------;
+
+// DATABASE;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db$STATISTICS = db.getSiblingDB( "_STATISTICS--COMMON" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// COLLECTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var col$daily = db$STATISTICS.getCollection( "dashboard-daily" );
+
+//----------------------------------------------------------------------------------------------------;
+
+// PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+
+var brand_cnt = 0;
+var shop_cnt = 0;
+var _to;
+var byte = 1024;
+
+//----------------------------------------------------------------------------------------------------;
+
+// PARAMETER;
+
+//----------------------------------------------------------------------------------------------------;
+
+var q0 = {};
+
+//----------------------------------------------------------------------------------------------------;
+
+// FUNCTION;
+
+//----------------------------------------------------------------------------------------------------;
+
+var FN = function( TARGET_DATE ){
+
+	var db0 = db.getSiblingDB( _SITE_NAME_ + "_" + TARGET_DATE.substr( 0, 4 ) );
+	var col0 = db0.getCollection( TARGET_DATE );
+
+	print( TARGET_DATE  + " -- " + Date() );
+
+	_to = {};
+	var r0 = {};
+	var r1 = {};
+
+	brand_cnt = 0;
+	shop_cnt = 0;
+
+	col0.find( q0 ).forEach( function( doc ){
+		if( !doc.LIST ) return;
+		if( !doc.LIST.brandName ) return;
+
+		if( doc.LIST.brandName != null )
+		{
+			if( !r0[ doc.LIST.brandName ] )
+			{
+				r0[ doc.LIST.brandName ] = {};
+				brand_cnt = brand_cnt + 1;
+			}
+		}
+
+		if( doc.LIST.sellerId != null )
+		{
+			if( !r1[ doc.LIST.sellerId ] )
+			{
+				r1[ doc.LIST.sellerId ] = {};
+				shop_cnt = shop_cnt + 1;
+			}
+		}
+	});
+
+	var colInfo = col0.stats();
+
+	_to._id = NumberInt( TARGET_DATE );
+	_to.year = NumberInt( TARGET_DATE.substr( 0, 4 ) );
+	_to.month = NumberInt( TARGET_DATE.substr( 4, 2 ) );
+	_to.day = NumberInt( TARGET_DATE.substr( 6, 2 ) );
+	_to.date = NumberInt( TARGET_DATE );
+
+	_to.size = {
+		byte : NumberInt( colInfo.size )
+		, kb : ( colInfo.size / byte ).toFixed( 3 )
+		, mb : ( colInfo.size / Math.pow( byte, 2 ) ).toFixed( 3 )
+		, gb : ( colInfo.size / Math.pow( byte, 3 ) ).toFixed( 3 )
+	};
+
+	_to.count = NumberInt( colInfo.count );
+	_to.shop_count = NumberInt( shop_cnt );
+	_to.brand_count = NumberInt( brand_cnt );
+
+	col$daily.remove( { _id : _to._id },true );
+	col$daily.insert( _to );
+
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+// LOGIC;
+
+//----------------------------------------------------------------------------------------------------;
+
+FN( "<!=TARGET_DATE=!>" );
+
+return;

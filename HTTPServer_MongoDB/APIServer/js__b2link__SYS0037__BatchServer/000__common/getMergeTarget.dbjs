@@ -1,0 +1,33 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/000__common/getMergeTarget.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+
+var _to;
+
+var a = db.adminCommand({ listDatabases : 1 });
+
+	a.databases.forEach( function( db ){
+
+		if( db.name[ 0 ] == "_" ) return;
+		if( db.name.indexOf( "수집" ) == -1 ) return;
+
+		var _t0 = db.name.split( "-" )[ 0 ];
+		var _t1 = _t0.split( "_" );
+
+		_to = {};
+		_to.shopNm = _t1[ 0 ];
+		_to.targetYear = _t1[ 1 ];
+
+		r.push( _to );
+	});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

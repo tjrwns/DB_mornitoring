@@ -1,0 +1,22 @@
+<div>
+	<div class="div-search-input" >
+		<div class="ui tiny grid search-condition" style="padding:10px;">
+			<div class="one wide column padding_00">
+				<div style="padding-bottom : 5px;">
+					<label>{{data_key}}</label></div><div class="ui fluid mini input"><input class="id-input-search {{data_key}}" type="text" placeholder="{{data_key}}" value="" data-key="{{data_key}}" >
+				</div>
+			</div>
+		</div>
+		<div class="ui grid" style="padding:10px;">
+			<div class="sixteen wide column padding_00_top_05">
+				<button class="id-btn-search ui positive mini basic button">SEARCH</button>
+				<button class="id-btn-reset ui negative mini basic button">RESET</button>
+			</div>
+		</div>
+	</div>
+	<div class="ui grid">
+		<div class="sixteen wide column">
+			<div id="div-fancygrid-List" tabindex="0" style="overflow:hidden;"></div>
+		</div>
+	</div>
+</div>

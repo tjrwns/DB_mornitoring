@@ -1,0 +1,82 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/shopee__상품상세정보가져오기썸네일.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = {
+	totalCount : 0
+	, data : []
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var _to;
+
+r.totalCount = col0.count();
+
+col0.find({}).forEach( function( doc ){
+
+	if( !doc.LIST ) return;
+
+	_to = {
+		goodsId : ""
+		, brandId : ""
+		, brandName : ""
+		, categoryId : ""
+		, categoryName : ""
+		, shopId : ""
+		, shopName : ""
+		, goodsImg : "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg"
+		, goodsName : ""
+		, price : null
+		, keyword : ""
+		, url : ""
+		, sellCount : -1
+	};
+
+	_to.goodsId = NumberLong( doc._id );
+
+	var t0 = doc.LIST;
+
+	//_to.goodsImg = t0.squareImage || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+	_to.goodsImg = "https://cf.shopee.sg/file/" + t0.image || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+
+	_to.goodsName = t0.name;
+
+	_to.brandName = t0.brand;
+	_to.brandId = "";//t0.brandId;
+
+	_to.categoryId = t0.catId;
+	_to.categoryName = "";//t0.categoryId;
+
+	_to.shopId = t0.shopid;
+	_to.shopName = "";//t0.sellerName;
+
+	_to.price = t0.price;
+
+	_to.keyword = doc.keyword;
+
+	_to.url = "https://shopee.sg/--i."+ t0.shopid + "." + t0.itemid;
+
+	_to.sellCount = t0.sold + " / " + t0.historical_sold
+
+	r.push( _to );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

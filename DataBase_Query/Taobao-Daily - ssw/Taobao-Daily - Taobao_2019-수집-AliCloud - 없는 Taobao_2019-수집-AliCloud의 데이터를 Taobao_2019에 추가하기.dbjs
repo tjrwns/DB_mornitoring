@@ -1,0 +1,37 @@
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "Taobao_2019-수집-AliCloud" );
+var db1 = db.getSiblingDB( "Taobao_2019" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = {};
+var P1 = { _id : null };
+
+//----------------------------------------------------------------------------------------------------;
+
+var cols0 = db0.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var io;
+var i=0, iLen=cols0.length;
+for( ; i<iLen; ++i )
+{
+	io = cols0[ i ];
+	var col0 = db0.getCollection( io );
+	var col1 = db1.getCollection( io );
+
+	var j=0, jLen=col0.count();
+	col0.find( P0 ).forEach(function( doc ){
+		P1._id = doc.id;
+
+		print( iLen + "/" + i + " - " + jLen + "/" + j + " - " + doc.id );
+
+		var doc0 = col1.findOne( P1 );
+		if( !doc0 ){
+			if( doc.raw_json_data ) col1.insertOne( doc.raw_json_data.data );
+		}
+		++j;
+	});
+}

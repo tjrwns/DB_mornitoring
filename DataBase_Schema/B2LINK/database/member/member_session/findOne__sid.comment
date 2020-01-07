@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {String} sid session id
+ * @return {Object}
+ */

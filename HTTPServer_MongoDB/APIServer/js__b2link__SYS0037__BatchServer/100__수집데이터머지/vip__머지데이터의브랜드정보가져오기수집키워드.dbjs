@@ -1,0 +1,102 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__머지데이터의브랜드정보가져오기수집키워드.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var allCols;
+(function(){ allCols = db.getSiblingDB( "VIP_2018" ).getCollectionNames().concat( db.getSiblingDB( "VIP_2019" ).getCollectionNames() ); })();
+
+var db0 = db.getSiblingDB( nm_db );
+if( nm_col == "null" ) nm_col = allCols[ allCols.length - 1 ];
+var col0 = db0.getCollection( nm_col );
+
+
+var yesterday_nm_col = allCols[ allCols.indexOf( nm_col ) - 1 ];
+var yesterday_nm_db = "VIP_" + yesterday_nm_col.substr( 0, 4 );
+
+var db1 = db.getSiblingDB( yesterday_nm_db );
+var col1 = db1.getCollection( yesterday_nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var o = {
+	"10000389": {"_id": "10000389","sn": "10000389","name": "菲诗小铺","name_eng": "THE FACE SHOP","logo": "http://a.vpimg3.com/upload/brandcool/0/954614f05b0840cc9137e060155cddf1/10000389/primary.png","pinyin": "fei_shi_xiao_pu","sort_by": "eng"},
+	"10000522": {"_id": "10000522","sn": "10000522","name": "兰芝","name_eng": "LANEIGE","logo": "http://a.vpimg3.com/upload/brandcool/0/6f10e743146949089b95faf95a003aed/10000522/primary.png","pinyin": "lan_zhi","sort_by": "pinyin"},
+	"10000611": {"_id": "10000611","sn": "10000611","name": "谜尚","name_eng": "MISSHA","logo": "http://a.vpimg3.com/upload/brandcool/0/e23455b2cf5c491eb5598ce50ff26810/10000611/primary.png","pinyin": "mi_shang","sort_by": "pinyin"},
+	"10000794": {"_id": "10000794","sn": "10000794","name": "雅诗兰黛","name_eng": "EsteeLauder","logo": "http://a.vpimg3.com/upload/brandcool/0/9bbd1f8bffe542b495f51199462ee8b3/10000794/primary.png","pinyin": "ya_shi_lan_dai","sort_by": "pinyin"},
+	"10003844": {"_id": "10003844","sn": "10003844","name": "丽得姿","name_eng": "leaders","logo": "http://a.vpimg3.com/upload/brandcool/0/7caee50939bb426d9a96b65d9b5afd45/10003844/primary.png","pinyin": "li_de_zi","sort_by": "pinyin"},
+	"10010531": {"_id": "10010531","sn": "10010531","name": "自然共和国","name_eng": "NATURE REPUBLIC","logo": "http://a.vpimg3.com/upload/brandcool/0/692a23f60f4e4e8f90f112bbfda9be50/10010531/primary.png","pinyin": "zi_ran_gong_he_guo","sort_by": "pinyin"},
+	"10014508": {"_id": "10014508","sn": "10014508","name": "后","name_eng": "The history of whoo","logo": "http://a.vpimg3.com/upload/brandcool/0/a5b0a53e9e93414c9bb2c74b4ede27d3/10014508/primary.png","pinyin": "hou","sort_by": "eng"},
+	"10014597": {"_id": "10014597","sn": "10014597","name": "蒂佳婷","name_eng": "Dr.Jart+","logo": "http://a.vpimg3.com/upload/brandcool/0/0e94d4c86552468ea783182ba7bc4343/10014597/primary.png","pinyin": "di_jia_ting","sort_by": "pinyin"},
+	"10016211": {"_id": "10016211","sn": "10016211","name": "美迪惠尔","name_eng": "MEDIHEAL","logo": "http://a.vpimg3.com/upload/brandcool/0/ab494d71de724cf39ab89a97493bcd26/10016211/primary.png","pinyin": "mei_di_hui_er","sort_by": "pinyin"},
+	"10020026": {"_id": "10020026","sn": "10020026","name": "","name_eng": "SNP","logo": "http://a.vpimg3.com/upload/brandcool/0/547db0f816524452a2234a317d1b465c/10020026/primary.png","pinyin": "","sort_by": "eng"},
+	"10020258": {"_id": "10020258","sn": "10020258","name": "","name_eng": "A.H.C","logo": "http://a.vpimg3.com/upload/brandcool/0/0115ca91f54c44f1b6f12103aa1d3638/10020258/primary.png","pinyin": "","sort_by": "eng"},
+	"10020534": {"_id": "10020534","sn": "10020534","name": "伊思","name_eng": "It's skin","logo": "http://a.vpimg3.com/upload/brandcool/0/3e563aec68604ae29c3e765f0b6f8f0f/10020534/primary.png","pinyin": "yi_si","sort_by": "pinyin"},
+	"10020735": {"_id": "10020735","sn": "10020735","name": "悦诗风吟","name_eng": "Innisfree","logo": "http://a.vpimg3.com/upload/brandcool/0/affe512985844dc8a9388891c210f5fc/10020735/primary.png","pinyin": "yue_shi_feng_yin","sort_by": "pinyin"},
+	"10021088": {"_id": "10021088","sn": "10021088","name": "三熹玉","name_eng": "3CE","logo": "http://a.vpimg3.com/upload/brandcool/0/c91aeaad50b14384b4307b4353b6d29a/10021088/primary.png","pinyin": "san_xi_yu","short_pinyin": "sxy","sort_by": "eng"},
+	"10021091": {"_id": "10021091","sn": "10021091","name": "","name_eng": "It's Skin2","logo": "http://a.vpimg3.com/upload/brandcool/0/f3ae3eb1d5514b16a381f706ab5c9a1a/10021091/primary.png","pinyin": "","sort_by": "eng"},
+	"10021107": {"_id": "10021107","sn": "10021107","name": "","name_eng": "Guerisson 9complex","logo": "http://a.vpimg3.com/upload/brandcool/0/a7cc0f629f394d078c201fb575b65916/10021107/primary.png","pinyin": "","sort_by": "eng"},
+	"10022236": {"_id": "10022236","sn": "10022236","name": "伊蒂之屋","name_eng": "ETUDE HOUSE","logo": "http://a.vpimg3.com/upload/brandcool/0/4c821b915ef041fbad30f61b5fbc7467/10022236/primary.png","pinyin": "yi_di_zhi_wu","sort_by": "pinyin"},
+	"10022973": {"_id": "10022973","sn": "10022973","name": "","name_eng": "Papa recipe","logo": "http://a.vpimg3.com/upload/brandcool/0/7f38b0fa87104045b37bb2b335c3de1e/10022973/primary.png","pinyin": "","sort_by": "eng"},
+	"10024670": {"_id": "10024670","sn": "10024670","name": "呂","name_eng": "RYO","logo": "http://a.vpimg3.com/upload/brandcool/0/a720a8cce7ac4d5ab677dbd7f10c9c46/10024670/primary.png","pinyin": "呂","short_pinyin": "呂","sort_by": "pinyin"},
+	"10025838": {"_id": "10025838","sn": "10025838","name": "","name_eng": "mise-en-scene","logo": "http://a.vpimg3.com/upload/brandcool/0/a1164d5058d44f6ea045292590ecb965/10025838/primary.png","pinyin": "","sort_by": "eng"},
+	"10025856": {"_id": "10025856","sn": "10025856","name": "","name_eng": "JAYJUN","logo": "http://a.vpimg3.com/upload/brandcool/0/916352e5e111431ab79218353e578b7e/10025856/primary.png","pinyin": "","sort_by": "eng"},
+	"10028732": {"_id": "10028732","sn": "10028732","name": "苏秘37°","name_eng": "su:m37º","logo": "http://a.vpimg3.com/upload/brandcool/0/470a80a9654b4449865e02581036aa2a/10028732/primary.png","pinyin": "su_mi_3_7_°","sort_by": "pinyin"},
+	"10029004": {"_id": "10029004","sn": "10029004","name": "","name_eng": "VT","logo": "http://a.vpimg3.com/upload/brandcool/0/14e5d85472a54787bed1e6de4516f93f/10029004/primary.png","pinyin": "","sort_by": "eng"},
+	"10029253": {"_id": "10029253","sn": "10029253","name": "悠宜","name_eng": "unny club","logo": "http://a.vpimg3.com/upload/brandcool/0/70c73fd1be0541d581066f5ec7883431/10029253/primary.png","pinyin": "you_yi","sort_by": "pinyin"},
+	"10029453": {"_id": "10029453","sn": "10029453","name": "","name_eng": "SHANGPREE","logo": "http://a.vpimg3.com/upload/brandcool/0/a441d1991d6249e693a7c690ddcc83e9/10029453/primary.png","pinyin": "","sort_by": "eng"},
+	"10030685": {"_id": "10030685","sn": "10030685","name": "","name_eng": "Innisfree1","logo": "http://a.vpimg3.com/upload/brandcool/0/6430c4eef0db46d7a8014695ca723f62/10030685/primary.png","pinyin": "","sort_by": "eng"},
+	"10031158": {"_id": "10031158","sn": "10031158","name": "","name_eng": "JMsolution","logo": "http://a.vpimg3.com/upload/brandcool/0/f6f2864c71c646abae387422a5093bc7/10031158/primary.png","pinyin": "","sort_by": "eng"},
+	"10032004": {"_id": "10032004","sn": "10032004","name": "完美日记","name_eng": "PERFECT DIARY","logo": "http://a.vpimg3.com/upload/brandcool/0/6d360a433e284417a14d03628cce1945/10032004/primary.png","pinyin": "wan_mei_ri_ji","sort_by": "pinyin"},
+	"10032246": {"_id": "10032246","sn": "10032246","name": "雪花秀","name_eng": "Sulwhasoo","logo": "http://a.vpimg3.com/upload/brandcool/0/b9fa06d5c88b44d28cdd55035cf5fe7c/10032246/primary.png","pinyin": "xue_hua_xiu","sort_by": "pinyin"},
+	"100026709": {"_id": "100026709","sn": "100026709","name": "伊思","name_eng": "It's skin1","logo": "http://a.vpimg3.com/upload/brandcool/0/3e563aec68604ae29c3e765f0b6f8f0f/10020534/primary.png","pinyin": "yi_si","sort_by": "pinyin"}
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var r1 = {}
+var r2 = {};
+var arr = [];
+
+col0.find({}).forEach(function(d){
+	if( !r1[ d.LIST.brand_store_sn ] ) r1[ d.LIST.brand_store_sn ] = 0;
+	++r1[ d.LIST.brand_store_sn ];
+});
+
+col1.find({}).forEach(function(d){
+	if( !r2[ d.LIST.brand_store_sn ] ) r2[ d.LIST.brand_store_sn ] = 0;
+	++r2[ d.LIST.brand_store_sn ];
+});
+
+var s,so,_to;
+for( s in o ){
+
+	so = o[ s ];
+	_to = { nm : so.name_eng, values : {} };
+
+	if( r1[ s ] ) _to.values[ nm_col ] = r1[ s ];
+	else _to.values[ nm_col ] = 0;
+	if( r2[ s ] ) _to.values[ yesterday_nm_col ] = r2[ s ];
+	else _to.values[ yesterday_nm_col ] = 0;
+
+	arr.push( _to );
+}
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = {
+	target_date : nm_col,
+	data : arr.sort( function( a, b ){ return a.values[ nm_col ] < b.values[ nm_col ] ? 1 : 0 ; })
+}
+
+//----------------------------------------------------------------------------------------------------;
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

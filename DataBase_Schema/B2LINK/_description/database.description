@@ -1,0 +1,55 @@
+//----------------------------------------------------------------------------------------------------;
+
+//	databse;
+
+//----------------------------------------------------------------------------------------------------;
+
+@ Database별로 Procedure들이 정의 되어있다.
+
+ - database/DatabaseName
+  . DatabaseName 실제 MongoDB 안에 구현될 Database의 이름이다.
+  . 폴더 이름 그대로 MongoDB 안에 Database로 생성이 된다.
+
+ - database/DatabaseName/CollectionName
+  . CollectionName은 실제 MongoDB 안에 구현되는 Collection의 이름이다.
+  . 폴더 이름 그대로 MongoDB안에 Database/Collection으로 생성이 된다.
+
+ - database/DatabaseName/CollectionName/procedureName.js
+  . procedureName.js는 실제 MongoDB 안에 구현되는 Procedure의 이름이다.
+  . 'CollectionName$ProcedureName' 형태로 Database안에 저장이 된다.
+  . procedureName.js는 MongoDB의 JS API를 기반으로 작성된 JS 함수이자, DB의 procedure이다.
+  . var returnValue = db.exec( "colName$procedureName( parameters );"); 형태로 사용 할 수 있다.
+
+ - database/DatabaseName/CollectionName/procedureName.comment
+  . procedure의 상세 설명 파일이다.
+  . 실제 기능과는 무관하고 참조용 파일이다.
+
+
+@ Database 하위 폴더 목록
+- datebase/_schema
+ . Collections 별 Schema JSON이 들어있다.
+
+- datebase/_schema_include
+- datebase/_schema_template
+
+- datebase/brand
+- datebase/brand/brand_basic
+- datebase/brand/brand_category
+
+- datebase/list_static
+- datebase/list_static/country
+- datebase/list_static/email_detail
+
+- datebase/member
+- datebase/member/member_basic
+- datebase/member/member_session
+- datebase/member/member_session_log
+- datebase/member/member_public
+
+- datebase/partner
+- datebase/partner
+
+- datebase/product
+- datebase/product/product_basic
+
+- datebase/stock

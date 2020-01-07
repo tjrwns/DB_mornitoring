@@ -1,0 +1,93 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__00_정제대상데일리수집컬렉션가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var targetYear = "<!=targetYear=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+/**
+ * 크기를 읽기용이한 단위로 변환하는 함수;
+ * @function
+ * @param {Number} bytes
+ * @return {String}
+ */
+var formatBytes = function( bytes ){
+	if( bytes < 1024 ) return bytes + " Bytes";
+	else if( bytes < 1048576 ) return ( bytes / 1024 ).toFixed( 3 ) + " KB";
+	else if( bytes < 1073741824 ) return ( bytes / 1048576 ).toFixed( 3 ) + " MB";
+	else return ( bytes / 1073741824 ).toFixed( 3 ) + " GB";
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var _NM_SITE_ = "VIP";
+var _TARGET_SITE_ = "VIP";
+var nm_db0 = _NM_SITE_ + "_" + targetYear + "-누적--월간";
+var nm_db1 = _NM_SITE_ + "_" + targetYear;
+
+var r = {
+	target_site : _TARGET_SITE_
+	, targetYear : targetYear
+	, data : {}
+};
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db0 );
+var db1 = db.getSiblingDB( nm_db1 );
+var colList0 = db0.getCollectionNames();
+var colList1 = db1.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+colList1.forEach(function( col ){
+	if( col == "_TEMP" ) return;
+	var month = col.substr(4,2) * 1; 
+	r.data[ month ] = { nm : "", stats : {} };
+})
+
+colList0.forEach(function( col ){
+	if( col == "_TEMP" ) return;
+	var col0 = db0.getCollection( col )
+	var data = col0.stats();
+
+	data.size = formatBytes( data.size );
+	data.avgObjSize = formatBytes( data.avgObjSize );
+	data.storageSize = formatBytes( data.storageSize );
+	data.totalIndexSize = formatBytes( data.totalIndexSize );
+
+	for( var s in data.indexSizes ){ data.indexSizes[ s ] = formatBytes( data.indexSizes[ s ] ); }
+	
+	//--------------------------------------------------data.wiredTiger;
+	var t = data.wiredTiger;
+	delete t.metadata;
+	delete t.creationString;
+	delete t.type;
+	delete t.uri;
+	delete t.LSM;
+	delete t[ "block-manager" ];
+	delete t.btree;
+	delete t.cache;
+	delete t.cache_walk;
+	delete t.cursor;
+	delete t.compression;
+	delete t.reconciliation;
+	//--------------------------------------------------data.wiredTiger;
+
+
+	var month = col.substr(4,2) * 1;
+
+	r.data[ month ].nm = col;
+	r.data[ month ].stats = data;
+
+})
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+	, d : r
+};

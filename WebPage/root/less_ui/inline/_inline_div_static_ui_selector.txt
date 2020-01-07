@@ -1,0 +1,11 @@
+background-color: #fff;
+
+border: solid 1px #000;
+
+display: inline-table;
+
+font-size: 13px;
+
+position: absolute;
+
+padding: 0px 0px 10px 0px;

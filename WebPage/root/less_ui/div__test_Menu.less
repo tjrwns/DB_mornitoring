@@ -1,0 +1,141 @@
+/* ---------------------------------------------------------------------------------------------------- */
+
+@left0: 5px;
+@left1: @left0 * 2px;
+
+@top0: 5px;
+@top1: @top0 * 2px;
+@top2: @top1 + @top1 + 15px;
+
+@right0: 5px;
+@right1: @right0 * 2;
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+#div__test_Menu {
+	/*/
+	height: 2000px;
+
+	//*/
+	border: @border_solid_1px_000000;
+	color: #000;
+
+	position: fixed;
+
+	left: @left0;
+	top: @top0;
+	bottom: 5px;
+	right: @right0;
+
+
+
+
+
+	#div__testMenu_Top {
+
+		border: @border_solid_1px_000000;
+
+		padding: @padding5;
+
+		left: @left1;
+		top: @top1;
+		right: @right1;
+
+		display: block;
+		position: fixed;
+	}
+
+	#div__test_Menu_List {
+		/*/
+		border: @border_solid_1px_000000;
+
+		position: absolute;
+		position: relative;
+		//*/
+		color: #000;
+		font-size: 11px;
+
+		border: @border_solid_1px_000000;
+
+		display: block;
+		position: absolute;
+
+		padding: @padding5;
+
+		left: 5px;
+		top: @top2;
+		bottom: 5px;
+		width: 250px;
+
+		line-height: 20px;
+
+		overflow: auto;
+		overflow-x: hidden;
+
+
+
+		a {
+			cursor: pointer;
+			display: block;
+			role: button;
+		}
+		a:hover {
+			text-decoration: underline;
+			color: red;
+		}
+		a:link {
+			text-decoration: none;
+			color: #333333;
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #333333;
+		}
+		a:active {
+			text-decoration: none;
+			color: #333333;
+		}
+
+		hr {
+			width: 170px;
+		}
+
+
+		.complete {
+			color: #0000FF;
+		}
+		.inComplete {
+			color: #FF0000;
+		}
+	}
+
+	#div__test_Menu_UIContainer {
+		/*/
+		border: @border_solid_1px_000000;
+		position: absolute;
+		position: relative;
+		//*/
+		color: #000;
+		// font-size: 11px;
+		font-size: 13px;
+
+		border: @border_solid_1px_000000;
+
+		display: block;
+		position: absolute;
+
+		padding: @padding5;
+
+		left: 272px;
+		top: @top2;
+		bottom: 5px;
+		right: 5px;
+
+		overflow-x: auto;
+		overflow-y: auto;
+	}
+}
+
+#test__selector {
+	display: inline-grid;
+}

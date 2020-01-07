@@ -1,0 +1,6 @@
+/**
+ * @function
+ * @param {uint} _id
+ * @param {uint} nSignInFail
+ * @return {uint} 1
+ */

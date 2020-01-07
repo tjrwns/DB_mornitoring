@@ -1,0 +1,63 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__01_데일리수집데이터를합치기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var targetYear = "<!=targetYear=!>";
+var targetMonth = "<!=targetMonth=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var prefix0 = "Kaola";
+var dbNm = prefix0 + "_" + targetYear;
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( dbNm );
+var db1 = db.getSiblingDB( dbNm + "-누적--월간" );
+
+var col0 = db1.getCollection( targetYear + targetMonth );
+var cols = db0.getCollectionNames();
+
+//----------------------------------------------------------------------------------------------------;
+
+var result = {
+	totalCount : 0
+};
+
+var validateItem0 = targetYear + targetMonth;
+var r = {};
+
+cols.reverse().forEach(function(col){
+	if( col.indexOf('All') != -1 ) return;
+	if( col.indexOf(validateItem0) == -1 ) return;
+	if( col == "_TEMP" ) return;
+
+	print(col)
+	db0.getCollection( col ).find().forEach(function(doc){
+		if( !r[ doc._id ] ) r[ doc._id ] = doc;
+	});
+});
+
+col0.remove({});
+var a = 0;
+for(var s in r )
+{
+	col0.insertOne( r[ s ] );
+	print(a);
+	++a;
+}
+
+var stats = col0.stats();
+
+result.totalCount = a;
+result.size = stats.size;
+result.count = stats.count;
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : result
+	, m : "OK"
+};

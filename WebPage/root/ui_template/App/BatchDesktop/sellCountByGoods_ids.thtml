@@ -1,0 +1,37 @@
+<div id="__TEMP__HTMLElement">
+
+	<div class="ui red message" style="display:none;">
+		<i class="close icon"></i>
+		<div class="header" style="padding-bottom: 20px">TEST - TEST</div>
+		<div class="id-msg-col"><p>{{SITE}} - {{DB}} - {{COL}} - {{COUNT}} - {{SIZE}}</p></div>
+	</div>
+
+	<div class="ui search_field">
+
+	</div>
+
+	<div class="ui action input" style="width: 100%; margin-bottom:10px;">
+		<input type="radio" id="base" class="radio_group" name="radio_group" value="base" style="max-width: 20px;" checked />
+		<label for="base">기본</label>
+		<input type="radio" id="each" class="radio_group" name="radio_group" value="each" style="max-width: 20px;" />
+		<label for="each">개별</label>
+
+		<select class="select_brand" style="max-width: 250px;">
+			<option value="">브랜드 검색</option>
+		</select>
+		<select class="select_product" style="max-width: 650px;">
+			<option value="">상품 검색</option>
+		</select>
+
+
+
+		<input class="input_search" type="text" placeholder="goods_id...">
+		<button class="btn_search ui button">Search</button>
+	</div>
+
+	<div class="area_charts ui">
+		<div class="id-echarts0" style="height: 500px;margin : 20px auto;"></div>
+		<div class="id-echarts1" style="height: 500px;margin : 20px auto;"></div>
+	</div>
+
+</div>

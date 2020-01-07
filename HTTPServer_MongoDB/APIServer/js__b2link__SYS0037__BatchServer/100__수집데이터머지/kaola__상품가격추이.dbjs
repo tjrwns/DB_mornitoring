@@ -1,0 +1,156 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/vip__가격추이.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var _TARGET_SITE_ = "Kaola";
+var product_id = <!=product_id=!>;
+
+var db0 = db.getSiblingDB( _TARGET_SITE_ + "_2018" );
+var db1 = db.getSiblingDB( _TARGET_SITE_ + "_2019" );
+
+var cols0 = db0.getCollectionNames();
+var cols1 = db1.getCollectionNames();
+
+var allCols = cols0.concat( cols1 )
+var r = {
+    date : []
+    , price : {
+		price : []
+	}
+	, info : []
+};
+
+var _q00 = { _id : null }
+
+var _to;
+allCols.forEach(function(col){
+
+	var year = col.substr(0,4);
+	var tDb = db.getSiblingDB( _TARGET_SITE_ + "_" + year );
+	var tCol = tDb.getCollection( col );
+
+	_q00._id = NumberLong( product_id );
+	var doc = tCol.findOne( _q00 );
+
+	if( doc ){
+		r.date.push( col );
+
+		_to = {
+			date : col
+			, goodsName : ""//doc.LIST.title
+			, goodsImg : ""//doc.LIST.imageUrl
+			, goodsId : doc._id//doc.LIST.goodsId
+			, price : ""//doc.DETAIL.data.skuPrice.currentPrice
+			, goodsTag : ""
+			, shopId : ""//doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId
+			, shoopName : ""//doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopName
+			, categoryId : ""//doc.DETAIL_HTML.__Goods__.basicInfo.categoryId
+			, categoryName : ""//doc.DETAIL_HTML.__Goods__.basicInfo.categoryName
+			, brandLogo : ""
+			, brandId : ""//doc.DETAIL_HTML.__Goods__.basicInfo.brandId
+			, brandName : ""//doc.DETAIL_HTML.__Goods__.basicInfo.brandName
+			, brandCountryName : ""
+			, keyProperty : ""
+			, goodsDeclareList : ""
+			, promotionTag : ""
+			, normalCouponDesc : ""
+//			, goodsCouponList : ""
+			, brandOriginCountry : ""
+			, goodsTag : ""
+
+
+		}
+
+		try
+		{
+			if( doc.LIST )
+			{
+				_to.goodsName = doc.LIST.title;
+				_to.goodsImg = doc.LIST.imageUrl;
+				_to.brandCountryName = doc.LIST.brandCountryName;
+				_to.keyProperty = doc.LIST.keyProperty.join("<br>");
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			if( doc.DETAIL )
+			{
+				_to.price = doc.DETAIL.data.skuPrice.currentPrice;
+				r.price.price.push( doc.DETAIL.data.skuPrice.currentPrice )
+				_to.goodsDeclareList = "";
+				var i = 0,iLen = doc.DETAIL.data.goodsDeclare.contentList.length,io;
+				for(;i<iLen;++i){
+					io = doc.DETAIL.data.goodsDeclare.contentList[ i ];
+					_to.goodsDeclareList = _to.goodsDeclareList + "<li><b>" + io.detailTitle + "</b> : " + io.detailContentList.join("<br>") + "</li>";
+				}
+				_to.goodsCouponList = "";
+				var i = 0,iLen = doc.DETAIL.data.goodsCouponList.length,io;
+				for(;i<iLen;++i){
+					io = doc.DETAIL.data.goodsCouponList[ i ];
+					_to.goodsCouponList = _to.goodsDeclareList + "<li><b>" + io.name + "</b> : " + io.condition + " / " + io.couponUseTime + "</li>";
+				}
+				_to.normalCouponDesc = doc.DETAIL.data.normalCouponDesc.join( "<br>" )
+				_to.promotionTag = doc.DETAIL.data.promotionTag.join( "<br>" )
+
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			if( doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo )
+			{
+				_to.shopId = doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopId;
+				_to.shoopName = doc.DETAIL_HTML.__KaolaGoodsDetail__.goodsShopInfo.shopName;
+			}
+		}
+		catch( er )
+		{
+			//er;
+		}
+
+		try
+		{
+			if( doc.DETAIL_HTML.__Goods__.basicInfo )
+			{
+				_to.categoryId = doc.DETAIL_HTML.__Goods__.basicInfo.categoryId
+				_to.categoryName = doc.DETAIL_HTML.__Goods__.basicInfo.categoryName
+				_to.brandId = doc.DETAIL_HTML.__Goods__.basicInfo.brandId
+				_to.brandName = doc.DETAIL_HTML.__Goods__.basicInfo.brandName
+				_to.brandOriginCountry = doc.DETAIL_HTML.__Goods__.basicInfo.brandOriginCountryBrev + "/" + doc.DETAIL_HTML.__Goods__.basicInfo.brandOriginCountryName;
+				_to.goodsTag = "";
+				if( doc.DETAIL_HTML.__Goods__.goodsTag )
+				{
+					_to.goodsTag = "<img src=\"" + doc.DETAIL_HTML.__Goods__.goodsTag.brandRectFlagImage + "\" width=\"30\"><br>" + doc.DETAIL_HTML.__Goods__.goodsTag.selfTag + " / " + doc.DETAIL_HTML.__Goods__.goodsTag.importTypeTag + " / " + doc.DETAIL_HTML.__Goods__.goodsTag.brandCountryTag + "<br>";
+				}
+				_to.brandLogo = '<img src="' + doc.DETAIL_HTML.__Goods__.brandLogo +'" width="80">';
+
+			}
+		}
+		catch( er )
+		{
+			//er;
+			printjson( er );
+		}
+
+		r.info.push( _to);
+	}
+})
+
+r.info.reverse();
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

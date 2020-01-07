@@ -1,0 +1,11 @@
+/**
+ * @function
+ * @param {Object} d
+ * <code>
+ * { mid : "", mpw : "" }
+ * </code>
+ * @return {uint} 0, 1
+ *
+ * @example
+ * member_date$sign_up({ "mid" : "thdtjsdn@gmail.com", "mpw" : "123qweasd" })' );
+ */

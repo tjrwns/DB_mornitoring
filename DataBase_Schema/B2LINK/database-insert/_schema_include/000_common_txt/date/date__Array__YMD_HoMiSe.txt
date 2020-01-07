@@ -1,0 +1,1 @@
+, "exampleValue" : [ NumberInt( 2016 ), NumberInt( 10 ), NumberInt( 27 ), NumberInt( 12 ), NumberInt( 20 ), NumberInt( 30 ) ], "type" : "array", "length" : NumberInt( 6 )

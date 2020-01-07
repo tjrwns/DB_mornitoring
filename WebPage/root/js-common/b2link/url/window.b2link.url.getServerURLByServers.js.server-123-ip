@@ -1,0 +1,236 @@
+//----------------------------------------------------------------------------------------------------;
+//var fileNm = "js/b2link/url/window.b2link.url.getServerURLByServer.js";
+//if( console ) console.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+//20170906_1501;
+//SYS00***_APIServer를 사용하길 권장함;
+//
+//session_server, b2ker_api_server, brand_portal_api_server, api_server등 삭제 예정임.;
+//
+//excel_server, file_server등도 시스템 코드로 교체 예정;
+
+(function(){
+
+	var _idx = {};
+	var _idxMaxCount = {};
+
+	var _server = {
+
+		//--------------------------------------------------[ S ] - 공용 서버;
+		//사용하는 곳 목록;
+		//B2LiNK-B2Ker-Dev, B2LiNK-BrandPortal-Dev;
+		SYS0010_APIServer : [ "http://222.239.10.123:30000", "http://222.239.10.123:30000", "http://222.239.10.123:30000" ]//B2LiNK-SessionServer-Dev;
+			, session_server : [ "http://222.239.10.123:30000", "http://222.239.10.123:30000", "http://222.239.10.123:30000" ]//B2LiNK-SessionServer-Dev;
+		, SYS0010_WebServer : [ "http://222.239.10.123:33333", "http://222.239.10.123:33333", "http://222.239.10.123:33333" ]//B2LiNK-SessionServer-Dev;
+
+		//사용하는 곳 목록;
+		//B2LiNK-SessionServer-Dev;
+		, SYS0011_APIServer : [ "http://222.239.10.123:31000", "http://222.239.10.123:31000", "http://222.239.10.123:31000" ]//B2LiNK-LogServer-Dev;
+		, SYS0011_WebServer : [ "http://222.239.10.123:31333", "http://222.239.10.123:31333", "http://222.239.10.123:31333" ]//B2LiNK-LogServer-Dev;
+
+		//모든 View 서비스에서 사용;
+		, SYS0015_APIServer : [ "http://222.239.10.122:49324", "http://222.239.10.122:49324", "http://222.239.10.122:49324" ]//Development-Components-UI;
+		, SYS0015_WebServer : [ "http://222.239.10.122:49323", "http://222.239.10.122:49323", "http://222.239.10.122:49323" ]//Development-Components-UI;
+		//, SYS0015_WebServer : [ "http://222.239.10.123:49323", "http://222.239.10.123:49323", "http://222.239.10.123:49323" ]//Development-Components-UI;
+		//, SYS0015_WebServer : [ "http://localhost:49323", "http://localhost:49323", "http://localhost:49323" ]//Development-Components-UI;
+
+		//사용하는 곳 목록;
+		//B2LiNK-B2Ker-Dev, B2LiNK-BrandPortal-Dev...;
+		, SYS0040_APIServer : [ "http://222.239.10.123:49322", "http://222.239.10.123:49322" ]
+			, file_server : [ "http://222.239.10.123:49322", "http://222.239.10.123:49322" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-B2Ker-Dev, ...;
+		//, SYS0050_APIServer : [ "http://localhost:47320", "http://localhost:47320" ]
+			//, webhook_server : [ "http://localhost:47320", "http://localhost:47320" ]
+		, SYS0050_APIServer : [ "http://222.239.10.122:47320", "http://222.239.10.122:47320" ]
+			, webhook_server : [ "http://222.239.10.122:47320", "http://222.239.10.122:47320" ]
+		//, SYS0050_APIServer : [ "http://222.239.10.123:47320", "http://222.239.10.123:47320" ]
+			//, webhook_server : [ "http://222.239.10.123:47320", "http://222.239.10.123:47320" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-WebSocket-MessageServer-Dev, ...;
+		//, SYS0060_APIServer : [ "http://localhost:42322", "http://localhost:42322" ]
+		//, SYS0060_APIServer : [ "http://222.239.10.120:42322", "http://222.239.10.120:42322" ]
+		, SYS0060_APIServer : [ "http://222.239.10.122:42322", "http://222.239.10.122:42322" ]
+		//, SYS0060_APIServer : [ "http://222.239.10.123:42322", "http://222.239.10.123:42322" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-B2Ker-Dev, B2LiNK-BrandPortal-Dev, ...;
+		, SYS0070_APIServer : [ "http://222.239.10.123:48320", "http://222.239.10.123:48320" ]
+			, excel_server : [ "http://222.239.10.123:48320", "http://222.239.10.123:48320" ]
+		, SYS0070_WebServer : [ "http://222.239.10.123:48321", "http://222.239.10.123:48321" ]
+			, excel_web_server : [ "http://222.239.10.123:48321", "http://222.239.10.123:48321" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-BrandPortal-Dev, ...;
+		, SYS0120_APIServer : [ "http://222.239.10.123:49520", "http://222.239.10.123:49520" ]
+		, SYS0120_WebServer : [ "http://222.239.10.123:49521", "http://222.239.10.123:49521" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-BrandPortal-Dev, ...;
+		, SYS0130_APIServer : [ "http://222.239.10.123:44520", "http://222.239.10.123:44520" ]
+		, SYS0130_WebServer : [ "http://222.239.10.123:44521", "http://222.239.10.123:44521" ]
+		//--------------------------------------------------[ E ] - 공용 서버;
+
+
+		//--------------------------------------------------[ S ] - 비지니스 시스템 서버;
+		//사용하는 곳 목록;
+		//B2LiNK-B2Ker-Dev, ...;
+		, SYS0020_APIServer : [ "http://222.239.10.123:49320", "http://222.239.10.123:49320" ]
+			, b2ker_api_server : [ "http://222.239.10.123:49320", "http://222.239.10.123:49320" ]
+		, SYS0020_WebServer : [ "http://222.239.10.123:49321", "http://222.239.10.123:49321" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-BrandPortal-Dev, ...;
+		, SYS0030_APIServer : [ "http://222.239.10.123:45320", "http://222.239.10.123:45320" ]
+			, api_server : [ "http://222.239.10.123:45320", "http://222.239.10.123:45320" ]
+		, SYS0030_WebServer : [ "http://222.239.10.123:45321", "http://222.239.10.123:45321" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-OnSight-Dev, ...;
+		, SYS0031_APIServer : [ "http://222.239.10.123:45420", "http://222.239.10.123:45420" ]
+			, api_server : [ "http://222.239.10.123:45420", "http://222.239.10.123:45420" ]
+		, SYS0031_WebServer : [ "http://222.239.10.123:45421", "http://222.239.10.123:45421" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-OnSight-Admin, ...;
+		, SYS0034_APIServer : [ "http://222.239.10.123:45324", "http://222.239.10.123:45324" ]
+		, SYS0034_WebServer : [ "http://222.239.10.123:45322", "http://222.239.10.123:45322" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-OnSight-Tool-SKUMapper, ...;
+		//, SYS0035_APIServer : [ "http://localhost:45325", "http://localhost:45325" ]
+		//, SYS0035_WebServer : [ "http://localhost:45326", "http://localhost:45326" ]
+		, SYS0035_APIServer : [ "http://222.239.10.123:45325", "http://222.239.10.123:45325" ]
+		, SYS0035_WebServer : [ "http://222.239.10.123:45326", "http://222.239.10.123:45326" ]
+
+		//사용하는 곳 목록;
+		//...;
+		//, SYS0037_APIServer : [ "http://localhost:45528", "http://localhost:45528" ]
+		//, SYS0037_WebServer : [ "http://localhost:45527", "http://localhost:45527" ]
+		//, SYS0037_APIServer : [ "http://192.168.1.230:45528", "http://192.168.1.230:45528" ]
+		//, SYS0037_WebServer : [ "http://192.168.1.230:45527", "http://192.168.1.230:45527" ]
+		, SYS0037_APIServer : [ "http://222.239.10.123:45528", "http://222.239.10.123:45528" ]
+		, SYS0037_WebServer : [ "http://222.239.10.123:45527", "http://222.239.10.123:45527" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-ProductServer-Dev ...;
+		//, SYS0100_APIServer : [ "https://test.pims.b2link.co.kr/router", "https://test.pims.b2link.co.kr/router" ]
+		//, SYS0100_WebServer : [ "https://test.pims.b2link.co.kr/view", "https://test.pims.b2link.co.kr/view" ]
+		//, SYS0100_APIServer : [ "http://222.239.10.122:44320", "http://222.239.10.122:44320" ]
+		//, SYS0100_WebServer : [ "http://222.239.10.122:44321", "http://222.239.10.122:44321" ]
+		, SYS0100_APIServer : [ "http://222.239.10.123:44320", "http://222.239.10.123:44320" ]
+		, SYS0100_WebServer : [ "http://222.239.10.123:44321", "http://222.239.10.123:44321" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-B2B-Platform-Admin ...;
+		//, SYS0210_APIServer : [ "http://localhost:42320", "http://localhost:42320" ]
+		//, SYS0210_WebServer : [ "http://localhost:42321", "http://localhost:42321" ]
+		//, SYS0210_APIServer : [ "http://222.239.10.122:42320", "http://222.239.10.122:42320" ]
+		//, SYS0210_WebServer : [ "http://222.239.10.122:42321", "http://222.239.10.122:42321" ]
+		, SYS0210_APIServer : [ "http://222.239.10.123:42320", "http://222.239.10.123:42320" ]
+		, SYS0210_WebServer : [ "http://222.239.10.123:42321", "http://222.239.10.123:42321" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-B2B-Platform-Dev ...;
+		//, SYS0215_APIServer : [ "http://localhost:42325", "http://localhost:42325" ]
+		//, SYS0215_WebServer : [ "http://localhost:42326", "http://localhost:42326" ]
+		//, SYS0215_APIServer : [ "http://222.239.10.122:42325", "http://222.239.10.122:42325" ]
+		//, SYS0215_WebServer : [ "http://222.239.10.122:42326", "http://222.239.10.122:42326" ]
+		, SYS0215_APIServer : [ "http://222.239.10.123:42325", "http://222.239.10.123:42325" ]
+		, SYS0215_WebServer : [ "http://222.239.10.123:42326", "http://222.239.10.123:42326" ]
+		//--------------------------------------------------[ E ] - 비지니스 시스템 서버;
+
+
+		//--------------------------------------------------[ S ] - Util;
+		//사용하는 곳 목록;
+		//B2LiNK-OnSight-Crawler, ...;
+		, SYS0032_APIServer : [ "http://222.239.10.123:45323", "http://222.239.10.123:45323" ]
+		//--------------------------------------------------[ E ] - Util;
+
+
+		//--------------------------------------------------[ S ] - DB Server;
+		//사용하는 곳 목록;
+		//B2LiNK-OnSight-Crawler-Storage-MongoDB, ...;
+		, SYS0033_APIServer : [ "http://222.239.10.123:45520", "http://222.239.10.123:45520" ]
+		, SYS0033_WebServer : [ "http://222.239.10.123:45521", "http://222.239.10.123:45521" ]
+
+		//사용하는 곳 목록;
+		//B2LiNK-China-Crawler-Storage-MongoDB ...;
+		, SYS0110_APIServer : [ "http://222.239.10.123:43320", "http://222.239.10.123:43320" ]
+		, SYS0110_WebServer : [ "http://222.239.10.123:43321", "http://222.239.10.123:43321" ]
+		//--------------------------------------------------[ E ] - DB Server;
+
+
+		//--------------------------------------------------[ S ] - Total.js;
+		//Total.js - SuperAdmin - 사용하는 곳 목록;
+		, SYS4110_APIServer : [ "http://222.239.10.123:40320", "http://222.239.10.123:40320" ]
+		, SYS4110_WebServer : [ "http://222.239.10.123:40320", "http://222.239.10.123:40320" ]
+
+		//Total.js - wiki - 사용하는 곳 목록;
+		, SYS4111_APIServer : [ "http://222.239.10.123:40321", "http://222.239.10.123:40321" ]
+		, SYS4111_WebServer : [ "http://222.239.10.123:40321", "http://222.239.10.123:40321" ]
+
+		//Total.js - HelpDesk - 사용하는 곳 목록;
+		, SYS4112_APIServer : [ "http://222.239.10.123:40322", "http://222.239.10.123:40322" ]
+		, SYS4112_WebServer : [ "http://222.239.10.123:40322", "http://222.239.10.123:40322" ]
+
+		//Total.js - Messanger - 사용하는 곳 목록;
+		, SYS4113_APIServer : [ "http://222.239.10.123:40323", "http://222.239.10.123:40323" ]
+		, SYS4113_WebServer : [ "http://222.239.10.123:40323", "http://222.239.10.123:40323" ]
+
+		//Total.js - OpenPlatform - 사용하는 곳 목록;
+		, SYS4120_APIServer : [ "http://222.239.10.123:40330", "http://222.239.10.123:40330" ]
+		, SYS4120_WebServer : [ "http://222.239.10.123:40330", "http://222.239.10.123:40330" ]
+
+		//Total.js - CMS - 사용하는 곳 목록;
+		, SYS4130_APIServer : [ "http://222.239.10.123:40340", "http://222.239.10.123:40340" ]
+		, SYS4130_WebServer : [ "http://222.239.10.123:40340", "http://222.239.10.123:40340" ]
+
+		//Total.js - Eshop - 사용하는 곳 목록;
+		, SYS4135_APIServer : [ "http://222.239.10.123:40345", "http://222.239.10.123:40345" ]
+		, SYS4135_WebServer : [ "http://222.239.10.123:40345", "http://222.239.10.123:40345" ]
+		//--------------------------------------------------[ E ] - Total.js;
+	};
+
+	var io, iLen;
+	for( var s in _server )
+	{
+		io = _server[ s ];
+		iLen = io.length;
+		_idxMaxCount[ s ] = iLen;
+		_idx[ s ] = SUtilMath.random( 0, iLen, 0 );
+	}
+
+	/**
+	 * @function
+	 * @param {String} nm_server
+	 * @return {String} url
+	 */
+	window.b2link.url.getServerURLByServers = function( nm_server )
+	{
+		if( !_server[ nm_server ] ) debugger;//없는 서버 이름이 들어옴;
+
+		var r;
+
+		if( _idxMaxCount[ nm_server ] > _idx[ nm_server ] )
+		{
+			r = _server[ nm_server ][ _idx[ nm_server ] ];
+			++_idx[ nm_server ];
+		}
+		else
+		{
+			_idx[ nm_server ] = 0;
+			r = _server[ nm_server ][ _idx[ nm_server ] ];
+		}
+
+		return r;
+	};
+
+})();
+
+//----------------------------------------------------------------------------------------------------;
+//if( console ) console.log( "[ E ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;

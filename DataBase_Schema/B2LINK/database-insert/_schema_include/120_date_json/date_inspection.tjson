@@ -1,0 +1,1 @@
+{ "description" : "검수검품 시행일자", "type" : "object", "properties" : <include>100_common_json/properties__Date_Object.json</include> }

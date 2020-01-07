@@ -1,0 +1,28 @@
+{
+	"description" : "휴대폰 번호를 저장", "type" : "object"
+	, "properties" : {
+		//Full;
+		"f" : { "description" : "Full Cell Number", "exampleValue" : "+82-2-1899-0534"<include>000_common_txt/string_default.txt</include> }
+
+		//Country Code;
+		, "c" : { "description" : "Country Code ", "exampleValue" : "82"<include>000_common_txt/string_default.txt</include> }
+
+		//Area Code;
+		, "a" : { "description" : "Area Code", "exampleValue" : "2"<include>000_common_txt/string_default.txt</include> }
+
+		//cell0;
+		, "n0" : { "description" : "Cell 0", "exampleValue" : "0000"<include>000_common_txt/string_default.txt</include> }
+
+		//cell1;
+		, "n1" : { "description" : "Cell 1", "exampleValue" : "1111"<include>000_common_txt/string_default.txt</include> }
+
+		//cell2;
+		, "n2" : { "description" : "Cell 2", "exampleValue" : "2222"<include>000_common_txt/string_default.txt</include> }
+
+		//cell3;
+		, "n3" : { "description" : "Cell 3", "exampleValue" : "3333"<include>000_common_txt/string_default.txt</include> }
+
+		//cell4;
+		, "n4" : { "description" : "Cell 4", "exampleValue" : "4444"<include>000_common_txt/string_default.txt</include> }
+	}
+}

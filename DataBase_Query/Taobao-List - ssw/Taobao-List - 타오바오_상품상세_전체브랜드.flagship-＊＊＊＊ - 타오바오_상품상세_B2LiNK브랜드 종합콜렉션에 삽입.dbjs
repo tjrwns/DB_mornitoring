@@ -1,0 +1,76 @@
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( "타오바오_상품상세_전체브랜드" );
+var db1 = db.getSiblingDB( "타오바오_상품상세_B2LiNK브랜드" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var col00 = db0.getCollection( "flagship-code_1801" );
+var col01 = db0.getCollection( "flagship-code_50010788" );
+var col02 = db0.getCollection( "flagship-code_50023282" );
+var col03 = db0.getCollection( "flagship-code_50025705" );
+
+var col10 = db1.getCollection( "20190312-A" );
+var col11 = db1.getCollection( "20190312-Y" );
+
+//----------------------------------------------------------------------------------------------------;
+
+var P0 = { _id : -1 };
+
+var R_ERROR = [];
+
+//----------------------------------------------------------------------------------------------------;
+
+var i = 0;
+var count = 0;
+
+col00.find({}).forEach( function( doc ){
+	P0._id = doc._id;
+
+	var doc0 = col10.findOne( P0 );
+	if( !doc0 ){
+		try{ col10.insertOne( doc ); }catch( er ){ R_ERROR.push( er ); }
+		++count;
+	}
+
+	print( i ); ++i;
+});
+
+col01.find({}).forEach( function( doc ){
+	P0._id = doc._id;
+
+	var doc0 = col10.findOne( P0 );
+	if( !doc0 ){
+		try{ col10.insertOne( doc ); }catch( er ){ R_ERROR.push( er ); }
+		++count;
+	}
+
+	print( i ); ++i;
+});
+
+col02.find({}).forEach( function( doc ){
+	P0._id = doc._id;
+
+	var doc0 = col10.findOne( P0 );
+	if( !doc0 ){
+		try{ col10.insertOne( doc ); }catch( er ){ R_ERROR.push( er ); }
+		++count;
+	}
+
+	print( i ); ++i;
+});
+
+col03.find({}).forEach( function( doc ){
+	P0._id = doc._id;
+
+	var doc0 = col10.findOne( P0 );
+	if( !doc0 ){
+		try{ col10.insertOne( doc ); }catch( er ){ R_ERROR.push( er ); }
+		++count;
+	}
+
+	print( i ); ++i;
+});
+
+printjson( R_ERROR );
+print( "count : " + count );

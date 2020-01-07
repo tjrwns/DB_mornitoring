@@ -1,0 +1,20 @@
+var dbs = {
+	"2018" : db.getSiblingDB( "goods_list_2018" )
+	, "2019" : db.getSiblingDB( "goods_list_2019" )
+}
+
+var cols00 = dbs[ "2018" ].getCollectionNames()
+var cols01 = dbs[ "2019" ].getCollectionNames()
+
+var allCols = cols00.concat( cols01 )
+
+var r = {}
+allCols.forEach(function(col){
+
+	var year = col.substr(0,4)
+	r[ col ] = dbs[ year ].getCollection( col ).find({cd$product_master : null }).count();
+})
+
+printjson( r )
+
+//----------------------------------------------------------------------------------------------------;

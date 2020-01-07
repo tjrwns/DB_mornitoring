@@ -1,0 +1,7 @@
+/**
+ * Session Object의 Check
+ * @function
+ * @param {Object} d Request Object { "mid" : "", "sid" : "", "d_ex" : "" }
+ * @param {Object} so Collection's Session Object { "_id" : NaN, "mid" : "", "sid" : "", "d_ex" : "" }
+ * @return {uint} 0 or 1
+ */

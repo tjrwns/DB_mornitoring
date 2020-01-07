@@ -1,0 +1,5 @@
+/**
+ * @function
+ * @param {String} mid
+ * @return {Document}
+ */

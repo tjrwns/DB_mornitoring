@@ -1,0 +1,70 @@
+//----------------------------------------------------------------------------------------------------;
+var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__상품상세정보가져오기.js";
+if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>";
+var nm_col = "<!=nm_col=!>";
+var code_db = "<!=code_db=!>";
+
+//----------------------------------------------------------------------------------------------------;
+
+var db0 = db.getSiblingDB( nm_db );
+var col0 = db0.getCollection( nm_col );
+
+//----------------------------------------------------------------------------------------------------;
+
+var r = [];
+
+//----------------------------------------------------------------------------------------------------;
+var _to;
+
+col0.find({}).forEach( function( doc ){
+	if( !doc.item ) return;
+
+	//VIP의 _id는 숫가자 커서 NumberLong 임;
+	_to = { goodsId : NumberLong( doc._id ) };
+
+	var t0 = doc.item;
+
+	_to.goodsImg = t0.images[ 0 ] || "https://cdn.warehouseskateboards.com/images/products/preview/no-image.jpg";
+	_to.siteNm = code_db;
+	_to.goodsName = t0.title;
+
+	_to.brandName = t0.brandValueId;
+	_to.brandId = t0.brandValueId
+
+	_to.categoryId = t0.categoryId;
+	_to.categoryName = t0.categoryId;
+
+	var t1 = doc.seller;
+
+	_to.shopId = t1.shopId;
+	_to.shopName = t1.shopName;
+
+
+	try
+	{
+	    if ( doc.apiStack[ 0 ].value.item.sellCount )
+		{
+			_to.price = doc.apiStack[ 0 ].value.price.price.priceText;
+		}
+	}
+	catch( e )
+	{
+		//에러;
+		_to.price = 0
+	}
+
+
+
+	r.push( _to );
+});
+
+//----------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, d : r
+	, m : "OK"
+};

@@ -1,0 +1,8 @@
+/**
+ * @function
+ * @param {Object} d { mid : "", mpw : "" }
+ * @return {uint} 0, 1
+ *
+ * @example
+ * member_basic$sign_up({ "mid" : "thdtjsdn@gmail.com", "mpw" : "123qweasd" });
+ */

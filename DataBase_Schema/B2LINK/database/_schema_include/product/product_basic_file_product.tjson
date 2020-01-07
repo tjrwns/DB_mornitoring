@@ -1,0 +1,7 @@
+{
+	//id;
+	"_id" : <include>100_common_json/_id.json</include>
+
+	//image file url;
+	, "url" : { "description" : "Product Image URL", "exampleValue" : "www.b2link.co.kr/product.img"<include>000_common_txt/string_default.txt</include> }
+}

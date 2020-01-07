@@ -1,0 +1,33 @@
+var ids_brand = {
+
+	"3CE" : 51
+	, "AHC" : 204
+}
+
+var db0 = db.getSiblingDB( "graph_data");
+var db1 = db.getSiblingDB( 'daily_master_h5' );
+
+var FN00 = function( year, weekNo, brand_id ){
+	print( year + " / " + weekNo + " / " + brand_id )
+	var d00 = db0.getCollection( 'week_summary_by_brand' ).findOne({"year" : year,"week" : weekNo, "_id$brand_basic" : brand_id });
+
+	var daily_graph_sales_amount = 0
+	db0.getCollection('daily_sales_by_brand').find({ "date_of_value.a" : { $gte : ISODate( d00.date_start + "T00:00:00.000Z"), $lte: ISODate( d00.date_end + "T00:00:00.000Z") },"_id$brand_basic" : brand_id }).forEach(function(d){
+		daily_graph_sales_amount += d.total_sales_amount
+	})
+	var daily_master_sales_quantity = 0
+	db1.getCollection('daily_master').find({"date" : { $gte : ISODate( d00.date_start + "T00:00:00.000Z"), $lte: ISODate( d00.date_end + "T00:00:00.000Z") }, "_id$brand_basic" : brand_id }).forEach(function(d){
+		daily_master_sales_quantity += d.Daily_Sales
+	})
+
+	printjson( "weekdata - sales_quanttity : " + d00.total_week_sales_quantity );
+	printjson( "daily_master_sales_quantity : " + daily_master_sales_quantity );
+	printjson( "weekdata - sales__amount : " + d00.total_week_sales_amount );
+	printjson( "daily_graph_sales_amount : " + daily_graph_sales_amount );
+
+}
+
+FN00( "2019", 43, ids_brand[ "3CE" ] )
+FN00( "2019", 43, ids_brand[ "AHC" ] )
+
+printjson( 1 );

@@ -1,0 +1,682 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+//var fileNm = "js__b2link__SYS0037__BatchServer/100__수집데이터머지/taobao__01_데일리마스터정제.dbjs";
+//if( TtwLog ) TtwLog.log( "[ S ] - " + fileNm + "----------" );
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var nm_db = "<!=nm_db=!>"
+var nm_col = "<!=nm_col=!>"
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// DB;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _db$name_mapping = db.getSiblingDB( "name_mapping" );
+var _db$daily_master = db.getSiblingDB( "daily_master" );
+var _db$daily_master_h5 = db.getSiblingDB( "daily_master_h5" );
+var _db$daily_master2 = db.getSiblingDB( "daily_master" );
+var _db$h5_data = db.getSiblingDB( nm_db );
+var _db$h5_data_ERROR = db.getSiblingDB( nm_db+ "-ERROR")
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var _col$goods_list = _db$name_mapping.goods_list;
+var _col$name_mapping = _db$daily_master.goods_list;
+var _col$daily_master = _db$daily_master_h5.daily_master_1
+
+var _col = _db$h5_data.getCollection( nm_col );
+var _col_ERROR = _db$h5_data_ERROR.getCollection( nm_col + "-Error" )
+var dateString = nm_col;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+_col$goods_list.createIndex( { _id$channel_basic : 1 }, { background : true } );
+_col$goods_list.createIndex( { product_url : 1 }, { background : true } );
+_col$goods_list.createIndex( { spuid : 1 }, { background : true } );
+_col$goods_list.createIndex( { _id$channel_basic : 1, product_url : 1 }, { background : true } );
+_col$goods_list.createIndex( { _id$channel_basic : 1, spuid : 1, _d : 1 }, { background : true } );
+_col$name_mapping.createIndex( { goods_id : 1,date : 1 }, { background : true } );
+_col$daily_master.createIndex( { goods_id : 1,date : 1 }, { background : true } );
+_col$daily_master.createIndex( { goods_id : 1}, { background : true } );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - REQUIRE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - DEFINE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var q1 = { date : { $gte : "", $lte : "" }, goods_id : "" };
+var q2 = { date : "", goods_id : "" };
+var q3 = {};
+var q4 = { goods_id : "" };
+
+var p1 = { date : 1, _id : 0, month_sold_quantity : 1, Daily_Sales : 1 };
+
+var s1 = { date : -1 };
+
+var getMonthSoldQuantities = function( date_start, date_end, goods_id )
+{
+	q1.date.$gte = date_start;
+	q1.date.$lte = date_end;
+	q1.goods_id = goods_id;
+
+	var _docs = [];
+	_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ _docs.push( doc ); });
+	return _docs;
+};
+
+var calculateLately7DaysMediateValue = function( today, goods_id )
+{
+	//'최근 7일 데일리 판매량의 중간값';
+	var _date_today = ISODate( today );
+	    _date_today.setDate( _date_today.getDate() - 1)
+	var date_before7 = ISODate( today );
+	    date_before7.setDate(_date_today.getDate() - 6);
+	var arr_monthSoldQuantities = getMonthSoldQuantities( date_before7, _date_today, goods_id );
+
+	if( arr_monthSoldQuantities.length == 0 ) //'최근 7일 데일리 판매량	이 없을 경우, 0
+		return -1;
+
+	arr_monthSoldQuantities.sort( function( a, b )
+	{
+		return a.month_sold_quantity > b.month_sold_quantity ? -1 : a.month_sold_quantity < b.month_sold_quantity ? 1 : 0;
+	});
+
+	if( arr_monthSoldQuantities.length % 2 == 0 )
+	{
+		//최근 7일 데일리 판매량의 중간 2개값의 평균
+		var o, t;
+		o =  arr_monthSoldQuantities.length / 2 ;
+		t = o - 1;
+		r = parseInt(( ( arr_monthSoldQuantities[ t ].month_sold_quantity + arr_monthSoldQuantities[ o ].month_sold_quantity ) / 2 ) + 0.5 ) ;
+	}
+	else
+	{
+		var o;
+		o = arr_monthSoldQuantities.length / 2 - 0.5;
+		r = arr_monthSoldQuantities[ o ].month_sold_quantity;
+	}
+	return r;
+};
+
+var calculateLately7Days= function( today, goods_id )
+{
+	//'최근 7일 데일리 판매량의 중간값';
+	var _date_today = ISODate( today );
+	    _date_today.setDate( _date_today.getDate() - 1)
+	var date_before7 = ISODate( today );
+	    date_before7.setDate(_date_today.getDate() - 6);
+	var arr_monthSoldQuantities = getMonthSoldQuantities( date_before7, _date_today, goods_id );
+
+	if( arr_monthSoldQuantities.length == 0 ) //'최근 7일 데일리 판매량	이 없을 경우, 0
+		return -1;
+
+	r = arr_monthSoldQuantities[ 0 ].month_sold_quantity;
+
+	return r;
+};
+
+var calculateLately7DaysMediateValue_DailySales = function( today, goods_id )
+{
+	//'최근 7일 데일리 판매량의 중간값';
+	var _date_today = ISODate( today );
+	    _date_today.setDate( _date_today.getDate() - 1)
+	var date_before7 = ISODate( today );
+	    date_before7.setDate(_date_today.getDate() - 6);
+	var arr_monthSoldQuantities = getMonthSoldQuantities( date_before7, _date_today, goods_id );
+
+	if( arr_monthSoldQuantities.length == 0 ) //'최근 7일 데일리 판매량	이 없을 경우, 0
+		return -1;
+
+	arr_monthSoldQuantities.sort( function( a, b )
+	{
+		return a.Daily_Sales > b.Daily_Sales ? -1 : a.Daily_Sales < b.Daily_Sales ? 1 : 0;
+	});
+
+	if( arr_monthSoldQuantities.length % 2 == 0 )
+	{
+		//최근 7일 데일리 판매량의 중간 2개값의 평균
+		var o, t;
+		o = arr_monthSoldQuantities.length / 2;
+		t = o - 1;
+		r = arr_monthSoldQuantities[ o ].Daily_Sales;
+	}
+	else
+	{
+		var o;
+		o = arr_monthSoldQuantities.length / 2 - 0.5;
+		r = arr_monthSoldQuantities[ o ].Daily_Sales;
+	}
+	return r;
+};
+
+var makeDateString = function( date )
+{
+	var my = date.getFullYear();
+	var mm = date.getMonth() + 1;
+	mm = mm > 9 ? mm.toString() : '0' + mm.toString();
+	var md = date.getDate();
+	md = md > 9 ? md.toString() : '0' + md.toString();
+
+	return my + "-" + mm + '-' + md;
+};
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+/**
+ * 일일 판매량을 계산
+ * @function
+ * @param {Object} doc  goods_info의 document
+ * @param {String} today 해당 데이터의 날짜( "2018-02-07" )
+ * @return {Number} r 일일 판매량
+ * @example
+ * <code>
+ * </code>
+ */
+var calculateDailySale = function( doc, today )
+{
+
+	var goods_id = doc._id;
+
+	//30일간판매량;
+	var DailySales_30 = -1
+	var _date_today = ISODate( today );
+	var _date_beforeOffset = ISODate( today );
+	    _date_beforeOffset.setDate( _date_beforeOffset.getDate() - 30 );
+	var _str_date = makeDateString( _date_beforeOffset );
+
+	q2.date = ISODate( _str_date );
+	q2.goods_id = goods_id;
+
+	var _doc = _col$daily_master.findOne( q2 );
+	if( _doc ) DailySales_30 =  _doc.Daily_Sales;
+
+
+	//오늘 월간 판매량;
+	var monthSoldQuantityToday = 0;
+	try
+	{
+	    if ( doc.apiStack[ 0 ].value.item ) monthSoldQuantityToday = doc.apiStack[ 0 ].value.item.sellCount;
+
+	}
+	catch( e )
+	{
+	    //에러;
+	}
+
+	//어제 월간 판매량;
+	var monthSoldQuantityYesterDay = -1;
+	var _date_today = ISODate( today );
+	var _date_beforeOffset = ISODate( today );
+		_date_beforeOffset.setDate(_date_today.getDate() - 1 );
+	var _str_date = makeDateString( _date_beforeOffset );
+
+	q2.date = ISODate( _str_date );
+	q2.goods_id = goods_id;
+
+	var _doc = _col$daily_master.findOne( q2 );
+	if( _doc ) monthSoldQuantityYesterDay = _doc.month_sold_quantity;
+
+
+
+//	print( "상품아이디 : " + goods_id )
+//	print( "30일전 데일리 판매량 : " + DailySales_30 )
+//	print( "오늘 월간 판매량 : " + monthSoldQuantityToday )
+//	print( "어제 월간 판매량 : " + monthSoldQuantityYesterDay )
+//	print( "--------------------------------------------" )
+
+	//오늘 일간 판매량;
+	var r = 0;
+
+	if( monthSoldQuantityYesterDay == -1 )//어제 30일 판매량이 없을 경우;
+	{
+
+		//monthSoldQuantityYesterDay = calculateLately7Days( today, goods_id );
+		//최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값;
+		//'최근 7일 데일리 판매량의 중간값';
+		var _date_today = ISODate( today );
+			_date_today.setDate( _date_today.getDate() - 1)
+		var date_before7 = ISODate( today );
+			date_before7.setDate(_date_today.getDate() - 6);
+
+		q1.date.$gte = date_before7;
+		q1.date.$lte = _date_today;
+		q1.goods_id = goods_id;
+
+		var arr_monthSoldQuantities = [];
+
+		_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ arr_monthSoldQuantities.push( doc ); });
+//		printjson( arr_monthSoldQuantities )
+		//'최근 7일 데일리 판매량	이 없을 경우, 0
+		if( arr_monthSoldQuantities.length == 0 ) monthSoldQuantityYesterDay =  -1;
+		else monthSoldQuantityYesterDay = arr_monthSoldQuantities[ 0 ].month_sold_quantity;
+
+//		print( "어제 월간 판매량이없음")
+//		print( "최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값 - " + monthSoldQuantityYesterDay )
+	}
+
+
+	if( DailySales_30 != -1 )//30일전 데일리 판매량이 존재 할경우;
+	{
+
+		if ( monthSoldQuantityYesterDay == -1 )
+		{
+
+			r = 0;
+//			print( "30일전 데일리 판매량이 존재 할경우")
+//			print( "최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값이 없음")
+//			print("DAILY_SALES : " + r)
+
+		}
+		else
+		{
+
+			r = monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30;//'오늘 30일 판매량 - 어제 30일 판매량+ 31일전 데일리 판매량'
+//			print( "30일전 데일리 판매량이 존재 할경우")
+//			print( "최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값이 있음")
+//			print("DAILY_SALES : " + r)
+		}
+
+	}
+	else//31일전 데일리 판매량이 존재 하지 않을 경우
+	{
+
+		if ( monthSoldQuantityYesterDay == -1 )
+		{
+			r = 0;
+//			print( "31일전 데일리 판매량이 존재 하지 않을 경우")
+//			print( "최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값이 없음")
+//			print("DAILY_SALES : " + r)
+		}
+		else
+		{
+			r = monthSoldQuantityToday - monthSoldQuantityYesterDay;//오늘 30일 판매량 - 어제 30일 판매량'
+//			print( "31일전 데일리 판매량이 존재 하지 않을 경우")
+//			print( "최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값이 있음")
+//			print("DAILY_SALES : " + r)
+		}
+	}
+
+	if( r < 0 )//if '오늘 30일 판매량 - 어제 30일 판매량 +  31일전 데일리 판매량' < 0 AND 오늘 30일 판매량 - 어제 30일 판매량 < 0;
+	{
+		//print( "DAILY_SALES가 영보다작음" )
+		//r = calculateLately7DaysMediateValue_DailySales( today, goods_id )//'최근 7일 데일리 판매량의 중간값';
+		//'최근 7일 데일리 판매량의 중간값';
+		//print("최근 7일 데일리 판매량의 중간값 : " + r)
+
+
+		//'최근 7일 데일리 판매량의 중간값';
+		var _date_today = ISODate( today );
+			_date_today.setDate( _date_today.getDate() - 1)
+		var date_before7 = ISODate( today );
+			date_before7.setDate(_date_today.getDate() - 6);
+
+		q1.date.$gte = date_before7;
+		q1.date.$lte = _date_today;
+		q1.goods_id = goods_id;
+
+		var arr_monthSoldQuantities = [];
+		_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ arr_monthSoldQuantities.push( doc ); });
+
+		//'최근 7일 데일리 판매량	이 없을 경우, 0
+		if( arr_monthSoldQuantities.length == 0 ) r = -1;
+		else
+		{
+
+			arr_monthSoldQuantities.sort( function( a, b )
+			{
+				return a.Daily_Sales > b.Daily_Sales ? -1 : a.Daily_Sales < b.Daily_Sales ? 1 : 0;
+			});
+
+			if( arr_monthSoldQuantities.length % 2 == 0 )
+			{
+				//최근 7일 데일리 판매량의 중간 2개값의 평균
+				var o, t;
+				o = arr_monthSoldQuantities.length / 2;
+				t = o - 1;
+				r = arr_monthSoldQuantities[ o ].Daily_Sales;
+			}
+			else
+			{
+				var o;
+				o = arr_monthSoldQuantities.length / 2 - 0.5;
+				r = arr_monthSoldQuantities[ o ].Daily_Sales;
+			}
+
+		}
+
+	}
+//	print( "----------------------------------------------------------------------------------------" )
+	return r;
+
+};
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DEFINE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DOCUMENT;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+/**
+ * insert model
+ * @property {Object}
+ * <code>
+	{
+		brand : ""
+		, date : ""
+		, Daily_Sales : ""
+		, goods_id : ""
+		, inventory : ""
+		, keyword : ""
+		, month_confirim_quantity : ""
+		, month_sold_quantity : ""
+		, month_sold_amount : ""
+		, name : ""
+		, original_price : ""
+		, original_price_max : ""
+		, original_price_min : ""
+		, price : ""
+		, price_min : ""
+		, price_max : ""
+		, product_attributes : []
+		, seller_id : ""
+		, shop_id : ""
+		, shop_name : ""
+		, shop_type : ""
+		, standard_name : ""
+	}
+ * </code>
+ */
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+var insertModel;
+//*/
+var _TARGET_YEARS_ = [ 2019 ];
+/*/
+var _TARGET_YEARS_ = [ 2018, 2019 ];
+//*/
+var insertData = [];
+
+
+// var count = _col.count();
+// var idx = 0;
+print("START - " + Date() )
+_col.find().forEach(function(doc){
+
+	try
+	{
+		_col$daily_master.insertMany( insertData );
+		insertData.length = 0;
+	}
+	catch( er )
+	{
+		//
+	}
+
+	insertModel = {};
+	//print( ++idx + "/" + count );
+	//print( doc._id )
+	//------------------------------------------------------------------------------------------goods_id;
+
+	q4.goods_id = doc._id.valueOf().toString() ;
+
+	insertModel.goods_id = doc._id;
+
+	var _doc$name_mapping = _col$name_mapping.findOne( q4 );
+	if( !_doc$name_mapping )
+	{
+
+	//------------------------------------------------------------------------------------------_id$brand_basic;
+		insertModel._id$brand_basic = NumberInt( -1 );
+	//------------------------------------------------------------------------------------------cd$product_master;
+		insertModel.cd$product_master = "";
+	//------------------------------------------------------------------------------------------keyword;
+		insertModel.keyword = "";
+	//------------------------------------------------------------------------------------------standard_name;
+		insertModel.standard_name = "";
+	//------------------------------------------------------------------------------------------nm_cn$category;
+		insertModel.nm_cn$category = "";
+	//------------------------------------------------------------------------------------------nm_kr$category;
+		insertModel.nm_kr$category = "";
+
+	}
+	else
+	{
+
+	//------------------------------------------------------------------------------------------_id$brand_basic;
+		//insertModel._id$brand_basic = _doc$name_mapping._id$brand_basic;
+		insertModel._id$brand_basic = NumberInt( _doc$name_mapping._id$brand_basic );
+	//------------------------------------------------------------------------------------------cd$product_master;
+		insertModel.cd$product_master = _doc$name_mapping.cd$product_master;
+	//------------------------------------------------------------------------------------------keyword;
+		insertModel.keyword = _doc$name_mapping.keyword;
+	//------------------------------------------------------------------------------------------standard_name;
+		insertModel.standard_name = _doc$name_mapping.standard_name;
+	//------------------------------------------------------------------------------------------nm_cn$category;
+		insertModel.nm_cn$category = "";
+	//------------------------------------------------------------------------------------------nm_kr$category;
+		insertModel.nm_kr$category = "";
+	}
+
+	//------------------------------------------------------------------------------------------date;
+	insertModel.date = ISODate( parseFloat( nm_col ) );
+	//------------------------------------------------------------------------------------------Daily_Sales;
+	insertModel.Daily_Sales = calculateDailySale( doc, nm_col );
+	//------------------------------------------------------------------------------------------inventory;
+	insertModel.inventory = doc.mockData.skuCore.sku2info['0'].quantity;;
+	//------------------------------------------------------------------------------------------month_sold_quantity;
+	insertModel.month_sold_quantity = 0;
+	try
+	{
+		if ( doc.apiStack[ 0 ].value.item ) insertModel.month_sold_quantity = doc.apiStack[ 0 ].value.item.sellCount;
+	}catch ( e )
+	{
+		//
+	}
+	//------------------------------------------------------------------------------------------;
+
+	var r = 0;
+	var price_min;
+	var price_max;
+
+	if( !doc.apiStack[ 0 ].value.price )
+	{
+		try
+		{
+			price_min = price_max = parseFloat( -1 );
+			_col_ERROR.insertOne( doc );
+		}
+		catch(er)
+		{
+			//
+		}
+	}
+	else
+	{
+		var price_txt = doc.apiStack[ 0 ].value.price.price.priceText;
+		var dash = price_txt.indexOf( '-' );
+		if( !dash )
+		{
+			var a = price_txt.split( "-" );
+			price_min = parseFloat( a[ 0 ] );
+			price_max = parseFloat( a[ 1 ] );
+		}
+		else price_min = price_max = parseFloat( price_txt );
+
+	}
+
+	//------------------------------------------------------------------------------------------price_max;
+	insertModel.price_max = price_max;
+	//------------------------------------------------------------------------------------------price_min;
+	insertModel.price_min = price_min;
+	//------------------------------------------------------------------------------------------price;
+	insertModel.price = price_max;
+
+
+	var sellCount = 0;
+	try
+	{
+		sellCount = doc.apiStack[ 0 ].value.item.sellCount;
+	}
+	catch ( e )
+	{
+		sellCount = 0;
+	}
+
+
+	//------------------------------------------------------------------------------------------month_sold_amount;
+	insertModel.month_sold_amount =  sellCount * price_max;
+	//------------------------------------------------------------------------------------------name;
+	insertModel.name = doc.item.title || "";
+	//------------------------------------------------------------------------------------------;
+
+	var original_price_txt;
+
+	if( !doc.apiStack[ 0 ].value.price )
+	{
+		try
+		{
+			original_price_min = original_price_max = original_price_txt = -1;
+			_col_ERROR.insertOne( doc );
+		}
+		catch(er)
+		{
+			//
+		}
+	}
+	else
+	{
+		if( doc.apiStack[ 0 ].value.price.extraPrices != undefined && doc.apiStack[ 0 ].value.price.extraPrices[ 0 ] != undefined )
+		{
+			original_price_txt = doc.apiStack[ 0 ].value.price.extraPrices[0].priceText;
+		}
+		else
+		{
+			original_price_txt = doc.apiStack[ 0 ].value.price.price.priceText;
+		}
+
+		var original_dash = original_price_txt.indexOf( '-' );
+		var original_price_min = 0;
+		var original_price_max = 0;
+		if( original_dash > -1)
+		{
+			var a = original_price_txt.split( "-" );
+			original_price_min = parseFloat( a[ 0 ] );
+			original_price_max = parseFloat( a[ 1 ] );
+		}
+		else
+		{
+			original_price_min = original_price_max = parseFloat( original_price_txt );
+		}
+
+	}
+
+	//------------------------------------------------------------------------------------------original_price_min;
+	insertModel.original_price_min = original_price_min;
+	//------------------------------------------------------------------------------------------original_price_max;
+	insertModel.original_price_max = original_price_max;
+	//------------------------------------------------------------------------------------------original_price;
+	insertModel.original_price = original_price_txt;
+	//------------------------------------------------------------------------------------------product_attributes;
+
+	insertModel.product_attributes = [];
+	if( doc.props.groupProps ){
+
+		var j = 0,jLen = doc.props.groupProps[0]['基本信息'].length,jo;
+		var _to = {}
+		for(;j<jLen;++j){
+			jo = doc.props.groupProps[0]['基本信息'][ j ];
+			for( var s in jo ){
+				_to[ s ] = jo[ s ];
+			}
+		}
+		_to.itemId = doc.item.itemId;
+		insertModel.product_attributes.push( _to );
+	}
+
+	//------------------------------------------------------------------------------------------shop_type;
+
+	//판매점포식별;
+	if( !doc.apiStack[ 0 ].value.trade.isBanSale4Oversea ) insertModel.shop_type = "天猫";
+	else insertModel.shop_type = "淘宝";
+
+	//------------------------------------------------------------------------------------------shop_name;
+	insertModel.shop_name = doc.seller.shopName || "";
+	//------------------------------------------------------------------------------------------shop_id;
+	insertModel.shop_id = doc.seller.shopId.toString();
+	//------------------------------------------------------------------------------------------seller_id;
+	insertModel.seller_id = doc.seller.userId.toString();
+	//------------------------------------------------------------------------------------------rootCategoryId;
+	insertModel.rootCategoryId = doc.item.rootCategoryId;
+	//------------------------------------------------------------------------------------------categoryId;
+	insertModel.categoryId = doc.item.categoryId;
+	//------------------------------------------------------------------------------------------brandValueId;
+	insertModel.brandValueId = "";
+	if( doc.item.brandValueId )
+	{
+		insertModel.brandValueId = doc.item.brandValueId;
+	}
+	//------------------------------------------------------------------------------------------rootCategoryId;
+	insertModel.rootCategoryId = doc.item.rootCategoryId;
+	//------------------------------------------------------------------------------------------date_collect;
+	insertModel.date_collect = ISODate( parseFloat( nm_col ) + 1 );
+	//------------------------------------------------------------------------------------------;
+
+	if( insertData.length == 900 )
+	{
+		try
+		{
+			_col$daily_master.insertMany( insertData );
+			insertData.length = 0;
+		}
+		catch( er )
+		{
+			//
+		}
+	}
+	else
+	{
+		insertData.push( insertModel );
+	}
+})
+print("END - " + Date() )
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+return {
+	r : 0
+	, m : "OK"
+};

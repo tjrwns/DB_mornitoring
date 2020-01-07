@@ -1,0 +1,5 @@
+/**
+ * update cd_rank -1000, 0, 1000, 2000, 3000, 4000, 10000
+ * @function
+ * @return {uint} 1
+ */

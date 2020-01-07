@@ -1,0 +1,870 @@
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// DB;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//var _db$name_mapping = db.getSiblingDB( "name_mapping" );
+//var _db$daily_master = db.getSiblingDB( "daily_master" );
+var _db$daily_master_h5 = db.getSiblingDB( "daily_master_h5" );
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// COLLECTION;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//var _col$name_mapping = _db$name_mapping.goods_list;
+//var _col$goods_list = _db$daily_master.goods_list;
+//var _col$daily_master = _db$daily_master_h5.daily_master_31dayUse_2018;
+var _col$daily_master = _db$daily_master_h5.daily_master_31dayUse_2019;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+// CREATE INDEX;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+_col$daily_master.createIndex( { date : 1 }, { background : true } );
+_col$daily_master.createIndex( { goods_id : 1,date : 1 }, { background : true } );
+_col$daily_master.createIndex( { goods_id : 1}, { background : true } );
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - REQUIRE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	FUNCTION - DEFINE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+var q1 = { date : { $gte : "", $lte : "" }, goods_id : "" };
+var q2 = { date : "", goods_id : "" };
+var q3 = {};
+var q4 = { goods_id : "" };
+var q5 = { date : null };
+
+var p1 = { date : 1, _id : 0, month_sold_quantity : 1, Daily_Sales : 1 };
+
+var s1 = { date : -1 };
+
+var makeDateString = function( date )
+{
+	var my = date.getFullYear();
+	var mm = date.getMonth() + 1;
+	mm = mm > 9 ? mm.toString() : '0' + mm.toString();
+	var md = date.getDate();
+	md = md > 9 ? md.toString() : '0' + md.toString();
+
+	return my + "-" + mm + '-' + md;
+};
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+
+/**
+ * 일일 판매량을 계산
+ * @function
+ * @param {Object} doc  goods_info의 document
+ * @param {String} today 해당 데이터의 날짜( "2018-02-07" )
+ * @return {Number} r 일일 판매량
+ * @example
+ * <code>
+ * </code>
+ */
+/*/
+var calculateDailySale = function( doc, today )
+{
+
+	var goods_id = doc._id.valueOf().toString();
+
+	//------------------------------------------------------- 30일간판매량;
+	var DailySales_30 = -1
+
+	var _date_beforeOffset = ISODate( today );
+	    _date_beforeOffset.setDate( _date_beforeOffset.getDate() - 30 );
+	var _str_date = makeDateString( _date_beforeOffset );
+
+	q2.date = ISODate( _str_date );
+	q2.goods_id = goods_id;
+
+	var _doc = _col$daily_master.findOne( q2 );
+	if( _doc ) DailySales_30 =  _doc.Daily_Sales;
+	print( "DailySales_30 : " + DailySales_30 );
+	//------------------------------------------------------- 어제 월간 판매량;
+	var monthSoldQuantityYesterDay = -1;
+
+	var _date_beforeOffset = ISODate( today );
+		_date_beforeOffset.setDate(_date_beforeOffset.getDate() - 1 );
+	var _str_date = makeDateString( _date_beforeOffset );
+
+	q2.date = ISODate( _str_date );
+	q2.goods_id = goods_id;
+	printjson( q2 );
+	var _doc = _col$daily_master.findOne( q2 );
+	if( _doc ) monthSoldQuantityYesterDay = _doc.month_sold_quantity;
+
+	print( "monthSoldQuantityYesterDay : " + monthSoldQuantityYesterDay );
+	//------------------------------------------------------- 오늘 월간 판매량;
+	var monthSoldQuantityToday = 0;
+	try
+	{
+	    if ( doc.apiStack[ 0 ].value.item.sellCount ) monthSoldQuantityToday = doc.apiStack[ 0 ].value.item.sellCount;
+	}
+	catch( e )
+	{
+		//에러;
+		monthSoldQuantityToday = 0;
+	}
+
+	//monthSoldQuantityToday = 0;
+	//monthSoldQuantityYesterDay = ???;
+	print( "monthSoldQuantityToday : " + monthSoldQuantityToday );
+	//------------------------------------------------------- 오늘 일간 판매량;
+	var r = 0;
+
+
+	//- 어제 30일 판매량이 없을 경우;
+	//	- 최근 7일 데일리 판매량이 없을 경우, 0;
+	//		- 어제 월간 판매량은 0;
+	//	- 최근 7일 데일리 판매량이 있을 경우, 0;
+	//		- 어제 월간 판매량은 최근일주일 월간판매량중 제일 큰 값;
+
+	if( monthSoldQuantityYesterDay == -1 )
+	{
+
+		//최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값;
+		//'최근 7일 데일리 판매량의 중간값';
+		var _date_today = ISODate( today );
+			_date_today.setDate( _date_today.getDate() - 1);
+		var date_before7 = ISODate( today );
+			date_before7.setDate( date_before7.getDate() - 7);
+
+		q1.date.$gte = date_before7;//7일전날짜;
+		q1.date.$lte = _date_today;//1일전날짜;
+		q1.goods_id = goods_id;//상품아이디;
+
+		var arr_monthSoldQuantities = [];
+
+		//7일간 상품을 조회해 배열에 담고 정렬을 수량으로 정렬한다.;
+		_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ arr_monthSoldQuantities.push( doc ); });
+
+		//최근 7일 데일리 판매량이 없을 경우, 0;
+		if( arr_monthSoldQuantities.length == 0 )
+		{
+			print( "어제판매량이없고 최근7일간 데이터가 없으므로 어제 월간판매량은 0");
+			monthSoldQuantityYesterDay = -1;//어제월간판매량;
+		}
+		else
+		{
+			print( "어제판매량이없고 최근7일간 데이터가 있으므로 어제 월간판매량은 " + arr_monthSoldQuantities[ 0 ].month_sold_quantity );
+			monthSoldQuantityYesterDay = arr_monthSoldQuantities[ 0 ].month_sold_quantity;//어제월간판매량;
+		}
+	}
+
+	//- 30일전 데일리 판매량이 존재 할경우;
+	//	- 어제 월간판매량이 존재함;
+	//		- 일간판매량은 오늘 30일 판매량 - 어제 30일 판매량+ 31일전 데일리 판매량;
+	//	- 어제 월간판매량이 존재 하지 않음;
+	//		- 일간판매량은 0;
+	//- 30일전 데일리 판매량이 존재 하지 않을경우;
+	//	- 어제 월간판매량이 존재함;
+	//		- 일간판매량은 오늘 30일 판매량 - 어제 30일 판매량;
+	//	- 어제 월간판매량이 존재 하지 않음;
+	//		- 일간판매량은 0;
+
+	if( DailySales_30 != -1 )//30일전 데일리 판매량이 존재 할경우;
+	{
+		if ( monthSoldQuantityYesterDay == -1 )
+		{
+			print( "30일전일간판매량이 있고 어제 월간판매량이 없으므로 오늘일간 판매량은 0" );
+			r = 0;
+		}
+		else
+		{
+			print( "30일전일간판매량이 있고 어제 월간판매량이 있으므로 오늘일간 판매량은  monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30 " +  ( monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30 ));
+
+			r = monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30;//'오늘 30일 판매량 - 어제 30일 판매량+ 31일전 데일리 판매량';
+		}
+	}
+	else//31일전 데일리 판매량이 존재 하지 않을 경우;
+	{
+		if ( monthSoldQuantityYesterDay == -1 )
+		{
+			print( "30일전일간판매량이 없고 어제 월간판매량이 없으므로 오늘일간 판매량은 0" );
+			r = 0;
+		}
+		else
+		{
+			print( "30일전일간판매량이 없고 어제 월간판매량이 있으므로 오늘일간 판매량은  monthSoldQuantityToday - monthSoldQuantityYesterDay : " +  (monthSoldQuantityToday - monthSoldQuantityYesterDay)  );
+			r = monthSoldQuantityToday - monthSoldQuantityYesterDay;//오늘 30일 판매량 - 어제 30일 판매량';
+		}
+	}
+
+	//- 일간판매량이 0보다 작다면;
+	//	- 최근7일의 판매량이 없다면 일간판매량은 0;
+	//	- 최근7일의 판매량이 있다면;
+	//		- 7일판매량의 일수가 짝수라면;
+	//			- 7일배열[ ( 7일배열값의 길이 / 2 ) - 1 ] = 일간판매량;
+	//		- 7일판매량의 일수가 홀수라면;
+	//			- 7일배열[ ( 7일배열값의 길이 / 2 ) - 0.5 ] = 일간판매량;
+
+	if( r < 0 )//if '오늘 30일 판매량 - 어제 30일 판매량 +  31일전 데일리 판매량' < 0 AND 오늘 30일 판매량 - 어제 30일 판매량 < 0;
+	{
+		print( "DAILY_SALES가 영보다작음" );
+		//r = calculateLately7DaysMediateValue_DailySales( today, goods_id )//'최근 7일 데일리 판매량의 중간값';
+
+		//'최근 7일 데일리 판매량의 중간값';
+		var _date_today = ISODate( today );
+			_date_today.setDate( _date_today.getDate() - 1);
+
+		var date_before7 = ISODate( today );
+			date_before7.setDate(date_before7.getDate() - 7);
+
+		q1.date.$gte = date_before7;
+		q1.date.$lte = _date_today;
+		q1.goods_id = goods_id;
+
+		var arr_monthSoldQuantities = [];
+		_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ arr_monthSoldQuantities.push( doc ); });
+
+		//'최근 7일 데일리 판매량	이 없을 경우, 0;
+		if( arr_monthSoldQuantities.length == 0 )
+		{
+			print("최근 7일 데일리 판매량	이 없을 경우, 0");
+			r = 0;
+		}
+		else
+		{
+			print("최근 7일 데일리 판매량	이 있을 경우");
+			arr_monthSoldQuantities.sort( function( a, b ){
+				return a.Daily_Sales > b.Daily_Sales ? -1 : a.Daily_Sales < b.Daily_Sales ? 1 : 0;
+			});
+
+			if( arr_monthSoldQuantities.length % 2 == 0 )
+			{
+				//최근 7일 데일리 판매량의 중간 2개값의 평균;
+				var o, t;
+				o = arr_monthSoldQuantities.length / 2;
+				t = o - 1;
+				r = arr_monthSoldQuantities[ t ].Daily_Sales;
+				print("최근판매량갯수가 짝수일때");
+				printjson( arr_monthSoldQuantities );
+				print( "o : " + o );
+				//print( r );
+			}
+			else
+			{
+				var o;
+				o = arr_monthSoldQuantities.length / 2 - 0.5;
+				r = arr_monthSoldQuantities[ o ].Daily_Sales;
+				print("최근판매량갯수가 홀수일때");
+				printjson( arr_monthSoldQuantities );
+				printjson( "o : " + o );
+				//print( r );
+			}
+
+		}
+	}
+	print( "판매량 : " + r );
+	return r;
+};
+
+/*/
+var calculateDailySale = function( doc, today )
+{
+
+	var goods_id = doc._id.valueOf().toString();
+
+	//------------------------------------------------------- 30일간판매량;
+	var DailySales_30 = -1
+
+	var _date_beforeOffset = ISODate( today );
+	    _date_beforeOffset.setDate( _date_beforeOffset.getDate() - 31 );
+	var _str_date = makeDateString( _date_beforeOffset );
+
+	q2.date = ISODate( _str_date );
+	q2.goods_id = goods_id;
+
+	var _doc = _col$daily_master.findOne( q2 );
+	if( _doc ) DailySales_30 =  _doc.Daily_Sales;
+	//print( "DailySales_30 : " + DailySales_30 );
+	//------------------------------------------------------- 어제 월간 판매량;
+	var monthSoldQuantityYesterDay = -1;
+
+	var _date_beforeOffset = ISODate( today );
+		_date_beforeOffset.setDate(_date_beforeOffset.getDate() - 1 );
+	var _str_date = makeDateString( _date_beforeOffset );
+
+	q2.date = ISODate( _str_date );
+	q2.goods_id = goods_id;
+	//printjson( q2 )
+	var _doc = _col$daily_master.findOne( q2 );
+	if( _doc ) monthSoldQuantityYesterDay = _doc.month_sold_quantity;
+
+	//print( "monthSoldQuantityYesterDay : " + monthSoldQuantityYesterDay );
+	//------------------------------------------------------- 오늘 월간 판매량;
+	var monthSoldQuantityToday = 0;
+	try
+	{
+	    if ( doc.apiStack[ 0 ].value.item.sellCount )
+		{
+			var _tmpSellCount = doc.apiStack[ 0 ].value.item.sellCount
+			if( _tmpSellCount.indexOf( "+" ) == -1 ) monthSoldQuantityToday = NumberInt( doc.apiStack[ 0 ].value.item.sellCount );
+			else if( _tmpSellCount.indexOf( "万" ) != -1 )
+			{
+				monthSoldQuantityToday = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000 );
+			}
+			else
+			{
+				monthSoldQuantityToday = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1 );
+			}
+		}
+	}
+	catch( e )
+	{
+		//에러;
+		monthSoldQuantityToday = 0
+	}
+
+	//monthSoldQuantityToday = 0;
+	//monthSoldQuantityYesterDay = ???;
+	//print( "monthSoldQuantityToday : " + monthSoldQuantityToday );
+	//------------------------------------------------------- 오늘 일간 판매량;
+	var r = 0;
+
+
+	//- 어제 30일 판매량이 없을 경우;
+	//	- 최근 7일 데일리 판매량이 없을 경우, 0;
+	//		- 어제 월간 판매량은 0;
+	//	- 최근 7일 데일리 판매량이 있을 경우, 0;
+	//		- 어제 월간 판매량은 최근일주일 월간판매량중 제일 큰 값;
+
+	if( monthSoldQuantityYesterDay == -1 )
+	{
+
+		//최근 7일간 수집된 30일 판매량 중 오늘을 제외한 최근값;
+		//'최근 7일 데일리 판매량의 중간값';
+		var _date_today = ISODate( today );
+			_date_today.setDate( _date_today.getDate() - 1)
+		var date_before7 = ISODate( today );
+			date_before7.setDate( date_before7.getDate() - 7);
+
+		q1.date.$gte = date_before7;//7일전날짜;
+		q1.date.$lte = _date_today;//1일전날짜;
+		q1.goods_id = goods_id;//상품아이디;
+
+		var arr_monthSoldQuantities = [];
+
+		//7일간 상품을 조회해 배열에 담고 정렬을 수량으로 정렬한다.;
+		_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ arr_monthSoldQuantities.push( doc ); });
+
+		//최근 7일 데일리 판매량이 없을 경우, 0;
+		if( arr_monthSoldQuantities.length == 0 )
+		{
+			//print( "어제판매량이없고 최근7일간 데이터가 없으므로 어제 월간판매량은 0");
+			monthSoldQuantityYesterDay = -1;//어제월간판매량;
+		}
+		else
+		{
+			//print( "어제판매량이없고 최근7일간 데이터가 있으므로 어제 월간판매량은 " + arr_monthSoldQuantities[ 0 ].month_sold_quantity );
+			monthSoldQuantityYesterDay = arr_monthSoldQuantities[ 0 ].month_sold_quantity;//어제월간판매량;
+		}
+	}
+
+	//- 30일전 데일리 판매량이 존재 할경우;
+	//	- 어제 월간판매량이 존재함;
+	//		- 일간판매량은 오늘 30일 판매량 - 어제 30일 판매량+ 31일전 데일리 판매량;
+	//	- 어제 월간판매량이 존재 하지 않음;
+	//		- 일간판매량은 0;
+	//- 30일전 데일리 판매량이 존재 하지 않을경우;
+	//	- 어제 월간판매량이 존재함;
+	//		- 일간판매량은 오늘 30일 판매량 - 어제 30일 판매량;
+	//	- 어제 월간판매량이 존재 하지 않음;
+	//		- 일간판매량은 0;
+
+	if( DailySales_30 != -1 )//30일전 데일리 판매량이 존재 할경우;
+	{
+		if ( monthSoldQuantityYesterDay == -1 )
+		{
+			//print( "30일전일간판매량이 있고 어제 월간판매량이 없으므로 오늘일간 판매량은 0" );
+			r = 0;
+		}
+		else
+		{
+			//print( "30일전일간판매량이 있고 어제 월간판매량이 있으므로 오늘일간 판매량은  monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30 " +  ( monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30 ));
+
+			r = monthSoldQuantityToday - monthSoldQuantityYesterDay + DailySales_30;//'오늘 30일 판매량 - 어제 30일 판매량+ 31일전 데일리 판매량';
+		}
+	}
+	else//31일전 데일리 판매량이 존재 하지 않을 경우
+	{
+		if ( monthSoldQuantityYesterDay == -1 )
+		{
+			//print( "30일전일간판매량이 없고 어제 월간판매량이 없으므로 오늘일간 판매량은 0" );
+			r = 0;
+		}
+		else
+		{
+			//print( "30일전일간판매량이 없고 어제 월간판매량이 있으므로 오늘일간 판매량은  monthSoldQuantityToday - monthSoldQuantityYesterDay : " +  (monthSoldQuantityToday - monthSoldQuantityYesterDay)  );
+			r = monthSoldQuantityToday - monthSoldQuantityYesterDay;//오늘 30일 판매량 - 어제 30일 판매량'
+		}
+	}
+
+	//- 일간판매량이 0보다 작다면;
+	//	- 최근7일의 판매량이 없다면 일간판매량은 0;
+	//	- 최근7일의 판매량이 있다면;
+	//		- 7일판매량의 일수가 짝수라면;
+	//			- 7일배열[ ( 7일배열값의 길이 / 2 ) - 1 ] = 일간판매량;
+	//		- 7일판매량의 일수가 홀수라면;
+	//			- 7일배열[ ( 7일배열값의 길이 / 2 ) - 0.5 ] = 일간판매량;
+
+	if( r < 0 )//if '오늘 30일 판매량 - 어제 30일 판매량 +  31일전 데일리 판매량' < 0 AND 오늘 30일 판매량 - 어제 30일 판매량 < 0;
+	{
+		//print( "DAILY_SALES가 영보다작음" );
+		//r = calculateLately7DaysMediateValue_DailySales( today, goods_id )//'최근 7일 데일리 판매량의 중간값';
+
+		//'최근 7일 데일리 판매량의 중간값';
+		var _date_today = ISODate( today );
+			_date_today.setDate( _date_today.getDate() - 1)
+
+		var date_before7 = ISODate( today );
+			date_before7.setDate(date_before7.getDate() - 7);
+
+		q1.date.$gte = date_before7;
+		q1.date.$lte = _date_today;
+		q1.goods_id = goods_id;
+
+		var arr_monthSoldQuantities = [];
+		_col$daily_master.find( q1, p1 ).sort( s1 ).forEach(function(doc){ arr_monthSoldQuantities.push( doc ); });
+
+		//'최근 7일 데일리 판매량	이 없을 경우, 0;
+		if( arr_monthSoldQuantities.length == 0 )
+		{
+			//print("최근 7일 데일리 판매량	이 없을 경우, 0");
+			r = 0;
+		}
+		else
+		{
+			//print("최근 7일 데일리 판매량	이 있을 경우");
+			arr_monthSoldQuantities.sort( function( a, b ){
+				return a.Daily_Sales > b.Daily_Sales ? -1 : a.Daily_Sales < b.Daily_Sales ? 1 : 0;
+			});
+
+			if( arr_monthSoldQuantities.length % 2 == 0 )
+			{
+				//최근 7일 데일리 판매량의 중간 2개값의 평균;
+				var o, t;
+				o = arr_monthSoldQuantities.length / 2;
+				t = o - 1;
+				r = arr_monthSoldQuantities[ t ].Daily_Sales;
+				//print("최근판매량갯수가 짝수일때");
+				//printjson( arr_monthSoldQuantities );
+				//print( "o : " + o );
+				//print( r );
+			}
+			else
+			{
+				var o;
+				o = arr_monthSoldQuantities.length / 2 - 0.5;
+				r = arr_monthSoldQuantities[ o ].Daily_Sales;
+				//print("최근판매량갯수가 홀수일때");
+				//printjson( arr_monthSoldQuantities );
+				//printjson( "o : " + o );
+				//print( r );
+			}
+
+		}
+	}
+	//print( "판매량 : " + r );
+	return r;
+};
+//*/
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DEFINE;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	DOCUMENT;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	PARAMETER;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+/**
+ * insert model
+ * @property {Object}
+ * <code>
+	{
+		brand : ""
+		, date : ""
+		, Daily_Sales : ""
+		, goods_id : ""
+		, inventory : ""
+		, keyword : ""
+		, month_confirim_quantity : ""
+		, month_sold_quantity : ""
+		, month_sold_amount : ""
+		, name : ""
+		, original_price : ""
+		, original_price_max : ""
+		, original_price_min : ""
+		, price : ""
+		, price_min : ""
+		, price_max : ""
+		, product_attributes : []
+		, seller_id : ""
+		, shop_id : ""
+		, shop_name : ""
+		, shop_type : ""
+		, standard_name : ""
+	}
+ * </code>
+ */
+
+
+//----------------------------------------------------------------------------------------------------------------------------------[ S ] - VALIDATION;
+var insertModel;
+/*/
+var _TARGET_YEARS_ = [ 2019 ];
+/*/
+var _TARGET_YEARS_ = [ 2018, 2019 ];
+//*/
+
+/*/
+var _tq = { _id :{ $in : [ 553227138407 ]} };
+/*/
+var _tq = {};
+//*/
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {String} startDate
+ */
+var FN = function( TARGET_DATE ){
+
+	var year = TARGET_DATE.toString().substr(0,4);
+
+	var _db$h5_data = db.getSiblingDB( "Taobao_" + year );
+	var _db$goods_list = db.getSiblingDB( "goods_list_" + year );
+
+	var _colList$goods_list = _db$goods_list.getCollectionNames();
+
+	_colList$goods_list.forEach(function( col ){
+		_db$goods_list.getCollection( col ).createIndex({ goods_id : 1 })
+	});
+
+	var _col$goods_list = _db$goods_list.getCollection( TARGET_DATE );
+
+	q5.date = new Date( TARGET_DATE )
+	_col$daily_master.remove( q5 );
+
+	print( "------------------------------------------------------------------------------------------" );
+	print( year + " - " + TARGET_DATE + " - " + Date() );
+	print( "------------------------------------------------------------------------------------------" );
+
+	var _col = _db$h5_data.getCollection( TARGET_DATE );
+
+	_col.find( _tq ).forEach(function(doc){
+
+		insertModel = {};
+		insertModel.brand = doc.brand || "";
+
+		//------------------------------------------------------------------------------------------goods_id;
+
+		q4.goods_id = doc._id.valueOf().toString();
+
+		//자료타입이 String으로 되어있지만 Number가 더 효율적임;
+		insertModel.goods_id = "" + doc._id;
+
+		var _doc$name_mapping = _col$goods_list.findOne( q4 );
+		if( !_doc$name_mapping )
+		{
+		//------------------------------------------------------------------------------------------_id$brand_basic;
+			insertModel._id$brand_basic = NumberInt( -1 );
+		//------------------------------------------------------------------------------------------cd$product_master;
+			insertModel.cd$product_master = "";
+		//------------------------------------------------------------------------------------------keyword;
+			insertModel.keyword = "";
+		//------------------------------------------------------------------------------------------standard_name;
+			insertModel.standard_name = "";
+		//------------------------------------------------------------------------------------------nm_cn$category;
+		//	insertModel.nm_cn$category = "";
+		//------------------------------------------------------------------------------------------nm_kr$category;
+		//	insertModel.nm_kr$category = "";
+		}
+		else
+		{
+		//------------------------------------------------------------------------------------------_id$brand_basic;
+			//insertModel._id$brand_basic = _doc$name_mapping._id$brand_basic;
+			insertModel._id$brand_basic = NumberInt( _doc$name_mapping._id$brand_basic );
+		//------------------------------------------------------------------------------------------cd$product_master;
+			insertModel.cd$product_master = _doc$name_mapping.cd$product_master;
+		//------------------------------------------------------------------------------------------keyword;
+			insertModel.keyword = _doc$name_mapping.keyword;
+		//------------------------------------------------------------------------------------------standard_name;
+			insertModel.standard_name = _doc$name_mapping.standard_name;
+		//------------------------------------------------------------------------------------------nm_cn$category;
+		//	insertModel.nm_cn$category = "";
+		//------------------------------------------------------------------------------------------nm_kr$category;
+		//	insertModel.nm_kr$category = "";
+		}
+
+		//------------------------------------------------------------------------------------------date;
+		insertModel.date = ISODate( parseFloat( TARGET_DATE ));
+		//------------------------------------------------------------------------------------------Daily_Sales;
+		insertModel.Daily_Sales = calculateDailySale( doc, TARGET_DATE );
+		//print( "insertModel.Daily_Sales : " + insertModel.Daily_Sales )
+		//------------------------------------------------------------------------------------------inventory;
+		insertModel.inventory = doc.mockData.skuCore.sku2info['0'].quantity;;
+
+		//오늘 월간 판매량;
+		//오늘 월간판매량 프로퍼티가 존재하지 않을경우 어제월간판매량을 대입한다.
+		var sellCount = NumberInt( 0 );
+		try
+		{
+			if ( doc.apiStack[ 0 ].value.item.sellCount )
+			{
+				var _tmpSellCount = doc.apiStack[ 0 ].value.item.sellCount
+				if( _tmpSellCount.indexOf( "+" ) == -1 ) sellCount = NumberInt( doc.apiStack[ 0 ].value.item.sellCount );
+				else if( _tmpSellCount.indexOf( "万" ) != -1 )
+				{
+					sellCount = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("万")[ 0 ] * 10000 );
+				}
+				else
+				{
+					sellCount = NumberInt( doc.apiStack[ 0 ].value.item.sellCount.split("+")[ 0 ] * 1 );
+				}
+			}
+			else
+			{
+				//어제 월간 판매량;
+				var monthSoldQuantityYesterDay = -1;
+
+				//var _date_today = ISODate( parseFloat( date ) );
+
+				var _date_beforeOffset = ISODate( parseFloat( TARGET_DATE ) );
+					_date_beforeOffset.setDate( _date_beforeOffset.getDate() - 1 );
+				var _str_date = makeDateString( _date_beforeOffset );
+
+				q2.date = ISODate( _str_date );
+				q2.goods_id = doc._id.valueOf().toString();
+
+				//printjson( q2 )
+
+				var _doc = _col$daily_master.findOne( q2 );
+				if( _doc ) monthSoldQuantityYesterDay = sellCount = NumberInt( _doc.month_sold_quantity );
+				if( monthSoldQuantityYesterDay == -1 ) sellCount = NumberInt( 0 );
+			}
+		}
+		catch( e )
+		{
+			//에러;
+			sellCount = NumberInt( 0 );
+		}
+
+		//------------------------------------------------------------------------------------------month_sold_quantity;
+		insertModel.month_sold_quantity = sellCount;
+		//------------------------------------------------------------------------------------------;
+
+		var r = 0;
+		var price_min = 0;
+		var price_max = 0;
+
+		if( !doc.apiStack[ 0 ].value.price )
+		{
+			try
+			{
+				price_min = price_max = parseFloat( -1 );
+				_col_ERROR.insertOne( doc );
+			}
+			catch(er)
+			{
+				//
+			}
+		}
+		else
+		{
+			var price_txt = doc.apiStack[ 0 ].value.price.price.priceText;
+			/*/
+			var dash = price_txt.indexOf( "-" );
+			if( !dash )
+			//*/
+			if( -1 != price_txt.indexOf( "-" ) )
+			{
+				var a = price_txt.split( "-" );
+				price_min = parseFloat( a[ 0 ] );
+				price_max = parseFloat( a[ 1 ] );
+			}
+			else price_min = price_max = parseFloat( price_txt );
+		}
+
+		//------------------------------------------------------------------------------------------price_max;
+		insertModel.price_max = price_max;
+		//------------------------------------------------------------------------------------------price_min;
+		insertModel.price_min = price_min;
+		//------------------------------------------------------------------------------------------price;
+		insertModel.price = price_max;
+		//------------------------------------------------------------------------------------------month_sold_amount;
+		insertModel.month_sold_amount =  sellCount * price_max;
+		//------------------------------------------------------------------------------------------name;
+		insertModel.name = doc.item.title || "";
+		//------------------------------------------------------------------------------------------;
+
+		var original_price_txt;
+
+		if( !doc.apiStack[ 0 ].value.price )
+		{
+			try
+			{
+				original_price_min = original_price_max = original_price_txt = -1;
+				_col_ERROR.insertOne( doc );
+			}
+			catch(er)
+			{
+				//
+			}
+		}
+		else
+		{
+			if( doc.apiStack[ 0 ].value.price.extraPrices != undefined && doc.apiStack[ 0 ].value.price.extraPrices[ 0 ] != undefined )
+			{
+				original_price_txt = doc.apiStack[ 0 ].value.price.extraPrices[0].priceText;
+			}
+			else
+			{
+				original_price_txt = doc.apiStack[ 0 ].value.price.price.priceText;
+			}
+
+			var original_dash = original_price_txt.indexOf( '-' );
+			var original_price_min = 0;
+			var original_price_max = 0;
+			if( original_dash > -1)
+			{
+				var a = original_price_txt.split( "-" );
+				original_price_min = a[ 0 ];
+				original_price_max = a[ 1 ];
+			}
+			else
+			{
+				original_price_min = original_price_max = original_price_txt;
+			}
+
+		}
+
+		//------------------------------------------------------------------------------------------original_price_min;
+		insertModel.original_price_min = original_price_min;
+		//------------------------------------------------------------------------------------------original_price_max;
+		insertModel.original_price_max = original_price_max;
+		//------------------------------------------------------------------------------------------original_price;
+		insertModel.original_price = original_price_txt;
+		//------------------------------------------------------------------------------------------product_attributes;
+
+		insertModel.product_attributes = [];
+		if( doc.props.groupProps ){
+
+			var j = 0,jLen = doc.props.groupProps[0]['基本信息'].length,jo;
+			var _to = {}
+			for(;j<jLen;++j){
+				jo = doc.props.groupProps[0]['基本信息'][ j ];
+				for( var s in jo ){
+					_to[ s ] = jo[ s ];
+				}
+			}
+			_to.itemId = parseFloat( doc.item.itemId );
+			insertModel.product_attributes.push( _to );
+		}
+
+		//------------------------------------------------------------------------------------------shop_type;
+
+		//판매점포식별;
+		if( !doc.apiStack[ 0 ].value.trade.isBanSale4Oversea ) insertModel.shop_type = "天猫";
+		else insertModel.shop_type = "淘宝";
+
+		//------------------------------------------------------------------------------------------shop_name;
+		insertModel.shop_name = doc.seller.shopName || "";
+		//------------------------------------------------------------------------------------------shop_id;
+		insertModel.shop_id = doc.seller.shopId.toString();
+		//------------------------------------------------------------------------------------------seller_id;
+		insertModel.seller_id = parseFloat( doc.seller.userId );
+		//------------------------------------------------------------------------------------------rootCategoryId;
+		insertModel.rootCategoryId = doc.item.rootCategoryId;
+		//------------------------------------------------------------------------------------------categoryId;
+		insertModel.categoryId = doc.item.categoryId;
+		//------------------------------------------------------------------------------------------brandValueId;
+		insertModel.brandValueId = doc.item.brandValueId || "";
+		//------------------------------------------------------------------------------------------rootCategoryId;
+		insertModel.rootCategoryId = doc.item.rootCategoryId;
+		//------------------------------------------------------------------------------------------date_collect;
+		insertModel.date_collect = ISODate( parseFloat( TARGET_DATE ) + 1);
+		//------------------------------------------------------------------------------------------;
+
+		_col$daily_master.insertOne( insertModel );
+
+	})
+}
+
+/*
+ * 대상일자를 배열로 반환하는 함수;
+ * @param {Number} startDate
+ * @param {Number} endDate
+ * @return {Array} result
+ */
+var getTargetDays = function( startDate, endDate ){
+
+	var db$2018 = db.getSiblingDB( "Taobao_2018" )
+	var db$2019 = db.getSiblingDB( "Taobao_2019" )
+
+
+	var cols2018 = db$2018.getCollectionNames();
+	var cols2019 = db$2019.getCollectionNames();
+
+	var allCols = cols2018.concat( cols2019 ).sort();
+
+	var result = [];
+
+	var i = 0,iLen = allCols.length,io;
+	for(;i<iLen;++i){
+		io = allCols[ i ];
+		if( io * 1 >= startDate &&  io * 1 <= endDate ) result.push( io )
+	}
+
+	return result;
+};
+
+var LOOP = function( start, end ){
+
+	var targetDays = getTargetDays( start, end );
+
+	var i = 0,iLen = targetDays.length,io;
+	for(;i<iLen;++i){
+		// io = Number( targetDays[ i ] );
+		io = targetDays[ i ];
+		FN( io )
+	}
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//	LOGIC;
+
+//----------------------------------------------------------------------------------------------------------------------------------;
+
+//LOOP( 20181001, 20181231 );
+LOOP( 20190101, 20190331 );
+
+return;

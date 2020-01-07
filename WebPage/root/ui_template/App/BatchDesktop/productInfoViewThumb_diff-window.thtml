@@ -1,0 +1,48 @@
+
+<div style="padding:10px;">{{diff_message}}</div>
+<div class="ui two stackable cards" style="padding:10px 0px 0px 35px;width: inherit;">
+	<div class="card" style="min-height: 500px;">
+		<div class="ui fluid image">
+			<div class="ui red big ribbon label">Prev</div>
+			<img src="{{prev_doc.goodsImg}}">
+		</div>
+		<div class="content">
+			<a class="header">{{prev_doc.goodsName}}</a>
+			<div class="meta"><span class="date">{{prev_doc.brandName}}</span></div>
+			<div class="ui divider"></div>
+			<div class="description">
+				<table class="ui celled striped table">
+					<thead>
+						<tr>
+							<th colspan="2">Product Info</th>
+						</tr>
+					</thead>
+					<tbody>{{prev_doc.productInfo}}</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="extra content" style="padding: 10px;line-height: 38px;"></div>
+	</div>
+	<div class="card" style="min-height: 500px;">
+		<div class="ui fluid image">
+			<div class="ui red big ribbon label">Current</div>
+			<img src="{{doc.goodsImg}}">
+		</div>
+		<div class="content">
+			<a class="header">{{doc.goodsName}}</a>
+			<div class="meta"><span class="date">{{doc.brandName}}</span></div>
+			<div class="ui divider"></div>
+			<div class="description">
+				<table class="ui celled striped table">
+					<thead>
+						<tr>
+							<th colspan="2">Product Info</th>
+						</tr>
+					</thead>
+					<tbody>{{doc.productInfo}}</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="extra content" style="padding: 10px;line-height: 38px;"></div>
+	</div>
+</div>
